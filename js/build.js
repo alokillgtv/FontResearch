@@ -51,7 +51,7 @@ function CompleteMap(){
   widthTH();
   setTimeout(function(){
     $('.data-table .table-data-body').hide();
-  },1000);
+  },5000);
   
   if($ERROR){
     alert("Có lẽ dữ liệu mà bạn phân tích chưa đúng.\n\nBạn hãy thử lại xem.")
