@@ -66,7 +66,7 @@ function BeginRun(){
 		}
 		catch(e){// Nếu xảy ra lỗi, thì chạy hàm phục hồi thiết lập
       alert("Hàm BeginRun():\n\n" + e);
-			execscript('ClearCfg()');
+			//execscript('ClearCfg()');
 		}
 	}
 }
@@ -296,7 +296,9 @@ function importConfigJS($name){
     }
   }
 	try{
-		checkFont()// Chạy hàm kiểm tra các dữ liệu font
+    setTimeout(function(){
+      checkFont()// Chạy hàm kiểm tra các dữ liệu font
+    },2000);
 	}
 	catch(e){	
 		alert("Đã xảy ra lỗi:\n\nHàm importConfig():\n\n" + e)
