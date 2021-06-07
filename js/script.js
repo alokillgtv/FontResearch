@@ -296,6 +296,7 @@ function importConfigJS($name){
     }
   }
 	try{
+    showLoad(true);
     setTimeout(function(){
       checkFont()// Chạy hàm kiểm tra các dữ liệu font
     },5000);
