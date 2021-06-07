@@ -712,9 +712,11 @@ function widthTH(){// Hàm căn chỉnh width cho thead
       var $th = $box1.find("th:eq("+$k+")"); // Lấy từng th
       if($th[0]){
         var $width = $th[0].offsetWidth + 1;// Lấy chiều rộng cơ bản của td
-        console.log($width);
-        $box2.find("th:eq("+$k+")").css("width",$width + "px");// Thêm chiều rộng cho th
-        $box1.find("th:eq("+$k+")").css("width",$width + "px");// Thêm chiều rộng cho th
+        //console.log($width);
+        if($width > 10){
+          $box2.find("th:eq("+$k+")").css("width",$width + "px");// Thêm chiều rộng cho th
+          $box1.find("th:eq("+$k+")").css("width",$width + "px");// Thêm chiều rộng cho th
+        }
       }
     }
   });
