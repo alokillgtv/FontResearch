@@ -735,7 +735,7 @@ function showTable(e){
     $table.addClass("active");
     $table.show();
     $(e).html('<i class="fas fa-minus"></i> Ẩn Dữ Liệu');
-    //widthTH();
+    widthTH();
   }
 }
 
