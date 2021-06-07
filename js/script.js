@@ -298,7 +298,7 @@ function importConfigJS($name){
 	try{
     setTimeout(function(){
       checkFont()// Chạy hàm kiểm tra các dữ liệu font
-    },2000);
+    },5000);
 	}
 	catch(e){	
 		alert("Đã xảy ra lỗi:\n\nHàm importConfig():\n\n" + e)
