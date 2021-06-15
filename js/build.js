@@ -324,6 +324,42 @@ function GetBlock($title,$byte,$type,$cals,$save,$dataList){// Hàm kiểm tra t
     case 9: // Text
       $result = hex2ascii($value);
       break;
+		case 10:	//UV Xoffset
+			if($dataList.typeChar == 0){
+				var $hex = SwapEndian($value);
+				var $float = hex2float($hex)
+				var $left = $float * $dataList.width;
+				$result = Round(eval($left + $cals),2);
+			}else{
+				var $float = hex2float($value);
+				var $left = $float * $dataList.width;
+				$result = Round(eval($left + $cals),2);
+			}
+      break;
+		case 11:	//UV Yoffset
+			if($dataList.typeChar == 0){
+				var $hex = SwapEndian($value);
+				var $float = hex2float($hex)
+				var $top = $float * $dataList.height;
+				$result = Round(eval($top + $cals),2);   
+      }else{
+				var $float = hex2float($value);
+				var $top = $float * $dataList.height;
+				$result = Round(eval($top + $cals),2);
+			}
+      break;
+		case 12:	//UV Xadvance
+			if($dataList.typeChar == 0){
+				var $hex = SwapEndian($value);
+				var $float = hex2float($hex)
+				var $left = $float * $dataList.width;
+				$result = Round(eval($left + $cals),2);
+			}else{
+				var $float = hex2float($value);
+				var $left = $float * $dataList.width;
+				$result = Round(eval($left + $cals),2);
+			}
+      break;
 	}
  // console.log("$title: " + $title + " Value: " + $value + ", Pos: " + $FILEPOS + " , Byte: " + $byte + ", width: " + $dataList.width + ", height: " + $dataList.height + ", $cals: " + $cals + " $result: " + $result);
 	var $arrayResult =[$result+"||",$value+"||"];

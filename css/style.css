@@ -1153,7 +1153,7 @@ thead .table-header {
   min-width: 96px;
 }
 #page-result .td-number {
-  background: black;
+  background: black !important;
   color: white;
 }
 .table-data-body.active {

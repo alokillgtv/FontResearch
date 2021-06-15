@@ -319,7 +319,7 @@ function RemoveBlock(e){
 function AddBlockValue(e){
   var $box = $(e).closest(".item-struct");
   var $block = $box.find('.item-block:last')[0].outerHTML; 
-  $box.find('.list-block-char').append($block);
+  $(e).closest('li').after($block);
   changeValue();// Chạy hàm thay đổi dữ liệu
 }
 
@@ -440,25 +440,25 @@ function showLoad($show){
 
 function showIMG(e){// Hàm hiện trang ảnh font
   window.scrollTo(0, 0);// Cuộn đến đầu trang
-	$('.page-data,#page-debug,.page-hex').hide();// Đóng các trang khác
+	$('.page-data,#page-debug,.page-hex,#page-hex-file').hide();// Đóng các trang khác
 	$('.page-img').show();// Mở trang ảnh font
 }
 
 function showDATA(e){// Hàm hiện trang phân tích
-	$('.page-img,#page-debug,.page-hex').hide();// Đóng các trang khác
+	$('.page-img,#page-debug,.page-hex,#page-hex-file').hide();// Đóng các trang khác
 	$('.page-data').show();// Mở trang phân tích
   widthTH();
 }
 
 function showCharInfo(){// Hàm hiện trang phân tích chi tiết
-  $('.page-img,#page-debug,.page-data').hide();// Đóng các trang khác
+  $('.page-img,#page-debug,.page-data,#page-hex-file').hide();// Đóng các trang khác
   $('.page-hex').show(); // Mở trang phân tích chi tiết
 }
 
 function Debugger(){// Hàm mở trang debug
   window.scrollTo(0, 0);// Cuộn lên đầu trang
 	$('#page-debug').show();// Hiện trang debug
-	$('.page-data,.page-img,.page-hex').hide(); // Ẩn các trang ko liên quan
+	$('.page-data,.page-img,.page-hex,#page-hex-file').hide(); // Ẩn các trang ko liên quan
 }
 
 function myType(e){// Hàm chọn kiểu dữ liệu
@@ -526,6 +526,21 @@ function selectType(e){// Hàm chọn kiểu dữ liệu dựa trên tiêu đề
 			$box.find(".select-byte").val($dec);
 			$box.find(".select-type").val(9);
 			break;
+		case 23:
+			// Nếu là UV Xoffset
+			$box.find(".select-byte").val(4);
+			$box.find(".select-type").val(10);
+			break;
+		case 24:
+			// Nếu là UV Yoffset
+			$box.find(".select-byte").val(4);
+			$box.find(".select-type").val(11);
+			break;
+		case 25:
+			// Nếu là UV Xadvance
+			$box.find(".select-byte").val(4);
+			$box.find(".select-type").val(12);
+      break;
 		default:
 			$box.find(".select-byte").val(2);
 			$box.find(".select-type").val(1);

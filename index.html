@@ -62,7 +62,7 @@
 		<div id="create-data" class="title-btn buildChar-page tip-hover" onclick="createDATA(this)"><i class="fas fa-plus-square"></i> Tạo Dữ Liệu Từ File FNT<small class="tip-show">Tạo các dữ liệu bitmap font dựa trên dữ liệu phân tích được cùng với dữ liệu được tạo từ file *FNT của BMFONT.</small></div>
 	</div>
 	<div id="page-content">
-		<div class="block-left col-md-4">
+		<div class="block-left col-md-4" onclick="changeValue()">
 			<ul class="option-list">
 				<li class="title-option">Thiết Lập Chung</li>
 				<li class="item-option tip-hover">
@@ -254,6 +254,9 @@
                     <option title="Số liệu độ lệch ký tự theo trục Y.&#10;Được chuyển về dạng Decimal. Thường nó được diễn giải theo kiểu số âm của Hex.&#10;VD: FFFE tương đương -2 trong số nguyên." value="20">Yoffset</option>
                     <option title="Độ khít của mỗi ký tự liền kề nhau.&#10;Được chuyển về dạng Decimal." value="21">Xadvance</option>
                     <option title="Lấy text một block tùy chọn." value="22">Text</option>
+                    <option title="Số liệu tọa độ UV Xoffset của ký tự.&#10;Tọa độ này được tính bằng số chấm động (Float) được chuyển từ UV Hex nhân với chiều rộng file ảnh font.&#10;Được chuyển về dạng Decimal." value="23">UV Xoffset</option>
+                    <option title="Số liệu tọa độ UV Yoffset của ký tự.&#10;Tọa độ này được tính bằng số chấm động (Float) được chuyển từ UV Hex nhân với chiều cao file ảnh font.&#10;Được chuyển về dạng Decimal." value="24">UV Yoffset</option>
+                    <option title="Số liệu tọa độ UV Xadvance của ký tự.&#10;Tọa độ này được tính bằng số chấm động (Float) được chuyển từ UV Hex nhân với chiều rộng file ảnh font.&#10;Được chuyển về dạng Decimal." value="25">UV Advance</option>
                   </select>
                   <small class="tip-show">Tiêu đề một block, hãy đặt tiêu đề để dễ nhận biết khi phân tích font.</small>
                 </label>
@@ -285,6 +288,9 @@
                     <option title="Dạng số chấm động (Float) nhưng đã được chuyển đổi về số nguyên bằng phép tính:&#10;UV Bottom (Float) * Chiều cao ảnh (Decimal).&#10;Số liệu block sẽ diễn giải dưới dạng số nguyên." value="7">UV Bottom</option>
                     <option title="Dạng số nguyên có chứa số âm được chuyển đổi từ số âm trong Hex.&#10;Thông thường những số âm trong Hex được diễn giải dưới dạng đặc biệt.&#10;VD: -1 tương đương với FFFF 2 byte này trong hex. Số liệu này được dùng để phân tích các Xoffset và Yoffset" value="8">Negative Hex</option>
                     <option title="Dạng text thuần, được chuyển từ hex sang." value="9">Text</option>
+                    <option title="Xoffset dạng số chấm động (Float) nhưng đã được chuyển đổi về số nguyên bằng phép tính:&#10;UV Xoffset (Float) * Chiều rộng ảnh (Decimal).&#10;Số liệu block sẽ diễn giải dưới dạng số nguyên." value="10">UV Xoffset</option>
+                    <option title="Yoffset dạng số chấm động (Float) nhưng đã được chuyển đổi về số nguyên bằng phép tính:&#10;UV Yoffset (Float) * Chiều cao ảnh (Decimal).&#10;Số liệu block sẽ diễn giải dưới dạng số nguyên." value="11">UV Yoffset</option>
+                    <option title="Xadvance dạng số chấm động (Float) nhưng đã được chuyển đổi về số nguyên bằng phép tính:&#10;UV Xadvance (Float) * Chiều rộng ảnh (Decimal).&#10;Số liệu block sẽ diễn giải dưới dạng số nguyên." value="12">UV Xadvance</option>
                   </select>
                   <small class="tip-show">Kiểu dữ liệu của block. Hãy chọn đúng dữ liệu để phân tích font.</small>
                 </label>
