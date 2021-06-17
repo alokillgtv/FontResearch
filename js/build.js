@@ -796,10 +796,14 @@ function dataCheck($obj,$box){
       for(var $e in $objStyle){// Chạy lập theo style
         var $value = $objStyle[$e];
         if($value != ""){// Nếu có dữ liệu
+          if($e == "width" || $e == "height"){
+            $value = Number($value) + 1;
+          }
           $style += $e + ": " + $value + "px;";// Chuyển các dữ liệu sang css
           $titleHTML2 += $e.toUpperCase() + ": <b>" + String($value).replace(/(\S+\.\S\S)\S+/,"$1") + "</b><br>";// Replace thông số css để lấy chú thích
         }
       }
+      $style = $style.replace(/Character.*?;/,"");
       $listChar += '<div pageImg="'+$page+'" class="char-cell" onclick="jumpChar(this)" onmouseover="charHover(this)" onmouseout="CharHoverHide(this)"  charnumber="'+$idCharacter+'" style="'+$style+'"><span class="hover-block-text">'+$titleHTML2+'<b>Nhấn Để Chuyển Đến<br>Khung Phân Tích</b></span></div>'; // Nối dữ liệu chứa tọa độ ký tự để tạo khung trên hình ảnh font
       $allHTML += $item + '<td class="td-button"><button class="btn-char-des" onclick="viewChar(this)">Giải Thích</button></td></tr>';// Thêm phím phân tích dữ liệu
     }
