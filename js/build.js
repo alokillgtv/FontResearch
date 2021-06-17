@@ -49,6 +49,7 @@ function sendReturn($data,$dataList,$box){// Hàm lấy dữ liệu từ autoit 
 function CompleteMap(){
   changeValue();// Chạy hàm thay đổi dữ liệu
   widthTH();
+  changeImg($('.button-page-img.active')[0]); // Chạy hàm thay đổi trang ảnh
   setTimeout(function(){
     $('.data-table .table-data-body').hide();
   },5000);
@@ -394,11 +395,55 @@ function numberNegative($hex,$byteGet){// Hàm chuyển số âm trong hex
 function fontimgfile(e){// Hàm khi chọn file image font
   var $box = $(e);// Chọn phần tử this
   var $input = document.getElementById('fontimgfile');// Tạo biến lấy input file map font
-  var file = $input.files[0];// Lấy file
-  var $name = file.name;// Lấy tên file
-  $('#pathImg').val($name);// Chèn tên file vào khung đường dẫn
-  var $imgpath = URL.createObjectURL($input.files[0]);// Tạo đường dẫn font ảnh
-  $('#img-view').attr("src",$imgpath);// Chèn đường dẫn vào ảnh
+  var $files = $input.files;// Lấy file
+  var $htmlItem = '<li class="item-page-img title-label">Chọn Ảnh Font</li>';
+  var $numberImage = -1;
+  for(var $o = 0;$o < $files.length;$o++){
+    var $item = new Object();
+    var $file = $files[$o];
+    if($file.name.match(/\.png|\.bmp|\.jpg/)){
+      $numberImage = $numberImage + 1;
+      $item.name = $file.name;// Lấy tên file
+      $item.path = $file.webkitRelativePath;// Lấy path file
+      $item.imgpath = URL.createObjectURL($file);;// Tạo đường dẫn font ảnh
+      if($numberImage == 0){
+        $('#pathImg').val($item.path);// Chèn tên file vào khung đường dẫn
+        $('#img-view').attr("src",$item.imgpath);// Chèn đường dẫn vào ảnh 
+        $htmlItem += '<li class="item-page-img button-page-img active" imagePath="'+$item.path+'" imagePage="0" imageSrc="'+$item.imgpath+'" onclick="changeImg(this)">Ảnh 1</li>';
+      }
+      else{
+        $htmlItem += '<li class="item-page-img button-page-img" imagePath="'+$item.path+'" imagePage="'+$numberImage+'" imageSrc="'+$item.imgpath+'" onclick="changeImg(this)">Ảnh '+($numberImage + 1)+'</li>';
+      }
+      $('.change-page-img').html($htmlItem);
+    }
+  }
+}
+
+function changeImg(e){
+  var $path = $(e).attr("imagepath"); // Lấy path file ảnh;
+  var $idImg = $(e).attr("imagepage"); // Lấy Id file ảnh
+  var $src = $(e).attr("imagesrc"); // Lấy đường dẫn file ảnh
+  var $box = $(e).closest(".change-page-img");
+  var $wBefore = $('#img-view')[0].naturalWidth;// Lấy width ảnh gốc
+  var $hBefore = $('#img-view')[0].naturalHeight;// Lấy height ảnh gốc
+  $box.find(".active").removeClass("active");
+  $(e).addClass("active");
+  $('#img-view').attr("src",$src);
+  $('#pathImg').val($path);
+  $('.body-page-img').attr("pageimg",$idImg)
+  //$('.body-page-img .char-cell').hide();
+  //$('.body-page-img .char-cell[pageimg="'+$idImg+'"]').show();
+  setTimeout(function(){
+    var $wAfter = $('#img-view')[0].naturalWidth;// Lấy width ảnh gốc
+    var $hAfter = $('#img-view')[0].naturalHeight;// Lấy height ảnh gốc
+   // console.log("$wBefore: " + $wBefore);
+    //console.log("$hBefore: " + $hBefore);
+   // console.log("$wAfter: " + $wAfter);
+    //console.log("$hAfter: " + $hAfter);
+    if($wBefore != $wAfter || $hBefore != $hAfter){
+      checkFont();
+    }
+  },1000);
 }
 
 function fontmapfile(e){// Hàm chọn file map font
@@ -471,7 +516,8 @@ function FNTback(){
           var $left = false;
           var $top = false;
           var $right = false;
-          var $bottom = false;          
+          var $bottom = false;      
+          var $page = "";
           for(var $l = 0;$l < $arrayBlock.length;$l++){// Chạy lập theo từng dữ liệu block
             var $titleBlock = $arrayBlock[$l][0];// Lấy tiêu đề dữ liệu block
             var $regexpBlock = $arrayBlock[$l][1];// Lấy Regexp dữ liệu block
@@ -539,6 +585,9 @@ function FNTback(){
                   $bottom = $value[1];
                   $css += "bottom: " + $value[1] + "px;";
                   $titleTagAdd = "<b>* Chú giải:</b> Tọa đồ từ lề bên trên của ảnh font cho đến lề bên dưới ký tự.";
+                  break;                
+                case "Page":
+                  $page = $value[1];
                   break;
                 default:
                   
@@ -563,7 +612,7 @@ function FNTback(){
           $beginHeader = false;// Đánh dấu đã tạo header
           $smallItem += '<td class="td-button"><button class="btn-char-des" onclick="viewChar(this)">Phân Tích</button></td></tr>';// Thêm button phân tích vào cột
           //$header += $item;// Thêm các cột vào table
-          $listChar += '<div onclick="jumpChar(this)" class="char-cell" onmousemove="charHover(this)" charnumber="'+$id+'" titleText="'+$titleHTML+'" style="'+$css+'"><span class="hover-block-text">'+$titleHTML+'<b>Nhấn Để Chuyển Đến<br>Khung Phân Tích</b></span></div>';// Tạo khung cho character
+          $listChar += '<div pageImg="'+$page+'" onclick="jumpChar(this)" class="char-cell" onmousemove="charHover(this)" charnumber="'+$id+'" titleText="'+$titleHTML+'" style="'+$css+'"><span class="hover-block-text">'+$titleHTML+'<b>Nhấn Để Chuyển Đến<br>Khung Phân Tích</b></span></div>';// Tạo khung cho character
         }
         if($smallItem){
           $bodyTable += $smallItem;
@@ -665,6 +714,7 @@ function dataCheck($obj,$box){
       var $style = "";// Tạo biến chứa style
       var $titleHTML2 = "";// Tạo biến chứa thông tin hover
       var $objStyle = new Object();// Tạo biến object chứa dữ liệu
+      var $page = "";
       $objStyle.Character = "";
       $objStyle.Unicode = "";
       $objStyle.width = "";
@@ -726,6 +776,9 @@ function dataCheck($obj,$box){
             $titleTagAdd = "<b>* Chú giải:</b> Tọa độ "+$title+" của ký tự.";
             $checkUV = true;
           }	
+          if($title == "Page"){
+            $page = $block[$e].value;
+          }
           $titleTag += $titleTagAdd;// Nối các chú thích lại
           var $class = "td-"+$title.replace(/\s/g,"-");// Tạo biến class
           $item += '<td calc="'+$block[$e].calc+'" class="'+$class+'" onmouseover="charTitleHover(this)" myHex="'+$block[$e].hex+'" onmouseout="CharHoverHide(this)" alt="'+$title+'" titleText="'+$titleTag+'">' + $block[$e].value + "</td>";// Tạo cột chứa dữ liệu
@@ -747,7 +800,7 @@ function dataCheck($obj,$box){
           $titleHTML2 += $e.toUpperCase() + ": <b>" + String($value).replace(/(\S+\.\S\S)\S+/,"$1") + "</b><br>";// Replace thông số css để lấy chú thích
         }
       }
-      $listChar += '<div class="char-cell" onclick="jumpChar(this)" onmouseover="charHover(this)" onmouseout="CharHoverHide(this)"  charnumber="'+$idCharacter+'" style="'+$style+'"><span class="hover-block-text">'+$titleHTML2+'<b>Nhấn Để Chuyển Đến<br>Khung Phân Tích</b></span></div>'; // Nối dữ liệu chứa tọa độ ký tự để tạo khung trên hình ảnh font
+      $listChar += '<div pageImg="'+$page+'" class="char-cell" onclick="jumpChar(this)" onmouseover="charHover(this)" onmouseout="CharHoverHide(this)"  charnumber="'+$idCharacter+'" style="'+$style+'"><span class="hover-block-text">'+$titleHTML2+'<b>Nhấn Để Chuyển Đến<br>Khung Phân Tích</b></span></div>'; // Nối dữ liệu chứa tọa độ ký tự để tạo khung trên hình ảnh font
       $allHTML += $item + '<td class="td-button"><button class="btn-char-des" onclick="viewChar(this)">Giải Thích</button></td></tr>';// Thêm phím phân tích dữ liệu
     }
     $table += $header + "<th>Phân Tích</th></tr></thead><tbody>" + $header + $allHTML + "</tbody></table></div>";// Nối các dữ liệu vào table

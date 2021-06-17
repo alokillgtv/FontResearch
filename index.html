@@ -13,6 +13,7 @@
 	<!-- Import Script Library -->
   <script src="./js/jquery.js" type="text/javascript"></script>
   <script type="text/javascript" src="./js/boostraps.js"></script>
+      <script type="text/javascript" src="./js/FileSaver.js"></script>
 	<!-- Chèn Css từ stylechat.css -->
   <link rel='shortcut icon' type='image/x-icon' href='icont.ico' />
   <link rel="apple-touch-icon" href="icont.ico">
@@ -76,10 +77,13 @@
 				<li class="item-option tip-hover">
 					<label class="label-item label-upload">
 						<!--<button onclick="execscript('FontImg()')" id="FontImg"><i class="fas fa-image"></i> Chọn File Ảnh Font</button>-->
-						<button id="FontImg"><i class="fas fa-image"></i> Chọn File Ảnh Font <input onclick="clearFile(this)" class="file-upload" accept=".jpg, .png, .bmp" type='file' id='fontimgfile' onchange="fontimgfile(this)" /></button>
+						<button id="FontImg"><i class="fas fa-image"></i> Chọn File Ảnh Font <input onclick="clearFile(this)" class="file-upload" accept=".jpg,.png,.bmp" type='file' id='fontimgfile' onchange="fontimgfile(this)" multiple="" webkitdirectory="webkitdirectory" /></button>
 						<input id="pathImg" onchange="imagePath(this)" type="text" placeholder="Nhập đường dẫn Ảnh Font" />
 					</label>
-					<small class="tip-show">Chọn file ảnh font. Hỗ trợ định dạng: .png, .jpg, .bmp</small>
+					<small class="tip-show">
+          Chọn thư mục chứa ảnh font. Hỗ trợ định dạng: .png, .jpg, .bmp<br>
+          Có thể chọn nhiều file ảnh cùng lúc.
+          </small>
 				</li>
 				<li class="item-option tip-hover">
 					<label class="label-item label-upload">Chọn Kiểu Phân Tích: </label>
@@ -106,29 +110,14 @@
                 <option value="1">Big Endian</option>
             </select>
             <small class="tip-show">Chọn kiểu dữ liệu font. Hãy chọn cho chính xác.<br><br>
-                Với Little Endian, dữ liệu được đọc theo dạng 0xFFFF0000<br><br>
-                Với Big Endian, dữ liệu được đọc theo dạng 0x0000FFFF
+                Ta có một dữ liệu có giá trị Decimal là 255 chuyển sang hex ta được 0x00FF thì:<br><br>
+                Với Little Endian, dữ liệu được đọc theo dạng 0xFF00<br><br>
+                Với Big Endian, dữ liệu được đọc theo dạng 0x00FF
             </small>
           </div>
         </li>
 			</ul>
 			<div class="fontmap-block font-map-0 character-list" style="display:block">
-        <!--
-				<div class="item-option tip-hover item-mapFont">
-					<h4>Tổng số lượng ký tự ở dữ liệu font.</h4>
-					<label class="label-item label-input">
-						<input type="number" id="FontMax" value="179" />
-					</label>
-					<small class="tip-show">Điền số lượng ký tự phù hợp để trích xuất dữ liệu. Mặc định tạm thời là 10 ký tự.</small>
-				</div>
-				<div class="item-option tip-hover item-mapFont">
-					<h4>Vị trí bắt đầu ký tự đầu tiên.</h4>
-					<label class="label-item label-input">
-						<input type="number" id="FontPos" value="1539" />
-					</label>
-					<small class="tip-show">Điền vị trí con trỏ bắt đầu ký tự đầu tiên của file dữ liệu font. <span class="red">Lưu ý: chỉ chấp nhận dữ liệu decimal. Không được dùng hex.</span></small>
-				</div>
-        -->
         <div class="item-struct">
           <h4 class="title-option title-struct">
             <span>Range: </span><b>Dữ Liệu Ký Tự</b>
@@ -151,14 +140,6 @@
               </label>
             </p>
           </h4>
-          <!--
-          <div class="submit-btn">
-            <button onclick="AddBlockValue(this)" class="btn-button add-value tip-hover"><i class="fas fa-plus"></i> Tạo thêm block dữ liệu
-              <small class="tip-show">Một block dữ liệu của font, nó có thể là dạng unicode, decimal, float... Một block dữ liệu có độ dài bất kỳ, có thể là 1 byte, 2 byte</span></small>
-            </button>
-            <button class="btn-button check-font" onclick="checkFont()"><i class="fas fa-cog"></i> Phân Tích Font</button>
-          </div>
-          -->
           <div class="body-struct">
             <div class="item-menu-list">
               <div class="item-name-list-header">
@@ -203,16 +184,6 @@
                   Để dùng Hex cần phải thêm tiền tố <b style="color:red">0x</b> vào trước hex. VD: <b style="color:red">0x3A40</b>
                   </small>
                 </li>
-                <!--
-                <li class="item-menu-struct item-menu-add tip-hover">
-                  <button onclick="addMenuBox(this)" class="item-menu-button item-menu-button-add"><i class="fas fa-plus"></i> Thêm Khối</button>
-                  <small class="tip-show">Thêm một khối dữ liệu để phân tích.</small>
-                </li>
-                <li class="item-menu-struct item-menu-remove tip-hover">
-                  <button onclick="removeMenuBox(this)" class="item-menu-button item-menu-button-remove"><i class="fas fa-times"></i> Xóa Khối</button>
-                  <small class="tip-show">Xóa bớt khối này.</small>
-                </li>
-                -->
               </ul>
             </div>
             <div class="item-name-list">
@@ -336,8 +307,12 @@
 		</div>
 		<div class="block-right col-md-8">
 			<div class="page-img">
-				<img src="empty.png" id="img-view">
-				<div id="cell-content" class="block-cell"></div>
+        <ul class="change-page-img">
+        </ul>
+        <div class="body-page-img img-page-count-1 active">
+          <img src="empty.png" id="img-view">
+          <div id="cell-content" class="block-cell"></div>
+        </div>
 			</div>
 			<div class="page-data">
 				<div id="page-result"><p class="none-data">Hiện chưa có dữ liệu để phân tích. Bạn cần chọn các dữ liệu cần thiết và nhấn vào nút Phân Tích Font để phân tích.</p></div>
@@ -363,6 +338,7 @@
           <div class="buttonDb" id="ImportHTML2" onclick="SendHTML(false)">IMPORT PAGE HTML</div>
           <div class="buttonDb" id="RunCode" onclick="CodeRun()">RUN CODE</div>
           <div class="buttonDb" id="Hex2Text" onclick="ConvertHex()">HEX2TEXT</div>
+          <div class="buttonDb" id="SaveData" onclick="SaveData()">SAVE DATA</div>
         </div>
         <div class="block-debug-item block-form">
           <label>FormData</label>

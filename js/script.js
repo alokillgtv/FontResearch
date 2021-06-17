@@ -10,6 +10,7 @@ $ERROR = false;// Tạo biến báo lỗi
 $dataList = "";// Tạo biến toàn cục chứa dữ liệu
 $SUPERDATA = new Object();
 $HEXNAME = "";
+$LISTIMAGE = []; // Tạo biến chứa đường dẫn ảnh
 // Hàm tạo fontmap bằng dữ liệu font trích xuất từ BMFONT
 function createDATA(){
 	alert("Hiện vẫn chưa hỗ trợ tính năng này");
@@ -121,7 +122,7 @@ function zoomIMG(e){
 	var $text = $(e).html() + '<i class="fas fa-caret-square-down"></i>';// Lấy dữ liệu đã phóng to và thêm icont vào
 	$('.item-zoom-main').html($text);// Thêm vào danh sách
 	if($img.indexOf("empty.png") == -1){// Nếu là font ảnh
-		$('.page-img').css("transform","scale("+$value+")").css("-ms-transform","scale("+$value+")");// Phóng to ảnh theo kích cỡ đã chọn
+		$('.body-page-img').css("transform","scale("+$value+")").css("-ms-transform","scale("+$value+")");// Phóng to ảnh theo kích cỡ đã chọn
 	}
 	else{
 		alert("Vui lòng chọn file ảnh font");// Nếu chưa có font ảnh thì báo
@@ -142,7 +143,12 @@ function getStructItem(){// Hàm lấy dữ liệu structItem
   $struct.typeChar = $('.typeChar :selected').val();// Lấy kiểu dữ liệu Little hoặc Big
   $struct.mapType = $('#type-check :selected').val();// Lấy kiểu phân tích font
   $struct.hexFile = $('#test').val();
-  $struct.dataimg = $('#img-view').attr("src");// Lấy đường dẫn font ảnh
+  $struct.dataimg = [];
+  $('.button-page-img').each(function(){
+    var $path = $(this).attr("imagepath"); // Lấy đường dẫn file ảnh font
+    $struct.dataimg.push($path);
+  })
+  $('#img-view').attr("src");// Lấy đường dẫn font ảnh
   $struct.datafile = $('#pathFont').text();// Lấy đường dẫn font ảnh
   $struct.width = $('#img-view')[0].naturalWidth;// Lấy width ảnh gốc
   $struct.height = $('#img-view')[0].naturalHeight;// Lấy height ảnh gốc
@@ -245,8 +251,20 @@ function importConfigJS($name){
   $("#type-check").val($obj.mapType); // Chuyển đổi tùy chọn
   FontMapChange(); // Chuyển đổi kiểu font map phù hợp
 	$('#pathFont').val($obj.datafile);// Chèn đường dẫn file font map
-	$('#pathImg').val($obj.dataimg);// Chèn đường dẫn file ảnh font
-	$('#img-view').attr("src",$obj.dataimg);// Chèn đường dẫn font ảnh vào
+  var $htmlItem = '<li class="item-page-img title-label">Chọn Ảnh Font</li>';
+  for(var $n = 0;$n < $obj.dataimg.length;$n++){
+    var $pathIMG = $obj.dataimg[$n];
+    var $number = $n + 1;
+    if($n == 0){
+      $htmlItem += '<li class="item-page-img button-page-img active" imagePath="'+$pathIMG+'" imagePage="0" imageSrc="'+$pathIMG+'" onclick="changeImg(this)">Ảnh 1</li>';
+      $('#pathImg').val($obj.dataimg[0]);// Chèn đường dẫn file ảnh font
+      $('#img-view').attr("src",$obj.dataimg[0]);// Chèn đường dẫn font ảnh vào
+    }
+    else{
+      $htmlItem += '<li class="item-page-img button-page-img" imagePath="'+$pathIMG+'" imagePage="'+$n+'" imageSrc="'+$pathIMG+'" onclick="changeImg(this)">Ảnh '+$number+'</li>';
+    }
+  }
+  $('.change-page-img').html($htmlItem);
   $('#test').val($obj.hexFile);
   $HEXFILE = $obj.hexFile;
   var $maxStruct = $obj.list.length;
@@ -827,6 +845,15 @@ function changeValue(){// Hàm thay đổi dữ liệu khi thêm block hoặc
     });
     $box.find('.name-lable-byte').html('Độ Dài <b>('+$byte+' Byte)</b>');// Chèn tổng byte vào ô     
   }
+}
+
+// Hàm lưu file data về máy tính
+function SaveData(){
+  var $script = "$dataSave = " + JSON.stringify($dataSave);
+  var blob = new Blob([$script], {
+    type: "text/javascript;charset=utf-8;",
+	});
+	saveAs(blob, "data.js");	
 }
 
 BeginRunJS()

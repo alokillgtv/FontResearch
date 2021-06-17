@@ -1260,3 +1260,53 @@ thead .table-header {
   left: 233px;
   top: 22px;
 }
+
+.body-page-img {
+  margin: 40px 20px;
+  position: relative;
+  display: block;
+}
+.change-page-img {
+  display: block;
+  position: absolute;
+  left: 20px;
+  width: 1000px;
+}
+.item-page-img {
+  background: black;
+  color: white;
+  font-weight: bold;
+  display: inline-block;
+  padding: 0 5px;
+  line-height: 30px;
+  cursor: pointer;
+}
+.item-page-img.active {
+  background: cadetblue !important;
+}
+.item-page-img:hover {
+  background: red;
+}
+
+.body-page-img[pageimg] .char-cell {
+    display: none;
+}
+
+.item-page-img.title-label {
+  background: black;
+}
+
+.body-page-img[pageimg="0"] .char-cell[pageimg="0"],
+.body-page-img[pageimg="0"] .char-cell[pageimg=""],
+.body-page-img[pageimg="1"] .char-cell[pageimg="1"],
+.body-page-img[pageimg="2"] .char-cell[pageimg="2"],
+.body-page-img[pageimg="3"] .char-cell[pageimg="3"],
+.body-page-img[pageimg="4"] .char-cell[pageimg="4"],
+.body-page-img[pageimg="5"] .char-cell[pageimg="5"],
+.body-page-img[pageimg="6"] .char-cell[pageimg="6"],
+.body-page-img[pageimg="7"] .char-cell[pageimg="7"],
+.body-page-img[pageimg="8"] .char-cell[pageimg="8"],
+.body-page-img[pageimg="9"] .char-cell[pageimg="9"],
+.body-page-img[pageimg="10"] .char-cell[pageimg="10"] {
+    display: block;
+}
