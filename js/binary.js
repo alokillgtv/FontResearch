@@ -105,7 +105,7 @@ function hex2float(str, precision) {
 function dec2bin(str) {
   return parseInt(str, 10).toString(2);
 }
-function dec2hex(str, signed) {
+function dec2hex(str, signed,plus) {
   var number = str;
 
   if (number[0] === "-") {
@@ -123,11 +123,22 @@ function dec2hex(str, signed) {
   else {
     number = parseInt(number,10);
   }
+  var $sothem = "";
+  var $hex = number.toString(16).toUpperCase();
   if (signed) {
-    return pad(number.toString(16).toUpperCase(), signed);
+    var $hex = pad(number.toString(16).toUpperCase(), signed);
   }
-  return number.toString(16).toUpperCase();
+  if(plus){
+    if($hex.length < plus){
+      var $sokhong = "00000000000000000000000000000000";
+      var $tru = plus - $hex.length;
+      var $reg = new RegExp("(.{"+$tru+"})","gi");
+      $sothem = $sokhong.match($reg)[0];
+    }
+  }
+  return $sothem + $hex;
 }
+
 function dec2float(str) {
   return str + ".0";
 }

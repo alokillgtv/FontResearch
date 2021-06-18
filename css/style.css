@@ -1,3 +1,8 @@
+@font-face {
+  font-family: 'consolas';
+  src: url('consola.ttf');
+}
+
 .block-left.col-md-3 {
   height: 100%;
   min-height: 900px;
@@ -107,6 +112,8 @@ ul {
   opacity: 1;
   z-index: 99;
   visibility: visible;
+  top: 32px;
+  left: 0px;
 }
 
 .red {
@@ -217,13 +224,14 @@ ul.list-block-char {
 
 .block-right {
   padding: 0;
-  min-height: 989px;
+  min-height: 750px;
   /*! border-left: 1px solid #ccc; */
 }
 .page-img {
   margin: 10px;
   display: inline-block;
   position: relative;
+  display: none;
 }
 
 .page-img img {
@@ -289,7 +297,8 @@ ul.list-block-char {
 
 #view-data {
   background: cornflowerblue;
-  margin-left: 246px;
+  margin-left: 366px;
+  width: 180px;
 }
 
 .page-data,
@@ -362,14 +371,16 @@ ul.list-block-char {
 }
 
 #create-data {
-  margin-left: 1012px;
+  margin-left: 977px;
+  width: 312px;
 }
 
 #zoom-img {
   background: goldenrod !important;
   border: 0;
   outline: none !important;
-  margin-left: 501px;
+  margin-left: 546px;
+  width: 210px;
 }
 select.typeChar {
   margin-left: 20px;
@@ -905,12 +916,13 @@ ul.list-block-char select {
   width: 35px;
 }
 #view-img {
-  left: 633px;
-  width: 247px;
+  left: 820px;
+  width: 186px;
 }
 #view-char-data {
   margin-left: 757px;
   background: crimson;
+  width: 220px;
 }
 #import-cfg {
   width: 300px;
@@ -1056,7 +1068,7 @@ ul.list-block-char select {
 }
 .btn-button.check-font {
   left: 403px;
-  width: 230px;
+  width: 237px;
   background: darkcyan;
   line-height: 20px;
 }
@@ -1262,7 +1274,7 @@ thead .table-header {
 }
 
 .body-page-img {
-  margin: 40px 20px;
+  margin: 50px 20px;
   position: relative;
   display: block;
 }
@@ -1271,6 +1283,7 @@ thead .table-header {
   position: absolute;
   left: 20px;
   width: 1000px;
+  top: -40px;
 }
 .item-page-img {
   background: black;
@@ -1309,4 +1322,158 @@ thead .table-header {
 .body-page-img[pageimg="9"] .char-cell[pageimg="9"],
 .body-page-img[pageimg="10"] .char-cell[pageimg="10"] {
     display: block;
+}
+
+.item-options .NoSave {
+  background: #ccc !important;
+  color: black;
+  cursor: no-drop;
+}
+
+.item-result-file {
+  display: inline-block;
+  padding: 5px;
+  border-right: 2px solid #ccc;
+  vertical-align: bottom;
+}
+.page-hex-file {
+  margin: 10px;
+  padding: 10px;
+  background: white;
+  font-family: consolas;
+  font-size: 13px;
+}
+.textarea-file-hex {
+  display: inline-block;
+  max-width: 830px;
+  vertical-align: top;
+  font-family: consolas;
+  border: 0;
+  box-sizing: unset;
+  outline: 0;
+  resize: none;
+  min-height: 600px;
+  overflow: hidden;
+  line-height: 20px;
+  min-width: 400px;
+}
+.output-text-file-hex {
+  width: 280px;
+  display: inline-block;
+  font-family: consolas;
+  font-size: 14px;
+  line-height: 20px;
+}
+.fotter-page-hex-file {
+  display: block;
+  border: 2px solid #ccc;
+  margin-left: -2px;
+}
+.body-page-hex-file {
+  overflow: auto;
+  height: 730px;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.item-head-hex {
+  display: inline-block;
+}
+.offset-text-file-hex {
+  width: 70px;
+  display: inline-block;
+  max-width: 90px;
+  color: #663AE0;
+  position: relative;
+  top: 2px;
+}
+.item-title-head {
+  width: 72px;
+}
+.list-head-hex {
+  font-family: consolas;
+  font-size: 14px;
+}
+.item-count-head {
+  max-width: 830px;
+  min-width: 398px;
+  margin-right: 5px;
+}
+
+.head-page-hex-file {
+  display: block;
+  color: #663AE0;
+}
+
+.item-result-file span {
+  min-width: 20px;
+  display: inline-block;
+  margin-left: 5px;
+}
+.input-byte-rows {
+  width: 80px;
+  height: 20px;
+}
+.item-byte-hex span {
+  text-align: left;
+  border: 0;
+}
+.list-result-file-hex {
+  font-size: 14px;
+}
+.jump-byte-rows {
+  width: 120px;
+  height: 20px;
+}
+.jump-byte-hex span {
+  border: 0;
+}
+
+.char-text-hex.hightLight {
+  background: #0078D766;
+}
+#view-hex-file {
+  width: 186px;
+  background: chocolate;
+}
+.line-text-hex {
+    position: relative;
+    top: 2px;
+}
+.end-byte-rows {
+  width: 90px;
+  height: 20px;
+}
+.max-byte-rows {
+  width: 90px;
+  height: 20px;
+}
+.max-byte-hex {
+  border: 0;
+}
+.item-result-file label {
+    margin: 0;
+}
+.result-cals-file-hex {
+  position: absolute;
+  right: 30px;
+  top: 64px;
+  width: 126px;
+  text-align: center;
+}
+.item-calc-number label {
+  display: block;
+  margin: 0;
+  background: cadetblue;
+  color: white;
+}
+.item-calc-number {
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+}
+.item-calc-number span {
+  min-height: 15px;
+  display: block;
+  word-wrap: break-word;
+  padding: 2px;
 }

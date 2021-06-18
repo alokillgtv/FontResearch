@@ -11,14 +11,15 @@ $dataList = "";// Tạo biến toàn cục chứa dữ liệu
 $SUPERDATA = new Object();
 $HEXNAME = "";
 $LISTIMAGE = []; // Tạo biến chứa đường dẫn ảnh
+$HEXTEXTAREA = "";
 // Hàm tạo fontmap bằng dữ liệu font trích xuất từ BMFONT
 function createDATA(){
 	alert("Hiện vẫn chưa hỗ trợ tính năng này");
 }
 
 function clearData(){
-  $('#fontmapfile,#fontimgfile,#test,input').val("");
-  $('#cell-content,#page-result,.name-label b').html("");
+  $('#fontmapfile,#fontimgfile,#test,.block-left input,.textarea-file-hex,.jump-byte-rows').val("");
+  $('#cell-content,#page-result,.name-label b,.output-text-file-hex,.item-offset-hex span,.item-block-hex span,.item-length-hex span,.offset-text-file-hex').html("");
   $('#page-result').html('<p class="none-data" style="background:white;border:1px solid #ccc">Hiện chưa có dữ liệu để phân tích. Bạn cần chọn các dữ liệu cần thiết và nhấn vào nút Phân Tích Font để phân tích.</p>');
   $('.body-page-hex').html('<div class="table-page-hex"></div>\
         <div class="data-hide-info"><p class="none-data">Hiện chưa có dữ liệu để phân tích chi tiết. Bạn cần bấm vào nút phân tích chi tiết ở trang cấu trúc font để tiến hành phân tích chi tiết ký tự.</p>\
@@ -28,47 +29,45 @@ function clearData(){
   $('.select-title option[value="13"]').prop("selected", true);
   $('.select-title-struct option[value="Không Xác Định"]').prop("selected", true);
   $('.title-struct b').text("Không Xác Định");
-  showIMG();
+  $('.input-byte-rows').val(16);
+  //showIMG();
 }
 
 // Hàm khởi chạy đầu tiên
 function BeginRunJS(){
   var $localSave = JSON.parse(localStorage.getItem("$dataSave"));
 	if($localSave){ // Nếu có dữ liệu ở form COPY
-    $dataSave = $localSave;
+    var $keysData = Object.keys($dataSave);
+    var $keysSave = Object.keys($localSave);
+    for(var $k = 0;$k < $keysSave.length;$k++){
+      var $nameSave = $keysSave[$k];
+      var $newSave = $dataSave[$nameSave];
+      if(!$newSave){
+        $dataSave[$nameSave] = $localSave[$nameSave];
+      }
+    }
   }
 	try{// Thử chạy hàm
     clearData(); // Xóa các dữ liệu cũ
 		var $key = Object.keys($dataSave); // Lấy key mỗi object
 		var $item = "";
 		for(var $j = 0;$j < $key.length;$j++){// Chạy lập từng object
-			$item += '<li class="item-options" title="'+$key[$j]+'"><b onclick="importcfg(this)">'+ $key[$j]+'</b><i onclick="delSave(this)" title="Xóa Thiết Lập Này"><small class="fas fa-trash-alt"></small></i></li>'; // Tạo các dòng chứa thiết lập
+      var $newSave = $dataSave[$key[$j]].new;
+      var $classNew = " NoSave";
+      var $onclick = "";
+      var $titleClick = "Không Thể Xóa Thiết Lập Này";
+      if($newSave){
+        $classNew = " NewSave";
+        $onclick = 'onclick="delSave(this)"';
+        $titleClick = "Xóa Thiết Lập Này"
+      }
+			$item += '<li class="item-options" title="'+$key[$j]+'"><b onclick="importcfg(this)">'+ $key[$j]+'</b><i class="delBtt'+$classNew+'" '+$onclick+' title="'+$titleClick+'"><small class="fas fa-trash-alt"></small></i></li>'; // Tạo các dòng chứa thiết lập
 		}
 		$('#import-cfg').append($item); // Chuyển các dòng thiết lập vào danh sách thiết lập
     changeValue();// Chạy hàm thay đổi dữ liệu
 	}
 	catch(e){// Nếu xảy ra lỗi, thì chạy hàm phục hồi thiết lập
     alert("Hàm BeginRun():\n\n" + e);
-	}
-}
-
-// Hàm khởi chạy đầu tiên
-function BeginRun(){
-	if(document.getElementById("copy").value != ""){ // Nếu có dữ liệu ở form COPY
-		var $data = fromHex(document.getElementById("copy").value,""); // Chuyển dữ liệu hex sang text
-		try{// Thử chạy hàm
-			var $obj = JSON.parse($data); // Chuyển dữ liệu thành Object
-			var $key = Object.keys($dataSave); // Lấy key mỗi object
-			var $item = "";
-			for(var $j = 0;$j < $key.length;$j++){// Chạy lập từng object
-				$item += '<li class="item-options" title="'+$key[$j]+'"><b onclick="importcfg(this)">'+ $key[$j]+'</b><i onclick="delSave(this)" title="Xóa Thiết Lập Này"><small class="fas fa-trash-alt"></small></i></li>'; // Tạo các dòng chứa thiết lập
-			}
-			$('#import-cfg').append($item); // Chuyển các dòng thiết lập vào danh sách thiết lập
-		}
-		catch(e){// Nếu xảy ra lỗi, thì chạy hàm phục hồi thiết lập
-      alert("Hàm BeginRun():\n\n" + e);
-			//execscript('ClearCfg()');
-		}
 	}
 }
 
@@ -186,16 +185,25 @@ function exportcfg(e){// Hàm xuất thiết lập để lưu lại
       else{
         alert("Đã lưu thiết lập ("+$name+")");
       }
-      $dataSave[$name] = $struct; // Lưu dữ liệu dưới tên thiết lập
+      var $newSaveData = localStorage.getItem('$dataSave');
+      if($newSaveData){
+        $newSaveData = JSON.parse($newSaveData);
+      }
+      else{
+        $newSaveData = new Object();
+      }
+      $newSaveData[$name] = $struct;
+      $newSaveData[$name].new = true;
+      //$dataSave[$name] = $struct; // Lưu dữ liệu dưới tên thiết lập
       //var $return = execscript('SaveCfg()');// Chạy script autoit lưu file thiết lập lại
       var $check = $('.item-options[title="'+$name+'"]').length;// Biến kiểm tra xem thiết lập có tồn tại chưa
       if($check == 0){// Nếu chưa có thiết lập thì tạo một menu thiết lập mới
-        var $option = '<li class="item-options" onclick="importcfg(this)" title="'+$name+'"><b>'+ $name+'</b><i onclick="delSave(this)" title="Xóa Thiết Lập Này"><small class="fas fa-trash-alt"></small></i></li>';
+        var $option = '<li class="item-options" onclick="importcfg(this)" title="'+$name+'"><b>'+ $name+'</b><i class="delBtt NewSave" onclick="delSave(this)" title="Xóa Thiết Lập Này"><small class="fas fa-trash-alt"></small></i></li>';
       }
       $('#import-cfg').append($option);// Chèn vào danh sách thiết lập
       $('#import-cfg').attr("onchange","importcfg(this)");// Thêm hàm tương tác khi chuyển
       //alert("Đã lưu thiết lập ("+$name+")");// Thông báo khi tạo thiết lập thành công
-      localStorage.setItem('$dataSave', JSON.stringify($dataSave));
+      localStorage.setItem('$dataSave', JSON.stringify($newSaveData));
     }
   }
   catch(e){
@@ -234,20 +242,6 @@ function importConfigJS($name){
 	var $obj = $json[$name];// Lấy dòng thiết lập dựa theo tên thiết lập
   $SAVEHERE = $obj;// Lưu lại file save hiện tại
   $HEXNAME = $obj.datafile;
-  /*
-  
-	var $datafile = $obj.datafile;// Lấy đường dẫn font map
-	var $dataimg = $obj.dataimg;// Lấy đường dẫn font ảnh
-	var $maxchar = $obj.maxChar;//Lấy tổng số ký tự đã lưu
-	var $posChar = $obj.posChar;// Lấy vị trí bắt đầu ký tự
-	var $typeChar = $obj.typeChar;// Lấy kiểu dữ liệu font map. Big Endian hoặc Little Endian
-	var $charlist = $obj.charlist.split("||");// Tách các dữ liệu ký tự
-	var $mapType = $obj.mapType;// Lấy kiểu font map, bitmap hoặc text
-	$FontMapType = Number($mapType);// Lưu biến fontmap hiện tại
-	$('#FontMax').val($maxchar);	// Chèn tổng số ký tự
-	$('#FontPos').val($posChar);	// Chèn vị trí bắt đầu ký tự đầu tiên
-	$('.typeChar').val($obj.typeChar); // Chọn kiểu dữ liệu Big Endian hoặc Little Endian
-  */
   $("#type-check").val($obj.mapType); // Chuyển đổi tùy chọn
   FontMapChange(); // Chuyển đổi kiểu font map phù hợp
 	$('#pathFont').val($obj.datafile);// Chèn đường dẫn file font map
@@ -313,6 +307,9 @@ function importConfigJS($name){
       }
     }
   }
+  setTimeout(function(){
+    setFileHex();
+  },1000)
 	try{
     showLoad(true);
     setTimeout(function(){
@@ -427,6 +424,7 @@ function FNTcheck(){
 function imagePath(e){
   var $src = $(e).val();
   $('#img-view').attr("src",$src);
+  $('.button-page-img.active').attr("imagepath",$src).attr("imagesrc",$src);;
 }
 
 // Hàm lấy array input FNT
@@ -456,27 +454,34 @@ function showLoad($show){
 	}
 }
 
+function showHexFile(e){
+  window.scrollTo(0, 0);// Cuộn đến đầu trang
+	$('.page-data,#page-debug,.page-hex,#page-hex-file,.page-hex-file,.page-img').hide();// Đóng các trang khác
+	$('.page-hex-file').show();// Mở trang ảnh font
+  setFileHex();
+}
+
 function showIMG(e){// Hàm hiện trang ảnh font
   window.scrollTo(0, 0);// Cuộn đến đầu trang
-	$('.page-data,#page-debug,.page-hex,#page-hex-file').hide();// Đóng các trang khác
+	$('.page-data,#page-debug,.page-hex,#page-hex-file,.page-hex-file').hide();// Đóng các trang khác
 	$('.page-img').show();// Mở trang ảnh font
 }
 
 function showDATA(e){// Hàm hiện trang phân tích
-	$('.page-img,#page-debug,.page-hex,#page-hex-file').hide();// Đóng các trang khác
+	$('.page-img,#page-debug,.page-hex,#page-hex-file,.page-hex-file').hide();// Đóng các trang khác
 	$('.page-data').show();// Mở trang phân tích
   widthTH();
 }
 
 function showCharInfo(){// Hàm hiện trang phân tích chi tiết
-  $('.page-img,#page-debug,.page-data,#page-hex-file').hide();// Đóng các trang khác
+  $('.page-img,#page-debug,.page-data,#page-hex-file,.page-hex-file').hide();// Đóng các trang khác
   $('.page-hex').show(); // Mở trang phân tích chi tiết
 }
 
 function Debugger(){// Hàm mở trang debug
   window.scrollTo(0, 0);// Cuộn lên đầu trang
 	$('#page-debug').show();// Hiện trang debug
-	$('.page-data,.page-img,.page-hex,#page-hex-file').hide(); // Ẩn các trang ko liên quan
+	$('.page-data,.page-img,.page-hex,#page-hex-file,.page-hex-file').hide(); // Ẩn các trang ko liên quan
 }
 
 function myType(e){// Hàm chọn kiểu dữ liệu
@@ -595,11 +600,13 @@ function delSave(e){// Hàm xóa thiết lập
   var $box = $(e).closest(".item-options");
 	var $value = $box.attr("title");// Lấy tên thiết lập
 	try{// Chạy thử hàm
-		var $objSave = $dataSave// Chuyển đổi dữ liệu sang object
-		delete $objSave[$value];// Xóa thiết lập đã chọn
-    localStorage.setItem("$dataSave",JSON.stringify($dataSave));
-    $box.remove();
-    alert("Đã xóa thiết lập [" + $value + "]")
+    var $localSave = JSON.parse(localStorage.getItem("$dataSave"));
+    if($localSave){
+      delete $localSave[$value];// Xóa thiết lập đã chọn
+      localStorage.setItem("$dataSave",JSON.stringify($localSave));
+      $box.remove();
+      alert("Đã xóa thiết lập [" + $value + "]")
+    }
 	}
 	catch(e){// Thông báo khi lỗi
 		alert("Hàm delSave():\n\n" + e);
@@ -834,7 +841,7 @@ function changeValue(){// Hàm thay đổi dữ liệu khi thêm block hoặc
       else if($value.match(/^[0-9]+$/)){
         $box2.removeClass("hex-value");// Xóa class hex nếu là dec
       }
-      checkHex(this,true)
+      //checkHex(this,true)
     });
     //$box.find('.select-title').each(function(){
      // selectType(this);

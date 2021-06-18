@@ -95,34 +95,58 @@ function customByte(e){
   changeValue();// Chạy hàm thay đổi dữ liệu
 }
 
+function getStringHex($value){
+  var $result = new Object();
+  $result.type = "NONE";
+  if($value){
+    if($value.match(/^0x[a-fA-F0-9]+$/)){// Nếu dữ liệu là hex
+      $result.hex = $value.match(/^0x([a-fA-F0-9]+)$/)[1];
+      $result.dec = hex2dec($result.hex);
+      $result.type = "HEX";
+    }
+    else if($value.match(/^[0-9]+$/)){
+      $result.dec = $value.match(/^([0-9]+)$/)[1];
+      $result.hex = pad(dec2hex($result.dec));
+      $result.type = "DEC";
+    }
+    else{// Nếu dữ liệu khác thì thông báo và xóa
+      $result.type = "NONE";
+    }
+  }
+  return $result;
+}
+
 function checkHex(e,a){
   var $value = $(e).val();
   var $box = $(e).closest("li");
   var $class = $box.attr("class");
   var $parent = $(e).closest(".body-struct");
   if($value){
-    if($value.match(/^0x[a-fA-F0-9]+$/)){// Nếu dữ liệu là hex
+    var $result = getStringHex($value);
+    if($result.type == "HEX"){// Nếu dữ liệu là hex
       $box.addClass("hex-value");
-      var $hex = $value.match(/^0x([a-fA-F0-9]+)$/)[1];
-      var $dec = hex2dec($hex);
+      var $hex = $result.hex;
+      var $dec = $result.dec;
       if($class.indexOf("item-menu-offset") > -1){
         $parent.find(".name-menu-offset b").html("(DEC: <i>"+$dec+"</i>)")
       }
       if($class.indexOf("item-menu-max") > -1){
-        $parent.find(".name-menu-max b").html("(DEC: <i>"+$dec+"</i>)")
+        $parent.find(".name-menu-max b").html("(DEC: <i>"+$dec+"</i>)");
       }
       //console.log("Dữ liệu đúng");
+      setRangeValue($parent)
     }
-    else if($value.match(/^[0-9]+$/)){
-      var $dec = $value.match(/^([0-9]+)$/)[1];
-      var $hex = pad(dec2hex($dec));
+    else if($result.type == "DEC"){
+      var $hex = $result.hex;
+      var $dec = $result.dec;
       if($class.indexOf("item-menu-offset") > -1){
-        $parent.find(".name-menu-offset b").html("(HEX: <i>"+$hex+"</i>)")
+        $parent.find(".name-menu-offset b").html("(HEX: <i>0x"+$hex+"</i>)")
       }
       if($class.indexOf("item-menu-max") > -1){
-        $parent.find(".name-menu-max b").html("(HEX: <i>"+$hex+"</i>)")
+        $parent.find(".name-menu-max b").html("(HEX: <i>0x"+$hex+"</i>)");
       }
-      $box.removeClass("hex-value")
+      $box.removeClass("hex-value");
+      setRangeValue($parent);
     }
     else{// Nếu dữ liệu khác thì thông báo và xóa
       if(!a){

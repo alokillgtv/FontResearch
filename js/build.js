@@ -476,7 +476,8 @@ function fontmapfile(e){// Hàm chọn file map font
     }
     if(label == "Binary"){// Chuyển đổi nếu là binary
       $HEXFILE = markup.join("").toUpperCase();
-      $('#test').val($HEXFILE)
+      $('#test').val($HEXFILE);
+      setFileHex();
     }
   }
 }
