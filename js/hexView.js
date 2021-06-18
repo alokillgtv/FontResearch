@@ -159,7 +159,7 @@ function GetCusor(e){
   if($select.length < 20){
     $('.item-hex-code span,.item-little-endian span').text("0x" + $select);
     $('.item-big-endian span').text("0x" + SwapEndian($select));
-    $('.item-dec-number span').text(hex2dec($select));
+    $('.item-dec-number span').text(hex2dec(SwapEndian($select)));
     $('.item-text-number span').text(hex2ascii($select).replace(/[^\u20-\u1f\u80-\ua1]|\</gi,"."));
     if($select.length == 8){
       $('.item-float-number span').text(Round(hex2float($select),6));
