@@ -1475,7 +1475,7 @@ thead .table-header {
   margin-bottom: 10px;
 }
 .item-calc-number span {
-  min-height: 15px;
+  min-height: 23px;
   display: block;
   word-wrap: break-word;
   padding: 2px;

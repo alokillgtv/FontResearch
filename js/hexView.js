@@ -253,18 +253,18 @@ function GetCusor(e){
 }
 
 function convertValue($select){
-  $select = $select.replace("0x","");
-  $('.item-hex-code span input').val("0x" + $select);
-  var $swap = SwapEndian($select);
-  $('.item-little-endian span').text("0x" + $swap);
-  $('.item-big-endian span').text(hex2dec($select));
-  $('.item-dec-number span').text(hex2dec($swap));
-  $('.item-text-number span').text(hex2ascii($select).replace(/[^\u20-\u1f\u80-\ua1]|\</gi,"."));
-  if($select.length == 8){
-    $('.item-float-number span').text(Round(hex2float($select),6));
-  }
-  else{
-    $('.item-float-number span').text("");
+  if($select.length > 0){
+    var $swap = SwapEndian($select);
+    $('.item-little-endian span').text($swap);
+    $('.item-big-endian span').text(hex2dec($select));
+    $('.item-dec-number span').text(hex2dec($swap));
+    $('.item-text-number span').text(hex2ascii($select).replace(/[^\u20-\u1f\u80-\ua1]|\</gi,"."));
+    if($select.length == 8){
+      $('.item-float-number span').text(Round(hex2float($swap),6));
+    }
+    else{
+      $('.item-float-number span').text("");
+    }
   }
 }
 
