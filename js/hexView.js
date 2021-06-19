@@ -447,12 +447,14 @@ function clearCals($test){
   }
 }
 
-function pheptinhtoan(){
-  
-}
-
 function swapMaytinh(e){
   var $text = $(e).text();
+  if($text == "DEC"){
+    $('.numberHex').hide();
+  }
+  else{
+    $('.numberHex').show();
+  }
   $('.btt-console.active').removeClass("active");
   $(e).addClass("active");
   var $value = $('.pheptinhmaytinh').val();
@@ -464,11 +466,9 @@ function swapMaytinh(e){
     if($value.match(/\+|\-|\*|\-|\=/)){
       
       if($text == "DEC"){
-        $('.numberHex').hide();
         $value = hex2dec($ketqua.replace(/\s/gi,""));
       }
       else{
-        $('.numberHex').show();
         $value = dec2hex($ketqua.replace(/\s/gi,""));
       }
       $('.pheptinhmaytinh').val($value);
@@ -477,11 +477,9 @@ function swapMaytinh(e){
     else{
       if($text == "DEC"){
         $value  = hex2dec($value.replace(/\s/gi,""));
-        $('.numberHex').hide();
       }
       else{
         $value = dec2hex($value.replace(/\s/gi,""));
-        $('.numberHex').show();
       }
       $('.pheptinhmaytinh').val($value);
       $('.ketquatinhtoan,.oketquadatinh').html($value);
