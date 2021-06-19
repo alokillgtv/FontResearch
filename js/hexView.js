@@ -454,43 +454,54 @@ function swapMaytinh(e){
   $(e).addClass("active");
   var $value = $('.pheptinhmaytinh').val();
   var $ketqua = $('.oketquadatinh').html();
-  if($value.length == 0){
+  if($value.length == 0 && $ketqua.length > 0){
     $value = $ketqua;
   }
-  if($value.match(/\+|\-|\*|\-|\=/) || $value.length == 0){
-    //$('.pheptinhmaytinh').val("");
-    //$('.ketquatinhtoan').html("");
-    if($text == "DEC"){
-      $('.numberHex').hide();
-      $value = hex2dec($ketqua.replace(/\s/gi,""));
+  if($value.length > 0 || $ketqua.length > 0){
+    if($value.match(/\+|\-|\*|\-|\=/)){
+      
+      if($text == "DEC"){
+        $('.numberHex').hide();
+        $value = hex2dec($ketqua.replace(/\s/gi,""));
+      }
+      else{
+        $('.numberHex').show();
+        $value = dec2hex($ketqua.replace(/\s/gi,""));
+      }
+      $('.pheptinhmaytinh').val($value);
+      $('.ketquatinhtoan,.oketquadatinh').html($value);
     }
     else{
-      $('.numberHex').show();
-      $value = dec2hex($ketqua.replace(/\s/gi,""));
+      if($text == "DEC"){
+        $value  = hex2dec($value.replace(/\s/gi,""));
+        $('.numberHex').hide();
+      }
+      else{
+        $value = dec2hex($value.replace(/\s/gi,""));
+        $('.numberHex').show();
+      }
+      $('.pheptinhmaytinh').val($value);
+      $('.ketquatinhtoan,.oketquadatinh').html($value);
     }
-    $('.pheptinhmaytinh').val($value);
-    $('.ketquatinhtoan,.oketquadatinh').html($value);
-  }
-  else{
-    if($text == "DEC"){
-      $value  = hex2dec($value.replace(/\s/gi,""));
-      $('.numberHex').hide();
-    }
-    else{
-      $value = dec2hex($value.replace(/\s/gi,""));
-      $('.numberHex').show();
-    }
-    $('.pheptinhmaytinh').val($value);
-    $('.ketquatinhtoan,.oketquadatinh').html($value);
   }
 }
 
 function copyValue(e,a){
+  clearCals(true)
   if(a){
-    var $value = $(e).closest("li").find("input").val().replace("0x","");
+    var $input = $(e).closest("li").find("input");
+    if($input.length > 0){
+      var $value = $(e).closest("li").find("input").val().replace("0x","");
+    }
+    else{
+      var $value = $(e).closest("li").find("span").text().replace("0x","");
+    }
+    $('.hexButton').trigger("click");
   }
   else{
     var $value = $(e).closest("li").find("span").text().replace("0x","");
+    $('.decButton').trigger("click");
   }
-  themPhepTinh($value)
+  themPhepTinh($value);
+  focusCals();
 }
