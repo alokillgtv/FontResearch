@@ -36,6 +36,9 @@
 		<div id="view-data" class="title-btn tip-hover dataCheck-page" onclick="showDATA(this)"><i class="fas fa-table"></i> Xem Cấu Trúc<small class="tip-show">Xem dữ liệu đã phân tích, các dữ liệu được đánh dấu và vẽ khung phù hợp với dữ liệu đã phân tích.</small></div>
 		<ul id="zoom-img" title="Phóng to ảnh font để nhìn rõ hơn." class="title-btn tip-hover zoomImg">
 			<li class="item-zoom item-zoom-main" title="1"><b><small class="fas fa-search-plus"></small> Size Ảnh: 100%</b><i class="fas fa-caret-square-down"></i></li>
+      <li onclick="zoomIMG(this)" class="item-zoom" title="0.3"><b><small class="fas fa-search-plus"></small> Size Ảnh: 30%</b></li>
+      <li onclick="zoomIMG(this)" class="item-zoom" title="0.5"><b><small class="fas fa-search-plus"></small> Size Ảnh: 50%</b></li>
+      <li onclick="zoomIMG(this)" class="item-zoom" title="0.8"><b><small class="fas fa-search-plus"></small> Size Ảnh: 80%</b></li>
 			<li onclick="zoomIMG(this)" class="item-zoom active" title="1"><b><small class="fas fa-search-plus"></small> Size Ảnh: 100%</b></li>
 			<li onclick="zoomIMG(this)" class="item-zoom" title="1.5"><b><small class="fas fa-search-plus"></small> Size Ảnh: 150%</b></li>
 			<li onclick="zoomIMG(this)" class="item-zoom" title="2"><b><small class="fas fa-search-plus"></small> Size Ảnh: 200%</b></li>
@@ -499,6 +502,9 @@
 		</div>
 	</div>
 	<div id="tooltip"></div>
+  <div class="copyright">
+    <b>Tool FontResearch by Alokill được viết trên nền Website, có thể sử dụng online hoặc <a target="_blank" href="https://github.com/alokillgtv/FontResearch/archive/refs/heads/main.zip">tải Source Code</a> từ <a target="_blank" href="https://github.com/alokillgtv/FontResearch">Github</a> của mình để dùng trên máy tính tiện lợi hơn.</b>
+  </div>
   <!-- Script data -->
   <script type="text/javascript" src="data.js"></script>
   <!-- Script Tạo Table phân tích -->

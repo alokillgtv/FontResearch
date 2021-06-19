@@ -220,6 +220,10 @@ ul.list-block-char {
   z-index: 99;
   padding: 0;
   padding-left: 5px;
+  overflow: auto;
+  max-height: 830px;
+  overflow-x: hidden;
+  min-height: 700px;
 }
 
 .block-right {
@@ -278,7 +282,7 @@ ul.list-block-char {
   vertical-align: middle;
   font-size: 12px;
   border: 1px solid #ccc;
-  width: 400px;
+  width: 385px;
 }
 .title-btn {
   color: white;
@@ -438,7 +442,7 @@ button#export-csv:hover {
   box-sizing: inherit;
 }
 .select-type {
-  width: 117px;
+  width: 113px;
 }
 ul.list-block-char select {
   font-size: 12px;
@@ -590,10 +594,10 @@ ul.list-block-char select {
   width: 269px;
 }
 .name-lable-title {
-  width: 168px;
+  width: 161px;
 }
 .name-lable-type {
-  width: 120px;
+  width: 115px;
 }
 .name-lable-byte {
   width: 140px;
@@ -967,7 +971,7 @@ ul.list-block-char select {
   line-height: 19px;
 }
 .block-byte select {
-  width: 140px;
+  width: 138px;
 }
 .name-lable-add {
   width: 41px;
@@ -978,6 +982,7 @@ ul.list-block-char select {
   display: inline-block;
   margin: 10px 0;
   text-align: left;
+  padding: 5px;
 }
 .item-struct {
   text-align: center;
@@ -992,7 +997,7 @@ ul.list-block-char select {
   border: navajowhite;
 }
 .select-title {
-  width: 130px;
+  width: 123px;
 }
 .character-list {
   margin-top: 20px;
@@ -1017,7 +1022,7 @@ ul.list-block-char select {
   left: 0;
 }
 .item-menu-input {
-  width: 190px;
+  width: 182px;
   height: 25px;
   text-indent: 60px;
 }
@@ -1048,10 +1053,10 @@ ul.list-block-char select {
   background: darkgoldenrod;
 }
 .name-menu-title {
-  width: 219px;
+  width: 220px;
 }
 .name-menu-offset {
-  width: 191px;
+  width: 183px;
 }
 .name-menu-max {
   width: 98px;
@@ -1103,7 +1108,7 @@ ul.list-block-char select {
 }
 
 .name-menu-max {
-  width: 196px;
+  width: 180px;
 }
 .name-lable-add {
   width: 48px;
@@ -1275,15 +1280,14 @@ thead .table-header {
 
 .body-page-img {
   margin: 50px 20px;
-  position: relative;
-  display: block;
+  position: absolute;
 }
 .change-page-img {
   display: block;
   position: absolute;
   left: 20px;
   width: 1000px;
-  top: -40px;
+  top: 5px;
 }
 .item-page-img {
   background: black;
@@ -1612,4 +1616,15 @@ thead .table-header {
 }
 .item-calc-number label b:hover {
   color: crimson;
+}
+
+.body-page-img[style*="0.3"] .char-cell,.body-page-img[style*="0.5"] .char-cell,.body-page-img[style*="0.8"] .char-cell {
+  border: 2px solid darkgoldenrod;
+}
+.item-menu-input.input-max {
+  width: 183px;
+}
+.copyright {
+    clear: both;
+    text-align: center;
 }

@@ -505,6 +505,11 @@ function FNTback(){
         var $block = $split[$j];// Lấy từng dòng dữ liệu
         var $test1 = new RegExp($arrayBlock[0][1]);// Tạo biểu thức để kiểm tra
         var $test2 = new RegExp($arrayBlock[1][1]);
+        if($j == 25){
+        console.log($block);
+        console.log($test1);
+        console.log($test2);
+        }
         if($block.match($test1) && $block.match($test2)){// Nếu dữ liệu đúng
           var $smallItem = '<tr class="item-cell-row">';// Tạo hàng table
           $here = $here + 1;// Vị trí character hiện tại 
@@ -626,6 +631,7 @@ function FNTback(){
 			//$('#formData').text($header);//
 			$('.block-cell').html($listChar);// Chèn khung character vào html
 		}
+    
     showLoad(false);// Đóng loading lại
     CompleteMap();// Chạy hàm hoàn thành
 	}

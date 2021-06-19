@@ -235,7 +235,8 @@ function GetCusor(e){
   $('.textarea-file-hex').focus();
   setCursorPos($('.textarea-file-hex')[0], pos.start, pos.end);
   var $select = $('.textarea-file-hex')[0].value.substring(pos.start, pos.end).replace(/\s/gi,"");
-  if($select.length < 20){
+  if($select.length < 100){
+    $('.input-hex-calc-swap').val($select);
     convertValue($select);
   }
   $('.item-offset-hex span').text(dec2hex($start));
