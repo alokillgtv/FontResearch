@@ -591,7 +591,7 @@ ul.list-block-char select {
   vertical-align: middle;
 }
 .input-regexp {
-  width: 269px;
+  width: 255px;
 }
 .name-lable-title {
   width: 161px;
@@ -617,7 +617,7 @@ ul.list-block-char select {
 }
 .item-regexp {
   display: none;
-  width: 268px;
+  width: 256px;
 }
 .item-regexp[style="display: inline;"] {
   display: inline-block !important;
