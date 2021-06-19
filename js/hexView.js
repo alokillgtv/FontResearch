@@ -407,13 +407,15 @@ function ketquapheptinh(){
         var $result = eval($pheptinhdec);
         $('.pheptinhmaytinh').val($cacpheptinh);
         $('.ketquatinhtoan').html($cacpheptinh);
-        $('.oketquadatinh').text(String(dec2hex($result)).replace(/(\d+\.\d{5})\d+/,"$1"))
+        var $ketqua = String(dec2hex($result)).replace(/(\d+\.\d{5})\d+/,"$1");
+        $('.oketquadatinh').text($ketqua).attr("title",$ketqua);
       }
       else{
         var $result = eval($cacpheptinh);
         $('.pheptinhmaytinh').val($cacpheptinh);
         $('.ketquatinhtoan').html($cacpheptinh);
-        $('.oketquadatinh').text(String($result).replace(/(\d+\.\d{5})\d+/,"$1"));
+        var $ketqua = String($result).replace(/(\d+\.\d{5})\d+/,"$1");
+        $('.oketquadatinh').text($ketqua).attr("title",$ketqua);
       }
     }
     else{
