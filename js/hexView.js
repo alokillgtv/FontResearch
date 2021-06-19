@@ -12,20 +12,18 @@ function setFileHex(){
   var $regexp = new RegExp("(.{"+$byte * 2+"})","gi");
   var $hexSplit = $hex.split($regexp);
   var $hexFile = "";
-  var $textFile = '';
+  var $textHtml = "";
+  var $textBase = "";
   var $numberRow = 0;
+  $ASNIITEXT = "";
   for(var $h = 0;$h < $hexSplit.length;$h++){
     var $block = $hexSplit[$h];
     if($block != ""){
       $numberRow = $numberRow + 1;
       var $ascii = hex2ascii($block).replace(/[^\u20-\u1f\u80-\ua1]|\</gi,".");
-      var $character = $ascii.match(/(.)/gi);
-      var $lineText = '<div class="line-text-hex">';
-      for(var $n = 0;$n < $character.length;$n++){
-        var $char = $character[$n];
-        $lineText += '<span class="char-text-hex">' + $char + '</span>';//|[^\u00A0-\u00FF]
-      }
-      $textFile += $lineText + "</div>"
+      $textBase += $ascii + "\n";
+      $ASNIITEXT += $ascii + "\n";
+      $textHtml += $ascii + "<br>";
       $hexFile += $block.match(/(.{2})/gi).join(" ") + "\n";
     }
   }
@@ -39,13 +37,76 @@ function setFileHex(){
     $leftNumber += '<div class="left-row-hex">' + dec2hex(($s * $byte),4,8) + "</div>";
   }
   $('.item-count-head span').text($HeadNumber);
-  $('.output-text-file-hex').html($textFile);
+  $('.body-output-text-file-hex').html($textHtml);
+  $('.textarea-output-text-file-hex').val($textBase);
   $('.offset-text-file-hex').html($leftNumber);
   var $width = $('.item-count-head')[0].clientWidth;
   $('.textarea-file-hex').css("width",$width + 5);
   $HEXTEXTAREA = $hexFile;
   $('.textarea-file-hex').val($hexFile);
   TextareaHeight();
+}
+
+function GetCusorText(e){
+  var $byte = Number($('.input-byte-rows').val()) + 1;
+  var $textarea = $ASNIITEXT.replace(/\n/gi,"<br>");
+  $('.body-output-text-file-hex').html($textarea);
+  var pos = getCursorPos(e);
+  pos.end = pos.end-Math.floor(pos.end/$byte)
+  pos.start = pos.start-Math.floor(pos.start/$byte);
+  var $BeginOffset = dec2hex(pos.start);
+  var $endOffset = dec2hex(pos.end);
+  var $length = dec2hex(pos.end - pos.start);
+  
+  //console.log(pos);
+  pos.end = Number(pos.end) * 3;
+  pos.start = Number(pos.start) * 3;
+  $('.textarea-file-hex').focus();
+  setCursorPos($('.textarea-file-hex')[0], pos.start, pos.end);
+  var $select = $('.textarea-file-hex')[0].value.substring(pos.start, pos.end).replace(/\s/gi,"");
+  if($select.length < 20){
+    convertValue($select);
+  }
+  $('.item-offset-hex span').text($BeginOffset);
+  $('.item-block-hex span').text($BeginOffset + "-" + $endOffset);
+  $('.item-length-hex span').text($length);
+  //console.log($select);
+  fillHighlight(pos);
+  $('.hightlight')[0].scrollIntoView({behavior: "smooth", block: "center", inline: "center"});
+  setTimeout(function(){
+    $('.hightlight')[0].scrollIntoView({behavior: "smooth", block: "center", inline: "center"});
+  },1);
+}
+
+function fillHighlight($pos){
+  //console.log($pos);
+  var $textarea = $ASNIITEXT.replace(/\n/gi,"<br>");
+  $('.body-output-text-file-hex').html($textarea);
+  var $byte = Number($('.input-byte-rows').val());
+  var $start = Number(Math.floor($pos.start / 3));
+  var $end = Number(Math.floor($pos.end / 3));
+  var $lineStart = Number(String($start / $byte).match(/\d+/)[0]);
+  var $lineEnd = Number(String($end / $byte).match(/\d+/)[0]);
+  var $posStart = $start - ($lineStart * $byte);
+  var $posEnd = $end - ($lineEnd * $byte);
+  var $listLineHTML = $ASNIITEXT.split("\n");
+  var $getLineStart = $listLineHTML[$lineStart];
+  var $getLineEnd = $listLineHTML[$lineEnd];
+  if($lineStart == $lineEnd){
+    var $length = $end - $start + 1;
+    var $regStart = new RegExp("(.{"+$posStart+"})(.{"+$length+"})(.*?)$","gi");
+    var $replaceStart = $getLineStart.replace($regStart,'$1<span class="hightlight">$2</span>$3');
+    $listLineHTML[$lineStart] = $replaceStart;
+  }
+  else{
+    var $regStart = new RegExp("(.{"+$posStart+"})(.*?)$","gi");
+    var $regEnd = new RegExp("(.{"+$posEnd+"})(.*?)$","gi");
+    var $replaceStart = $getLineStart.replace($regStart,'$1<span class="hightlight">$2');
+    var $replaceEnd = $getLineEnd.replace($regEnd,'$1</span>$2');
+    $listLineHTML[$lineStart] = $replaceStart;
+    $listLineHTML[$lineEnd] = $replaceEnd;
+  }
+  $('.body-output-text-file-hex').html($listLineHTML.join("<br>"));
 }
 
 function setTextCursor(input, content, row, column){
@@ -135,8 +196,12 @@ function byteRows(e){
 
 function GetCusor(e){
   var pos = getCursorPos(e);
+  if(pos.end == pos.start){
+    pos.end = pos.end + 1;
+  }
   var $end = Math.floor(pos.end / 3);
   var $start = Math.floor(pos.start / 3);
+  setCursorPos($('.textarea-file-hex')[0], pos.start, pos.end);
   var $select = $('.textarea-file-hex')[0].value.substring(pos.start, pos.end);
   if(/^\d\s/.test($select)){
     $start = $start - 1;
@@ -154,33 +219,64 @@ function GetCusor(e){
     $end = $end + 1;
     pos.end = pos.end + 1;
   }
-  var $select = $('.textarea-file-hex')[0].value.substring(pos.start, pos.end).replace(/\s/gi,"");
-  console.log($select);
-  if($select.length < 20){
-    $('.item-hex-code span,.item-little-endian span').text("0x" + $select);
-    $('.item-big-endian span').text("0x" + SwapEndian($select));
-    $('.item-dec-number span').text(hex2dec(SwapEndian($select)));
-    $('.item-text-number span').text(hex2ascii($select).replace(/[^\u20-\u1f\u80-\ua1]|\</gi,"."));
-    if($select.length == 8){
-      $('.item-float-number span').text(Round(hex2float($select),6));
+  if(/^\s$/.test($select)){
+    pos.end = pos.start - 1;
+    pos.start = pos.start - 3
+  }
+  if(/^\d$/.test($select)){
+    if(Number(pos.start) % 2){
+      pos.start = pos.start - 1
+    }
+    else{
+      pos.end = pos.end + 1;
     }
   }
   var $length = Math.floor($end - $start) + 1;
+  $('.textarea-file-hex').focus();
+  setCursorPos($('.textarea-file-hex')[0], pos.start, pos.end);
+  var $select = $('.textarea-file-hex')[0].value.substring(pos.start, pos.end).replace(/\s/gi,"");
+  if($select.length < 20){
+    convertValue($select);
+  }
   $('.item-offset-hex span').text(dec2hex($start));
   $('.item-block-hex span').text(dec2hex($start) + "-" + dec2hex($end));
   $('.item-length-hex span').text(dec2hex($length));
-  $('.char-text-hex').removeClass("hightLight");
+  fillHighlight(pos)
+  /*
   if($length < 500){
     for(var $v = 0;$v < $length;$v++){
       var $eq = $start + $v;
       $('.char-text-hex:eq('+$eq+')').addClass("hightLight");
     }
   }
+  */
 }
+
+function convertValue($select){
+  $select = $select.replace("0x","");
+  $('.item-hex-code span input').val("0x" + $select);
+  var $swap = SwapEndian($select);
+  $('.item-little-endian span').text("0x" + $swap);
+  $('.item-big-endian span').text(hex2dec($select));
+  $('.item-dec-number span').text(hex2dec($swap));
+  $('.item-text-number span').text(hex2ascii($select).replace(/[^\u20-\u1f\u80-\ua1]|\</gi,"."));
+  if($select.length == 8){
+    $('.item-float-number span').text(Round(hex2float($select),6));
+  }
+  else{
+    $('.item-float-number span').text("");
+  }
+}
+
+
 
 function hexEdit(e){
   $(e).val($HEXTEXTAREA);
   //alert("Vui lòng không chỉnh sửa Hex ở đây");
+}
+
+function textEdit(e){
+  $(e).val($ASNIITEXT);
 }
 
 function setRangeHight($start,$end,$max){
@@ -201,24 +297,21 @@ function setRangeHight($start,$end,$max){
   var $decEnd = $decStart + $decMax;
   $('.textarea-file-hex').focus();
   setCursorPos($('.textarea-file-hex')[0], $decStart, $decEnd - 1);
-  console.log($('.char-text-hex').eq($start.dec));
-  $('.char-text-hex').eq($start.dec)[0].scrollIntoView({behavior: "smooth", block: "center"});
+  var pos = {};
+  pos.start = $decStart;
+  pos.end = $decEnd - 1;
+  fillHighlight(pos)
+  //console.log($('.char-text-hex').eq($start.dec));
+  $('.hightlight')[0].scrollIntoView({behavior: "smooth", block: "center", inline: "center"});
   setTimeout(function(){
-    $('.char-text-hex').eq($start.dec)[0].scrollIntoView({behavior: "smooth", block: "center"});
-  },500);
+    $('.hightlight')[0].scrollIntoView({behavior: "smooth", block: "center", inline: "center"});
+  },1);
   var $hexEnd = dec2hex(Number($start.dec) + Number($start.dec))
   $('.item-offset-hex span').text($start.hex);
   $('.item-block-hex span').text($start.hex + "-" + $hexEnd.replace("0x",""));
   $('.item-length-hex span').text($max.hex);
-  $('.char-text-hex').removeClass("hightLight");
-  if($max.dec < 500){
-    for(var $v = 0;$v < $max.dec;$v++){
-      var $eq = Number($start.dec) + $v;
-      $('.char-text-hex:eq('+$eq+')').addClass("hightLight");
-      //$('.char-text-hex:eq('+$eq+')')[0].classList.add("hightLight");
-    }
-  }
 }
+
 
 function setRangeValue($parent){
   var $valueMax = $parent.find('.item-menu-input.input-max').val();
@@ -263,18 +356,141 @@ function JumpOffset(e){
     var $dec = $result.dec * 3;
     $('.textarea-file-hex').focus();
     setCursorPos($('.textarea-file-hex')[0], $dec, $dec+2);
-    console.log($('.char-text-hex:eq('+$result.dec+')'));
-    $('.char-text-hex:eq('+$result.dec+')')[0].scrollIntoView({behavior: "smooth", block: "center", inline: "nearest"});
+    var $byte = Number($('.input-byte-rows').val());
+    var $textarea = $ASNIITEXT.replace(/\n/gi,"<br>");
+    $('.body-output-text-file-hex').html($textarea);
+    var pos = {};
+    pos.start = $dec;
+    pos.end = $dec+2;
+    console.log(pos);
+    fillHighlight(pos)
+    $('.hightlight')[0].scrollIntoView({behavior: "smooth", block: "center", inline: "center"});
     setTimeout(function(){
-      $('.char-text-hex:eq('+$result.dec+')')[0].scrollIntoView({behavior: "smooth", block: "center", inline: "nearest"});
-    },500);
+      $('.hightlight')[0].scrollIntoView({behavior: "smooth", block: "center", inline: "center"});
+    },1);
     $('.item-offset-hex span').text($result.hex);
     $('.item-block-hex span').text($result.hex + "-" + dec2hex(Number($result.dec)+2));
     $('.item-length-hex span').text(1);
-    $('.char-text-hex').removeClass("hightLight");
-    $('.char-text-hex:eq('+$result.dec+')').addClass("hightLight");
   }
   else{
     alert("Vui lòng chỉ nhập dữ liệu số thập phân (DEC)\n\nhoặc dữ liệu số thập lục phân (HEX) vào ô.")
   }
+}
+
+function themPhepTinh($number){
+  var $old = $('.pheptinhmaytinh').val();
+  if(String($number).match(/[\+\-\*\/]/)){
+    $old = $old + " " + $number + " ";
+  }
+  else{
+    $old = $old + $number;
+  }
+  $('.pheptinhmaytinh').val($old);
+  $('.ketquatinhtoan').html($old);
+  ketquapheptinh();
+}
+
+function focusCals(){
+  $('.pheptinhmaytinh').focus();
+}
+
+
+function ketquapheptinh(){
+  var $cacpheptinh = $('.pheptinhmaytinh').val().replace(/\n/,"");
+  try{
+    if($cacpheptinh.length > 0){
+      var $test = $('.btt-console.active').text();
+      if($cacpheptinh.match(/[a-fA-F0-9]+/) && $test == "HEX"){
+        var $pheptinhdec = $cacpheptinh.replace(/([a-fA-F0-9]+)/gi,function(e){
+          return hex2dec(e);
+        });
+        var $result = eval($pheptinhdec);
+        $('.pheptinhmaytinh').val($cacpheptinh);
+        $('.ketquatinhtoan').html($cacpheptinh);
+        $('.oketquadatinh').text(String(dec2hex($result)).replace(/(\d+\.\d{5})\d+/,"$1"))
+      }
+      else{
+        var $result = eval($cacpheptinh);
+        $('.pheptinhmaytinh').val($cacpheptinh);
+        $('.ketquatinhtoan').html($cacpheptinh);
+        $('.oketquadatinh').text(String($result).replace(/(\d+\.\d{5})\d+/,"$1"));
+      }
+    }
+    else{
+      $('.ketquatinhtoan,.oketquadatinh').html("");
+    }
+  }
+  catch{
+  }
+}
+
+function clearCals($test){
+  if($test){
+    $('.pheptinhmaytinh').val("");
+    $('.ketquatinhtoan,.oketquadatinh').html("");
+  }
+  else{
+    var $cacpheptinh = $('.pheptinhmaytinh').val();
+    if($cacpheptinh.indexOf("=") > -1){
+      $('.pheptinhmaytinh').val("");
+      $('.ketquatinhtoan,.oketquadatinh').html("");
+    }
+    else{
+      $cacpheptinh = $cacpheptinh.substring(0,($cacpheptinh.length - 1));
+      $('.pheptinhmaytinh').val($cacpheptinh);
+      $('.ketquatinhtoan').html($cacpheptinh);
+      ketquapheptinh();
+    }
+  }
+}
+
+function pheptinhtoan(){
+  
+}
+
+function swapMaytinh(e){
+  var $text = $(e).text();
+  $('.btt-console.active').removeClass("active");
+  $(e).addClass("active");
+  var $value = $('.pheptinhmaytinh').val();
+  var $ketqua = $('.oketquadatinh').html();
+  if($value.length == 0){
+    $value = $ketqua;
+  }
+  if($value.match(/\+|\-|\*|\-|\=/) || $value.length == 0){
+    //$('.pheptinhmaytinh').val("");
+    //$('.ketquatinhtoan').html("");
+    if($text == "DEC"){
+      $('.numberHex').hide();
+      $value = hex2dec($ketqua.replace(/\s/gi,""));
+    }
+    else{
+      $('.numberHex').show();
+      $value = dec2hex($ketqua.replace(/\s/gi,""));
+    }
+    $('.pheptinhmaytinh').val($value);
+    $('.ketquatinhtoan,.oketquadatinh').html($value);
+  }
+  else{
+    if($text == "DEC"){
+      $value  = hex2dec($value.replace(/\s/gi,""));
+      $('.numberHex').hide();
+    }
+    else{
+      $value = dec2hex($value.replace(/\s/gi,""));
+      $('.numberHex').show();
+    }
+    $('.pheptinhmaytinh').val($value);
+    $('.ketquatinhtoan,.oketquadatinh').html($value);
+  }
+}
+
+function copyValue(e,a){
+  if(a){
+    var $value = $(e).closest("li").find("input").val().replace("0x","");
+  }
+  else{
+    var $value = $(e).closest("li").find("span").text().replace("0x","");
+  }
+  themPhepTinh($value)
 }

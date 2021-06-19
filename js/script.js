@@ -12,14 +12,15 @@ $SUPERDATA = new Object();
 $HEXNAME = "";
 $LISTIMAGE = []; // Tạo biến chứa đường dẫn ảnh
 $HEXTEXTAREA = "";
+$ASNIITEXT = "";
 // Hàm tạo fontmap bằng dữ liệu font trích xuất từ BMFONT
 function createDATA(){
 	alert("Hiện vẫn chưa hỗ trợ tính năng này");
 }
 
 function clearData(){
-  $('#fontmapfile,#fontimgfile,#test,.block-left input,.textarea-file-hex,.jump-byte-rows').val("");
-  $('#cell-content,#page-result,.name-label b,.output-text-file-hex,.item-offset-hex span,.item-block-hex span,.item-length-hex span,.offset-text-file-hex').html("");
+  $('#fontmapfile,#fontimgfile,#test,.block-left input,.textarea-file-hex,.jump-byte-rows,.textarea-output-text-file-hex,.input-hex-calc-swap,.pheptinhmaytinh,.end-byte-rows,.max-byte-rows').val("");
+  $('#cell-content,#page-result,.name-label b,.body-output-text-file-hex,.item-offset-hex span,.item-block-hex span,.item-length-hex span,.offset-text-file-hex').html("");
   $('#page-result').html('<p class="none-data" style="background:white;border:1px solid #ccc">Hiện chưa có dữ liệu để phân tích. Bạn cần chọn các dữ liệu cần thiết và nhấn vào nút Phân Tích Font để phân tích.</p>');
   $('.body-page-hex').html('<div class="table-page-hex"></div>\
         <div class="data-hide-info"><p class="none-data">Hiện chưa có dữ liệu để phân tích chi tiết. Bạn cần bấm vào nút phân tích chi tiết ở trang cấu trúc font để tiến hành phân tích chi tiết ký tự.</p>\

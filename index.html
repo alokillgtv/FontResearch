@@ -349,24 +349,27 @@
         <div class="body-page-hex-file">
           <div class="offset-text-file-hex"></div>
           <textarea onkeyup="hexEdit(this)" onchange="hexEdit(this)" onmouseup="GetCusor(this)" class="textarea-file-hex"></textarea>
-          <div class="output-text-file-hex"></div>
+          <div class="output-text-file-hex">
+            <div class="body-output-text-file-hex"></div>
+            <textarea onchange="textEdit(this)" onmouseup="GetCusorText(this)" class="textarea-output-text-file-hex"></textarea>
+          </div>
         </div>
         <div class="result-cals-file-hex">
           <ul class="list-calc-hex">
             <li class="item-calc-number item-hex-code">
-              <label>HEX</label>
-              <span></span>
+              <label>HEX <b class="icont-copy-cals" onclick="copyValue(this,true)" title="Copy dòng này xuống máy tính."><i class="far fa-copy"></i></b></label>
+              <span><input class="input-hex-calc-swap" onchange="convertValue(this.value)" type="text" placeholder="Nhập Giá Trị HEX" /></span>
             </li>
             <li class="item-calc-number item-little-endian">
-              <label>LITTLE ENDIAN</label>
+              <label>SWAP HEX<b class="icont-copy-cals" onclick="copyValue(this,false)" title="Copy dòng này xuống máy tính."><i class="far fa-copy"></i></b></label>
               <span></span>
             </li>
             <li class="item-calc-number item-big-endian">
-              <label>BIG ENDIAN</label>
+              <label>DECIMAL<b class="icont-copy-cals" onclick="copyValue(this,false)" title="Copy dòng này xuống máy tính."><i class="far fa-copy"></i></b></label>
               <span></span>
             </li>
             <li class="item-calc-number item-dec-number">
-              <label>DECIMAL</label>
+              <label>DECIMAL SWAP<b class="icont-copy-cals" onclick="copyValue(this,false)" title="Copy dòng này xuống máy tính."><i class="far fa-copy"></i></b></label>
               <span></span>
             </li>
             <li class="item-calc-number item-text-number">
@@ -374,8 +377,66 @@
               <span></span>
             </li>
             <li class="item-calc-number item-float-number">
-              <label>FLOAT</label>
+              <label>FLOAT<b class="icont-copy-cals" onclick="copyValue(this,false)" title="Copy dòng này xuống máy tính."><i class="far fa-copy"></i></b></label>
               <span></span>
+            </li>
+            <li class="item-calc-number item-maytinh-number" onclick="focusCals()">
+              <label>MÁY TÍNH</label>
+              <div class="body-maytinh">
+                <div class="item-body-maytinh ketqua-maytinh">
+                  <textarea title="Nhập phép tính của bạn vào đây." placeholder="Nhập phép tính của bạn." class="pheptinhmaytinh" onmouseup="ketquapheptinh()" onchange="ketquapheptinh()" onkeyup="ketquapheptinh()"></textarea>
+                  <div class="ketquatinhtoan"></div>
+                </div>
+                <div class="item-body-maytinh ketqua-maytinh">
+                  <div class="oketquadatinh" title="Kết quả phép tính của bạn."></div>
+                </div>
+                <div class="item-body-maytinh swap-maytinh">
+                  <button title="Chuyển sang phép tính bằng DEC." class="decButton btt-console active" onclick="swapMaytinh(this)">DEC</button>
+                  <button title="Chuyển sang phép tính bằng HEX" class="hexButton btt-console" onclick="swapMaytinh(this)">HEX</button>
+                </div>
+                <div class="item-body-maytinh congthuc-maytinh">
+                  <button title="Phép tính cộng." class="btt-maytinh phepcong" onclick="themPhepTinh('+')">+</button>
+                  <button title="Phép tính trừ." class="btt-maytinh pheptru" onclick="themPhepTinh('-')">-</button>
+                  <button title="Phép tính nhân." class="btt-maytinh phepnhan" onclick="themPhepTinh('*')">*</button>
+                  <button title="Phép tính chia." class="btt-maytinh phepchia" onclick="themPhepTinh('/')">/</button>
+                </div>
+                <div class="item-body-maytinh conso-maytinh">
+                  <div class="line-break-number">
+                    <button title="Xóa bớt một số trong phép tính." class="btt-maytinh clearone" onclick="clearCals(false)"><i class="fas fa-backspace"></i></button>
+                    <button title="Xóa hết tất cả phép tính." class="btt-maytinh clearAll" onclick="clearCals(true)"><i class="fas fa-eraser"></i></button>
+                  </div>
+                  <div class="line-break-number">
+                    <button class="btt-maytinh so7" onclick="themPhepTinh('7')">7</button>
+                    <button class="btt-maytinh so8" onclick="themPhepTinh('8')">8</button>
+                    <button class="btt-maytinh so9" onclick="themPhepTinh('9')">9</button>
+                  </div>
+                  <div class="line-break-number">
+                    <button class="btt-maytinh so4" onclick="themPhepTinh('4')">4</button>
+                    <button class="btt-maytinh so5" onclick="themPhepTinh('5')">5</button>
+                    <button class="btt-maytinh so6" onclick="themPhepTinh('6')">6</button>
+                  </div>
+                  <div class="line-break-number">
+                    <button class="btt-maytinh so1" onclick="themPhepTinh('1')">1</button>
+                    <button class="btt-maytinh so2" onclick="themPhepTinh('2')">2</button>
+                    <button class="btt-maytinh so3" onclick="themPhepTinh('3')">3</button>
+                  </div>
+                  <div class="line-break-number">
+                    <button class="btt-maytinh so0" onclick="themPhepTinh('0')">0</button>
+                    <button class="btt-maytinh socham" onclick="themPhepTinh('.')">.</button>
+                    <button class="btt-maytinh ketqua" onclick="ketquapheptinh(this)">=</button>
+                  </div>
+                  <div class="line-break-number numberHex">
+                    <button class="btt-maytinh soA" onclick="themPhepTinh('A')">A</button>
+                    <button class="btt-maytinh soB" onclick="themPhepTinh('B')">B</button>
+                    <button class="btt-maytinh soC" onclick="themPhepTinh('C')">C</button>
+                  </div>
+                  <div class="line-break-number numberHex">
+                    <button class="btt-maytinh soD" onclick="themPhepTinh('D')">D</button>
+                    <button class="btt-maytinh soE" onclick="themPhepTinh('E')">E</button>
+                    <button class="btt-maytinh soF" onclick="themPhepTinh('F')">F</button>
+                  </div>
+                </div>
+              </div>
             </li>
           </ul>
         </div>
