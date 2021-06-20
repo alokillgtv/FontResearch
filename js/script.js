@@ -864,4 +864,4 @@ function SaveData(){
 	saveAs(blob, "data.js");	
 }
 
-BeginRunJS()
+BeginRunJS();

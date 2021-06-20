@@ -1476,13 +1476,16 @@ thead .table-header {
 }
 .item-calc-number {
   border: 1px solid #ccc;
-  margin-bottom: 10px;
+  margin-bottom: 3px;
 }
 .item-calc-number span {
   min-height: 23px;
   display: block;
   word-wrap: break-word;
   padding: 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .textarea-output-text-file-hex {
@@ -1561,7 +1564,7 @@ thead .table-header {
 }
 .conso-maytinh .btt-maytinh {
   width: 32px;
-  font-size: 19px;
+  font-size: 14px;
   background: azure;
 }
 .line-break-number {
@@ -1627,4 +1630,10 @@ thead .table-header {
 .copyright {
     clear: both;
     text-align: center;
+}
+.item-Negative-number b {
+  font-weight: normal;
+  width: 58px;
+  display: inline-block;
+  text-align: left;
 }

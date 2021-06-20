@@ -109,62 +109,30 @@ function fillHighlight($pos){
   $('.body-output-text-file-hex').html($listLineHTML.join("<br>"));
 }
 
-function setTextCursor(input, content, row, column){
-  // search row times: 
-  var pos = 0;
-  var prevPos = 0;
-  for( var i = 0; (i<row) && (pos != -1); ++i){
-      prevPos = pos;
-      pos = content.indexOf("\n",pos+1);        
-  }
-
-
-  // if we can't go as much down as we want,
-  //  go as far as worked
-  if(-1 == pos){ pos = prevPos; }
-
-  if(0 != row)
-      ++pos; // one for the linebreak
-
-  // prevent cursor from going beyond the current line
-  var lineEndPos = content.indexOf("\n", pos+1);
-
-  if((-1 != lineEndPos) && 
-      (column > lineEndPos-pos)){
-      // go *only* to the end of the current line
-      pos = lineEndPos;
-  } else{
-      // act as usual
-      pos += column
-  }
-
-  setSelectionRange(input, pos,pos);
-}
-
 function getCursorPos(input) {
-    if ("selectionStart" in input && document.activeElement == input) {
-        return {
-            start: input.selectionStart,
-            end: input.selectionEnd
-        };
+  if ("selectionStart" in input && document.activeElement == input) {
+    return {
+      start: input.selectionStart,
+      end: input.selectionEnd
+    };
+  }
+  else if (input.createTextRange) {
+    var sel = document.selection.createRange();
+    if (sel.parentElement() === input) {
+      var rng = input.createTextRange();
+      rng.moveToBookmark(sel.getBookmark());
+      for (var len = 0; rng.compareEndPoints("EndToStart", rng) > 0; rng.moveEnd("character", -1)) {
+          len++;
+      }
+      rng.setEndPoint("StartToStart", input.createTextRange());
+      for (var pos = { start: 0, end: len }; rng.compareEndPoints("EndToStart", rng) > 0; rng.moveEnd("character", -1)) {
+          pos.start++;
+          pos.end++;
+      }
+      return pos;
     }
-    else if (input.createTextRange) {
-        var sel = document.selection.createRange();
-        if (sel.parentElement() === input) {
-            var rng = input.createTextRange();
-            rng.moveToBookmark(sel.getBookmark());
-            for (var len = 0; rng.compareEndPoints("EndToStart", rng) > 0; rng.moveEnd("character", -1)) {
-                len++;
-            }
-            rng.setEndPoint("StartToStart", input.createTextRange());
-            for (var pos = { start: 0, end: len }; rng.compareEndPoints("EndToStart", rng) > 0; rng.moveEnd("character", -1)) {
-                pos.start++;
-                pos.end++;
-            }
-            return pos;
-        }
-    }
-    return -1;
+  }
+  return -1;
 }
 
 function setCursorPos(input, start, end) {
@@ -198,12 +166,13 @@ function GetCusor(e){
   var pos = getCursorPos(e);
   if(pos.end == pos.start){
     pos.end = pos.end + 1;
+    pos.start = pos.start - 1;
   }
   var $end = Math.floor(pos.end / 3);
   var $start = Math.floor(pos.start / 3);
   setCursorPos($('.textarea-file-hex')[0], pos.start, pos.end);
   var $select = $('.textarea-file-hex')[0].value.substring(pos.start, pos.end);
-  if(/^\d\s/.test($select)){
+  if(/^\S\s/.test($select)){
     $start = $start - 1;
     pos.start = pos.start - 1;
   }
@@ -215,7 +184,7 @@ function GetCusor(e){
     $end = $end - 1;
     pos.end = pos.end - 1;
   }
-  if(/\s\d$/.test($select)){
+  if(/\s\S$/.test($select)){
     $end = $end + 1;
     pos.end = pos.end + 1;
   }
@@ -223,7 +192,7 @@ function GetCusor(e){
     pos.end = pos.start - 1;
     pos.start = pos.start - 3
   }
-  if(/^\d$/.test($select)){
+  if(/^\S$/.test($select)){
     if(Number(pos.start) % 2){
       pos.start = pos.start - 1
     }
@@ -243,28 +212,27 @@ function GetCusor(e){
   $('.item-block-hex span').text(dec2hex($start) + "-" + dec2hex($end));
   $('.item-length-hex span').text(dec2hex($length));
   fillHighlight(pos)
-  /*
-  if($length < 500){
-    for(var $v = 0;$v < $length;$v++){
-      var $eq = $start + $v;
-      $('.char-text-hex:eq('+$eq+')').addClass("hightLight");
-    }
-  }
-  */
 }
 
 function convertValue($select){
   if($select.length > 0){
-    var $swap = SwapEndian($select);
-    $('.item-little-endian span').text($swap);
-    $('.item-big-endian span').text(hex2dec($select));
-    $('.item-dec-number span').text(hex2dec($swap));
-    $('.item-text-number span').text(hex2ascii($select).replace(/[^\u20-\u1f\u80-\ua1]|\</gi,"."));
-    if($select.length == 8){
-      $('.item-float-number span').text(Round(hex2float($swap),6));
-    }
-    else{
-      $('.item-float-number span').text("");
+    if($select.match(/^[a-fA-F0-9]+$/) || $select.match(/^[0-9]+$/)){
+      var $swap = SwapEndian($select);
+      $('.item-little-endian span').text($swap);
+      $('.item-big-endian span').text(hex2dec($select));
+      $('.item-dec-number span').text(hex2dec($swap));
+      $('.item-text-number span').text(hex2ascii($select).replace(/[^\u20-\u1f\u80-\ua1]|\</gi,"."));
+      if($select.length <= 8){
+        var $swap = SwapEndian($select);
+        var $Negative = "<b>Origin: </b><b>" + numberNegative($select) + "</b><br><b>SWAP: </b><b>" + numberNegative($swap) + "</b>";
+        $('.item-Negative-number span').html($Negative);
+      }
+      if($select.length == 8){
+        $('.item-float-number span').text(Round(hex2float($swap),6));
+      }
+      else{
+        $('.item-float-number span').text("");
+      }
     }
   }
 }

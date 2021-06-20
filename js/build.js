@@ -368,28 +368,61 @@ function GetBlock($title,$byte,$type,$cals,$save,$dataList){// Hàm kiểm tra t
 }
 
 function numberNegative($hex,$byteGet){// Hàm chuyển số âm trong hex
-	switch($byteGet){//Kiểm tra giá trị của byte
-		case 2:// Nếu là 1 byte
-			var $maxNumber = 255 ;// Giá trị tối đa là 255
+  var $byteGet = $hex.length;
+  if($byteGet <= 8){
+    switch($byteGet){//Kiểm tra giá trị của byte
+      case 2:// Nếu là 1 byte
+        var $maxNumber = 255 ;// Giá trị tối đa là 255
+        break;
+      case 4://Nếu là 2 byte
+        var $maxNumber = 65535 ; //Giá trị tối đa là 65535
+        break;
+      case 6://Nếu là 3 byte
+        var $maxNumber = 16777215 ; //Giá trị tối đa là 16777215
+        break;
+      case 8://Nếu là 4 byte
+        var $maxNumber = 4294967295 ; //Giá trị tối đa là 4294967295
+        break;
+    }
+    var $splitNumber = ($maxNumber / 2) ; //Phân nữa giá trị tối đa
+    var $numberHex = hex2dec($hex);	//Chuyển giá trị hex sang dec
+    if ($numberHex > $splitNumber){// Nếu giá trị hex lớn hơn phân nữa giá trị tối đa, thì nó là số âm
+      var $numberNegative = $numberHex - $maxNumber - 1;	//Tính ra số âm
+    }else{
+      var $numberNegative = $numberHex;
+    }
+    return $numberNegative// Trả về số âm
+  }
+  else{
+    return "";
+  }
+}
+
+function NegativeHex($number,$byte){
+  switch($byte){//Kiểm tra giá trị của byte
+    case 2:// Nếu là 1 byte
+      var $maxNumber = 255 ;// Giá trị tối đa là 255
       break;
-		case 4://Nếu là 2 byte
-			var $maxNumber = 65535 ; //Giá trị tối đa là 65535
+    case 4://Nếu là 2 byte
+      var $maxNumber = 65535 ; //Giá trị tối đa là 65535
       break;
-		case 6://Nếu là 3 byte
-			var $maxNumber = 16777215 ; //Giá trị tối đa là 16777215
+    case 6://Nếu là 3 byte
+      var $maxNumber = 16777215 ; //Giá trị tối đa là 16777215
       break;
-		case 8://Nếu là 4 byte
-			var $maxNumber = 4294967295 ; //Giá trị tối đa là 4294967295
+    case 8://Nếu là 4 byte
+      var $maxNumber = 4294967295 ; //Giá trị tối đa là 4294967295
       break;
-	}
-	var $splitNumber = ($maxNumber / 2) ; //Phân nữa giá trị tối đa
-	var $numberHex = hex2dec($hex);	//Chuyển giá trị hex sang dec
-	if ($numberHex > $splitNumber){// Nếu giá trị hex lớn hơn phân nữa giá trị tối đa, thì nó là số âm
-		var $numberNegative = $numberHex - $maxNumber - 1;	//Tính ra số âm
-	}else{
-		var $numberNegative = $numberHex;
-	}
-	return $numberNegative// Trả về số âm
+  }
+  var $number = Number($number);
+  var $splitNumber = ($maxNumber / 2) ;
+  var $numberHex = $maxNumber + $number;
+  if ($numberHex > $splitNumber && $numberHex < $maxNumber){// Nếu giá trị hex lớn hơn phân nữa giá trị tối đa, thì nó là số âm
+    var $numberNegative = dec2hex(($numberHex + 1));	//Tính ra số âm
+  }
+  else{
+    var $numberNegative = dec2hex($number);
+  }
+  return $numberNegative;
 }
 
 function fontimgfile(e){// Hàm khi chọn file image font
