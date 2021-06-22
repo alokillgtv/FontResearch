@@ -8,11 +8,17 @@ $FILEPOS = 0;// Tạo biến chứa vị trí con trỏ file hex
 $SAVEHERE = ""; // Tạo biến file save hiện tại.
 $ERROR = false;// Tạo biến báo lỗi
 $dataList = "";// Tạo biến toàn cục chứa dữ liệu
-$SUPERDATA = new Object();
-$HEXNAME = "";
+$SUPERDATA = new Object(); // Tạo biến siêu dữ liệu
+$HEXNAME = "";// Tên file HEX
 $LISTIMAGE = []; // Tạo biến chứa đường dẫn ảnh
-$HEXTEXTAREA = "";
-$ASNIITEXT = "";
+$HEXTEXTAREA = "";// Tạo biến lưu dữ liệu file HEX TEXTAREA
+$ASNIITEXT = "";// Tạo biến lưu dữ liệu file ASNII TEXTAREA
+$OBJECTCUSOR = ""// Tạo biến lưu dữ liệu con trỏ hex
+$OBJECTHLOFFSET = [];
+$DELETEOFFSET = [];
+$OBJECTHL = [];// Tạo biến lưu dữ liệu highlight
+$OBJECEDITTHL = [];//
+$SAVECHANGE = "";
 // Hàm tạo fontmap bằng dữ liệu font trích xuất từ BMFONT
 function createDATA(){
 	alert("Hiện vẫn chưa hỗ trợ tính năng này");
@@ -108,6 +114,7 @@ function importcfg(e){
     //Console.log("$value",$value);
 		$nameCfg = $value; // biến tên thiết lập
 		//importConfig($value) // Chạy hàm thêm thiết lập
+    clearData();
 		importConfigJS($value) // Chạy hàm thêm thiết lập
 		$('.item-main b').text($value); // Thêm tên dữ liệu vào main item
 	}
@@ -259,7 +266,12 @@ function importConfigJS($name){
       $htmlItem += '<li class="item-page-img button-page-img" imagePath="'+$pathIMG+'" imagePage="'+$n+'" imageSrc="'+$pathIMG+'" onclick="changeImg(this)">Ảnh '+$number+'</li>';
     }
   }
-  $('.change-page-img').html($htmlItem);
+  setTimeout(function(){
+    var $wBefore = $('#img-view')[0].naturalWidth;
+    var $hBefore = $('#img-view')[0].naturalHeight;
+    $htmlItem += '<li class="item-size-image"><div title="Chiều dài của ảnh font hiện tại."><label>Width</label><span><input class="width-input-img" type="number" placeholder="Nhập Width" value="'+$wBefore+'"></span></div><div title="Chiều cao của ảnh font hiện tại."><label>Height</label><span><input placeholder="Nhập Height" class="height-input-img" value="'+$hBefore+'" type="number"/></span></div></li>';
+    $('.change-page-img').html($htmlItem);
+  }, 500);
   $('#test').val($obj.hexFile);
   $HEXFILE = $obj.hexFile;
   var $maxStruct = $obj.list.length;
@@ -459,7 +471,7 @@ function showHexFile(e){
   window.scrollTo(0, 0);// Cuộn đến đầu trang
 	$('.page-data,#page-debug,.page-hex,#page-hex-file,.page-hex-file,.page-img').hide();// Đóng các trang khác
 	$('.page-hex-file').show();// Mở trang ảnh font
-  setFileHex();
+  //setFileHex();
 }
 
 function showIMG(e){// Hàm hiện trang ảnh font

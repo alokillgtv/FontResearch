@@ -1336,7 +1336,6 @@ thead .table-header {
 
 .item-result-file {
   display: inline-block;
-  padding: 5px;
   border-right: 2px solid #ccc;
   vertical-align: bottom;
 }
@@ -1348,18 +1347,20 @@ thead .table-header {
   font-size: 13px;
 }
 .textarea-file-hex {
-  display: inline-block;
-  max-width: 830px;
-  vertical-align: top;
-  font-family: consolas;
   border: 0;
   box-sizing: unset;
   outline: 0;
   resize: none;
-  min-height: 600px;
-  overflow: hidden;
   line-height: 20px;
-  min-width: 400px;
+  position: absolute;
+  overflow: hidden;
+  left: -3px;
+  top: 0px;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
 }
 .output-text-file-hex {
   width: 280px;
@@ -1428,7 +1429,7 @@ thead .table-header {
   font-size: 14px;
 }
 .jump-byte-rows {
-  width: 120px;
+  width: 150px;
   height: 20px;
 }
 .jump-byte-hex span {
@@ -1447,18 +1448,19 @@ thead .table-header {
     top: 2px;
 }
 .end-byte-rows {
-  width: 90px;
+  width: 150px;
   height: 20px;
 }
 .max-byte-rows {
-  width: 90px;
+  width: 150px;
   height: 20px;
 }
-.max-byte-hex {
+.save-highlight-hex {
   border: 0;
 }
-.item-result-file label {
+.item-result-file label,.item-result-file span {
     margin: 0;
+    padding: 5px;
 }
 .result-cals-file-hex {
   position: absolute;
@@ -1636,4 +1638,189 @@ thead .table-header {
   width: 58px;
   display: inline-block;
   text-align: left;
+}
+.left-tab-HEX {
+  display: inline-block;
+  max-width: 830px;
+  vertical-align: top;
+  font-family: consolas;
+  min-height: 600px;
+  line-height: 20px;
+  min-width: 400px;
+  position: relative;
+}
+
+.textarea-file-hex-copy {
+  position: relative;
+  top: 2px;
+  left: -1px;
+  /*! z-index: -1; */
+}
+.block-highlight {
+  position: relative;
+  padding-bottom: 10px;
+  z-index: 11;
+  margin-right: -8px;
+}
+.text-hex-highlight {
+  background: beige;
+  border: 2px solid red;
+  position: relative;
+  left: -5px;
+  padding: 0 2px;
+}
+.body-highlight {
+  position: absolute;
+  background: white;
+  padding: 5px;
+  border: 2px solid darkmagenta;
+  left: -100%;
+  min-width: 220px;
+  display: none;
+  top: 18px;
+}
+.select-highlight select {
+  width: 135px;
+  outline: 0;
+  border: 1px solid;
+  text-align: center;
+}
+.result-highlight {
+  margin-top: 6px;
+}
+.button-highlight {
+  background: red;
+  color: white;
+  border: 0;
+  width: 80px;
+  margin: 5px;
+}
+.button-highlight:hover {
+  background: black;
+}
+
+.select-highlight label {
+  display: block;
+  font-weight: normal;
+}
+.select-highlight span,.select-highlight select {
+  display: inline-block;
+}
+.select-type-HL {
+  margin-left: 23px;
+}
+.tool-result-highlight {
+  text-align: center;
+  display: block;
+}
+.save-buttonHL {
+  background: cornflowerblue;
+}
+.number-result-hightlight label {
+  width: 160px;
+  border: 1px dashed #ccc;
+  min-height: 22px;
+  vertical-align: middle;
+  background: beige;
+  margin-left: -4px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.block-highlight.active .body-highlight {
+  display: block;
+}
+.block-highlight:hover .body-highlight {
+  display: block;
+  z-index: 30;
+}
+.save-highlight-button {
+  background: #1d42d5;
+  font-size: 13px;
+  border: 0;
+  margin: 0;
+  padding: 5px;
+  line-height: 14px;
+  position: relative;
+  top: -3px;
+  color: white;
+}
+.save-highlight-button:hover {
+  background: black;
+}
+
+.item-size-image {
+  font-weight: bold;
+  display: inline-block;
+  padding: 0 5px;
+  /*! line-height: 30px; */
+  cursor: pointer;
+  background: #074f66;
+  color: white;
+  position: relative;
+  line-height: 30px;
+}
+.item-size-image div {
+  display: inline-block;
+}
+.item-size-image input {
+  width: 78px;
+  margin: 0 5px;
+  color: black;
+  height: 24px;
+}
+.item-size-image label {
+    margin: 0;
+}
+.block-highlight.active {
+  z-index: 30;
+}
+.block-highlight:hover {
+  z-index: 30;
+}
+.arrow-title {
+  position: absolute;
+  bottom: 8;
+  left: -5px;
+  right: 5px;
+  text-align: center;
+  font-weight: bold;
+  display: none;
+  width: 100%;
+  z-index: 40;
+  top: -1px;
+}
+.body-arrow {
+  padding: 0 5px;
+  background: #0000007a;
+  color: white;
+  font-size: 9px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  display: inline-block;
+  word-wrap: break-word;
+  white-space: nowrap;
+}
+.block-highlight:hover .arrow-title {
+  display: none;
+}
+.arrow-title:hover .body-arrow {
+  display: none;
+}
+.textarea-file-hex-copy.focus .arrow-title {
+  display: block;
+}
+
+.remove-highlight-hex .save-highlight-button {
+  background: brown;
+}
+.remove-highlight-hex {
+  border: 0;
+}
+.remove-highlight-hex .tip-show {
+  left: -63px !important;
+}
+.block-highlight:hover .arrow-title {
+  display: none;
 }

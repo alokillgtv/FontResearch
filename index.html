@@ -298,27 +298,15 @@
       <div class="page-hex-file">
          <div class="fotter-page-hex-file">
           <ul class="list-result-file-hex">
-            <li class="item-result-file item-offset-hex tip-hover">
-              <label>Offset: </label><span></span>
-              <small class="tip-show">Vị trí con trỏ hiện tại.</small>
-            </li>
-            <li class="item-result-file item-block-hex tip-hover">
-              <label>Block: </label><span></span>
-              <small class="tip-show">Vị trí bắt đầu và kết thúc của một khối mà bạn chọn.</small>
-            </li>
-            <li class="item-result-file item-length-hex tip-hover">
-              <label>Length: </label><span></span>
-              <small class="tip-show">Độ dài khối mà bạn đã chọn.</small>
-            </li>
             <li class="item-result-file item-byte-hex tip-hover">
-              <label>Byte Row: </label><span><input class="input-byte-rows" onchange="byteRows(this)" value="16" type="number"/></span>
+              <label>Byte Row: </label><span><input class="input-byte-rows" onfocusout="byteRows(this)" onchange="byteRows(this)" value="16" type="number"/></span>
               <small class="tip-show">Chuyển đổi số byte được hiển thị trong một hàng.<br>
               Chỉ được dùng giá trị DEC ở ô này. <br>
               Và giá trị tuyệt đối không thấp hơn 16 và cao hơn 32.
               </small>
             </li>
             <li class="item-result-file jump-byte-hex tip-hover">
-              <label>Start Offset: </label><span><input class="jump-byte-rows" onchange="JumpOffset(this)" value="" placeholder="Start Offset" type="text"/></span>
+              <label>Start Offset: </label><span><input class="jump-byte-rows" onfocusout="JumpOffset(this)" onchange="JumpOffset(this)" value="" placeholder="Start Offset" type="text"/></span>
               <small class="tip-show">Vị trí bắt đầu khối hex mà bạn chọn.<br>
               Khi nhập vào ô này, con trỏ sẽ được nhảy đến vị trí mà bạn nhập.<br>
               Có thể dùng HEX và DEC đều được.<br>
@@ -326,7 +314,7 @@
               </small>
             </li>
             <li class="item-result-file end-byte-hex tip-hover">
-              <label>End Offset: </label><span><input class="end-byte-rows" onchange="EndOffset(this)" value="" placeholder="End Offset" type="text"/></span>
+              <label>End Offset: </label><span><input class="end-byte-rows" onfocusout="EndOffset(this)" onchange="EndOffset(this)" value="" placeholder="End Offset" type="text"/></span>
               <small class="tip-show">Vị trí kết thúc khối hex mà bạn chọn.<br>
               Khi nhập vào ô này, con trỏ sẽ chọn offset khối bắt đầu<br>
               cho đến offset kết thúc mà bạn nhập.<br>
@@ -335,12 +323,31 @@
               </small>
             </li>
             <li class="item-result-file max-byte-hex tip-hover">
-              <label>Length: </label><span><input class="max-byte-rows" onchange="MaxOffset(this)" value="" placeholder="Length" type="text"/></span>
+              <label>Length: </label><span><input class="max-byte-rows" onfocusout="MaxOffset(this)" onchange="MaxOffset(this)" value="" placeholder="Length" type="text"/></span>
               <small class="tip-show">Độ dài khối hex mà bạn chọn.<br>
               Khi nhập vào ô này, con trỏ sẽ chọn offset khối bắt đầu<br>
               cho đến độ dài khối mà bạn nhập.<br>
               Có thể dùng HEX và DEC đều được.<br>
               Để dùng Hex cần phải thêm tiền tố <b style="color:red">0x</b> vào trước hex. VD: <b style="color:red">0x3A40</b>
+              </small>
+            </li>
+            <li class="item-result-file save-highlight-hex tip-hover">
+              <button class="save-highlight-button" onclick="openToolHex()"><i class="fas fa-highlighter"></i> Ghim Block</button>
+              <small class="tip-show">
+              Công cụ dùng để ghim tạm dữ liệu.<br>
+              Để phân tích dễ dàng hơn, cần ghim tạm các khối dữ liệu<br>
+              với giá trị mà bạn nghiên cứu được.<br>
+              Ngoài mục đích đánh dấu khối block mà bạn chọn,<br>
+              nó còn có tính năng đặt tên và giá trị cho khối này.<br>
+              Để dùng công cụ này, các bạn cần chọn khối HEX trước.
+              </small>
+            </li>
+            <li class="item-result-file remove-highlight-hex tip-hover">
+              <button class="save-highlight-button" onclick="removeToolHex()"><i class="fas fa-trash"></i> Xóa Hết Ghim</button>
+              <small class="tip-show">
+              Công cụ dùng để xóa hết các block ghim.<br>
+              Đôi khi ghim dữ liệu bị trùng sẽ gây lỗi.<br>
+              Hãy dùng công cụ này phục hồi lại mặc định.
               </small>
             </li>
           </ul>
@@ -354,7 +361,11 @@
         </div>
         <div class="body-page-hex-file">
           <div class="offset-text-file-hex"></div>
-          <textarea onkeyup="hexEdit(this)" onchange="hexEdit(this)" onmouseup="GetCusor(this)" class="textarea-file-hex"></textarea>
+          <div class="left-tab-HEX">
+            <textarea onmouseleave="focusTextarea(this,false)" onmouseenter="focusTextarea(this,true)" onkeyup="hexEdit(this)" onchange="hexEdit(this)" onmouseup="GetCusor(this)" class="textarea-file-hex"></textarea>
+            <div class="textarea-file-hex-copy"></div>
+            <div class="hight-light-hex"></div>
+          </div>
           <div class="output-text-file-hex">
             <div class="body-output-text-file-hex"></div>
             <textarea onchange="textEdit(this)" onmouseup="GetCusorText(this)" class="textarea-output-text-file-hex"></textarea>

@@ -447,9 +447,12 @@ function fontimgfile(e){// Hàm khi chọn file image font
       else{
         $htmlItem += '<li class="item-page-img button-page-img" imagePath="'+$item.path+'" imagePage="'+$numberImage+'" imageSrc="'+$item.imgpath+'" onclick="changeImg(this)">Ảnh '+($numberImage + 1)+'</li>';
       }
-      $('.change-page-img').html($htmlItem);
+      var $wBefore = $('#img-view')[0].naturalWidth;
+      var $hBefore = $('#img-view')[0].naturalHeight;
+      $htmlItem += '<li class="item-size-image"><div title="Chiều dài của ảnh font hiện tại."><label>Width</label><span><input class="width-input-img" type="number" placeholder="Nhập Width" value="'+$wBefore+'"></span></div><div title="Chiều cao của ảnh font hiện tại."><label>Height</label><span><input placeholder="Nhập Height" class="height-input-img" value="'+$hBefore+'" type="number"/></span></div></li>';
     }
   }
+  $('.change-page-img').html($htmlItem);  
 }
 
 function changeImg(e){
