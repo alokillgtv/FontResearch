@@ -1745,8 +1745,8 @@ thead .table-header {
   top: -3px;
   color: white;
 }
-.save-highlight-button:hover {
-  background: black;
+.save-highlight-button:hover,.remove-highlight-button:hover .save-highlight-button{
+  background: black!important;
 }
 
 .item-size-image {
