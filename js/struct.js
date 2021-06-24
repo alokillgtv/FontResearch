@@ -43,6 +43,7 @@ function selectTitleBox($r){// Hàm khi chọn select custom
   if($class.indexOf("select-byte") == -1){
     $($r).closest(".item-struct").find('.title-struct b').html($title);// In tên tiêu đề vào head box
   }
+  $($r).closest('.item-struct').attr("boxName",$title)
   changeValue();// Chạy hàm thay đổi dữ liệu
 }
 

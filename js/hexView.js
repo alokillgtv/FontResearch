@@ -34,52 +34,77 @@ function setFileHex(){
   $('.body-output-text-file-hex').html($textHtml); // Thêm dữ liệu ASNII html
   $('.textarea-output-text-file-hex').val($textBase);// Thêm dữ liệu ASNII text
   $('.offset-text-file-hex').html($leftNumber);// Thêm cột trái offset vào
-  var $width = $('.item-count-head')[0].clientWidth;// Tính chiều dài của cột HEX
-  $('.textarea-file-hex').css("width",$width + 5);// Gán chiều dài vào form HEX
   $HEXTEXTAREA = $hexFile;// Lưu dữ liệu HEXTAREA lại
   $('.textarea-file-hex').val($hexFile);// Chèn dữ liệu hex vào form
   $('.textarea-file-hex-copy').html($hexFile.replace(/\n/gi,"<br>"))
   //TextareaHeight(); // Chạy hàm thiếp lập chiều cao form
 }
 
+function subHEXString($start,$end,$string){// Hàm tách dữ liệu theo offset
+  var $object = {};// Tạo biến object
+  var $length = $string.length;// Tổng số ký tự của đoạn string
+  $object.beginString = $string.substring(0,$start);// Lấy từ đầu string cho đến vị trí bắt đầu con trỏ
+  $object.endString  = $string.substring($end,$length);// Lấy từ vị trí kết thúc con trỏ cho đến kết thúc string
+  $object.getString = $string.substring($start,$end);// Lấy đoạn string từ đầu cho đến vị trí kết thúc con trỏ
+  return $object;// Trả về dữ liệu lấy được
+}
+
+
 function GetCusorText(e){// Hàm chọn 1 ký tự ở khung ASNII
   try{
+    var $object = {}
     var $byte = Number($('.input-byte-rows').val()) + 1;// lấy số buye trong 1 hàng
     var $textarea = $ASNIITEXT.replace(/\n/gi,"<br>");// Chuyển dữ liệu ASNII cũ để phục hồi lại
     $('.body-output-text-file-hex').html($textarea);// Xóa các hightlight cũ đi
     var pos = getCursorPos(e);// Lấy vị trí con trỏ ở khung HEX
+    var posOrigin = {};
+    posOrigin.start = pos.start;
+    posOrigin.end = pos.end;
     pos.end = pos.end-Math.floor(pos.end/$byte)// Vị trí cuối chính xác của con trỏ
     pos.start = pos.start-Math.floor(pos.start/$byte); // Vị trí đầu chính xác của con trỏ
-    setFormOffset(pos.start * 3,pos.end * 3,((Number(pos.end) - Number(pos.start)) * 3)); // Thêm vào form offset
     var $BeginOffset = dec2hex(pos.start);// Tính Begin Offset của khối hex mà bạn chọn
     var $endOffset = dec2hex(pos.end);// Tính End Offset của của khối hex mà bạn chọn
     var $length = dec2hex(pos.end - pos.start);// Tính độ dài của khối hex mà bạn chọn
     //console.log(pos);
     pos.end = Number(pos.end) * 3;// Offset bắt đầu chính xác bên khung HEX
     pos.start = Number(pos.start) * 3;// Offset kết thúc chính xác bên khung HEX
-    $('.textarea-file-hex').focus();// Di chuyển con trỏ vào khung HEX để chọn khối
-    setCursorPos($('.textarea-file-hex')[0], pos.start, pos.end+2);// Chọn khối HEX với offset khối đã chọn
+    //$('.textarea-file-hex').focus();// Di chuyển con trỏ vào khung HEX để chọn khối
+    //setCursorPos($('.textarea-file-hex')[0], pos.start, pos.end+2);// Chọn khối HEX với offset khối đã chọn
     if(pos.end == pos.start){
-      pos.end = pos.start + 2
+      pos.end = pos.start + 2;
+      posOrigin.end = posOrigin.end + 1;
     }
+    setFormOffset(pos.start,pos.end,(pos.end - pos.start)); // Thêm vào form offset
+    console.log(pos)
+    fillHexHighLight(pos);
+    setCursorPos($('.textarea-output-text-file-hex')[0], posOrigin.start, posOrigin.end);
     var $select = $('.textarea-file-hex')[0].value.substring(pos.start, pos.end).replace(/\s/gi,"");// Lấy dữ liệu đã chọn
-    if($select.length < 20){// Nếu dữ liệu dưới 10 byte thì chuyển dữ liệu
-      convertValue($select);// Chuyển các dữ liệu đã chọn thành từng giá trị
+    $object.type = false;
+    if($select.length < 32){// Nếu dữ liệu dưới 10 byte thì chuyển dữ liệu
+      $object.value = convertValue($select);// Chuyển các dữ liệu đã chọn thành từng giá trị
     }
-    //console.log($select);
-    fillHighlight(pos);// Bôi đen khung ASNII tương ứng với khối HEX đã chọn
-    $('.hightlight')[0].scrollIntoView({behavior: "smooth", block: "center", inline: "center"}); // Cuộn đến vị trí đã chọn
-    setTimeout(function(){
-      $('.hightlight')[0].scrollIntoView({behavior: "smooth", block: "center", inline: "center"});
-    },1);
+    else{
+      convertValue("")
+      $('.item-text-number span').text("Dữ liệu quá dài.")
+    }
+    $object.pos = pos;// Thêm object vị trí con trỏ
+    $OBJECTCUSOR = $object;// Lưu dữ liệu vào biến toàn cục
   }
   catch(e){
     console.log("Lỗi GetCusorText(): " + e)
   }
 }
 
+function fillHexHighLight(pos){
+  var $string = subHEXString(pos.start,pos.end,$HEXTEXTAREA)
+  var $html = '<span class="hex-highlight">' + $string.getString.replace(/\s$/gi,"") + "</span>";
+  var $fullHTML = $string.beginString + $html + $string.endString;
+  $('.hight-light-hex').html($fullHTML.replace(/\n/gi,"<br>"));
+}
+
 function GetCusor(e){// Hàm thực thi khi chọn con trỏ ở khung HEX
   try{
+    $('.hight-light-hex').html("");
     var $object = {} // Tạo biến lưu giá trị chuyển đổi của khối hex
     var pos = getCursorPos(e);// Lấy vị trí con trỏ hiện tại
     if(pos.end == pos.start){// Nếu con trỏ không chọn khối
@@ -142,7 +167,8 @@ function GetCusor(e){// Hàm thực thi khi chọn con trỏ ở khung HEX
       $object.value = convertValue($select);// Chuyển đổi dữ liệu
     }
     else{
-      convertValue("")
+      convertValue("");
+      $('.item-text-number span').text("Dữ liệu quá dài.")
     }
     fillHighlight(pos)// Highlight khung ASNII
     setFormOffset($start,$end,$length); // Thêm vào form offset
@@ -153,16 +179,6 @@ function GetCusor(e){// Hàm thực thi khi chọn con trỏ ở khung HEX
     console.log("Lỗi GetCusor(): " + e)
   }
 }
-/*
-function subString($start,$end,$string){// Hàm tách dữ liệu theo offset
-  var $object = {};// Tạo biến object
-  var $length = $string.length;// Tổng số ký tự của đoạn string
-  $object.beginString = $string.substring(0,$start);// Lấy từ đầu string cho đến vị trí bắt đầu con trỏ
-  $object.endString  = $string.substring($end,$length);// Lấy từ vị trí kết thúc con trỏ cho đến kết thúc string
-  $object.getString = $string.substring($start,$end);// Lấy đoạn string từ đầu cho đến vị trí kết thúc con trỏ
-  return $object;// Trả về dữ liệu lấy được
-}
-*/
 
 function subString($arraylist,$string,$saveStart){// Hàm tách dữ liệu theo offset
   var $arraylist = $arraylist.sort(function(a, b) {
@@ -256,7 +272,6 @@ function openToolHex(){
     alert("Vui lòng ghim bên cột HEX.")
     return;
   }
-  //$('.textarea-file-hex-copy').html($HEXTEXTAREA.replace(/\n/gi,"<br>"))// Phục hồi lại dữ liệu cũ, xóa các highlight trước
   SAVEchange();
   var $itemOffset = [];
   var $saveStart = $OBJECTCUSOR.pos.start;
@@ -282,20 +297,18 @@ function openToolHex(){
     if($k == $getObject.lineNumber){
       $class = "active";
     }
-    //var $hexBlock = subString($OBJECTCUSOR.pos.start,$OBJECTCUSOR.pos.end,$HEXTEXTAREA);
-    //console.log($hexBlock.getString);
     if($lineBlockHex != ""){
       var $splitBR = $lineBlockHex.split("\n");
       var $lineStringHex = [];
       for(var $d = 0;$d < $splitBR.length;$d++){
         var $lineHEX = $splitBR[$d];
-        $lineStringHex.push('<span class="text-hex-highlight">'+$lineHEX+'</span>');
+        $lineStringHex.push('<span class="text-hex-highlight"><span class="arrow-title"></span><b>'+$lineHEX+'</b></span>');
       }
       $lineStringHex = $lineStringHex.join("<br>");
       var $selectTitle = $('.select-block.select-title')[0].outerHTML.replace('<select class=\"select-block select-title\" onchange=\"selectType(this)\">','<select class=\"select-block-HL select-title-HL\" onchange="selectTitleHL(this)">');
       var $selectType = $('.select-block.select-type')[0].outerHTML.replace('<select class=\"select-block select-type\" onchange=\"myType(this)\">','<select class=\"select-block-HL select-type-HL\" onchange=\"myTypeHL(this)\">');
       var $htmlBlock = '\
-      <span blockid="'+$k+'" startOffset="'+$startOffset+'" endOffset="'+$endOffset+'" class="block-highlight '+$class+'"><span class="arrow-title"></span>\
+      <span blockid="'+$k+'" startOffset="'+$startOffset+'" endOffset="'+$endOffset+'" class="block-highlight '+$class+'">\
         <span class="full-text-high" stringOG="'+$lineBlockHex+'" >'+$lineStringHex+'</span>\
         <span class="body-highlight">\
           <span class="select-highlight">\
@@ -303,7 +316,7 @@ function openToolHex(){
             <label><span>Kiểu:&nbsp;</span>'+$selectType+'</label>\
           </span>\
           <span class="tool-result-highlight">\
-            <button title="Lưu vị trí ghim này." onclick="saveHighLight(this,true)" class="button-highlight save-buttonHL"><i class="far fa-eye-slash"></i>&nbsp;Ẩn</button>\
+            <button title="Ẩn/Hiện vị trí ghim này." onclick="saveHighLight(this,true)" class="button-highlight save-buttonHL"><i class="far fa-eye-slash"></i>&nbsp;Ẩn</button>\
             <button title="Xóa vị trí ghim này." onclick="saveHighLight(this,false)" class="button-highlight delete-buttonHL"><i class="fas fa-times"></i>&nbsp;Xóa</button>\
           </span>\
           <span class="result-highlight">\
@@ -331,11 +344,11 @@ function openToolHex(){
 function myTypeHL(e){
   var $box = $(e).closest(".block-highlight")
   var $type = Number($(e).find("option:selected").val());
-  var $hex = $box.find(".text-hex-highlight").text().replace(/\s/gi,"");
+  var $hex = $box.find(".text-hex-highlight b").text().replace(/\s/gi,"");
   var $length = $hex.length;
   if($length > 10 || $length == 0){
-    alert("Vui lòng chỉ chọn khối hex nhỏ hơn 5 byte để xem kết quả chuyển đổi.");
-    return false;
+    //alert("Vui lòng chỉ chọn khối hex nhỏ hơn 5 byte để xem kết quả chuyển đổi.");
+    //return false;
   }
   var $value = convertValue($hex);
   var $result = "";
@@ -637,6 +650,7 @@ function setFormOffset($start,$end,$length){
   var $start = Number(Math.floor($start / 3));// Lấy vị trí bắt đầu khối HEX
   var $end = Number(Math.floor($end / 3));// Lấy vị trí kết thúc khối HEX
   var $length = Number(Math.floor($length / 3));// Lấy vị trí kết thúc khối HEX
+  if($length == 0){$length = 1}
   $('.jump-byte-rows').val("0x" + dec2hex($start)); // Thêm vào form begin Start
   $('.end-byte-rows').val("0x" + dec2hex($end)); // Thêm vào form begin End
   $('.max-byte-rows').val("0x" + dec2hex($length)); // Thêm vào form length
@@ -740,8 +754,10 @@ function byteRows(e){// Hàm kiểm tra số byte trong một hàng
 }
 
 function hexEdit(e){
-  $(e).val($HEXTEXTAREA);
-  //alert("Vui lòng không chỉnh sửa Hex ở đây");
+  if(e.value != ""){
+    $(e).val($HEXTEXTAREA);
+    //alert("Vui lòng không chỉnh sửa Hex ở đây");
+  }
 }
 
 function textEdit(e){
@@ -772,9 +788,9 @@ function setRangeHight($start,$end,$max){
     pos.end = $decEnd - 1;
     fillHighlight(pos)
     //console.log($('.char-text-hex').eq($start.dec));
-    $('.hightlight')[0].scrollIntoView({behavior: "smooth", block: "center", inline: "center"});
+    $('.hightlight')[0].scrollIntoView({behavior: "smooth", block: "start", inline: "center"});
     setTimeout(function(){
-      $('.hightlight')[0].scrollIntoView({behavior: "smooth", block: "center", inline: "center"});
+      $('.hightlight')[0].scrollIntoView({behavior: "smooth", block: "start", inline: "center"});
     },1);
     var $endDec = Number($start.dec) + Number($max.dec);
     var $hexEnd = dec2hex($endDec)

@@ -27,13 +27,13 @@
 		<ul id="import-cfg" title="Mở nhanh các thiết lập để phân tích nhanh các cấu trúc mà bạn đã lưu trước đó." class="title-btn list-options tip-hover">
 			<li title="Mở nhanh các thiết lập để phân tích nhanh các cấu trúc mà bạn đã lưu trước đó." title="Chọn Thiết Lập Đã Lưu" class="item-options item-main"><b>Chọn Thiết Lập Đã Lưu</b><i class="fas fa-caret-square-down"></i></li>
 		</ul>
-		<div id="debug" title="Mở Debug" class="title-btn debug-page tip-hover" onclick="Debugger(this)"><i class="fas fa-code"></i><small class="tip-show">Mở trang Develope.</small></div>
+		<div id="debug" title="Mở Debug" class="title-btn debug-page tip-hover" onclick="showPAGE(this,'page-debug')"><i class="fas fa-code"></i><small class="tip-show">Mở trang Develope.</small></div>
 		<div id="export-cfg" class="title-btn tip-hover save-template" onclick="exportcfg(this)"><i class="fas fa-save"></i><small class="tip-show"> Lưu các thiết lập để mở nhanh hơn khi phân tích lần sau.</small></div>
 		<div id="reload" class="title-btn tip-hover reload-template" onclick="clearData(this)"><i class="fas fa-redo-alt"></i><small class="tip-show"> Khôi phục lại các mặc định vốn có.</small></div>
     <button class="btn-button check-font title-btn tip-hover" onclick="checkFont()"><i class="fas fa-cog"></i> Phân Tích Font<small class="tip-show">Nhấn vào để tiến hành phân tích font từ những dữ liệu đã có.</small></button>
-    <div id="view-hex-file" class="title-btn tip-hover hex-file-page" onclick="showHexFile(this)"><i class="fas fa-image"></i> Xem Hex File<small class="tip-show">Xem file map font bằng Hex Code.</small></div>
-		<div id="view-img" class="title-btn tip-hover image-page" onclick="showIMG(this)"><i class="fas fa-image"></i> Xem Ảnh Font<small class="tip-show">Xem ảnh file font đã phân tích. Các dữ liệu đúng sẽ được kẽ khung để phân biệt từng ký tự.</small></div>
-		<div id="view-data" class="title-btn tip-hover dataCheck-page" onclick="showDATA(this)"><i class="fas fa-table"></i> Xem Cấu Trúc<small class="tip-show">Xem dữ liệu đã phân tích, các dữ liệu được đánh dấu và vẽ khung phù hợp với dữ liệu đã phân tích.</small></div>
+    <div id="view-hex-file" class="title-btn tip-hover hex-file-page" onclick="showPAGE(this,'page-hex-file')" ><i class="far fa-edit"></i> Xem Hex File<small class="tip-show">Xem file map font bằng Hex Code.</small></div>
+		<div id="view-img" class="title-btn tip-hover image-page" onclick="showPAGE(this,'page-img')"><i class="fas fa-image"></i> Xem Ảnh Font<small class="tip-show">Xem ảnh file font đã phân tích. Các dữ liệu đúng sẽ được kẽ khung để phân biệt từng ký tự.</small></div>
+		<div id="view-data" class="title-btn tip-hover dataCheck-page" onclick="showPAGE(this,'page-data')"><i class="fas fa-table"></i> Xem Cấu Trúc<small class="tip-show">Xem dữ liệu đã phân tích, các dữ liệu được đánh dấu và vẽ khung phù hợp với dữ liệu đã phân tích.</small></div>
 		<ul id="zoom-img" title="Phóng to ảnh font để nhìn rõ hơn." class="title-btn tip-hover zoomImg">
 			<li class="item-zoom item-zoom-main" title="1"><b><small class="fas fa-search-plus"></small> Size Ảnh: 100%</b><i class="fas fa-caret-square-down"></i></li>
       <li onclick="zoomIMG(this)" class="item-zoom" title="0.3"><b><small class="fas fa-search-plus"></small> Size Ảnh: 30%</b></li>
@@ -45,8 +45,8 @@
 			<li onclick="zoomIMG(this)" class="item-zoom" title="3"><b><small class="fas fa-search-plus"></small> Size Ảnh: 300%</b></li>
 			<li onclick="zoomIMG(this)" class="item-zoom" title="4"><b><small class="fas fa-search-plus"></small> Size Ảnh: 400%</b></li>
 		</ul>
-    <div id="view-char-data" class="title-btn CharView-page tip-hover" onclick="showCharInfo(this)"><i class="fas fa-table"></i> Xem Chi Tiết Ký Tự<small class="tip-show">Xem chi tiết phân tích của một ký tự đã phân tích được khi nhấn vào nút phân tích ở trang cấu trúc. Trang này bao gồm những ví dụ và công thức đã phân tích được.</small></div>
-		<div id="create-data" class="title-btn buildChar-page tip-hover" onclick="createDATA(this)"><i class="fas fa-plus-square"></i> Tạo Dữ Liệu Từ File FNT<small class="tip-show">Tạo các dữ liệu bitmap font dựa trên dữ liệu phân tích được cùng với dữ liệu được tạo từ file *FNT của BMFONT.</small></div>
+    <div id="view-char-data" class="title-btn CharView-page tip-hover" onclick="showPAGE(this,'page-hex')"><i class="fas fa-table"></i> Xem Chi Tiết Ký Tự<small class="tip-show">Xem chi tiết phân tích của một ký tự đã phân tích được khi nhấn vào nút phân tích ở trang cấu trúc. Trang này bao gồm những ví dụ và công thức đã phân tích được.</small></div>
+		<div id="create-data" class="title-btn buildChar-page tip-hover" onclick="showPAGE(this,'page-buildFont')"><i class="fas fa-plus-square"></i> Tạo Dữ Liệu Từ File FNT<small class="tip-show">Tạo các dữ liệu bitmap font dựa trên dữ liệu phân tích được cùng với dữ liệu được tạo từ file *FNT của BMFONT.</small></div>
 	</div>
 	<div id="page-content">
 		<div class="block-left col-md-4" onclick="changeValue()">
@@ -156,7 +156,7 @@
                   <small class="tip-show">Đặt tiêu đề cho một khối kết cấu (Struct). Mỗi một file font thường được chia thành nhiều khối. Và mỗi khối chứa những dữ liệu riêng biệt, có khi là width, hoặc unicode, hoặc character.</small>
                 </li>
                 <li class="item-menu-struct item-menu-offset tip-hover">
-                  <input class="item-menu-input input-offset" onchange="checkHex(this)" placeholder="Nhập Start Offset Dữ Liệu"  />
+                  <input class="item-menu-input input-offset" onfocusout="checkHex(this)" onchange="checkHex(this)" placeholder="Nhập Start Offset Dữ Liệu"  />
                   <small class="tip-show">Nhập vị trí bắt đầu một khối dữ liệu.<br>
                   Đây là vị trí bắt đầu khối dữ liệu. (Tương đương Start Offset trong HXD).<br>
                   Có thể nhập bằng HEX hoặc DEC đều được.<br>
@@ -164,7 +164,7 @@
                   </small>
                 </li>
                 <li class="item-menu-struct item-menu-max tip-hover">
-                  <input class="item-menu-input input-max" onchange="checkHex(this)" placeholder="Nhập Độ Dài(Length)"  />
+                  <input class="item-menu-input input-max" onfocusout="checkHex(this)" onchange="checkHex(this)" placeholder="Nhập Độ Dài(Length)"  />
                   <small class="tip-show">Nhập độ dài của khối dữ liệu này.<br>
                   Có thể nhập bằng HEX hoặc DEC đều được.<br>
                   Để dùng Hex cần phải thêm tiền tố <b style="color:red">0x</b> vào trước hex. VD: <b style="color:red">0x3A40</b>
@@ -179,7 +179,7 @@
               <span class="name-label name-lable-type item-mapFont">Kiểu Dữ Liệu</span>
               <span class="name-label name-lable-regexp item-regexp">Regular Expressions</span>
               <span class="name-label name-lable-cals">Tính Toán</span>
-              <span class="name-label name-lable-save hide">Lưu</span>
+              <span class="name-label name-lable-save">Lưu</span>
               <span class="name-label name-lable-delete">Xóa</span>
               <span class="name-label name-lable-add">Thêm</span>
             </div>
@@ -270,16 +270,18 @@
                   </small>
                 </label>
                 <label class="label-block block-cals tip-hover tip-left">
-                  <input onchange="calsinput(this)" type="text" class="input-cals" value="+0" placeholder="Nhập phép tính" />
-                  <small class="tip-show">Tính toán bổ sung cho block này.</small>
+                  <input onchange="calsinput(this)" type="text" class="input-cals" value="+0" placeholder="Phép Tính" />
+                  <small class="tip-show">Tính toán bổ sung cho block này. Một số dữ liệu cần phải cộng hoặc nhân thêm một số nào đó để có thể tính ra giá trị đúng nhất của dữ liệu.<br><br>Do đó bạn cần phải nhập thêm các phép tính cần thiết cho nó.</small>
                 </label>
                 <label class="label-block block-save tip-hover tip-left">
-                  <input type="checkbox" id="block-save" name="vehicle1" value="True">
-                  <small class="tip-show">Giữ nguyên giá trị này.</small>
+                  <input type="checkbox" class="block-save-input" name="vehicle1" value="True">
+                  <small class="tip-show">Giữ nguyên giá trị này. Tính năng này chỉ sử dụng khi tạo font bitmap bằng tool.<br><br>
+                    Nó được dùng để giữ nguyên các giá trị mà bạn không muốn chuyển đổi khi tạo font.
+                  </small>
                 </label>
                 <label class="remove-block tip-hover tip-left" onclick="RemoveBlock(this)">
                   <b><i class="fas fa-times"></i></b>
-                  <small class="tip-show">Xóa Block này.</small>
+                  <small class="tip-show">Xóa bớt Block này.</small>
                 </label>
                 <label class="remove-block tip-hover tip-left" onclick="AddBlockValue(this)">
                   <b><i class="fas fa-plus"></i></b>
@@ -295,59 +297,44 @@
       </div>
 		</div>
 		<div class="block-right col-md-8">
-      <div class="page-hex-file">
+      <div class="page-hex-file show-page">
          <div class="fotter-page-hex-file">
           <ul class="list-result-file-hex">
             <li class="item-result-file item-byte-hex tip-hover">
               <label>Byte Row: </label><span><input class="input-byte-rows" onfocusout="byteRows(this)" onchange="byteRows(this)" value="16" type="number"/></span>
-              <small class="tip-show">Chuyển đổi số byte được hiển thị trong một hàng.<br>
-              Chỉ được dùng giá trị DEC ở ô này. <br>
+              <small class="tip-show">Chuyển đổi số byte được hiển thị trong một hàng. Chỉ được dùng giá trị DEC ở ô này. <br><br>
               Và giá trị tuyệt đối không thấp hơn 16 và cao hơn 32.
               </small>
             </li>
             <li class="item-result-file jump-byte-hex tip-hover">
               <label>Start Offset: </label><span><input class="jump-byte-rows" onfocusout="JumpOffset(this)" onchange="JumpOffset(this)" value="" placeholder="Start Offset" type="text"/></span>
-              <small class="tip-show">Vị trí bắt đầu khối hex mà bạn chọn.<br>
-              Khi nhập vào ô này, con trỏ sẽ được nhảy đến vị trí mà bạn nhập.<br>
-              Có thể dùng HEX và DEC đều được.<br>
+              <small class="tip-show">Vị trí bắt đầu khối hex mà bạn chọn. Khi nhập vào ô này, con trỏ sẽ được nhảy đến vị trí mà bạn nhập. Có thể dùng HEX và DEC đều được.<br><br>
               Để dùng Hex cần phải thêm tiền tố <b style="color:red">0x</b> vào trước hex. VD: <b style="color:red">0x3A40</b>
               </small>
             </li>
             <li class="item-result-file end-byte-hex tip-hover">
               <label>End Offset: </label><span><input class="end-byte-rows" onfocusout="EndOffset(this)" onchange="EndOffset(this)" value="" placeholder="End Offset" type="text"/></span>
-              <small class="tip-show">Vị trí kết thúc khối hex mà bạn chọn.<br>
-              Khi nhập vào ô này, con trỏ sẽ chọn offset khối bắt đầu<br>
-              cho đến offset kết thúc mà bạn nhập.<br>
-              Có thể dùng HEX và DEC đều được.<br>
-              Để dùng Hex cần phải thêm tiền tố <b style="color:red">0x</b> vào trước hex. VD: <b style="color:red">0x3A40</b>
+              <small class="tip-show">Vị trí kết thúc khối hex mà bạn chọn. Khi nhập vào ô này, con trỏ sẽ chọn offset khối bắt đầu cho đến offset kết thúc mà bạn nhập.<br><br>
+              Có thể dùng HEX và DEC đều được. Để dùng Hex cần phải thêm tiền tố <b style="color:red">0x</b> vào trước hex. VD: <b style="color:red">0x3A40</b>
               </small>
             </li>
             <li class="item-result-file max-byte-hex tip-hover">
               <label>Length: </label><span><input class="max-byte-rows" onfocusout="MaxOffset(this)" onchange="MaxOffset(this)" value="" placeholder="Length" type="text"/></span>
-              <small class="tip-show">Độ dài khối hex mà bạn chọn.<br>
-              Khi nhập vào ô này, con trỏ sẽ chọn offset khối bắt đầu<br>
-              cho đến độ dài khối mà bạn nhập.<br>
-              Có thể dùng HEX và DEC đều được.<br>
-              Để dùng Hex cần phải thêm tiền tố <b style="color:red">0x</b> vào trước hex. VD: <b style="color:red">0x3A40</b>
+              <small class="tip-show">Độ dài khối hex mà bạn chọn. Khi nhập vào ô này, con trỏ sẽ chọn offset khối bắt đầu cho đến độ dài khối mà bạn nhập.<br><br>
+              Có thể dùng HEX và DEC đều được. Để dùng Hex cần phải thêm tiền tố <b style="color:red">0x</b> vào trước hex. VD: <b style="color:red">0x3A40</b>
               </small>
             </li>
             <li class="item-result-file save-highlight-hex tip-hover">
               <button class="save-highlight-button" onclick="openToolHex()"><i class="fas fa-highlighter"></i> Ghim Block</button>
               <small class="tip-show">
-              Công cụ dùng để ghim tạm dữ liệu.<br>
-              Để phân tích dễ dàng hơn, cần ghim tạm các khối dữ liệu<br>
-              với giá trị mà bạn nghiên cứu được.<br>
-              Ngoài mục đích đánh dấu khối block mà bạn chọn,<br>
-              nó còn có tính năng đặt tên và giá trị cho khối này.<br>
-              Để dùng công cụ này, các bạn cần chọn khối HEX trước.
+              Công cụ dùng để ghim tạm dữ liệu. Để phân tích dễ dàng hơn, cần ghim tạm các khối dữ liệu với giá trị mà bạn nghiên cứu được.<br><br>
+              Ngoài mục đích đánh dấu khối block mà bạn chọn, nó còn có tính năng đặt tên và giá trị cho khối này. Để dùng công cụ này, các bạn cần chọn khối HEX trước.
               </small>
             </li>
             <li class="item-result-file remove-highlight-hex tip-hover">
               <button class="save-highlight-button" onclick="removeToolHex()"><i class="fas fa-trash"></i> Xóa Hết Ghim</button>
               <small class="tip-show">
-              Công cụ dùng để xóa hết các block ghim.<br>
-              Đôi khi ghim dữ liệu bị trùng sẽ gây lỗi.<br>
-              Hãy dùng công cụ này phục hồi lại mặc định.
+              Công cụ dùng để xóa hết các block ghim. Đôi khi ghim dữ liệu bị trùng sẽ gây lỗi. Hãy dùng công cụ này phục hồi lại mặc định.
               </small>
             </li>
           </ul>
@@ -365,6 +352,7 @@
             <textarea onmouseleave="focusTextarea(this,false)" onmouseenter="focusTextarea(this,true)" onkeyup="hexEdit(this)" onchange="hexEdit(this)" onmouseup="GetCusor(this)" class="textarea-file-hex"></textarea>
             <div class="textarea-file-hex-copy"></div>
             <div class="hight-light-hex"></div>
+            <div class="block-highlight-hex"></div>
           </div>
           <div class="output-text-file-hex">
             <div class="body-output-text-file-hex"></div>
@@ -462,7 +450,7 @@
           </ul>
         </div>
       </div>
-			<div class="page-img">
+			<div class="page-img show-page">
         <ul class="change-page-img">
         </ul>
         <div class="body-page-img img-page-count-1 active">
@@ -470,15 +458,78 @@
           <div id="cell-content" class="block-cell"></div>
         </div>
 			</div>
-			<div class="page-data">
+			<div class="page-data show-page">
 				<div id="page-result"><p class="none-data">Hiện chưa có dữ liệu để phân tích. Bạn cần chọn các dữ liệu cần thiết và nhấn vào nút Phân Tích Font để phân tích.</p></div>
 			</div>
-      <div class="page-hex">
+      <div class="page-hex show-page">
         <div class="body-page-hex">
           <div class="table-page-hex"></div>
           <div class="data-hide-info"><p class="none-data">Hiện chưa có dữ liệu để phân tích chi tiết. Bạn cần bấm vào nút phân tích chi tiết ở trang cấu trúc font để tiến hành phân tích chi tiết ký tự.</p>
           </div>
         </div>
+      </div>
+      <div class="page-buildFont show-page">
+        <div class="body-tool-buildFont">
+          <ul class="list-tool-buildFont">
+            <li class="item-tool-buildFont fntmap-tool tip-hover">
+              <button class="wrap-tool"><i class="fas fa-file-import"></i> UPLOAD FNT FILE
+                <input type="file" accept=".fnt" id="fntFile" onclick="checkFNTFILE(this)" class="file-upload" onchange="FNTFILE(this)"/>
+              </button>
+              <small class="tip-show">Chọn File *FNT được xuất ra từ Tool BMFONT hoặc HIERO.<br><br>
+                Khi bạn tạo một font bitmap bằng 1 trong 2 tool trên, thì sẽ nhận được 2 file gồm file *FNT dữ liệu font map và một file ảnh. Các bạn cần upload file *FNT lên tool để lấy dữ liệu.
+              </small>
+            </li>
+            <li class="item-tool-buildFont fntimg-tool tip-hover">
+              <button class="wrap-tool"><i class="fas fa-image"></i> UPLOAD FONT ẢNH
+                <input type="file" accept=".jpg,.png,.bmp" id="imageFile" class="file-upload" onchange="IMGBIT(this)"/>
+              </button>
+              <small class="tip-show">Chọn File ảnh font được xuất ra từ Tool BMFONT hoặc HIERO<br><br>
+                Khi bạn tạo một font bitmap bằng 1 trong 2 tool trên, thì sẽ nhận được 2 file gồm file *FNT dữ liệu font map và một file ảnh. Các bạn cần upload file ảnh lên tool. Một vài game yêu cầu phải có font ảnh để có thể tính được giá trị của font map.</small>
+            </li>
+            <li class="item-tool-buildFont buildFNT-tool tip-hover">
+              <button class="wrap-tool"><i class="fas fa-tools"></i> TẠO FONT BITMAP</button>
+              <small class="tip-show">Tiến hành tạo lại file binary chứa font map với dữ liệu phân tích được cùng với dữ liệu font mới tạo bằng file *FNT và file ảnh font.<br><br>
+              Các bạn nên phân tích đúng font map để tool có thể hoạt động chính xác hơn.
+              </small>
+            </li>
+          </ul>
+          <div class="console-tool-build">
+            <div class="panel-character-tool">
+              <div class="panel-line-tool max-charFNT">
+                <label><i class="fas fa-th-list"></i> Tổng số ký tự File FNT Font được Tạo: </label><b></b>
+              </div>
+              <div class="panel-line-tool max-charBIT">
+                <label><i class="fas fa-th-list"></i> Tổng số ký tự File Font Map Phân Tích: </label><b></b>
+              </div>
+              <div class="panel-line-tool wIMG">
+                <label><i class="fas fa-th-list"></i> Chiều Rộng Ảnh Font: </label><b></b>
+              </div>
+              <div class="panel-line-tool hIMG">
+                <label><i class="fas fa-th-list"></i> Chiều Cao Ảnh Font: </label><b></b>
+              </div>
+              <div class="panel-line-tool character-list-view"></div>
+              <div class="panel-line-tool consolePage"></div>
+            </div>
+            <div class="panel-image-tool">
+              <div class="wrap-panel-img">
+                <img src="empty.png" id="imgTool" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="body-faq-buildFont">
+          <div class="panel-faq">
+            <ul class="list-faq">
+              <li class="item-list-faq active" type="general">Hướng Dẫn Chung</li>
+              <li class="item-list-faq" type="bmfont">Hướng Dẫn Tạo Font Bằng BMFONT</li>
+              <li class="item-list-faq" type="hiero">Hướng Dẫn Tạo Font Bằng HIERO FONT</li>
+            </ul>
+            <div class="faq-general"></div>
+            <div class="faq-bmfont"></div>
+            <div class="faq-hiero"></div>
+          </div>
+        </div>
+        <div class="body-console-buildFont"></div>
       </div>
 			<div id="loading-run">
 				<div class="wrapbody-loading">
@@ -486,7 +537,7 @@
 					<i class="fas fa-spinner fa-pulse"></i>
 				</div>
 			</div>
-			<div id="page-debug">
+			<div id="page-debug" class="show-page">
         <div class="block-debug-item block-button-debug">
           <div class="buttonDb" id="AllHTML" onclick="AllGetHTML(true)">GET ALL HTML</div>
           <div class="buttonDb" id="PageHTML" onclick="AllGetHTML(false)">GET PAGE HTML</div>
@@ -532,6 +583,8 @@
   <script type="text/javascript" src="./js/struct.js"></script>  
   <!-- Script Hex View -->
   <script type="text/javascript" src="./js/hexView.js"></script>  
+  <!-- Script Hex View -->
+  <script type="text/javascript" src="./js/SaveBinary.js"></script>  
   <!-- Script Tổng Thể -->
   <script type="text/javascript" src="./js/script.js"></script>
 </body>

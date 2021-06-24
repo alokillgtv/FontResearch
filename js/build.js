@@ -8,7 +8,6 @@ function dataChange($AllResult,$dataList,$box){// Hàm khởi chạy khi phân t
 */
 
 function sendReturn($data,$dataList,$box){// Hàm lấy dữ liệu từ autoit post qua
-  $SUPERDATA.data = $data;
 	var $split = $data.split("##");// Tách các dữ liệu từ ký tự ##
 	var $result = [];// Tạo biến array mới
 	for($j = 0;$j < $split.length;$j++){// Chạy lập từng dữ liệu
@@ -34,7 +33,6 @@ function sendReturn($data,$dataList,$box){// Hàm lấy dữ liệu từ autoit 
 			$result.push($column);// Nạp array kiểu dữ liệu vào khối dữ liệu
 		}
 	}
-  $SUPERDATA.result = $result;
   //console.log($dataList.structTitle)
   if($dataList.structTitle == "Dữ Liệu Ký Tự"){
     dataCheck($result,$box);// Chạy hàm kiểm tra dữ liệu để tạo table
@@ -89,55 +87,63 @@ function FNTcheck(){
 
 // Hàm lấy dữ liệu block
 function getCharType($box){
+  var $sendObj = {};
+  var $newObj = [];
   if(!$box){
     var $box = $('.item-struct:eq(0)');
   }
 	var $dataChar = "";// Tạo biến array chứa dữ liệu
 	$box.find('.item-block.item-char').each(function(){// Thực thi theo từng block
-      if($FontMapType == 0){
-        var $item = "";// Tạo một biến item chứa dữ liệu
-        var $title = $(this).find('.select-title :selected').val();// Lấy tiêu đề block
-        var $byte = $(this).find('.select-byte :selected').val();// Lấy số byte của block
-        var $type = $(this).find('.select-type :selected').val();// Lấy kiểu dữ liệu block
-        var $calsValue = $(this).find('.input-cals').val();// Lấy phép tính bổ sung của block
-        if($calsValue == ""){// Nếu phép tính trống thì giá trị bằng 0
-          $calsValue = "+0";
-        }
-        var $save = $(this).find('#block-save:checked').val();// Kiểm tra xem có giữ nguyên dữ liệu block hay không
-        if(!$save){
-          $save = "False";
-        }
-        // Nối các dữ liệu vào biến item
-        $item += $title + "##";
-        $item += $byte + "##";
-        $item += $type + "##";
-        $item += $calsValue + "##";
-        $item += $save + "##";
-        $dataChar += $item + "||";
-      }
-      else{
-        var $item = "";
-        var $title = $(this).find('.select-title :selected').val();// Lấy tiêu đề block
-        var $cals = $(this).find('.input-cals').val();// Lấy phép tính bổ sung của block
-        if($cals == ""){// Nếu phép tính trống thì giá trị bằng 0
-          $cals = "+0";
-        }
-        var $save = $(this).find('#block-save:checked').val();// Kiểm tra xem có giữ nguyên dữ liệu block hay không
-        if(!$save){
-          $save = "False";
-        }
-        var $regexpVal = $(this).find('.input-regexp').val(); // Lấy biểu thức chính quy và nối các dữ liệu lại
-        $item += $title + "##";
-        $item += $regexpVal + "##";
-        $item += $cals + "##";
-        $item += $save + "##";
-        $dataChar += $item + "||";
-      }
+    var $title = $(this).find('.select-title :selected').val();// Lấy tiêu đề block
+    var $titleText = $(this).find('.select-title :selected').text();
+    var $byte = $(this).find('.select-byte :selected').val();// Lấy số byte của block
+    var $type = $(this).find('.select-type :selected').val();// Lấy kiểu dữ liệu block
+    var $typeText = $(this).find('.select-type :selected').text();
+    var $save = $(this).find('.block-save:checked').val();// Kiểm tra xem có giữ nguyên dữ liệu block hay không
+    var $regexpVal = "";
+    var $regexpVal = $(this).find('.input-regexp').val(); // Lấy biểu thức chính quy và nối các dữ liệu lại
+    var $item = "";// Tạo một biến item chứa dữ liệu
+    var $newItem = {};
+    if(!$save){
+        $save = "False";
+    }
+    var $calsValue = $(this).find('.input-cals').val();// Lấy phép tính bổ sung của block
+    if($calsValue == ""){// Nếu phép tính trống thì giá trị bằng 0
+      $calsValue = "+0";
+    }
+    if($FontMapType == 0){
+      // Nối các dữ liệu vào biến item
+      $item += $title + "##";
+      $item += $byte + "##";
+      $item += $type + "##";
+      $item += $calsValue + "##";
+      $item += $save + "##";
+      $dataChar += $item + "||";
+    }
+    else{
+      var $newItem = {};
+      var $item = "";
+      $item += $title + "##";
+      $item += $regexpVal + "##";
+      $item += $cals + "##";
+      $item += $save + "##";
+      $dataChar += $item + "||";
+    }
+    $newItem.titleValue = $title;
+    $newItem.titleText = $titleText;
+    $newItem.byteLong = $byte;
+    $newItem.typeValue = $type;
+    $newItem.typeText = $typeText;
+    $newItem.calsValue = $calsValue;
+    $newItem.regexp = $regexpVal;
+    $newObj.push($newItem);
 	})
-	return $dataChar;
+  $sendObj.listChar = $newObj;
+  $sendObj.result = $dataChar;
+	return $sendObj;
 }
 
-// Hàm kiểm tra file
+// Hàm kiểm tra file $SUPERDATA
 function Bitmapcheck(){
   if(document.getElementById("fontmapfile").files.length == 0){
     showLoad(false);
@@ -154,6 +160,11 @@ function Bitmapcheck(){
     }
   }
   $('#page-result').html("");
+  getDataList(true);
+}
+
+function getDataList($check){
+  $SUPERDATA = [];
   var $itemMax = $('.item-struct').length;
   for(var $i = 0;$i < $itemMax;$i++){
     var $box = $('.item-struct:eq('+$i+')');
@@ -163,6 +174,8 @@ function Bitmapcheck(){
     $dataList.width = $('#img-view')[0].naturalWidth;// Lấy width ảnh gốc
     $dataList.height = $('#img-view')[0].naturalHeight;// Lấy height ảnh gốc
     $dataList.structTitle = $box.find(".select-title-struct option:selected").val();
+    $dataList.startOff = getStringHex($box.find(".input-offset").val()).dec;
+    $dataList.lengthOff = getStringHex($box.find(".input-max").val()).dec;
     var $charPos = $box.find(".input-offset").val();
     var $lengthBlock = $box.find(".input-max").val();
     var $maxByte = 0;
@@ -173,15 +186,14 @@ function Bitmapcheck(){
     $dataList.maxByte = $maxByte;
     $dataList.maxChar = changeHex($lengthBlock) / $maxByte;// Lấy tổng số ký tự
     $dataList.charPos = changeHex($charPos);// Lấy vị trí bắt đầu ký tự
-    //console.log($dataList);
-    //console.log(changeHex($lengthBlock));
     $dataList.typeChar = $('.typeChar :selected').val();// Lấy kiểu font
-    $dataList.charlist = getCharType($box);// Lấy danh sách dữ liệu
-    //$data = 'SendData('+$wImg+','+$hImg+','+$maxChar+','+$charPos+','+$typeChar+',"'+$charlist+'","'+$pathChar+'")';// Tạo biến chứa script khởi chạy autoit
-    //execscript($data); // Chạy autoit theo hàm sẵn có
-    //setTimeout(function(){
+    $dataList.charlist = getCharType($box).result;// Lấy danh sách dữ liệu
+    if($check){
       SendData($dataList,$box)
-    //},500);
+    }
+    else{
+      $SUPERDATA.push($dataList);
+    }
   }
 }
 
@@ -226,6 +238,10 @@ function ListChar($dataList){// Hàm lấy chi tiết các dữ liệu của blo
 		}
 	}
 	return $itemGet + "$$$$" + $itemHex + "$$$$" + $itemCals; //Trả về dữ liệu
+}
+
+function changeTypeByte($type,$value){
+  
 }
 
 function GetBlock($title,$byte,$type,$cals,$save,$dataList){// Hàm kiểm tra từng kiểu dữ liệu
@@ -485,6 +501,11 @@ function changeImg(e){
 function fontmapfile(e){// Hàm chọn file map font
   var $input = document.getElementById('fontmapfile');// Tạo biến lấy input file map font
   var file = $input.files[0];// Lấy file
+  var $size = file.size;
+  if($size > 1000000){
+    alert("Vui lòng chỉ chọn những file dưới 1MB.\nDung lượng file quá lớn tool không thể xử lý được.");
+    return false;
+  }
   var $name = file.name;// Lấy tên file
   $('#pathFont').val($name);// Chèn tên file vào khung đường dẫn
   var fr = new FileReader();// Tạo biến đọc file

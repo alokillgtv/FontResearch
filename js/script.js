@@ -1,32 +1,34 @@
 /* Script Tổng Thể Thực Thi*/
-
-$FontMapType = 0;	// Tạo biến chứa kiểu font, hiện tại là bitmap font
-$nameCfg = "";	// Tạo biến chứa tên
-$varGetHTML = true; // Tạo biến kiểm tra khi lấy html
-$HEXFILE = "";// Tạo biến chứa dữ liệu file hex
-$FILEPOS = 0;// Tạo biến chứa vị trí con trỏ file hex
-$SAVEHERE = ""; // Tạo biến file save hiện tại.
-$ERROR = false;// Tạo biến báo lỗi
-$dataList = "";// Tạo biến toàn cục chứa dữ liệu
-$SUPERDATA = new Object(); // Tạo biến siêu dữ liệu
-$HEXNAME = "";// Tên file HEX
-$LISTIMAGE = []; // Tạo biến chứa đường dẫn ảnh
-$HEXTEXTAREA = "";// Tạo biến lưu dữ liệu file HEX TEXTAREA
-$ASNIITEXT = "";// Tạo biến lưu dữ liệu file ASNII TEXTAREA
-$OBJECTCUSOR = ""// Tạo biến lưu dữ liệu con trỏ hex
-$OBJECTHLOFFSET = [];
-$DELETEOFFSET = [];
-$OBJECTHL = [];// Tạo biến lưu dữ liệu highlight
-$OBJECEDITTHL = [];//
-$SAVECHANGE = "";
+function CREATVAR(){
+  $FontMapType = 0;	// Tạo biến chứa kiểu font, hiện tại là bitmap font
+  $nameCfg = "";	// Tạo biến chứa tên
+  $varGetHTML = true; // Tạo biến kiểm tra khi lấy html
+  $HEXFILE = "";// Tạo biến chứa dữ liệu file hex
+  $FILEPOS = 0;// Tạo biến chứa vị trí con trỏ file hex
+  $SAVEHERE = ""; // Tạo biến file save hiện tại.
+  $ERROR = false;// Tạo biến báo lỗi
+  $dataList = "";// Tạo biến toàn cục chứa dữ liệu
+  $SUPERDATA = []; // Tạo biến siêu dữ liệu
+  $HEXNAME = "";// Tên file HEX
+  $LISTIMAGE = []; // Tạo biến chứa đường dẫn ảnh
+  $HEXTEXTAREA = "";// Tạo biến lưu dữ liệu file HEX TEXTAREA
+  $ASNIITEXT = "";// Tạo biến lưu dữ liệu file ASNII TEXTAREA
+  $OBJECTCUSOR = ""// Tạo biến lưu dữ liệu con trỏ hex
+  $OBJECTHLOFFSET = [];
+  $DELETEOFFSET = [];
+  $OBJECTHL = [];// Tạo biến lưu dữ liệu highlight
+  $OBJECEDITTHL = [];//
+  $SAVECHANGE = "";
+}
+CREATVAR();
 // Hàm tạo fontmap bằng dữ liệu font trích xuất từ BMFONT
 function createDATA(){
 	alert("Hiện vẫn chưa hỗ trợ tính năng này");
 }
 
 function clearData(){
-  $('#fontmapfile,#fontimgfile,#test,.block-left input,.textarea-file-hex,.jump-byte-rows,.textarea-output-text-file-hex,.input-hex-calc-swap,.pheptinhmaytinh,.end-byte-rows,.max-byte-rows').val("");
-  $('#cell-content,#page-result,.name-label b,.body-output-text-file-hex,.item-offset-hex span,.item-block-hex span,.item-length-hex span,.offset-text-file-hex').html("");
+  $('#fontmapfile,#fontimgfile,#test,.textarea-file-hex,.jump-byte-rows,.textarea-output-text-file-hex,.input-hex-calc-swap,.pheptinhmaytinh,.end-byte-rows,.max-byte-rows').val("");
+  $('#cell-content,#page-result,.name-label b,.body-output-text-file-hex,.item-offset-hex span,.item-block-hex span,.item-length-hex span,.offset-text-file-hex,.textarea-file-hex-copy').html("");
   $('#page-result').html('<p class="none-data" style="background:white;border:1px solid #ccc">Hiện chưa có dữ liệu để phân tích. Bạn cần chọn các dữ liệu cần thiết và nhấn vào nút Phân Tích Font để phân tích.</p>');
   $('.body-page-hex').html('<div class="table-page-hex"></div>\
         <div class="data-hide-info"><p class="none-data">Hiện chưa có dữ liệu để phân tích chi tiết. Bạn cần bấm vào nút phân tích chi tiết ở trang cấu trúc font để tiến hành phân tích chi tiết ký tự.</p>\
@@ -37,6 +39,7 @@ function clearData(){
   $('.select-title-struct option[value="Không Xác Định"]').prop("selected", true);
   $('.title-struct b').text("Không Xác Định");
   $('.input-byte-rows').val(16);
+  CREATVAR();
   //showIMG();
 }
 
@@ -174,7 +177,7 @@ function getStructItem(){// Hàm lấy dữ liệu structItem
     $item.structTitle = $node.find(".select-title-struct option:selected").val();// Lấy tiêu đề một khối
     $item.structLength = $node.find(".input-max").val();// Lấy tiêu đề một khối
     $item.charPos = $node.find(".input-offset").val(); // Lấy start offset một khối
-    $item.charlist = getCharType($node);// Lấy kiểu phân tích ở các block
+    $item.charlist = getCharType($node).result;// Lấy kiểu phân tích ở các block
     $struct.list.push($item);
   }
   return $struct
@@ -284,11 +287,13 @@ function importConfigJS($name){
     $box.find(".input-offset").val($itemStruct.charPos);
     $box.find(".input-max").val($itemStruct.structLength);
     if($box.find('.select-title-struct option[value="'+$itemStruct.structTitle+'"]').length == 0){
-      $box.find(".select-title-struct").append('<option value="'+$itemStruct.structTitle+'">'+$itemStruct.structTitle+'</option>')
+      $box.find(".select-title-struct").append('<option value="'+$itemStruct.structTitle+'">'+$itemStruct.structTitle+'</option>');
     }
     else{
       $box.find(".select-title-struct").val($itemStruct.structTitle);
+      
     }  
+    $box.attr("boxname",$itemStruct.structTitle)
     $box.find(".title-struct b").text($itemStruct.structTitle);
     $box.find('.select-title-struct option[value="'+$itemStruct.structTitle+'"]').prop("selected", true)
     AddValue($countList,$box);
@@ -467,34 +472,10 @@ function showLoad($show){
 	}
 }
 
-function showHexFile(e){
+function showPAGE(e,a){
   window.scrollTo(0, 0);// Cuộn đến đầu trang
-	$('.page-data,#page-debug,.page-hex,#page-hex-file,.page-hex-file,.page-img').hide();// Đóng các trang khác
-	$('.page-hex-file').show();// Mở trang ảnh font
-  //setFileHex();
-}
-
-function showIMG(e){// Hàm hiện trang ảnh font
-  window.scrollTo(0, 0);// Cuộn đến đầu trang
-	$('.page-data,#page-debug,.page-hex,#page-hex-file,.page-hex-file').hide();// Đóng các trang khác
-	$('.page-img').show();// Mở trang ảnh font
-}
-
-function showDATA(e){// Hàm hiện trang phân tích
-	$('.page-img,#page-debug,.page-hex,#page-hex-file,.page-hex-file').hide();// Đóng các trang khác
-	$('.page-data').show();// Mở trang phân tích
-  widthTH();
-}
-
-function showCharInfo(){// Hàm hiện trang phân tích chi tiết
-  $('.page-img,#page-debug,.page-data,#page-hex-file,.page-hex-file').hide();// Đóng các trang khác
-  $('.page-hex').show(); // Mở trang phân tích chi tiết
-}
-
-function Debugger(){// Hàm mở trang debug
-  window.scrollTo(0, 0);// Cuộn lên đầu trang
-	$('#page-debug').show();// Hiện trang debug
-	$('.page-data,.page-img,.page-hex,#page-hex-file,.page-hex-file').hide(); // Ẩn các trang ko liên quan
+  $('.show-page').hide();
+  $('.' + a).show();
 }
 
 function myType(e){// Hàm chọn kiểu dữ liệu

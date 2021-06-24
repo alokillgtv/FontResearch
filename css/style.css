@@ -174,8 +174,9 @@ ul.list-block-char {
   background: red;
   line-height: 20px;
   cursor: pointer;
-  width: 42px;
+  width: 32px;
   text-align: center;
+  margin-right: 3px;
 }
 
 .remove-block:hover {
@@ -437,21 +438,21 @@ button#export-csv:hover {
   padding: 0;
   font-size: 14px;
   height: 20px;
-  width: 70px;
+  width: 80px;
   vertical-align: middle;
   box-sizing: inherit;
 }
 .select-type {
-  width: 113px;
+  width: 100px;
 }
 ul.list-block-char select {
   font-size: 12px;
   vertical-align: middle;
 }
-#block-save {
+.block-save-input {
   vertical-align: top;
   -moz-transform: scale(1.2);
-  margin: 4px 8px;
+  margin: 4px 0px;
 }
 
 #import-cfg li,
@@ -508,7 +509,7 @@ ul.list-block-char select {
 }
 .item-zoom.active,
 .block-save {
-  display: none !important;
+  /*! display: none !important; */
 }
 
 .minimize-btn {
@@ -594,22 +595,22 @@ ul.list-block-char select {
   width: 255px;
 }
 .name-lable-title {
-  width: 161px;
-}
-.name-lable-type {
-  width: 115px;
-}
-.name-lable-byte {
   width: 140px;
 }
+.name-lable-type {
+  width: 100px;
+}
+.name-lable-byte {
+  width: 130px;
+}
 .name-lable-cals {
-  width: 70px;
+  width: 80px;
 }
 .name-lable-save {
-  width: 29px;
+  width: 40px;
 }
 .name-lable-delete {
-  width: 42px;
+  width: 35px;
 }
 .item-name-list {
   font-size: 14px;
@@ -942,20 +943,21 @@ ul.list-block-char select {
     text-align: justify;
 }
 
-.label-upload .file-upload {
+.label-upload .file-upload,.wrap-tool .file-upload {
   opacity: 0;
   position: absolute;
   width: inherit;
   left: 0;
   top: 0;
   width: 208px;
+  cursor: pointer;
 }
 
 .input-custom-byte {
   position: absolute;
   left: 0;
   right: 0;
-  width: 142px;
+  width: 130px;
   top: 0;
   z-index: -55;
   opacity: 0;
@@ -964,14 +966,14 @@ ul.list-block-char select {
   position: relative;
 }
 .block-byte {
-  width: 141px;
+  width: 132px;
 }
 .custom-byte {
   width: inherit;
   line-height: 19px;
 }
 .block-byte select {
-  width: 138px;
+  width: 130px;
 }
 .name-lable-add {
   width: 41px;
@@ -997,7 +999,7 @@ ul.list-block-char select {
   border: navajowhite;
 }
 .select-title {
-  width: 123px;
+  width: 102px;
 }
 .character-list {
   margin-top: 20px;
@@ -1105,16 +1107,19 @@ ul.list-block-char select {
 }
 .button-tool.tip-hover .tip-show {
     top: 32px;
+    right: 0;
+    left: inherit;
 }
 
 .name-menu-max {
   width: 180px;
 }
 .name-lable-add {
-  width: 48px;
+  width: 40px;
+  text-align: left;
 }
 .remove-block[onclick="AddBlockValue(this)"] {
-  width: 48px;
+  width: 32px;
 }
 .title-struct b {
     max-width: 430px;
@@ -1360,7 +1365,8 @@ thead .table-header {
   bottom: 0;
   width: 100%;
   height: 100%;
-  z-index: 1;
+  z-index: 4;
+  background: transparent;
 }
 .output-text-file-hex {
   width: 280px;
@@ -1507,11 +1513,13 @@ thead .table-header {
   color: transparent;
 }
 .hightlight {
-  background: #0078D7;
+  background: #0078d794;
   display: inline;
   position: relative;
   z-index: 9;
-  color: white;
+  color: black;
+  position: relative;
+  left: 2px;
 }
 .input-hex-calc-swap {
     width: 120px;
@@ -1651,16 +1659,18 @@ thead .table-header {
 }
 
 .textarea-file-hex-copy {
-  position: relative;
+  position: static;
   top: 2px;
   left: -1px;
-  /*! z-index: -1; */
+  z-index: 2;
+  background: transparent;
 }
 .block-highlight {
   position: relative;
   padding-bottom: 10px;
   z-index: 11;
   margin-right: -8px;
+  top: 2px;
 }
 .text-hex-highlight {
   background: beige;
@@ -1674,7 +1684,7 @@ thead .table-header {
   background: white;
   padding: 5px;
   border: 2px solid darkmagenta;
-  left: -100%;
+  left: -5px;
   min-width: 220px;
   display: none;
   top: 18px;
@@ -1723,9 +1733,7 @@ thead .table-header {
   vertical-align: middle;
   background: beige;
   margin-left: -4px;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
+  word-wrap: break-word;
 }
 .block-highlight.active .body-highlight {
   display: block;
@@ -1781,8 +1789,8 @@ thead .table-header {
 .arrow-title {
   position: absolute;
   bottom: 8;
-  left: -5px;
-  right: 5px;
+  left: 0;
+  right: 0;
   text-align: center;
   font-weight: bold;
   display: none;
@@ -1791,16 +1799,18 @@ thead .table-header {
   top: -1px;
 }
 .body-arrow {
-  padding: 0 5px;
+  padding: 0 1px;
   background: #0000007a;
   color: white;
-  font-size: 9px;
+  font-size: 10px;
   position: absolute;
   left: 0;
   right: 0;
   display: inline-block;
   word-wrap: break-word;
   white-space: nowrap;
+  text-shadow: 1px 1px black,-1px 1px black,1px -1px black,-1px -1px black;
+  font-weight: bold;
 }
 .block-highlight:hover .arrow-title {
   display: none;
@@ -1823,4 +1833,135 @@ thead .table-header {
 }
 .block-highlight:hover .arrow-title {
   display: none;
+}
+.option-list .tip-show {
+  top: 40px !important;
+}
+.block-type .tip-show {
+  right: 0 !important;
+  left: inherit !important;
+  top: 32px !important;
+}
+.item-menu-max .tip-show {
+  right: 0 !important;
+  left: inherit !important;
+}
+
+.item-title-head {
+  margin-right: -4px;
+}
+.text-hex-highlight b {
+  font-weight: normal;
+}
+.block-save {
+  width: 43px;
+  text-align: center;
+}
+.block-save .tip-show {
+  right: 0 !important;
+  left: inherit !important;
+}
+
+.hight-light-hex {
+  position: absolute;
+  top: 2px;
+  left: -1px;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+  background: white;
+  color: transparent;
+}
+.hex-highlight {
+  background: #0078d794;
+  z-index: 55;
+  display: inline;
+  position: relative;
+  color: transparent;
+}
+.block-save .tip-show {
+  text-align: left;
+}
+.page-buildFont {
+  margin: 10px;
+  padding: 10px;
+  background: white;
+  font-size: 15px;
+  display: none;
+}
+
+.item-tool-buildFont button {
+  border: 0;
+  color: white;
+  width: 380px;
+  font-size: 30px;
+  cursor: pointer;
+}
+.list-tool-buildFont {
+  text-align: center;
+  margin-bottom: 10px;
+}
+.item-tool-buildFont {
+  display: inline-block;
+  margin-right: 15px;
+}
+.fntmap-tool button {
+  background: blue;
+}
+.item-tool-buildFont button:hover {
+  background: black;
+}
+.fntimg-tool button {
+  background: coral;
+}
+.buildFNT-tool button {
+  background: red;
+}
+.panel-line-tool label {
+  width: 400px;
+  padding: 5px;
+  margin: 0;
+  border: 1px dashed chocolate;
+  background: beige;
+}
+.panel-line-tool b {
+  width: 100px;
+  border: 1px dashed chocolate;
+  padding: 5px;
+  display: inline-block;
+  margin-left: 40px;
+  background: beige;
+  text-align: center;
+  min-height: 33px;
+  vertical-align: middle;
+}
+.item-list-faq {
+  display: inline-block;
+  padding: 5px;
+  margin-right: -4px;
+  cursor: pointer;
+  font-weight: bold;
+  background: #008b8b8a;
+  color: white;
+}
+.item-list-faq.active {
+  background: darkcyan !important;
+  color: white;
+}
+.list-faq {
+  border-bottom: 2px solid darkcyan;
+}
+.item-list-faq:hover {
+  background: black;
+  color: white;
+}
+.panel-line-tool {
+  margin-bottom: 10px;
+}
+.item-tool-buildFont .tip-show {
+  top: 50px !important;
+  width: 366px;
+  text-align: left;
 }
