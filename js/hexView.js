@@ -563,13 +563,14 @@ function convertValue($select){// Hàm chuyển đổi các dữ liệu khi ch�
       $object.Negative = false;// Tạo object lưu số âm hex
       $object.NegativeSwap = false;// Tạo object lưu số âm khối hex swap
       $object.Float = false;// Tạo object lưu giá trị float của khối hex
+      $object.FloatSwap = false;// Tạo object lưu giá trị float của khối hex
       $object.uv = {};// Tạo object lưu giá trị uv của khối hex
       $object.uv.type = false;// Kiểm tra xem uv có tính được không
       $object.uv.value = "Dữ liệu UV không thể tính được.\nDo không có kích thước font ảnh.\nVui lòng chọn font ảnh để tính giá trị này."     
       $object.asnii = hex2ascii($object.hex).replace(/[^\u20-\u1f\u80-\ua1]|\</gi,".");// Lưu giá trị text của khối hex
       $('.item-little-endian span').text($object.swap);// Gán các giá trị vào cột phải dữ liệu
-      $('.item-big-endian span').text($object.swap);// Gán các giá trị vào cột phải dữ liệu
-      $('.item-dec-number span').text($object.dec);// Gán các giá trị vào cột phải dữ liệu
+      $('.item-big-endian span').text($object.dec);// Gán các giá trị vào cột phải dữ liệu
+      $('.item-dec-number span').text($object.decSwap);// Gán các giá trị vào cột phải dữ liệu
       $('.item-text-number span').text($object.asnii);// Gán các giá trị vào cột phải dữ liệu
       if($select.length <= 8){// Nếu khối hex nhỏ hơn 4 byte
         $object.Negative = numberNegative($object.hex);// Chuyển khối hex sang số âm
@@ -581,6 +582,7 @@ function convertValue($select){// Hàm chuyển đổi các dữ liệu khi ch�
         $object.FloatSwap = Round(hex2float($object.swap),6);// Lưu lại object Float
         $object.Float = Round(hex2float($object.hex),6);// Lưu lại object Float
         $('.item-float-number span').text($object.Float);
+        $('.item-floatSwap-number span').text($object.FloatSwap);
         var $width = $('.width-input-img').val(); // Lấy width ảnh
         var $height = $('.height-input-img').val();// Lấy height ảnh
         if($width && $height){

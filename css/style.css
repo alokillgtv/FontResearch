@@ -1558,9 +1558,8 @@ thead .table-header {
 }
 
 .item-body-maytinh {
-  margin-bottom: 5px;
   border-bottom: 1px dashed #ccc;
-  padding: 5px 0;
+  padding: 3px 0;
   position: relative;
 }
 
@@ -1963,5 +1962,10 @@ thead .table-header {
 .item-tool-buildFont .tip-show {
   top: 50px !important;
   width: 366px;
+  text-align: left;
+}
+.item-calc-number .tip-show {
+  left: -220px !important;
+  top: 0px !important;
   text-align: left;
 }

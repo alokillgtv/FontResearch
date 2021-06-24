@@ -362,33 +362,45 @@
         </div>
         <div class="result-cals-file-hex">
           <ul class="list-calc-hex">
-            <li class="item-calc-number item-hex-code" title="Dữ liệu HEX mà bạn đã chọn.&#10;Có thể nhập dữ liệu HEX tùy thích&#10;để tool chuyển đổi sang các giá trị khác nhau.">
+            <li class="item-calc-number item-hex-code tip-hover">
               <label>HEX <b class="icont-copy-cals" onclick="copyValue(this,true)" title="Copy dòng này xuống máy tính."><i class="far fa-copy"></i></b></label>
               <span><input class="input-hex-calc-swap" onmouseup="convertValue(this.value)" onkeyup="convertValue(this.value)" onchange="convertValue(this.value)" type="text" placeholder="Nhập Giá Trị HEX" /></span>
+              <small class="tip-show">Dữ liệu HEX mà bạn đã chọn. Có thể nhập dữ liệu HEX tùy thích để tool chuyển đổi sang các giá trị khác nhau.</small>
             </li>
-            <li title="Dữ liệu được chuyển đổi từ HEX gốc mà bạn đã chọn.&#10;Nó có thể là BIG ENDIAN hoặc LITTLE ENDIAN." class="item-calc-number item-little-endian">
+            <li class="item-calc-number item-little-endian tip-hover">
               <label>SWAP HEX<b class="icont-copy-cals" onclick="copyValue(this,true)" title="Copy dòng này xuống máy tính."><i class="far fa-copy"></i></b></label>
               <span></span>
+              <small class="tip-show">Dữ liệu được chuyển đổi từ HEX gốc mà bạn đã chọn. Nó có thể là BIG ENDIAN hoặc LITTLE ENDIAN.</small>
             </li>
-            <li class="item-calc-number item-big-endian" title="Dữ liệu DECIMAL được chuyển đổi từ HEX gốc mà bạn đã chọn.">
+            <li class="item-calc-number item-big-endian tip-hover">
               <label>DECIMAL<b class="icont-copy-cals" onclick="copyValue(this,false)" title="Copy dòng này xuống máy tính."><i class="far fa-copy"></i></b></label>
               <span></span>
+              <small class="tip-show">Dữ liệu DECIMAL được chuyển đổi từ HEX gốc mà bạn đã chọn.</small>
             </li>
-            <li class="item-calc-number item-dec-number" title="Dữ liệu DECIMAL được chuyển đổi từ HEX&#10;được chuyển đổi SWAP mà bạn đã chọn.">
+            <li class="item-calc-number item-dec-number tip-hover">
               <label>DECIMAL SWAP<b class="icont-copy-cals" onclick="copyValue(this,false)" title="Copy dòng này xuống máy tính."><i class="far fa-copy"></i></b></label>
               <span></span>
+              <small class="tip-show">Dữ liệu DECIMAL được chuyển đổi từ HEX được chuyển đổi SWAP mà bạn đã chọn.</small>
             </li>
-            <li class="item-calc-number item-text-number" title="TEXT ASNII từ đoạn HEX mà bạn đã chọn.">
+            <li class="item-calc-number item-text-number tip-hover">
               <label>ASNII</label>
               <span></span>
+              <small class="tip-show">TEXT ASNII từ đoạn HEX mà bạn đã chọn.</small>
             </li>
-            <li class="item-calc-number item-float-number" title="Dữ liệu dấu chấm động (FLOAT)&#10;được chuyển đổi từ khối HEX mà bạn đã chọn.&#10;Dữ liệu này chỉ được chuyển đổi khi bạn chọn khối HEX với 4 byte.">
+            <li class="item-calc-number item-float-number tip-hover">
               <label>FLOAT<b class="icont-copy-cals" onclick="copyValue(this,false)" title="Copy dòng này xuống máy tính."><i class="far fa-copy"></i></b></label>
               <span></span>
+              <small class="tip-show">Dữ liệu dấu chấm động (FLOAT) được chuyển đổi từ khối HEX mà bạn đã chọn. Dữ liệu này chỉ được chuyển đổi khi bạn chọn khối HEX với 4 byte.</small>
             </li>
-            <li class="item-calc-number item-Negative-number" title="Số âm của HEX được chuyển đổi từ khối HEX mà bạn đã chọn..&#10;Origin là HEX gốc được chuyển sang số âm.&#10;Swap là hex được đảo ngược và chuyển sang số âm.">
+            <li class="item-calc-number item-floatSwap-number tip-hover">
+              <label>FLOAT SWAP<b class="icont-copy-cals" onclick="copyValue(this,false)" title="Copy dòng này xuống máy tính."><i class="far fa-copy"></i></b></label>
+              <span></span>
+              <small class="tip-show">Dữ liệu dấu chấm động (FLOAT) được chuyển đổi từ khối HEX được SWAP mà bạn đã chọn. Dữ liệu này chỉ được chuyển đổi khi bạn chọn khối HEX với 4 byte.</small>
+            </li>
+            <li class="item-calc-number item-Negative-number tip-hover">
               <label>NEGATIVE HEX</label>
               <span></span>
+              <small class="tip-show">Số âm của HEX được chuyển đổi từ khối HEX mà bạn đã chọn. Origin là HEX gốc được chuyển sang số âm. Swap là hex được đảo ngược và chuyển sang số âm.</small>
             </li>
             <li class="item-calc-number item-maytinh-number" onclick="focusCals()">
               <label>MÁY TÍNH</label>
