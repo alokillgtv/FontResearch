@@ -96,8 +96,8 @@ function GetCusorText(e){// Hàm chọn 1 ký tự ở khung ASNII
 }
 
 function fillHexHighLight(pos){
-  var $string = subHEXString(pos.start,pos.end,$HEXTEXTAREA)
-  var $html = '<span class="hex-highlight">' + $string.getString.replace(/\s$/gi,"") + "</span>";
+  var $string = subHEXString(pos.start,pos.end,$HEXTEXTAREA);
+  var $html = '<span class="hex-highlight">' + $string.getString.replace(/\n/gi,"<br>").replace(/\s$/gi,"") + "</span>";
   var $fullHTML = $string.beginString + $html + $string.endString;
   $('.hight-light-hex').html($fullHTML.replace(/\n/gi,"<br>"));
 }
