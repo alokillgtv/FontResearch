@@ -142,28 +142,52 @@ function actionFNT($string){
   return $charLISTFNT;
 }
 
+function IMGBIT(e){
+  var $file = e.files[0];// lấy file font ảnh
+  var $imgsrc = URL.createObjectURL($file);// Tạo đường dẫn font ảnh
+  $('#imgTool').attr("src",$imgsrc);// Chèn đường dẫn font ảnh
+  setTimeout(function(){
+    var $width = $('#imgTool')[0].naturalWidth;// Lấy width ảnh font bitmap
+    var $height = $('#imgTool')[0].naturalHeight;// Lấy height ảnh font bitmap
+    $('.wIMGFNT b').text($width);// Chèn width vào ô
+    $('.hIMGFNT b').text($height);// Chèn height vào ô
+  },100)
+}
+
 function checkFILE($objFNT){
-  $('.max-charFNT b').text($objFNT.count);
-  getDataList(false)
-  var $boxChar = $('.item-struct[boxname="Dữ Liệu Ký Tự"]');
-  var $start = getStringHex($boxChar.find(".input-offset").val()).dec;
-  var $length = getStringHex($boxChar.find(".input-max").val()).dec;
-  var $bytelong = 0;
-  var $listStruct = [];
-  $('.item-struct').each(function(){
-    var $boxName = $(this).attr("boxname");
-    var $struct = getCharType($(this));
-    $listStruct.push($struct);
+  $('#checkWidth,#checkHeight,#checkXadvance,#checkUnicode').attr("disabled","disabled");
+  if($('.character-table').length == 0){// Nếu chưa bấm phân tích font
+    checkFont();
+  }
+  $('.max-charFNT b').text($objFNT.count);// Chèn tổng số ký tự file FNT
+  getDataList(false)// Lấy dữ liệu $SUPERDATA
+  var $boxChar = $('.item-struct[boxname="Dữ Liệu Ký Tự"]'); // Lấy box struct Dữ Liệu Ký Tự
+  if($boxChar.length == 0){
+    alert("Bạn phải có một khối Range Dữ Liệu Ký Tự mới có thể dùng tính năng này.");
+    return;
+  }
+  var $start = getStringHex($boxChar.find(".input-offset").val()).dec;// Lấy start offset struct
+  var $length = getStringHex($boxChar.find(".input-max").val()).dec;// Lấy length struct
+  var $bytelong = 0;// Tạo biến lấy tổng số byte 1 struct
+  var $listStruct = [];// Tạo array chứa dữ liệu tất cả struct
+  $('.item-struct').each(function(){// Chạy lập theo từng struct
+    var $struct = getCharType($(this));// Lấy dữ liệu 1 struct
+    $listStruct.push($struct);// Gán dữ liệu vào array struct
   })
-  $boxChar.find('.select-byte option:selected').each(function(){
-    var $value = Number($(this).val());
-    $bytelong = $bytelong + $value;
+  $boxChar.find('.select-byte option:selected').each(function(){// Chạy lập theo từng select byte để tính
+    var $value = Number($(this).val());// Lấy byte 1 khối
+    $bytelong = $bytelong + $value;// Cộng byte lại
   });
-  var $stringCals = $length + " % " + $bytelong;
+  var $stringCals = $length + " % " + $bytelong;// Kiểm tra xem khối dữ liệu này có đúng hay không
   $stringCals = eval($stringCals);
-  var $maxChar = $length / $bytelong;
-  if($stringCals == 0){
-    $('.max-charBIT b').text($maxChar);
+  var $maxChar = $length / $bytelong;// Lấy tổng số ký tự font bitmap
+  if($stringCals == 0){// Nếu dữ liệu đúng
+    $('.max-charBIT b').text($maxChar);// Chèn tổng số ký tự vào ô
+    var $width = $('#img-view')[0].naturalWidth;// Lấy width ảnh font bitmap
+    var $height = $('#img-view')[0].naturalHeight;// Lấy height ảnh font bitmap
+    $('.wIMG b').text($width);// Chèn width vào ô
+    $('.hIMG b').text($height);// Chèn height vào ô
+    createTable($listStruct,$objFNT,$SUPERDATA);// Tạo table chứa các ký tự
   }
   else{
     alert("Có vẻ như khối Range Dữ Liệu Ký Tự của bạn có độ dài vượt quá số ký tự phân tích được,\nhãy nhớ kiểm tra lại nếu xong dễ xảy ra lỗi khi tạo font mới.");
@@ -171,3 +195,66 @@ function checkFILE($objFNT){
   }
 }
 
+function splitData($listStruct){
+  if($listStruct[0]){
+    for(var $N = 0;$N < $listStruct.length;$N++){
+      var $Struct = $listStruct[$N];
+      var $Name = $Struct.Name;
+      var $Start = $Struct.StartOffset;
+      var $Length = $Struct.LengthOffset;
+      var $HexStruct = FileRead($HEXFILE,$Start,$Length);
+      var $maxByte = $Struct.maxByte * 2;
+      var $regexp = new RegExp("(.{"+$maxByte+"})","gi");
+      var $lineStruct = $HexStruct.match($regexp);
+      if($lineStruct){
+        //console.log($lineStruct);
+        $listStruct[$N].resultData = splitBlock($lineStruct,$Struct);
+        $DATASTRUCT = $listStruct;
+      }
+    }
+  }
+}
+
+function splitBlock($lineStruct,$Struct){
+  var $listHex = [];
+  for(var $U = 0;$U < $lineStruct.length;$U++){
+    var $lineHex = $lineStruct[$U]; // Hex 1D200000F83F3F00600E3F00B8483F0098163FC8FFFDFF18010701
+    //console.log($lineHex)
+    var $beginSplit = 0;
+    var $listCharHex = [];
+    for(var $M = 0; $M < $Struct.listChar.length;$M++){
+      var $thisChar = $Struct.listChar[$M];
+      var $byteLong = $thisChar.byteLong * 2;
+      var $titleText = $thisChar.titleText;
+      var $regSplit = new RegExp("^(.{"+$beginSplit+"})(.{"+$byteLong+"})");
+      $beginSplit = $beginSplit + $byteLong;
+      var $item = $thisChar;
+      if($lineHex){
+        $item.Hex = $lineHex.match($regSplit)[2];
+        $listCharHex.push($item);
+      }
+    }
+    $listHex.push($listCharHex);
+  }
+  //console.log($listHex);
+  return $listHex;
+}
+
+function createTable($listStruct,$objFNT,$SUPERDATA){// Hàm tạo table và kiểm tra ký tự
+  for(var $n = 0;$n < $listStruct.length;$n++){
+    var $struct = $listStruct[$n];
+    if($struct.Name == "Dữ Liệu Width"){
+      $('#checkWidth').removeAttr("disabled");
+    }
+    if($struct.Name == "Dữ Liệu Height"){
+      $('#checkHeight').removeAttr("disabled");
+    }    
+    if($struct.Name == "Dữ Liệu Xadvance"){
+      $('#checkXadvance').removeAttr("disabled");
+    }
+    if($struct.Name == "Dữ Liệu Unicode"){
+      $('#checkUnicode').removeAttr("disabled");
+    }
+  }
+  
+}

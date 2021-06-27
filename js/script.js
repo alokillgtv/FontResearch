@@ -27,7 +27,8 @@ function createDATA(){
 }
 
 function clearData(){
-  $('#fontmapfile,#fontimgfile,#test,.textarea-file-hex,.jump-byte-rows,.textarea-output-text-file-hex,.input-hex-calc-swap,.pheptinhmaytinh,.end-byte-rows,.max-byte-rows').val("");
+  $('#checkWidth,#checkHeight,#checkXadvance,#checkUnicode').attr("disabled","disabled");
+  $('#fontmapfile,#fontimgfile,#test,.textarea-file-hex,.jump-byte-rows,.textarea-output-text-file-hex,.input-hex-calc-swap,.pheptinhmaytinh,.end-byte-rows,.max-byte-rows,#pathFont,#pathImg').val("");
   $('#cell-content,#page-result,.name-label b,.body-output-text-file-hex,.item-offset-hex span,.item-block-hex span,.item-length-hex span,.offset-text-file-hex,.textarea-file-hex-copy').html("");
   $('#page-result').html('<p class="none-data" style="background:white;border:1px solid #ccc">Hiện chưa có dữ liệu để phân tích. Bạn cần chọn các dữ liệu cần thiết và nhấn vào nút Phân Tích Font để phân tích.</p>');
   $('.body-page-hex').html('<div class="table-page-hex"></div>\
@@ -856,5 +857,25 @@ function SaveData(){
 	});
 	saveAs(blob, "data.js");	
 }
+
+// Hàm check key nhấn
+$(document).keydown(function(event){
+  if (event.key == 'F1') {
+    openToolHex();// Dùng Ctrl+Shift+S để highlight
+  }
+  if(event.key == 'F2'){
+    $('.pheptinhmaytinh').focus(); // Dùng Ctrl+Shift+W để dùng máy tính.
+  }
+  if(event.key == 'F4'){
+    showPAGE("",'page-hex-file'); // Dùng Ctrl+Shift+H để mở trang HEX.
+  }
+  if(event.key == 'F6'){
+    showPAGE(this,'page-img'); // Dùng Ctrl+Shift+H để mở trang ảnh font.
+  }
+  if(event.key == 'F8'){
+    showPAGE(this,'page-data'); // Dùng Ctrl+Shift+H để mở trang cấu trúc font.
+  }
+});
+
 
 BeginRunJS();

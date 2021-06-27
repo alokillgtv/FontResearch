@@ -93,13 +93,19 @@ function getCharType($box){
     var $box = $('.item-struct:eq(0)');
   }
 	var $dataChar = "";// Tạo biến array chứa dữ liệu
+  var $maxByte = 0;
 	$box.find('.item-block.item-char').each(function(){// Thực thi theo từng block
+    var $nameStruct = $box.find(".select-title-struct :selected").val();
+    $sendObj.StartOffset = getStringHex($box.find(".input-offset").val()).dec;
+    $sendObj.LengthOffset = getStringHex($box.find(".input-max").val()).dec;
+    $sendObj.Name = $nameStruct;
     var $title = $(this).find('.select-title :selected').val();// Lấy tiêu đề block
     var $titleText = $(this).find('.select-title :selected').text();
     var $byte = $(this).find('.select-byte :selected').val();// Lấy số byte của block
+    $maxByte = $maxByte + Number($byte);
     var $type = $(this).find('.select-type :selected').val();// Lấy kiểu dữ liệu block
     var $typeText = $(this).find('.select-type :selected').text();
-    var $save = $(this).find('.block-save:checked').val();// Kiểm tra xem có giữ nguyên dữ liệu block hay không
+    var $save = $(this).find('.block-save-input:checked').val();// Kiểm tra xem có giữ nguyên dữ liệu block hay không
     var $regexpVal = "";
     var $regexpVal = $(this).find('.input-regexp').val(); // Lấy biểu thức chính quy và nối các dữ liệu lại
     var $item = "";// Tạo một biến item chứa dữ liệu
@@ -136,8 +142,10 @@ function getCharType($box){
     $newItem.typeText = $typeText;
     $newItem.calsValue = $calsValue;
     $newItem.regexp = $regexpVal;
+    $newItem.save = $save;
     $newObj.push($newItem);
 	})
+  $sendObj.maxByte = $maxByte;
   $sendObj.listChar = $newObj;
   $sendObj.result = $dataChar;
 	return $sendObj;
@@ -871,7 +879,7 @@ function dataCheck($obj,$box){
       $listChar += '<div pageImg="'+$page+'" class="char-cell" onclick="jumpChar(this)" onmouseover="charHover(this)" onmouseout="CharHoverHide(this)"  charnumber="'+$idCharacter+'" style="'+$style+'"><span class="hover-block-text">'+$titleHTML2+'<b>Nhấn Để Chuyển Đến<br>Khung Phân Tích</b></span></div>'; // Nối dữ liệu chứa tọa độ ký tự để tạo khung trên hình ảnh font
       $allHTML += $item + '<td class="td-button"><button class="btn-char-des" onclick="viewChar(this)">Giải Thích</button></td></tr>';// Thêm phím phân tích dữ liệu
     }
-    $table += $header + "<th>Phân Tích</th></tr></thead><tbody>" + $header + $allHTML + "</tbody></table></div>";// Nối các dữ liệu vào table
+    $table += $header + "<th>Phân Tích</th></tr></thead><tbody>" + $header + '<th>Phân Tích</th></tr>' + $allHTML + "</tbody></table></div>";// Nối các dữ liệu vào table
     //$('#test').text($header);// Chèn dữ liệu vào form test
     $('#page-result').append($table);// Chèn table vào html
     //$('#formData').text($header);Chèn dữ liệu vào form data

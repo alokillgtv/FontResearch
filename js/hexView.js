@@ -280,7 +280,7 @@ function openToolHex(){
   $OBJECTHLOFFSET.push($itemOffset);
   var $getObject = subString($OBJECTHLOFFSET,$HEXTEXTAREA,$saveStart)
   $OBJECTHL = $getObject.string;
-  console.log($getObject)
+  //console.log($getObject)
   $OBJECEDITTHL = $OBJECTHL;
   $('.block-highlight.active').removeClass("active");// Ẩn highlight đang edit
   for($k = 0;$k < $OBJECTHL.length;$k++){

@@ -31,9 +31,18 @@
 		<div id="export-cfg" class="title-btn tip-hover save-template" onclick="exportcfg(this)"><i class="fas fa-save"></i><small class="tip-show"> Lưu các thiết lập để mở nhanh hơn khi phân tích lần sau.</small></div>
 		<div id="reload" class="title-btn tip-hover reload-template" onclick="clearData(this)"><i class="fas fa-redo-alt"></i><small class="tip-show"> Khôi phục lại các mặc định vốn có.</small></div>
     <button class="btn-button check-font title-btn tip-hover" onclick="checkFont()"><i class="fas fa-cog"></i> Phân Tích Font<small class="tip-show">Nhấn vào để tiến hành phân tích font từ những dữ liệu đã có.</small></button>
-    <div id="view-hex-file" class="title-btn tip-hover hex-file-page" onclick="showPAGE(this,'page-hex-file')" ><i class="far fa-edit"></i> Xem Hex File<small class="tip-show">Xem file map font bằng Hex Code.</small></div>
-		<div id="view-img" class="title-btn tip-hover image-page" onclick="showPAGE(this,'page-img')"><i class="fas fa-image"></i> Xem Ảnh Font<small class="tip-show">Xem ảnh file font đã phân tích. Các dữ liệu đúng sẽ được kẽ khung để phân biệt từng ký tự.</small></div>
-		<div id="view-data" class="title-btn tip-hover dataCheck-page" onclick="showPAGE(this,'page-data')"><i class="fas fa-table"></i> Xem Cấu Trúc<small class="tip-show">Xem dữ liệu đã phân tích, các dữ liệu được đánh dấu và vẽ khung phù hợp với dữ liệu đã phân tích.</small></div>
+    <div id="view-hex-file" class="title-btn tip-hover hex-file-page" onclick="showPAGE(this,'page-hex-file')" ><i class="far fa-edit"></i> Xem Hex File
+      <small class="tip-show">Xem file map font bằng Hex Code.<br><br>
+      Phím Tắt: <b>F4</b></small>
+    </div>
+		<div id="view-img" class="title-btn tip-hover image-page" onclick="showPAGE(this,'page-img')">
+      <i class="fas fa-image"></i> Xem Ảnh Font
+      <small class="tip-show">Xem ảnh file font đã phân tích. Các dữ liệu đúng sẽ được kẽ khung để phân biệt từng ký tự.<br><br>
+      Phím Tắt: <b>F6</b></small>
+    </div>
+		<div id="view-data" class="title-btn tip-hover dataCheck-page" onclick="showPAGE(this,'page-data')"><i class="fas fa-table"></i> Xem Cấu Trúc
+      <small class="tip-show">Xem dữ liệu đã phân tích, các dữ liệu được đánh dấu và vẽ khung phù hợp với dữ liệu đã phân tích.<br><br>
+      Phím Tắt: <b>F8</b></small></div>
 		<ul id="zoom-img" title="Phóng to ảnh font để nhìn rõ hơn." class="title-btn tip-hover zoomImg">
 			<li class="item-zoom item-zoom-main" title="1"><b><small class="fas fa-search-plus"></small> Size Ảnh: 100%</b><i class="fas fa-caret-square-down"></i></li>
       <li onclick="zoomIMG(this)" class="item-zoom" title="0.3"><b><small class="fas fa-search-plus"></small> Size Ảnh: 30%</b></li>
@@ -254,19 +263,14 @@
                 <label class="label-block block-regexp tip-hover tip-left item-regexp">
                   <input type="text" class="input-regexp" value="" placeholder="Nhập biểu thức" />
                   <small class="tip-show">
-                    Trường này dùng để tách các dữ liệu font từ giá trị chứa fontmap dạng text.<br>
-                    Nó thường được sử dụng ở các file FNT của BMFONT hoặc các tập tin .txt<br>
-                    Để sử dụng các bạn có thể chọn theo các tiêu đề của block.<br>
-                    Tool sẽ tự động thêm các thuật toán tách phù hợp theo Regular Expressions (biểu thức chính quy).<br>
-                    Nếu các bạn hiểu rõ về Regular Expressions, các bạn có thể tùy chỉnh theo các thông số phù hợp.<br>
-                    Tool nhận các giá trị cần lấy trong cặp dấu ().<br>
-                    VD: Một thông số trong file FNT như sau:<br>
-                    char id=9 x=8 y=420 width=7 height=41<br>
-                    Nếu muốn lấy giá trị của Width. Các bạn phải viết biểu thức như sau: <b style="color:white;background:red">width\=(\d+)</b>
-                    Tool sẽ lấy được giá trị 7 của Width. Phân tích biểu thức này như sau:<br>
+                    Trường này dùng để tách các dữ liệu font từ giá trị chứa fontmap dạng text. Nó thường được sử dụng ở các file FNT của BMFONT hoặc các tập tin .txt<br><br>
+                    Để sử dụng các bạn có thể chọn theo các tiêu đề của block. Tool sẽ tự động thêm các thuật toán tách phù hợp theo Regular Expressions (biểu thức chính quy).<br><br>
+                    Nếu các bạn hiểu rõ về Regular Expressions, các bạn có thể tùy chỉnh theo các thông số phù hợp. Tool nhận các giá trị cần lấy trong cặp dấu ().<br><br>
+                    VD: Một thông số trong file FNT như sau: char id=9 x=8 y=420 width=7 height=41<br><br>
+                    Nếu muốn lấy giá trị của Width. Các bạn phải viết biểu thức như sau: <b style="color:white;background:red">width\=(\S+)</b>. Tool sẽ lấy được giá trị 7 của Width. Phân tích biểu thức này như sau:<br>
                     <b style="color:white;background:red">width</b> => Kiểm tra xem dòng đó có width và lấy giá trị nằm sau nó.<br>
                     <b style="color:white;background:red">\=</b> => Những ký tự đặc biệt, các bạn cần thêm dấu <b style="color:white;background:red">\</b> để bỏ qua không tính ký tự này.<br>
-                    <b style="color:white;background:red">(\d+)</b> => Lấy giá trị theo số tự nhiên.
+                    <b style="color:white;background:red">(\S+)</b> => Lấy giá trị không phải là dấu Space.
                   </small>
                 </label>
                 <label class="label-block block-cals tip-hover tip-left">
@@ -276,7 +280,8 @@
                 <label class="label-block block-save tip-hover tip-left">
                   <input type="checkbox" class="block-save-input" name="vehicle1" value="True">
                   <small class="tip-show">Giữ nguyên giá trị này. Tính năng này chỉ sử dụng khi tạo font bitmap bằng tool.<br><br>
-                    Nó được dùng để giữ nguyên các giá trị mà bạn không muốn chuyển đổi khi tạo font.
+                    Nó được dùng để giữ nguyên các giá trị mà bạn không muốn chuyển đổi khi tạo font.<br><br>
+                    Bạn nên dùng nó đối với các giá trị mà bạn chưa xác định được kiểu dữ liệu của nó. Các giá trị này sẽ được giữ nguyên gốc sau khi tạo file map font.
                   </small>
                 </label>
                 <label class="remove-block tip-hover tip-left" onclick="RemoveBlock(this)">
@@ -329,7 +334,8 @@
               <button class="save-highlight-button" onclick="openToolHex()"><i class="fas fa-highlighter"></i> Ghim Block</button>
               <small class="tip-show">
               Công cụ dùng để ghim tạm dữ liệu. Để phân tích dễ dàng hơn, cần ghim tạm các khối dữ liệu với giá trị mà bạn nghiên cứu được.<br><br>
-              Ngoài mục đích đánh dấu khối block mà bạn chọn, nó còn có tính năng đặt tên và giá trị cho khối này. Để dùng công cụ này, các bạn cần chọn khối HEX trước.
+              Ngoài mục đích đánh dấu khối block mà bạn chọn, nó còn có tính năng đặt tên và giá trị cho khối này. Để dùng công cụ này, các bạn cần chọn khối HEX trước.<br><br>
+              Phím Tắt: <b>F1</b>
               </small>
             </li>
             <li class="item-result-file remove-highlight-hex tip-hover">
@@ -350,14 +356,14 @@
         <div class="body-page-hex-file">
           <div class="offset-text-file-hex"></div>
           <div class="left-tab-HEX">
-            <textarea onmouseleave="focusTextarea(this,false)" onmouseenter="focusTextarea(this,true)" onkeyup="hexEdit(this)" onchange="hexEdit(this)" onmouseup="GetCusor(this)" class="textarea-file-hex"></textarea>
+            <textarea readonly="" onmouseleave="focusTextarea(this,false)" onmouseenter="focusTextarea(this,true)" onkeyup="hexEdit(this)" onchange="hexEdit(this)" onmouseup="GetCusor(this)" class="textarea-file-hex"></textarea>
             <div class="textarea-file-hex-copy"></div>
             <div class="hight-light-hex"></div>
             <div class="block-highlight-hex"></div>
           </div>
           <div class="output-text-file-hex">
             <div class="body-output-text-file-hex"></div>
-            <textarea onchange="textEdit(this)" onmouseup="GetCusorText(this)" class="textarea-output-text-file-hex"></textarea>
+            <textarea readonly="" onchange="textEdit(this)" onmouseup="GetCusorText(this)" class="textarea-output-text-file-hex"></textarea>
           </div>
         </div>
         <div class="result-cals-file-hex">
@@ -402,7 +408,7 @@
               <span></span>
               <small class="tip-show">Số âm của HEX được chuyển đổi từ khối HEX mà bạn đã chọn. Origin là HEX gốc được chuyển sang số âm. Swap là hex được đảo ngược và chuyển sang số âm.</small>
             </li>
-            <li class="item-calc-number item-maytinh-number" onclick="focusCals()">
+            <li class="item-calc-number item-maytinh-number tip-hover" onclick="focusCals()">
               <label>MÁY TÍNH</label>
               <div class="body-maytinh">
                 <div class="item-body-maytinh ketqua-maytinh">
@@ -459,6 +465,8 @@
                   </div>
                 </div>
               </div>
+              <small class="tip-show">Máy tính mini, dùng để tính toán nhanh DEC hoặc HEX.<br><br>
+              Phím Tắt: <b>F2</b></small>
             </li>
           </ul>
         </div>
@@ -506,23 +514,79 @@
               </small>
             </li>
           </ul>
+          <div class="check-tool-fnt">
+            <div class="form-check form-switch checkCharRep tip-hover">
+              <input autocomplete="off" id="checkCharRep" type="checkbox" value="true" class="input-check-switch"  checked>
+              <label for="checkCharRep" class="form-check-label">Sử dụng Replace Ký Tự để thay Font</label>
+              <small class="tip-show">Tùy chọn này được thiết lập mặc định. Khi sử dụng tùy chọn này. Các ký tự có bên trong file FNT được tạo bằng tool sẽ được sử dụng để thay thế cho các ký tự bên trong file font map mặc định mà bạn đã phân tích. Nó chỉ lấy các tọa độ x,y chiều rộng và chiều cao của ký tự bên trong file FNT được tạo thay thế cho các tọa độ của file font map.<br><br>
+              Do đó, các ký tự trong font map sẽ có tiếng việt như file FNT được tạo nhưng vẫn giữ nguyên số ký tự nguyên gốc. Và để thể hiện các ký tự tiếng việt này khi chạy game. Bạn phải sử dụng thay thế ký tự chúng thể hiện tiếng việt.<br><br>
+              Ví dụ chữ <b>Đ</b> trong file FNT thay thế cho chữ <b>Ä</b> trong file font map gốc. Để thể hiện chữ <b>Đ</b>, các bạn cần chuyển chữ <b>Đ</b> thành chữ <b>Ä</b>.<br></br>
+              Nếu các bạn tắt tùy chọn này, tất cả ký tự trong file fnt sẽ được thay vào font map gốc. Nhưng không vượt quá số ký tự gốc của font map. Nếu vượt quá số ký tự, các bạn cần phải tắt tùy chọn <b>Giới hạn số ký tự theo Font Map Gốc</b>.<br><br>
+              Lưu ý rằng, một vài game không hỗ trợ mở rộng các ký tự tiếng việt, nó có một khối Range chứa dữ liệu Unicode riêng biệt. Các bạn cần phải tìm và sử dụng tính năng <b>Thay thế cấu trúc Range Unicode</b> để đồng bộ tất cả lại. Tuy nhiên vẫn rất dễ lỗi khi sử dụng tính năng này. Tốt nhất vẫn là sử dụng Replace ký tự để ít lỗi xảy ra hơn.
+              </small>
+            </div>
+            <div class="form-check form-switch checkMaxChar tip-hover">
+              <input autocomplete="off" id="checkMaxChar" type="checkbox" value="true" class="input-check-switch"  checked>
+              <label for="checkMaxChar" class="form-check-label">Giới hạn số ký tự theo Font Map Gốc</label>
+              <small class="tip-show">Tùy chọn giới hạn số ký tự trong file FNT được dùng để tạo font bitmap mới. Tùy chọn này được bật mặc định. Các bạn không thể sử dụng file FNT các bạn tạo có số ký tự vượt mức ký tự có trong file font map gốc.<br><br>
+              Một số game có giới hạn số ký tự bằng một thuật toán riêng biệt. Nếu các bạn xác định được vị trí để sửa cho phù hợp với file FNT các bạn tạo thì có thể sẽ chạy. Tuy nhiên để an toàn, chỉ nên giới hạn số ký tự các bạn tạo bằng với số ký tự font map gốc chứa.<br><br>
+              Nếu các bạn tắt tùy chọn này, tool sẽ tạo font map theo giới hạn số ký tự mà các bạn tạo bằng file FNT. Có lẽ một vài game có thể chạy được, tuy nhiên khả năng thành công không cao. Do đó không khuyến khích các bạn tắt tùy chọn này.
+              </small>
+            </div>
+            <div class="form-check form-switch checkXadvance tip-hover">
+              <input autocomplete="off" id="checkXadvance" type="checkbox" class="input-check-switch" disabled="disabled">
+              <label for="checkXadvance" class="form-check-label">Thay thế cấu trúc Range Xadvance</label>
+              <small class="tip-show">Tùy chọn này được vô hiệu hóa, nó chỉ được mở khi trong khối phân tích của các bạn có một cấu trúc Range Xadvance.<br><br>
+              Nếu bạn bật tùy chọn này. Dữ liệu trong khối Range Xadvance mà bạn nghiên cứu được sẽ được thay thế bằng dữ liệu Xadvance trong file FNT font mà bạn đã tạo.</small>
+            </div>
+            <div class="form-check form-switch checkWidth tip-hover">
+              <input autocomplete="off" id="checkWidth" type="checkbox" class="input-check-switch" disabled="disabled">
+              <label for="checkWidth" class="form-check-label">Thay thế cấu trúc Range Width</label>
+              <small class="tip-show">Tùy chọn này được vô hiệu hóa, nó chỉ được mở khi trong khối phân tích của các bạn có một cấu trúc Range Width.<br><br>
+              Nếu bạn bật tùy chọn này. Dữ liệu trong khối Range Width mà bạn nghiên cứu được sẽ được thay thế bằng dữ liệu Width trong file FNT font mà bạn đã tạo.</small>
+            </div>
+            <div class="form-check form-switch checkHeight tip-hover">
+              <input autocomplete="off" id="checkHeight" type="checkbox" class="input-check-switch" disabled="disabled">
+              <label for="checkHeight" class="form-check-label">Thay thế cấu trúc Range Height</label>
+              <small class="tip-show">Tùy chọn này được vô hiệu hóa, nó chỉ được mở khi trong khối phân tích của các bạn có một cấu trúc Range Height.<br><br>
+              Nếu bạn bật tùy chọn này. Dữ liệu trong khối Range Height mà bạn nghiên cứu được sẽ được thay thế bằng dữ liệu Height trong file FNT font mà bạn đã tạo.</small>
+            </div>
+            <div class="form-check form-switch checkUnicode tip-hover">
+              <input autocomplete="off" id="checkUnicode" type="checkbox" class="input-check-switch" disabled="disabled">
+              <label for="checkUnicode" class="form-check-label">Thay thế cấu trúc Range Unicode</label>
+              <small class="tip-show">Tùy chọn này được vô hiệu hóa, nó chỉ được mở khi trong khối phân tích của các bạn có một cấu trúc Range Unicode.<br><br>
+              Nếu bạn bật tùy chọn này. Dữ liệu trong khối Range Unicode mà bạn nghiên cứu được sẽ được thay thế bằng các ký tự bạn tạo trong file FNT font mà bạn đã tạo.<br><br>
+              Nó được dùng khi bạn muốn font của bạn có thể dùng bằng tiếng việt trực tiếp không thông qua quá trình Replace Ký Tự để thể hiện tiếng việt trong game.
+              </small>
+            </div>
+          </div>
           <div class="console-tool-build">
-            <div class="panel-character-tool">
-              <div class="panel-line-tool max-charFNT">
-                <label><i class="fas fa-th-list"></i> Tổng số ký tự File FNT Font được Tạo: </label><b></b>
-              </div>
+            <div class="panel-character-tool left-panel">
+              <div class="panel-line-tool headPanel">SỐ LIỆU FONT MAP</div>
               <div class="panel-line-tool max-charBIT">
                 <label><i class="fas fa-th-list"></i> Tổng số ký tự File Font Map Phân Tích: </label><b></b>
               </div>
               <div class="panel-line-tool wIMG">
-                <label><i class="fas fa-th-list"></i> Chiều Rộng Ảnh Font: </label><b></b>
+                <label><i class="fas fa-th-list"></i> Chiều Rộng Ảnh Font Gốc: </label><b></b>
               </div>
               <div class="panel-line-tool hIMG">
-                <label><i class="fas fa-th-list"></i> Chiều Cao Ảnh Font: </label><b></b>
+                <label><i class="fas fa-th-list"></i> Chiều Cao Ảnh Font Gốc: </label><b></b>
               </div>
-              <div class="panel-line-tool character-list-view"></div>
-              <div class="panel-line-tool consolePage"></div>
             </div>
+            <div class="panel-character-tool right-panel">
+              <div class="panel-line-tool headPanel">SỐ LIỆU FONT FNT</div>
+              <div class="panel-line-tool max-charFNT">
+                <label><i class="fas fa-th-list"></i> Tổng số ký tự File FNT Font được Tạo: </label><b></b>
+              </div>
+              <div class="panel-line-tool wIMGFNT">
+                <label><i class="fas fa-th-list"></i> Chiều Rộng Ảnh Font FNT: </label><b></b>
+              </div>
+              <div class="panel-line-tool hIMGFNT">
+                <label><i class="fas fa-th-list"></i> Chiều Cao Ảnh Font FNT: </label><b></b>
+              </div>
+            </div>
+            <div class="panel-character-list-view"></div>
+            <div class="panel-consolePage"></div>
             <div class="panel-image-tool">
               <div class="wrap-panel-img">
                 <img src="empty.png" id="imgTool" />
