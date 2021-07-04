@@ -1,6 +1,7 @@
 /* Script Tổng Thể Thực Thi*/
 function CREATVAR(){
   $FontMapType = 0;	// Tạo biến chứa kiểu font, hiện tại là bitmap font
+  $FontEndian = 0; // Tạo biến chứa kiểu dữ liệu font. Hiện tại là Little Endian
   $nameCfg = "";	// Tạo biến chứa tên
   $varGetHTML = true; // Tạo biến kiểm tra khi lấy html
   $HEXFILE = "";// Tạo biến chứa dữ liệu file hex
@@ -140,10 +141,8 @@ function zoomIMG(e){
 	}
 }
 
-function sleep2($time){
-  setTimeout(function(){
-    var $test = "";
-  },$time)
+function switchEndian(e){
+  $FontEndian = $('.typeChar :selected').val();
 }
 
 function getStructItem(){// Hàm lấy dữ liệu structItem
@@ -152,6 +151,7 @@ function getStructItem(){// Hàm lấy dữ liệu structItem
   
    // Lấy dữ liệu cho struct object
   $struct.typeChar = $('.typeChar :selected').val();// Lấy kiểu dữ liệu Little hoặc Big
+  $FontEndian = $struct.typeChar;
   $struct.mapType = $('#type-check :selected').val();// Lấy kiểu phân tích font
   $struct.hexFile = $('#test').val();
   $struct.dataimg = [];

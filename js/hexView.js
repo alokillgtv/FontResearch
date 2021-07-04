@@ -267,6 +267,12 @@ function removeToolHex(){
   $DELETEOFFSET = [];
 }
 
+function hoverHL(e){
+  var $hex = $(e).find(".text-hex-highlight b").text().replace(/\s/gi,"");
+  $('.input-hex-calc-swap').val($hex);
+  convertValue($hex);
+}
+
 function openToolHex(){
   if($OBJECTCUSOR == ""){
     alert("Vui lòng ghim bên cột HEX.")
@@ -308,7 +314,7 @@ function openToolHex(){
       var $selectTitle = $('.select-block.select-title')[0].outerHTML.replace('<select class=\"select-block select-title\" onchange=\"selectType(this)\">','<select class=\"select-block-HL select-title-HL\" onchange="selectTitleHL(this)">');
       var $selectType = $('.select-block.select-type')[0].outerHTML.replace('<select class=\"select-block select-type\" onchange=\"myType(this)\">','<select class=\"select-block-HL select-type-HL\" onchange=\"myTypeHL(this)\">');
       var $htmlBlock = '\
-      <span blockid="'+$k+'" startOffset="'+$startOffset+'" endOffset="'+$endOffset+'" class="block-highlight '+$class+'">\
+      <span blockid="'+$k+'" onmouseenter="hoverHL(this)" startOffset="'+$startOffset+'" endOffset="'+$endOffset+'" class="block-highlight '+$class+'">\
         <span class="full-text-high" stringOG="'+$lineBlockHex+'" >'+$lineStringHex+'</span>\
         <span class="body-highlight">\
           <span class="select-highlight">\

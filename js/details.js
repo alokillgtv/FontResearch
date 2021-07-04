@@ -156,7 +156,7 @@ Phân tích dữ liệu phía trên, ta có được như sau::<br>\
 
 // Hàm phân tích ký tự
 function viewChar(e){
-  showCharInfo(); // Hiện trang phân tích chi tiết
+  showPAGE(this,'page-hex'); // Hiện trang phân tích chi tiết
   window.scrollTo(0, 0); // Cuộn đến vị trí phân tích
   var $tr = $(e).closest(".item-cell-row");// Tạo biến lấy tr table hiện tại
   var $list = [];// Tạo biến list array

@@ -745,7 +745,7 @@ function dataValue($obj){
         var $titleTag = "<b>" + $title + ":</b>&#10;";// Tạo chú thích dữ liệu
         $titleTag += "<b>* Little Endian:</b> <i>0x" + $block[$e].hex + "</i>&#10;";
         $titleTag += "<b>* Big Endian:</b> <i>0x" + SwapEndian($block[$e].hex) + "</i>&#10;";
-        $titleTag += "<b>* Value:/<b> <i>" + $block[$e].value + "</i>&#10;"; 
+        $titleTag += "<b>* Value:<b> <i>" + $block[$e].value + "</i>&#10;"; 
         var $class = "td-"+$block[$e].title.replace(/\s/g,"-");// Tạo biến class
         $item += '<td calc="'+$block[$e].calc+'" class="'+$class+'" onmouseover="charTitleHover(this)" myHex="'+$block[$e].hex+'" onmouseout="CharHoverHide(this)" alt="'+$block[$e].title+'" titleText="'+$titleTag+'">' + $block[$e].value + "</td>";// Tạo cột chứa dữ liệu
       }
@@ -819,7 +819,7 @@ function dataCheck($obj,$box){
           var $titleTag = "<b>" + $title + ":</b>&#10;";// Tạo chú thích dữ liệu
           $titleTag += "<b>* Little Endian:</b> <i>0x" + $block[$e].hex + "</i>&#10;";
           $titleTag += "<b>* Big Endian:</b> <i>0x" + SwapEndian($block[$e].hex) + "</i>&#10;";
-          $titleTag += "<b>* Value:/<b> <i>" + $block[$e].value + "</i>&#10;";
+          $titleTag += "<b>* Value:<b> <i>" + $block[$e].value + "</i>&#10;";
           $titleTagAdd = "<b>* Chú giải:</b> " + $title + " của ký tự.";
           // Kiểm tra từng kiểu dữ liệu và thêm vào style cùng chú giải
           if($title == "Width"){

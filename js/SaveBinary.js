@@ -197,6 +197,13 @@ function checkFILE($objFNT){
 
 function splitData($listStruct){
   if($listStruct[0]){
+    $DATASTRUCT = {};
+    $DATASTRUCT.character = false;
+    $DATASTRUCT.xadvance = false;
+    $DATASTRUCT.unicode = false;
+    $DATASTRUCT.width = false;
+    $DATASTRUCT.height = false;
+    $DATASTRUCT.other = false;
     for(var $N = 0;$N < $listStruct.length;$N++){
       var $Struct = $listStruct[$N];
       var $Name = $Struct.Name;
@@ -208,10 +215,32 @@ function splitData($listStruct){
       var $lineStruct = $HexStruct.match($regexp);
       if($lineStruct){
         //console.log($lineStruct);
-        $listStruct[$N].resultData = splitBlock($lineStruct,$Struct);
-        $DATASTRUCT = $listStruct;
+        //$listStruct[$N].resultData = splitBlock($lineStruct,$Struct);
+        if($Struct.Name == "Dữ Liệu Ký Tự"){
+          $DATASTRUCT.character = splitBlock($lineStruct,$Struct);
+        }
+        else if($Struct.Name == "Dữ Liệu Xadvance"){
+          $DATASTRUCT.xadvance = splitBlock($lineStruct,$Struct);
+          $('#checkXadvance').removeAttr("disabled");
+        }
+        else if($Struct.Name == "Dữ Liệu Unicode"){
+          $DATASTRUCT.unicode = splitBlock($lineStruct,$Struct);
+          $('#checkUnicode').removeAttr("disabled");
+        }
+        else if($Struct.Name == "Dữ Liệu Width"){
+          $DATASTRUCT.width = splitBlock($lineStruct,$Struct);
+          $('#checkWidth').removeAttr("disabled");
+        }
+        else if($Struct.Name == "Dữ Liệu Height"){
+          $DATASTRUCT.height = splitBlock($lineStruct,$Struct);
+          $('#checkHeight').removeAttr("disabled");
+        }
+        else{
+          $DATASTRUCT.other = splitBlock($lineStruct,$Struct);
+        }
       }
     }
+    return $DATASTRUCT;
   }
 }
 
@@ -219,7 +248,7 @@ function splitBlock($lineStruct,$Struct){
   var $listHex = [];
   for(var $U = 0;$U < $lineStruct.length;$U++){
     var $lineHex = $lineStruct[$U]; // Hex 1D200000F83F3F00600E3F00B8483F0098163FC8FFFDFF18010701
-    //console.log($lineHex)
+    //console.log($lineHex);
     var $beginSplit = 0;
     var $listCharHex = [];
     for(var $M = 0; $M < $Struct.listChar.length;$M++){
@@ -228,10 +257,18 @@ function splitBlock($lineStruct,$Struct){
       var $titleText = $thisChar.titleText;
       var $regSplit = new RegExp("^(.{"+$beginSplit+"})(.{"+$byteLong+"})");
       $beginSplit = $beginSplit + $byteLong;
-      var $item = $thisChar;
+      var $itemNew = new Object();
+      $itemNew.byteLong = $thisChar.byteLong;
+      $itemNew.calsValue = $thisChar.calsValue;
+      $itemNew.regexp = $thisChar.regexp;
+      $itemNew.save = $thisChar.save;
+      $itemNew.titleText = $thisChar.titleText;
+      $itemNew.titleValue = $thisChar.titleValue;
+      $itemNew.typeText = $thisChar.typeText;
+      $itemNew.typeValue = $thisChar.typeValue;
       if($lineHex){
-        $item.Hex = $lineHex.match($regSplit)[2];
-        $listCharHex.push($item);
+        $itemNew.Hex = $lineHex.match($regSplit)[2];
+        $listCharHex.push($itemNew);
       }
     }
     $listHex.push($listCharHex);
@@ -241,20 +278,37 @@ function splitBlock($lineStruct,$Struct){
 }
 
 function createTable($listStruct,$objFNT,$SUPERDATA){// Hàm tạo table và kiểm tra ký tự
-  for(var $n = 0;$n < $listStruct.length;$n++){
-    var $struct = $listStruct[$n];
-    if($struct.Name == "Dữ Liệu Width"){
-      $('#checkWidth').removeAttr("disabled");
-    }
-    if($struct.Name == "Dữ Liệu Height"){
-      $('#checkHeight').removeAttr("disabled");
-    }    
-    if($struct.Name == "Dữ Liệu Xadvance"){
-      $('#checkXadvance').removeAttr("disabled");
-    }
-    if($struct.Name == "Dữ Liệu Unicode"){
-      $('#checkUnicode').removeAttr("disabled");
+  var $structData = splitData($listStruct);
+  if($structData.character){
+    var $listCharacter = getSmallData($structData.character,"Hex","Character");
+    
+  }
+}
+
+function getSmallData($structDataHex,$get,$type){//getSmallData($DATASTRUCT.character,"Hex","Character") // Hàm tách dữ liệu nhỏ
+  var $listItem = [];
+  for(var $k = 0;$k < $structDataHex.length;$k++){
+    var $lineHEX = $structDataHex[$k];
+    for(var $j = 0;$j < $lineHEX.length;$j++){
+      var $itemHEX = $lineHEX[$j];
+      if($itemHEX.titleText == $type){
+        $listItem.push($itemHEX[$get]);
+      }
+      //$allhex += $hex;
     }
   }
-  
+  return $listItem;
+}
+
+function joinHEX($structDataHex){// Hàm nối các khối hex từ object
+  var $allhex = "";
+  for(var $k = 0;$k < $structDataHex.length;$k++){
+    var $lineHEX = $structDataHex[$k];
+    for(var $j = 0;$j < $lineHEX.length;$j++){
+      var $itemHEX = $lineHEX[$j];
+      var $hex = $itemHEX.Hex;
+      $allhex += $hex;
+    }
+  }
+  return $allhex;
 }
