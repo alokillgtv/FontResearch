@@ -801,7 +801,7 @@ function JumpImg(e){// Hàm nhảy khi chọn phân tích
 }
 
 function jumpChar(e){// Hàm nhảy khi chọn ký tự ở ảnh font
-  showDATA();// Hiện trang phân tích
+  showPAGE("",'page-data');// Hiện trang phân tích
   var $unicodeNum = $(e).attr("charnumber"); // Lấy số unicode ký tự
   $('.character-table td[alt="Unicode"]').each(function(){// Chạy lập theo từng ký tự để tìm ra ký tự phù hợp
     var $textCode = $(this).text();// Lấy số unicode của dữ liệu này

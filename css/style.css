@@ -223,8 +223,9 @@ ul.list-block-char {
   padding-left: 5px;
   overflow: auto;
   max-height: 830px;
-  overflow-x: hidden;
+  overflow-x: scroll;
   min-height: 700px;
+  padding-right: 5px;
 }
 
 .block-right {
@@ -283,7 +284,7 @@ ul.list-block-char {
   vertical-align: middle;
   font-size: 12px;
   border: 1px solid #ccc;
-  width: 385px;
+  width: 375px;
 }
 .title-btn {
   color: white;
@@ -595,7 +596,7 @@ ul.list-block-char select {
   width: 243px;
 }
 .name-lable-title {
-  width: 140px;
+  width: 136px;
 }
 .name-lable-type {
   width: 100px;
@@ -973,7 +974,7 @@ ul.list-block-char select {
   line-height: 19px;
 }
 .block-byte select {
-  width: 130px;
+  width: 123px;
 }
 .name-lable-add {
   width: 41px;
@@ -999,7 +1000,7 @@ ul.list-block-char select {
   border: navajowhite;
 }
 .select-title {
-  width: 102px;
+  width: 97px;
 }
 .character-list {
   margin-top: 20px;
@@ -1038,7 +1039,7 @@ ul.list-block-char select {
   height: 25px;
   position: relative;
   top: 0px;
-  width: 213px;
+  width: 202px;
 }
 .item-menu-button {
   background: red;
@@ -1055,7 +1056,7 @@ ul.list-block-char select {
   background: darkgoldenrod;
 }
 .name-menu-title {
-  width: 220px;
+  width: 210px;
 }
 .name-menu-offset {
   width: 183px;
