@@ -38,7 +38,7 @@ function clearData(){
   $('.fontmap-block').html($('.item-struct:last'));
   $('.list-block-char').html($('.item-char:last'));
   $('.select-title option[value="13"]').prop("selected", true);
-  $('.select-title-struct option[value="Không Xác Định"]').prop("selected", true);
+  $('.select-title-struct option[value="Dữ Liệu Ký Tự"]').prop("selected", true);
   $('.title-struct b').text("Không Xác Định");
   $('.input-byte-rows').val(16);
   CREATVAR();
@@ -780,7 +780,7 @@ window.addEventListener('scroll', function() {
 });
 
 function JumpImg(e){// Hàm nhảy khi chọn phân tích
-  showIMG(); // Hiện trang ảnh
+  showPAGE("",'page-img'); // Hiện trang ảnh
   var $unicodeNum = $(e).attr("charnumber"); // Lấy số unicode ký tự
   $('.char-cell').each(function(){// Chạy lập theo từng ký tự để tìm ra ký tự phù hợp
     var $textCode = $(this).attr("charnumber"); // Lấy số unicode của ký tự trong font ảnh

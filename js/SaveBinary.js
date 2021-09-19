@@ -281,7 +281,61 @@ function createTable($listStruct,$objFNT,$SUPERDATA){// Hàm tạo table và ki�
   var $structData = splitData($listStruct);
   if($structData.character){
     var $listCharacter = getSmallData($structData.character,"Hex","Character");
-    
+    for(var $n = 0;$n < $listCharacter.length;$n++){
+      var $char = $listCharacter[$n];
+      var $value = convertValue($char);
+      if($FontEndian == 0){
+        var $dec = $value.decSwap;
+      }
+      else{
+        var $dec = $value.dec;
+      }
+      var $character = String.fromCharCode($dec);
+    }
+  }
+}
+
+function convertValueDec($select,$long){// Hàm chuyển đổi các dữ liệu dec
+  var $object = {};
+  $object.hex = dec2hex($select,4,$long);
+  $object.swap = SwapEndian($object.hex);
+  if($select < 0){
+    $object.hex = hexNegative($select,$long);
+    $object.swap = SwapEndian($object.hex);
+  }
+  if(String($select).indexOf(".") > -1){
+    $object.hex = float2hex(String($select));
+    $object.swap = SwapEndian($object.hex);
+  }
+  return $object;// Trả về các giá trị đã chuyển đổi
+}
+
+function hexNegative($dec,$byteGet){// Hàm chuyển số âm trong hex
+  if($byteGet <= 8){
+    switch($byteGet){//Kiểm tra giá trị của byte
+      case 2:// Nếu là 1 byte
+        var $maxNumber = 255 ;// Giá trị tối đa là 255
+        break;
+      case 4://Nếu là 2 byte
+        var $maxNumber = 65535 ; //Giá trị tối đa là 65535
+        break;
+      case 6://Nếu là 3 byte
+        var $maxNumber = 16777215 ; //Giá trị tối đa là 16777215
+        break;
+      case 8://Nếu là 4 byte
+        var $maxNumber = 4294967295 ; //Giá trị tối đa là 4294967295
+        break;
+    }
+    var $numberHex = $dec;	//Chuyển giá trị hex sang dec
+    if ($numberHex < 0){// Nếu giá trị hex lớn hơn phân nữa giá trị tối đa, thì nó là số âm
+      var $numberNegative = ($maxNumber + 1) + $dec	//Tính ra số âm
+    }else{
+      var $numberNegative = $numberHex;
+    }
+    return dec2hex($numberNegative,4,$byteGet);// Trả về số âm
+  }
+  else{
+    return "";
   }
 }
 

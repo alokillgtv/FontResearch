@@ -607,8 +607,8 @@ function FNTback(){
               var $title = $titleBlock;// Lấy tiêu đề dữ liệu
               var $titleTag = "<b>" + $title + ":</b><br>";// Tạo biến title hover
               var $hexItem = Number($value[1]).toString(16).toUpperCase();// Chuyển dữ liệu sang hex
-              $titleTag += "<b>* Little Endian:</b> <i>0x" + $hexItem + "</i><br>";// Tạo chú thích Little Endian
-              $titleTag += "<b>* Big Endian:</b> <i>0x" + SwapEndian($hexItem) + "</i><br>";// Tạo chú thích Big Endian
+              $titleTag += "<b>* Gốc:</b> <i>0x" + $hexItem + "</i><br>";// Tạo chú thích Little Endian
+              $titleTag += "<b>* Swap:</b> <i>0x" + SwapEndian($hexItem) + "</i><br>";// Tạo chú thích Big Endian
               $titleTag += "<b>* Decimal:</b> <i>" + $value[1] + "</i><br>";// Tạo chú thích Decimal
               $titleTagAdd = "<b>* Chú giải:</b> " + $title + " của ký tự.";// Ghi chú kiểu dữ liệu
               switch($titleBlock) {// Kiểm tra theo từng dữ liệu
@@ -743,8 +743,8 @@ function dataValue($obj){
         }
         var $title = $block[$e].title;// Lấy tên dữ liệu
         var $titleTag = "<b>" + $title + ":</b>&#10;";// Tạo chú thích dữ liệu
-        $titleTag += "<b>* Little Endian:</b> <i>0x" + $block[$e].hex + "</i>&#10;";
-        $titleTag += "<b>* Big Endian:</b> <i>0x" + SwapEndian($block[$e].hex) + "</i>&#10;";
+        $titleTag += "<b>* Gốc:</b> <i>0x" + $block[$e].hex + "</i>&#10;";
+        $titleTag += "<b>* Swap:</b> <i>0x" + SwapEndian($block[$e].hex) + "</i>&#10;";
         $titleTag += "<b>* Value:<b> <i>" + $block[$e].value + "</i>&#10;"; 
         var $class = "td-"+$block[$e].title.replace(/\s/g,"-");// Tạo biến class
         $item += '<td calc="'+$block[$e].calc+'" class="'+$class+'" onmouseover="charTitleHover(this)" myHex="'+$block[$e].hex+'" onmouseout="CharHoverHide(this)" alt="'+$block[$e].title+'" titleText="'+$titleTag+'">' + $block[$e].value + "</td>";// Tạo cột chứa dữ liệu
@@ -817,8 +817,8 @@ function dataCheck($obj,$box){
         else{// Nếu là các dữ liệu khác
           var $title = $block[$e].title;// Lấy tên dữ liệu
           var $titleTag = "<b>" + $title + ":</b>&#10;";// Tạo chú thích dữ liệu
-          $titleTag += "<b>* Little Endian:</b> <i>0x" + $block[$e].hex + "</i>&#10;";
-          $titleTag += "<b>* Big Endian:</b> <i>0x" + SwapEndian($block[$e].hex) + "</i>&#10;";
+          $titleTag += "<b>* Gốc:</b> <i>0x" + $block[$e].hex + "</i>&#10;";
+          $titleTag += "<b>* Swap:</b> <i>0x" + SwapEndian($block[$e].hex) + "</i>&#10;";
           $titleTag += "<b>* Value:<b> <i>" + $block[$e].value + "</i>&#10;";
           $titleTagAdd = "<b>* Chú giải:</b> " + $title + " của ký tự.";
           // Kiểm tra từng kiểu dữ liệu và thêm vào style cùng chú giải

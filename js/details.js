@@ -26,47 +26,47 @@ $htmlData.text = new Object();
 
 $htmlData.character.html = '<div class="info-text-view info-character"><i>Character: </i>Ký tự được chuyển đổi từ dữ liệu unicode dạng <b>Decimal</b> khi phân tích. <br>\
 Phân tích dữ liệu phía trên, ta có được như sau::<br>\
-<i>Little Endian:</i> <span>0x#LHEX#</span> <b>=></b> <i>Big Endian:</i> <span>0x#BHEX#</span> <b>=></b> <i>Character:</i> <span>#VALUE#</span><br></div>';
+<i>Gốc:</i> <span>0x#LHEX#</span> <b>=></b> <i>Swap:</i> <span>0x#BHEX#</span> <b>=></b> <i>Character:</i> <span>#VALUE#</span><br></div>';
 
 $htmlData.unicode.html = '<div class="info-text-view info-unicode"><i>Unicode: </i>Mã Unicode dạng <b>Decimal</b> khi phân tích từ hex.<br>\
 Phân tích dữ liệu phía trên, ta có được như sau::<br>\
-<i>Little Endian:</i> <span>0x#LHEX#</span> <i>Big Endian:</i> <span>0x#BHEX#</span> <b>=></b> <i>Decimal:</i> <span>#DEC#</span><br>\</div>';
+<i>Gốc:</i> <span>0x#LHEX#</span> <i>Swap:</i> <span>0x#BHEX#</span> <b>=></b> <i>Decimal:</i> <span>#DEC#</span><br>\</div>';
 
 $htmlData.width.html = '<div class="info-text-view info-width"><i>Width: </i>Dữ liệu chiều rộng ký tự dạng <b>Decimal</b> khi phân tích từ hex.<br>\
 Phân tích dữ liệu phía trên, ta có được như sau::<br>\
-<i>Little Endian:</i> <span>0x#LHEX#</span> <b>=></b> <i>Big Endian:</i> <span>0x#BHEX#</span> <b>=></b> <i>Decimal:</i> <span>#DEC#</span><br></div>';
+<i>Gốc:</i> <span>0x#LHEX#</span> <b>=></b> <i>Swap:</i> <span>0x#BHEX#</span> <b>=></b> <i>Decimal:</i> <span>#DEC#</span><br></div>';
 
 $htmlData.height.html = '<div class="info-text-view info-height"><i>Height: </i>Dữ liệu chiều cao ký tự dạng <b>Decimal</b> khi phân tích từ hex.<br>\
 Phân tích dữ liệu phía trên, ta có được như sau::<br>\
-<i>Little Endian:</i> <span>0x#LHEX#</span> <b>=></b> <i>Big Endian:</i> <span>0x#BHEX#</span> <b>=></b> <i>Decimal:</i> <span>#DEC#</span><br></div>';
+<i>Gốc:</i> <span>0x#LHEX#</span> <b>=></b> <i>Swap:</i> <span>0x#BHEX#</span> <b>=></b> <i>Decimal:</i> <span>#DEC#</span><br></div>';
 
 $htmlData.paddingleft.html = '<div class="info-text-view info-paddingL"><i>Padding Left: </i>Dữ liệu khoảng trống thêm vào lề bên trái ký tự. Dữ liệu này được tính với dạng <b>Decimal</b> khi phân tích từ hex.<br>\
 Phân tích dữ liệu phía trên, ta có được như sau::<br>\
-<i>Little Endian:</i> <span>0x#LHEX#</span> <b>=></b> <i>Big Endian:</i> <span>0x#BHEX#</span> <b>=></b> <i>Decimal:</i> <span>#DEC#</span><br>\</div>';
+<i>Gốc:</i> <span>0x#LHEX#</span> <b>=></b> <i>Swap:</i> <span>0x#BHEX#</span> <b>=></b> <i>Decimal:</i> <span>#DEC#</span><br>\</div>';
 
 $htmlData.paddingtop.html = '<div class="info-text-view info-paddingT"><i>Padding Top: </i>Dữ liệu khoảng trống thêm vào lề bên trên ký tự. Dữ liệu này được tính với dạng <b>Decimal</b> khi phân tích từ hex.<br>\
 Phân tích dữ liệu phía trên, ta có được như sau::<br>\
-<i>Little Endian:</i> <span>0x#LHEX#</span> <b>=></b> <i>Big Endian:</i> <span>0x#BHEX#</span> <b>=></b> <i>Decimal:</i> <span>#DEC#</span><br>\</div>';
+<i>Gốc:</i> <span>0x#LHEX#</span> <b>=></b> <i>Swap:</i> <span>0x#BHEX#</span> <b>=></b> <i>Decimal:</i> <span>#DEC#</span><br>\</div>';
 
 $htmlData.paddingright.html = '<div class="info-text-view info-paddingR"><i>Padding Right: </i>Dữ liệu khoảng trống thêm vào lề bên phải ký tự. Dữ liệu này được tính với dạng <b>Decimal</b> khi phân tích từ hex.<br>\
 Phân tích dữ liệu phía trên, ta có được như sau::<br>\
-<i>Little Endian:</i> <span>0x#LHEX#</span> <b>=></b> <i>Big Endian:</i> <span>0x#BHEX#</span> <b>=></b> <i>Decimal:</i> <span>#DEC#</span><br>\</div>';
+<i>Gốc:</i> <span>0x#LHEX#</span> <b>=></b> <i>Swap:</i> <span>0x#BHEX#</span> <b>=></b> <i>Decimal:</i> <span>#DEC#</span><br>\</div>';
 
 $htmlData.paddingbottom.html = '<div class="info-text-view info-paddingB"><i>Padding Bottom: </i>Dữ liệu khoảng trống thêm vào lề bên dưới ký tự. Dữ liệu này được tính với dạng <b>Decimal</b> khi phân tích từ hex.<br>\
 Phân tích dữ liệu phía trên, ta có được như sau::<br>\
-<i>Little Endian:</i> <span>0x#LHEX#</span> <b>=></b> <i>Big Endian:</i> <span>0x#BHEX#</span> <b>=></b> <i>Decimal:</i> <span>#DEC#</span><br>\</div>';
+<i>Gốc:</i> <span>0x#LHEX#</span> <b>=></b> <i>Swap:</i> <span>0x#BHEX#</span> <b>=></b> <i>Decimal:</i> <span>#DEC#</span><br>\</div>';
 
 $htmlData.x.html = '<div class="info-text-view info-x"><i>X: </i>Dữ liệu tọa độ dựa theo trục X/Y, tính từ lề trái của ảnh cho đến ký tự. Dữ liệu này được tính với dạng <b>Decimal</b> khi phân tích từ hex.<br>\
 Phân tích dữ liệu phía trên, ta có được như sau::<br>\
-<i>Little Endian:</i> <span>0x#LHEX#</span> <b>=></b> <i>Big Endian:</i> <span>0x#BHEX#</span> <b>=></b> <i>Decimal:</i> <span>#DEC#</span><br>\</div>';
+<i>Gốc:</i> <span>0x#LHEX#</span> <b>=></b> <i>Swap:</i> <span>0x#BHEX#</span> <b>=></b> <i>Decimal:</i> <span>#DEC#</span><br>\</div>';
 
 $htmlData.y.html = '<div class="info-text-view info-y"><i>Y: </i>Dữ liệu tọa độ dựa theo trục X/Y, tính từ lề bên trên của ảnh cho đến ký tự. Dữ liệu này được tính với dạng <b>Decimal</b> khi phân tích từ hex.<br>\
 Phân tích dữ liệu phía trên, ta có được như sau::<br>\
-<i>Little Endian:</i> <span>0x#LHEX#</span> <b>=></b> <i>Big Endian:</i> <span>0x#BHEX#</span> <b>=></b> <i>Decimal:</i> <span>#DEC#</span><br>\</div>';
+<i>Gốc:</i> <span>0x#LHEX#</span> <b>=></b> <i>Swap:</i> <span>0x#BHEX#</span> <b>=></b> <i>Decimal:</i> <span>#DEC#</span><br>\</div>';
 
 $htmlData.uvleft.html = '<div class="info-text-view info-uvleft"><i>UV Left: </i>Dữ liệu tọa độ của ký tự. Dữ liệu này được dùng dưới dạng Float (Dấu chấm động). Dữ liệu này trên hex thường có độ dài 4 byte với kiểu Little Endian (0x#LHEX#). Dữ liệu này đại biểu cho tọa độ từ lề bên trái của font ảnh đến vị trí lề bên trái ký tự.<br>\
 Phân tích dữ liệu phía trên, ta có được như sau::<br>\
-<i>Little Endian:</i> <span>0x#LHEX#</span> <b>=></b> <i>Big Endian:</i> <span>0x#BHEX#</span> <b>=></b> <i>Float:</i> <span>#FLOAT#</span><br>\
+<i>Gốc:</i> <span>0x#LHEX#</span> <b>=></b> <i>Swap:</i> <span>0x#BHEX#</span> <b>=></b> <i>Float:</i> <span>#FLOAT#</span><br>\
 Để chuyển đổi từ Hex Float sang Float như trên khá phức tạp, mình sẽ không nói rõ các bạn có thể tự tìm hiểu trên mạng.\
 Để tính dữ liệu này, các bạn cần có dữ liệu chiều rộng và chiều cao của ảnh font.<br>\
 Ta tạm gọi:<br>\
@@ -79,7 +79,7 @@ Và đưa vào phép tính: <i>LEFT</i> <b>=</b> <i>#FLOAT#</i> <b>*</b> <i>#IMG
 
 $htmlData.uvtop.html = '<div class="info-text-view info-uvtop"><i>UV Top: </i>Dữ liệu tọa độ của ký tự. Dữ liệu này được dùng dưới dạng Float (Dấu chấm động). Dữ liệu này trên hex thường có độ dài 4 byte với kiểu Little Endian (0x#LHEX#). Dữ liệu này đại biểu cho tọa độ từ lề bên trên của font ảnh đến vị trí lề bên trên ký tự.<br>\
 Phân tích dữ liệu phía trên, ta có được như sau::<br>\
-<i>Little Endian:</i> <span>0x#LHEX#</span> <b>=></b> <i>Big Endian:</i> <span>0x#BHEX#</span> <b>=></b> <i>Float:</i> <span>#FLOAT#</span><br>\
+<i>Gốc:</i> <span>0x#LHEX#</span> <b>=></b> <i>Swap:</i> <span>0x#BHEX#</span> <b>=></b> <i>Float:</i> <span>#FLOAT#</span><br>\
 Để chuyển đổi từ Hex Float sang Float như trên khá phức tạp, mình sẽ không nói rõ các bạn có thể tự tìm hiểu trên mạng.\
 Để tính dữ liệu này, các bạn cần có dữ liệu chiều rộng và chiều cao của ảnh font.<br>\
 Ta tạm gọi:<br>\
@@ -92,7 +92,7 @@ Và đưa vào phép tính: <i>TOP</i> <b>=</b> <i>#FLOAT#</i> <b>*</b> <i>#IMGH
 
 $htmlData.uvright.html = '<div class="info-text-view info-uvright"><i>UV RIGHT: </i>Dữ liệu tọa độ của ký tự. Dữ liệu này được dùng dưới dạng Float (Dấu chấm động). Dữ liệu này trên hex thường có độ dài 4 byte với kiểu Little Endian (0x#LHEX#). Dữ liệu này đại biểu cho tọa độ từ lề bên trái của font ảnh đến vị trí lề bên phải ký tự.<br>\
 Phân tích dữ liệu phía trên, ta có được như sau::<br>\
-<i>Little Endian:</i> <span>0x#LHEX#</span> <b>=></b> <i>Big Endian:</i> <span>0x#BHEX#</span> <b>=></b> <i>Float:</i> <span>#FLOAT#</span><br>\
+<i>Gốc:</i> <span>0x#LHEX#</span> <b>=></b> <i>Swap:</i> <span>0x#BHEX#</span> <b>=></b> <i>Float:</i> <span>#FLOAT#</span><br>\
 Để chuyển đổi từ Hex Float sang Float như trên khá phức tạp, mình sẽ không nói rõ các bạn có thể tự tìm hiểu trên mạng.\
 Để tính dữ liệu này, các bạn cần có dữ liệu chiều rộng và chiều cao của ảnh font.<br>\
 Ta tạm gọi:<br>\
@@ -105,7 +105,7 @@ Và đưa vào phép tính: <i>RIGHT</i> <b>=</b> <i>#FLOAT#</i> <b>*</b> <i>#IM
 
 $htmlData.uvbottom.html = '<div class="info-text-view info-uvbottom"><i>UV BOTTOM: </i>Dữ liệu tọa độ của ký tự. Dữ liệu này được dùng dưới dạng Float (Dấu chấm động). Dữ liệu này trên hex thường có độ dài 4 byte với kiểu Little Endian (0x#LHEX#). Dữ liệu này đại biểu cho tọa độ từ lề bên trên của font ảnh đến vị trí lề bên dưới ký tự.<br>\
 Phân tích dữ liệu phía trên, ta có được như sau::<br>\
-<i>Little Endian:</i> <span>0x#LHEX#</span> <b>=></b> <i>Big Endian:</i> <span>0x#BHEX#</span> <b>=></b> <i>Float:</i> <span>#FLOAT#</span><br>\
+<i>Gốc:</i> <span>0x#LHEX#</span> <b>=></b> <i>Swap:</i> <span>0x#BHEX#</span> <b>=></b> <i>Float:</i> <span>#FLOAT#</span><br>\
 Để chuyển đổi từ Hex Float sang Float như trên khá phức tạp, mình sẽ không nói rõ các bạn có thể tự tìm hiểu trên mạng.\
 Để tính dữ liệu này, các bạn cần có dữ liệu chiều rộng và chiều cao của ảnh font.<br>\
 Ta tạm gọi:<br>\
@@ -120,39 +120,39 @@ $htmlData.uknown.html = '<div class="info-text-view info-uknown"><i>UKNOWN: </i>
 
 $htmlData.left.html = '<div class="info-text-view info-left"><i>LEFT: </i>Dữ liệu tọa độ của ký tự, tính từ lề bên trái của ảnh cho đến lề bên trái của ký tự. Dữ liệu này được tính với dạng <b>Decimal</b>.<br>\
 Phân tích dữ liệu phía trên, ta có được như sau::<br>\
-<i>Little Endian:</i> <span>0x#LHEX#</span> <b>=></b> <i>Big Endian:</i> <span>0x#BHEX#</span> <b>=></b> <i>Decimal:</i> <span>#DEC#</span><br>\</div>';
+<i>Gốc:</i> <span>0x#LHEX#</span> <b>=></b> <i>Swap:</i> <span>0x#BHEX#</span> <b>=></b> <i>Decimal:</i> <span>#DEC#</span><br>\</div>';
 
 $htmlData.top.html = '<div class="info-text-view info-top"><i>TOP: </i>Dữ liệu tọa độ của ký tự, tính từ lề bên trên của ảnh cho đến lề bên trên của ký tự. Dữ liệu này được tính với dạng <b>Decimal</b>.<br>\
 Phân tích dữ liệu phía trên, ta có được như sau::<br>\
-<i>Little Endian:</i> <span>0x#LHEX#</span> <b>=></b> <i>Big Endian:</i> <span>0x#BHEX#</span> <b>=></b> <i>Decimal:</i> <span>#DEC#</span><br>\</div>';
+<i>Gốc:</i> <span>0x#LHEX#</span> <b>=></b> <i>Swap:</i> <span>0x#BHEX#</span> <b>=></b> <i>Decimal:</i> <span>#DEC#</span><br>\</div>';
 
 $htmlData.right.html = '<div class="info-text-view info-right"><i>RIGHT: </i>Dữ liệu tọa độ của ký tự, tính từ lề bên trái của ảnh cho đến lề bên phải của ký tự. Dữ liệu này được tính với dạng <b>Decimal</b>.<br>\
 Phân tích dữ liệu phía trên, ta có được như sau::<br>\
-<i>Little Endian:</i> <span>0x#LHEX#</span> <b>=></b> <i>Big Endian:</i> <span>0x#BHEX#</span> <b>=></b> <i>Decimal:</i> <span>#DEC#</span><br>\</div>';
+<i>Gốc:</i> <span>0x#LHEX#</span> <b>=></b> <i>Swap:</i> <span>0x#BHEX#</span> <b>=></b> <i>Decimal:</i> <span>#DEC#</span><br>\</div>';
 
 $htmlData.bottom.html = '<div class="info-text-view info-bottom"><i>BOTTOM: </i>Dữ liệu tọa độ của ký tự, tính từ lề bên trên của ảnh cho đến lề bên dưới của ký tự. Dữ liệu này được tính với dạng <b>Decimal</b>.<br>\
 Phân tích dữ liệu phía trên, ta có được như sau::<br>\
-<i>Little Endian:</i> <span>0x#LHEX#</span> <b>=></b> <i>Big Endian:</i> <span>0x#BHEX#</span> <b>=></b> <i>Decimal:</i> <span>#DEC#</span><br>\</div>';
+<i>Gốc:</i> <span>0x#LHEX#</span> <b>=></b> <i>Swap:</i> <span>0x#BHEX#</span> <b>=></b> <i>Decimal:</i> <span>#DEC#</span><br>\</div>';
 
 $htmlData.page.html = '<div class="info-text-view info-page"><i>PAGE: </i>Dữ liệu vị trí ký tự nằm trong font ảnh nào. Một vài game chứa nhiều ký tự trong nhiều tập tin ảnh, chúng được đánh dấu bằng số liệu dạng <b>Decimal</b>. Dữ liệu này thường có độ dài 1 byte<br>\
 Phân tích dữ liệu phía trên, ta có được như sau::<br>\
-<i>Little Endian:</i> <span>0x#LHEX#</span> <b>=></b> <i>Big Endian:</i> <span>0x#BHEX#</span> <b>=></b> <i>Decimal:</i> <span>#DEC#</span><br>\</div>';
+<i>Gốc:</i> <span>0x#LHEX#</span> <b>=></b> <i>Swap:</i> <span>0x#BHEX#</span> <b>=></b> <i>Decimal:</i> <span>#DEC#</span><br>\</div>';
 
 $htmlData.xoffset.html = '<div class="info-text-view info-xoffset"><i>XOFFSET: </i>Dữ liệu độ lệch theo trục X để bổ sung cho ký tự. Một vài game chứa nhiều ký tự có chiều cao và chiều rộng không đồng đều. Do đó dữ liệu này để bổ sung cho ký tự đó nằm đúng vị trí. Dữ liệu này có thể là số dương hoặc số âm và được chuyển đổi lại thành <b>Decimal</b>. Dữ liệu này thường có độ dài 1 hoặc 2 byte. Và khi được diễn giải dưới dạng HEX nó được tính theo cách riêng biệt.<br>\
 Phân tích dữ liệu phía trên, ta có được như sau::<br>\
-<i>Little Endian:</i> <span>0x#LHEX#</span> <b>=></b> <i>Big Endian:</i> <span>0x#BHEX#</span> <b>=></b> <i>Decimal:</i> <span>#DEC#</span> <b>=></b> <i>Xoffset:</i> <span>#VALUE#</span><br>\</div>';
+<i>Gốc:</i> <span>0x#LHEX#</span> <b>=></b> <i>Swap:</i> <span>0x#BHEX#</span> <b>=></b> <i>Decimal:</i> <span>#DEC#</span> <b>=></b> <i>Xoffset:</i> <span>#VALUE#</span><br>\</div>';
 
 $htmlData.yoffset.html = '<div class="info-text-view info-yoffset"><i>YOFFSET: </i>Dữ liệu độ lệch theo trục Y để bổ sung cho ký tự. Một vài game chứa nhiều ký tự có chiều cao và chiều rộng không đồng đều. Do đó dữ liệu này để bổ sung cho ký tự đó nằm đúng vị trí. Dữ liệu này có thể là số dương hoặc số âm và được chuyển đổi lại thành <b>Decimal</b>. Dữ liệu này thường có độ dài 1 hoặc 2 byte. Và khi được diễn giải dưới dạng HEX nó được tính theo cách riêng biệt.<br>\
 Phân tích dữ liệu phía trên, ta có được như sau::<br>\
-<i>Little Endian:</i> <span>0x#LHEX#</span> <b>=></b> <i>Big Endian:</i> <span>0x#BHEX#</span> <b>=></b> <i>Decimal:</i> <span>#DEC#</span> <b>=></b> <i>Yoffset:</i> <span>#VALUE#</span><br>\</div>';
+<i>Gốc:</i> <span>0x#LHEX#</span> <b>=></b> <i>Swap:</i> <span>0x#BHEX#</span> <b>=></b> <i>Decimal:</i> <span>#DEC#</span> <b>=></b> <i>Yoffset:</i> <span>#VALUE#</span><br>\</div>';
 
 $htmlData.xadvance.html = '<div class="info-text-view info-xadvance"><i>XADVANCE: </i>Dữ liệu độ lệch theo độ khít chiều rộng để bổ sung cho ký tự. Một vài game chứa nhiều ký tự có độ khít khác nhau. Do đó dữ liệu này để bổ sung cho ký tự đó nằm đúng vị trí. Dữ liệu này thường có dạng <b>Decimal</b>. Dữ liệu này thường có độ dài 1 hoặc 2 byte.<br>\
 Phân tích dữ liệu phía trên, ta có được như sau::<br>\
-<i>Little Endian:</i> <span>0x#LHEX#</span> <b>=></b> <i>Big Endian:</i> <span>0x#BHEX#</span> <b>=></b> <i>Decimal:</i> <span>#DEC#</span><br>\</div>';
+<i>Gốc:</i> <span>0x#LHEX#</span> <b>=></b> <i>Swap:</i> <span>0x#BHEX#</span> <b>=></b> <i>Decimal:</i> <span>#DEC#</span><br>\</div>';
 
 $htmlData.xadvance.text = '<div class="info-text-view info-text"><i>TEXT: </i>Dữ liệu dạng thuần text.<br>\
 Phân tích dữ liệu phía trên, ta có được như sau::<br>\
-<i>Little Endian:</i> <span>0x#LHEX#</span> <b>=></b> <i>Big Endian:</i> <span>0x#BHEX#</span> <b>=></b> <i>Decimal:</i> <span>#DEC#</span><br>\</div>';
+<i>Gốc:</i> <span>0x#LHEX#</span> <b>=></b> <i>Swap:</i> <span>0x#BHEX#</span> <b>=></b> <i>Decimal:</i> <span>#DEC#</span><br>\</div>';
 
 // Hàm phân tích ký tự
 function viewChar(e){
@@ -200,8 +200,8 @@ function sendTable($list){
   // Tạo biến table
   var $table = '<table id="view-data-cell"><tbody>\
   <tr><th class="header-table-view end-header">Chú Thích</th>'; // Tạo biến chứa header table
-  var $cellHex1 = '<tr><td class="begin-row row-table-view">Little Endian</td>'; // Tạo biến chứa các cell Little Endian
-  var $cellHex2 = '<tr><td class="begin-row row-table-view">Big Endian</td>'; // Tạo biến chứa các cell Big Endian
+  var $cellHex1 = '<tr><td class="begin-row row-table-view">Hex Gốc</td>'; // Tạo biến chứa các cell Little Endian
+  var $cellHex2 = '<tr><td class="begin-row row-table-view">Hex Swap</td>'; // Tạo biến chứa các cell Big Endian
   var $cellDec = '<tr><td class="begin-row row-table-view">Dec</td>'; // Tạo biến chứa các cell Big Endian
   var $cellFloat = '<tr><td class="begin-row row-table-view">Float</td>'; // Tạo biến chứa dữ liệu Float
   var $cellCalc = '<tr><td class="begin-row row-table-view">Tính Toán</td>'; // Tạo biến chứa dữ liệu Float
