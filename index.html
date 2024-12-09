@@ -24,38 +24,35 @@
 
 <body class="body-page">
 	<div class="titlebar">
-		<ul id="import-cfg" title="Mở nhanh các thiết lập để phân tích nhanh các cấu trúc mà bạn đã lưu trước đó." class="title-btn list-options tip-hover">
-			<li title="Mở nhanh các thiết lập để phân tích nhanh các cấu trúc mà bạn đã lưu trước đó." title="Chọn Thiết Lập Đã Lưu" class="item-options item-main"><b>Chọn Thiết Lập Đã Lưu</b><i class="fas fa-caret-square-down"></i></li>
-		</ul>
-		<div id="debug" title="Mở Debug" class="title-btn debug-page tip-hover" onclick="showPAGE(this,'page-debug')"><i class="fas fa-code"></i><small class="tip-show">Mở trang Develope.</small></div>
-		<div id="export-cfg" class="title-btn tip-hover save-template" onclick="exportcfg(this)"><i class="fas fa-save"></i><small class="tip-show"> Lưu các thiết lập để mở nhanh hơn khi phân tích lần sau.</small></div>
-		<div id="reload" class="title-btn tip-hover reload-template" onclick="clearData(this)"><i class="fas fa-redo-alt"></i><small class="tip-show"> Khôi phục lại các mặc định vốn có.</small></div>
-    <button class="btn-button check-font title-btn tip-hover" onclick="checkFont()"><i class="fas fa-cog"></i> Phân Tích Font<small class="tip-show">Nhấn vào để tiến hành phân tích font từ những dữ liệu đã có.</small></button>
-    <div id="view-hex-file" class="title-btn tip-hover hex-file-page" onclick="showPAGE(this,'page-hex-file')" ><i class="far fa-edit"></i> Xem Hex File
-      <small class="tip-show">Xem file map font bằng Hex Code.<br><br>
-      Phím Tắt: <b>F4</b></small>
-    </div>
-		<div id="view-img" class="title-btn tip-hover image-page" onclick="showPAGE(this,'page-img')">
-      <i class="fas fa-image"></i> Xem Ảnh Font
-      <small class="tip-show">Xem ảnh file font đã phân tích. Các dữ liệu đúng sẽ được kẽ khung để phân biệt từng ký tự.<br><br>
-      Phím Tắt: <b>F6</b></small>
-    </div>
-		<div id="view-data" class="title-btn tip-hover dataCheck-page" onclick="showPAGE(this,'page-data')"><i class="fas fa-table"></i> Xem Cấu Trúc
-      <small class="tip-show">Xem dữ liệu đã phân tích, các dữ liệu được đánh dấu và vẽ khung phù hợp với dữ liệu đã phân tích.<br><br>
-      Phím Tắt: <b>F8</b></small></div>
-		<ul id="zoom-img" title="Phóng to ảnh font để nhìn rõ hơn." class="title-btn tip-hover zoomImg">
-			<li class="item-zoom item-zoom-main" title="1"><b><small class="fas fa-search-plus"></small> Size Ảnh: 100%</b><i class="fas fa-caret-square-down"></i></li>
-      <li onclick="zoomIMG(this)" class="item-zoom" title="0.3"><b><small class="fas fa-search-plus"></small> Size Ảnh: 30%</b></li>
-      <li onclick="zoomIMG(this)" class="item-zoom" title="0.5"><b><small class="fas fa-search-plus"></small> Size Ảnh: 50%</b></li>
-      <li onclick="zoomIMG(this)" class="item-zoom" title="0.8"><b><small class="fas fa-search-plus"></small> Size Ảnh: 80%</b></li>
-			<li onclick="zoomIMG(this)" class="item-zoom active" title="1"><b><small class="fas fa-search-plus"></small> Size Ảnh: 100%</b></li>
-			<li onclick="zoomIMG(this)" class="item-zoom" title="1.5"><b><small class="fas fa-search-plus"></small> Size Ảnh: 150%</b></li>
-			<li onclick="zoomIMG(this)" class="item-zoom" title="2"><b><small class="fas fa-search-plus"></small> Size Ảnh: 200%</b></li>
-			<li onclick="zoomIMG(this)" class="item-zoom" title="3"><b><small class="fas fa-search-plus"></small> Size Ảnh: 300%</b></li>
-			<li onclick="zoomIMG(this)" class="item-zoom" title="4"><b><small class="fas fa-search-plus"></small> Size Ảnh: 400%</b></li>
-		</ul>
-    <div id="view-char-data" class="title-btn CharView-page tip-hover" onclick="showPAGE(this,'page-hex')"><i class="fas fa-table"></i> Xem Chi Tiết Ký Tự<small class="tip-show">Xem chi tiết phân tích của một ký tự đã phân tích được khi nhấn vào nút phân tích ở trang cấu trúc. Trang này bao gồm những ví dụ và công thức đã phân tích được.</small></div>
-		<div id="create-data" class="title-btn buildChar-page tip-hover" onclick="showPAGE(this,'page-buildFont')"><i class="fas fa-plus-square"></i> Tạo Dữ Liệu Từ File FNT<small class="tip-show">Tạo các dữ liệu bitmap font dựa trên dữ liệu phân tích được cùng với dữ liệu được tạo từ file *FNT của BMFONT.</small></div>
+		<div class="left-combo left-cb-button">
+			<ul id="import-cfg" title="Mở nhanh các thiết lập để phân tích nhanh các cấu trúc mà bạn đã lưu trước đó." class="title-btn list-options tip-hover">
+				<li title="Mở nhanh các thiết lập để phân tích nhanh các cấu trúc mà bạn đã lưu trước đó." title="Chọn Thiết Lập Đã Lưu" class="item-options item-main"><b>Chọn Thiết Lập Đã Lưu</b><i class="fas fa-caret-square-down"></i></li>
+			</ul>
+			<div id="debug" title="Mở Debug" class="title-btn debug-page tip-hover" onclick="showPAGE(this,'page-debug')"><i class="fas fa-code"></i><small class="tip-show">Mở trang Develope.</small></div>
+			<div id="export-cfg" class="title-btn tip-hover save-template" onclick="exportcfg(this)"><i class="fas fa-save"></i><small class="tip-show"> Lưu các thiết lập để mở nhanh hơn khi phân tích lần sau.</small></div>
+			<div id="reload" class="title-btn tip-hover reload-template" onclick="clearData(this)"><i class="fas fa-redo-alt"></i><small class="tip-show"> Khôi phục lại các mặc định vốn có.</small></div>
+		</div>
+		<div class="left-combo right-cb-button">
+			<button title="Phân Tích Font&#013;Nhấn vào để tiến hành phân tích font từ những dữ liệu đã có." class="btn-button check-font title-btn tip-hover" onclick="checkFont()"><i class="fas fa-cog"></i> <b>Phân Tích Font</b><small class="tip-show">&#013;Nhấn vào để tiến hành phân tích font từ những dữ liệu đã có.</small></button>
+			<div id="view-hex-file" title="Xem file map font bằng Hex Code." class="title-btn tip-hover hex-file-page" onclick="showPAGE(this,'page-hex-file')" ><i class="far fa-edit"></i> <b>Xem Hex File</b>
+				<small class="tip-show">Xem file map font bằng Hex Code.<br><br>
+				Phím Tắt: <b>F4</b></small>
+			</div>
+			<div id="view-img" title="Xem Ảnh Font.&#013;Xem ảnh file font đã phân tích. Các dữ liệu đúng sẽ được kẽ khung để phân biệt từng ký tự." class="title-btn tip-hover image-page" onclick="showPAGE(this,'page-img')">
+				<i class="fas fa-image"></i> <b>Xem Ảnh Font</b>
+				<small class="tip-show">Xem ảnh file font đã phân tích. Các dữ liệu đúng sẽ được kẽ khung để phân biệt từng ký tự.<br><br>
+				Phím Tắt: <b>F6</b></small>
+			</div>
+			<div id="view-data" title="Xem Cấu Trúc&#013;Xem dữ liệu đã phân tích, các dữ liệu được đánh dấu và vẽ khung phù hợp với dữ liệu đã phân tích." class="title-btn tip-hover dataCheck-page" onclick="showPAGE(this,'page-data')"><i class="fas fa-table"></i> <b>Xem Cấu Trúc</b>
+				<small class="tip-show">Xem dữ liệu đã phân tích, các dữ liệu được đánh dấu và vẽ khung phù hợp với dữ liệu đã phân tích.<br><br>
+				Phím Tắt: <b>F8</b></small>
+			</div>
+
+		<div id="view-char-data" title="Xem Chi Tiết Ký Tự&#013;Xem chi tiết phân tích của một ký tự đã phân tích được khi nhấn vào nút phân tích ở trang cấu trúc. Trang này bao gồm những ví dụ và công thức đã phân tích được." class="title-btn CharView-page tip-hover" onclick="showPAGE(this,'page-hex')">
+			<i class="fas fa-table"></i> <b>Xem Chi Tiết Ký Tự</b><small class="tip-show">Xem chi tiết phân tích của một ký tự đã phân tích được khi nhấn vào nút phân tích ở trang cấu trúc. Trang này bao gồm những ví dụ và công thức đã phân tích được.</small>
+		</div>
+		<div id="create-data" title="Tạo Dữ Liệu Từ File FNT&#013;Tạo các dữ liệu bitmap font dựa trên dữ liệu phân tích được cùng với dữ liệu được tạo từ file *FNT của BMFONT."  class="title-btn buildChar-page tip-hover" onclick="showPAGE(this,'page-buildFont')"><i class="fas fa-plus-square"></i> <b>Tạo Dữ Liệu Từ File FNT</b><small class="tip-show">Tạo các dữ liệu bitmap font dựa trên dữ liệu phân tích được cùng với dữ liệu được tạo từ file *FNT của BMFONT.</small></div>
+		</div>	
 	</div>
 	<div id="page-content">
 		<div class="block-left col-md-4" onclick="changeValue()">
@@ -94,7 +91,7 @@
 						Dữ liệu được phân tích dựa trên file map như font .fnt
 						của phần mềm tạo font map BMFONT của Angel<br><br>
 						Hoặc các bạn có thể tách được các dạng tương tự như vậy.<br>
-            Ví dụ như dòng Dead Island và Dying Light. Các bạn có thể sử tách các dữ liệu bằng thuật toán biểu thức chính quy (Regular Expressions)
+						Ví dụ như dòng Dead Island và Dying Light. Các bạn có thể sử tách các dữ liệu bằng thuật toán biểu thức chính quy (Regular Expressions)
 					</small>
 				</li>
         <li class="item-option tip-hover">
@@ -193,106 +190,106 @@
               <span class="name-label name-lable-add">Thêm</span>
             </div>
             <ul class="list-block-char">
-              <li class="item-block item-char">
-                <label class="label-block block-name"></label>
-                <label class="label-block block-title tip-hover">
-                  <select class="select-block select-title" onchange="selectType(this)">
-                    <option title="Dạng ký tự, được chuyển từ các unicode hex sang dạng character text để nhận dạng." value="0">Character</option>
-                    <option title="Số liệu chiều rộng mỗi ký tự.&#10;Được chuyển về dạng Decimal." value="1">Width</option>
-                    <option title="Số liệu chiều cao mỗi ký tự.&#10;Được chuyển về dạng Decimal." value="2">Height</option>
-                    <option title="Số liệu khoảng trống bên trái ký tự.&#10;Được chuyển về dạng Decimal." value="3">Padding Left</option>
-                    <option title="Số liệu khoảng trống phía trên ký tự.&#10;Được chuyển về dạng Decimal." value="4">Padding Top</option>
-                    <option title="Số liệu khoảng trống bên phải ký tự.&#10;Được chuyển về dạng Decimal." value="5">Padding Right</option>
-                    <option title="Số liệu khoảng trống phía dưới ký tự.&#10;Được chuyển về dạng Decimal." value="6">Padding Bottom</option>
-                    <option title="Số liệu tọa độ trục X của ký tự.&#10;Được chuyển về dạng Decimal." value="7">X</option>
-                    <option title="Số liệu tọa độ trục Y của ký tự.&#10;Được chuyển về dạng Decimal." value="8">Y</option>
-                    <option title="Số liệu tọa độ UV Left của ký tự.&#10;Tọa độ này được tính bằng số chấm động (Float) được chuyển từ UV Hex nhân với chiều rộng file ảnh font.&#10;Được chuyển về dạng Decimal." value="9">UV Left</option>
-                    <option title="Số liệu tọa độ UV Top của ký tự.&#10;Tọa độ này được tính bằng số chấm động (Float) được chuyển từ UV Hex nhân với chiều cao file ảnh font.&#10;Được chuyển về dạng Decimal." value="10">UV Top</option>
-                    <option title="Số liệu tọa độ UV Right của ký tự.&#10;Tọa độ này được tính bằng số chấm động (Float) được chuyển từ UV Hex nhân với chiều rộng file ảnh font.&#10;Được chuyển về dạng Decimal." value="11">UV Right</option>
-                    <option title="Số liệu tọa độ UV Bottom của ký tự.&#10;Tọa độ này được tính bằng số chấm động (Float) được chuyển từ UV Hex nhân với chiều cao file ảnh font.&#10;Được chuyển về dạng Decimal." value="12">UV Bottom</option>
-                    <option title="Số liệu chưa xác nhận. Các bạn có thể giữ nguyên nó nếu muốn." value="13" selected>Uknown</option>
-                    <option title="Số liệu vị trí bên trái của ký tự.&#10;Được chuyển về dạng Decimal." value="14">Left</option>
-                    <option title="Số liệu vị trí phía trên của ký tự.&#10;Được chuyển về dạng Decimal." value="15">Top</option>
-                    <option title="Số liệu vị trí bên phải của ký tự.&#10;Được chuyển về dạng Decimal." value="16">Right</option>
-                    <option title="Số liệu vị trí bên dưới của ký tự.&#10;Được chuyển về dạng Decimal." value="17">Bottom</option>
-                    <option title="Số liệu page font chứa character. Thường những font map sẽ có nhiều file ảnh.&#10;Và mỗi ký tự sẽ thuộc vào từng ảnh riêng của nó." value="18">Page</option>
-                    <option title="Số liệu độ lệch ký tự theo trục X.&#10;Được chuyển về dạng Decimal. Thường nó được diễn giải theo kiểu số âm của Hex.&#10;VD: FFFF tương đương -1 trong số nguyên." value="19">Xoffset</option>
-                    <option title="Số liệu độ lệch ký tự theo trục Y.&#10;Được chuyển về dạng Decimal. Thường nó được diễn giải theo kiểu số âm của Hex.&#10;VD: FFFE tương đương -2 trong số nguyên." value="20">Yoffset</option>
-                    <option title="Độ khít của mỗi ký tự liền kề nhau.&#10;Được chuyển về dạng Decimal." value="21">Xadvance</option>
-                    <option title="Lấy text một block tùy chọn." value="22">Text</option>
-                    <option title="Số liệu tọa độ UV Xoffset của ký tự.&#10;Tọa độ này được tính bằng số chấm động (Float) được chuyển từ UV Hex nhân với chiều rộng file ảnh font.&#10;Được chuyển về dạng Decimal." value="23">UV Xoffset</option>
-                    <option title="Số liệu tọa độ UV Yoffset của ký tự.&#10;Tọa độ này được tính bằng số chấm động (Float) được chuyển từ UV Hex nhân với chiều cao file ảnh font.&#10;Được chuyển về dạng Decimal." value="24">UV Yoffset</option>
-                    <option title="Số liệu tọa độ UV Xadvance của ký tự.&#10;Tọa độ này được tính bằng số chấm động (Float) được chuyển từ UV Hex nhân với chiều rộng file ảnh font.&#10;Được chuyển về dạng Decimal." value="25">UV Advance</option>
-                  </select>
-                  <small class="tip-show">Tiêu đề một block, hãy đặt tiêu đề để dễ nhận biết khi phân tích font.</small>
-                </label>
-                <label class="label-block block-byte tip-hover item-mapFont">
-                  <select class="select-block select-byte" onchange="selectTitleBox(this)">
-                    <option value="1">1 Byte</option>
-                    <option value="2" selected>2 Byte</option>
-                    <option value="3">3 Byte</option>
-                    <option value="4">4 Byte</option>
-                    <option value="5">5 Byte</option>
-                    <option value="6">6 Byte</option>
-                    <option value="7">Tùy Chỉnh</option>
-                  </select>
-                  <small class="input-custom-byte">
-                    <input type="text" placeholder="Nhập Byte" class="custom-byte" onchange="customByte(this)" />
-                    <button onclick="customTitle(this)" class="custom-input-btn">Nhập</button>
-                  </small>
-                  <small class="tip-show">Độ dài một block, hãy chọn số byte tương ứng cho một block.</small>
-                </label>
-                <label blocktype="Decimal" class="label-block block-type tip-hover tip-left item-mapFont">
-                  <select class="select-block select-type" onchange="myType(this)">
-                    <option title="Dạng ký tự. Số liệu block sẽ diễn giải dưới dạng ký tự." value="0">Unicode (Ký Tự)</option>
-                    <option title="Dạng số nguyên (Decimal). Số liệu block sẽ diễn giải dưới dạng số nguyên." value="1" selected>Decimal</option>
-                    <option title="Dạng số thập lục phân (Hex). Số liệu block sẽ diễn giải dưới dạng số thập lục phân." value="2">Hex</option>
-                    <option title="Dạng số chấm động (Float). Số liệu block sẽ diễn giải dưới dạng số chấm động." value="3">Float</option>
-                    <option title="Dạng số chấm động (Float) nhưng đã được chuyển đổi về số nguyên bằng phép tính:&#10;UV Left (Float) * Chiều rộng ảnh (Decimal).&#10;Số liệu block sẽ diễn giải dưới dạng số nguyên." value="4">UV Left</option>
-                    <option title="Dạng số chấm động (Float) nhưng đã được chuyển đổi về số nguyên bằng phép tính:&#10;UV Top (Float) * Chiều cao ảnh (Decimal).&#10;Số liệu block sẽ diễn giải dưới dạng số nguyên." value="5">UV Top</option>
-                    <option title="Dạng số chấm động (Float) nhưng đã được chuyển đổi về số nguyên bằng phép tính:&#10;UV Right (Float) * Chiều rộng ảnh (Decimal).&#10;Số liệu block sẽ diễn giải dưới dạng số nguyên." value="6">UV Right</option>
-                    <option title="Dạng số chấm động (Float) nhưng đã được chuyển đổi về số nguyên bằng phép tính:&#10;UV Bottom (Float) * Chiều cao ảnh (Decimal).&#10;Số liệu block sẽ diễn giải dưới dạng số nguyên." value="7">UV Bottom</option>
-                    <option title="Dạng số nguyên có chứa số âm được chuyển đổi từ số âm trong Hex.&#10;Thông thường những số âm trong Hex được diễn giải dưới dạng đặc biệt.&#10;VD: -1 tương đương với FFFF 2 byte này trong hex. Số liệu này được dùng để phân tích các Xoffset và Yoffset" value="8">Negative Hex</option>
-                    <option title="Dạng text thuần, được chuyển từ hex sang." value="9">Text</option>
-                    <option title="Xoffset dạng số chấm động (Float) nhưng đã được chuyển đổi về số nguyên bằng phép tính:&#10;UV Xoffset (Float) * Chiều rộng ảnh (Decimal).&#10;Số liệu block sẽ diễn giải dưới dạng số nguyên." value="10">UV Xoffset</option>
-                    <option title="Yoffset dạng số chấm động (Float) nhưng đã được chuyển đổi về số nguyên bằng phép tính:&#10;UV Yoffset (Float) * Chiều cao ảnh (Decimal).&#10;Số liệu block sẽ diễn giải dưới dạng số nguyên." value="11">UV Yoffset</option>
-                    <option title="Xadvance dạng số chấm động (Float) nhưng đã được chuyển đổi về số nguyên bằng phép tính:&#10;UV Xadvance (Float) * Chiều rộng ảnh (Decimal).&#10;Số liệu block sẽ diễn giải dưới dạng số nguyên." value="12">UV Xadvance</option>
-                  </select>
-                  <small class="tip-show">Kiểu dữ liệu của block. Hãy chọn đúng dữ liệu để phân tích font.</small>
-                </label>
-                <label class="label-block block-regexp tip-hover tip-left item-regexp">
-                  <input type="text" class="input-regexp" value="" placeholder="Nhập biểu thức" />
-                  <small class="tip-show">
-                    Trường này dùng để tách các dữ liệu font từ giá trị chứa fontmap dạng text. Nó thường được sử dụng ở các file FNT của BMFONT hoặc các tập tin .txt<br><br>
-                    Để sử dụng các bạn có thể chọn theo các tiêu đề của block. Tool sẽ tự động thêm các thuật toán tách phù hợp theo Regular Expressions (biểu thức chính quy).<br><br>
-                    Nếu các bạn hiểu rõ về Regular Expressions, các bạn có thể tùy chỉnh theo các thông số phù hợp. Tool nhận các giá trị cần lấy trong cặp dấu ().<br><br>
-                    VD: Một thông số trong file FNT như sau: char id=9 x=8 y=420 width=7 height=41<br><br>
-                    Nếu muốn lấy giá trị của Width. Các bạn phải viết biểu thức như sau: <b style="color:white;background:red">width\=(\S+)</b>. Tool sẽ lấy được giá trị 7 của Width. Phân tích biểu thức này như sau:<br>
-                    <b style="color:white;background:red">width</b> => Kiểm tra xem dòng đó có width và lấy giá trị nằm sau nó.<br>
-                    <b style="color:white;background:red">\=</b> => Những ký tự đặc biệt, các bạn cần thêm dấu <b style="color:white;background:red">\</b> để bỏ qua không tính ký tự này.<br>
-                    <b style="color:white;background:red">(\S+)</b> => Lấy giá trị không phải là dấu Space.
-                  </small>
-                </label>
-                <label class="label-block block-cals tip-hover tip-left">
-                  <input onchange="calsinput(this)" type="text" class="input-cals" value="+0" placeholder="Phép Tính" />
-                  <small class="tip-show">Tính toán bổ sung cho block này. Một số dữ liệu cần phải cộng hoặc nhân thêm một số nào đó để có thể tính ra giá trị đúng nhất của dữ liệu.<br><br>Do đó bạn cần phải nhập thêm các phép tính cần thiết cho nó.</small>
-                </label>
-                <label class="label-block block-save tip-hover tip-left">
-                  <input type="checkbox" class="block-save-input" name="vehicle1" value="True">
-                  <small class="tip-show">Giữ nguyên giá trị này. Tính năng này chỉ sử dụng khi tạo font bitmap bằng tool.<br><br>
-                    Nó được dùng để giữ nguyên các giá trị mà bạn không muốn chuyển đổi khi tạo font.<br><br>
-                    Bạn nên dùng nó đối với các giá trị mà bạn chưa xác định được kiểu dữ liệu của nó. Các giá trị này sẽ được giữ nguyên gốc sau khi tạo file map font.
-                  </small>
-                </label>
-                <label class="remove-block tip-hover tip-left" onclick="RemoveBlock(this)">
-                  <b><i class="fas fa-times"></i></b>
-                  <small class="tip-show">Xóa bớt Block này.</small>
-                </label>
-                <label class="remove-block tip-hover tip-left" onclick="AddBlockValue(this)">
-                  <b><i class="fas fa-plus"></i></b>
-                  <small class="tip-show">Thêm 1 Block dữ liệu nữa.</small>
-                </label>
-              </li>						
+				<li class="item-block item-char">
+					<label class="label-block block-name"></label>
+					<label class="label-block block-title tip-hover">
+						<select class="select-block select-title" onchange="selectType(this)">
+						<option title="Dạng ký tự, được chuyển từ các unicode hex sang dạng character text để nhận dạng." value="0">Character</option>
+						<option title="Số liệu chiều rộng mỗi ký tự.&#10;Được chuyển về dạng Decimal." value="1">Width</option>
+						<option title="Số liệu chiều cao mỗi ký tự.&#10;Được chuyển về dạng Decimal." value="2">Height</option>
+						<option title="Số liệu khoảng trống bên trái ký tự.&#10;Được chuyển về dạng Decimal." value="3">Padding Left</option>
+						<option title="Số liệu khoảng trống phía trên ký tự.&#10;Được chuyển về dạng Decimal." value="4">Padding Top</option>
+						<option title="Số liệu khoảng trống bên phải ký tự.&#10;Được chuyển về dạng Decimal." value="5">Padding Right</option>
+						<option title="Số liệu khoảng trống phía dưới ký tự.&#10;Được chuyển về dạng Decimal." value="6">Padding Bottom</option>
+						<option title="Số liệu tọa độ trục X của ký tự.&#10;Được chuyển về dạng Decimal." value="7">X</option>
+						<option title="Số liệu tọa độ trục Y của ký tự.&#10;Được chuyển về dạng Decimal." value="8">Y</option>
+						<option title="Số liệu tọa độ UV Left của ký tự.&#10;Tọa độ này được tính bằng số chấm động (Float) được chuyển từ UV Hex nhân với chiều rộng file ảnh font.&#10;Được chuyển về dạng Decimal." value="9">UV Left</option>
+						<option title="Số liệu tọa độ UV Top của ký tự.&#10;Tọa độ này được tính bằng số chấm động (Float) được chuyển từ UV Hex nhân với chiều cao file ảnh font.&#10;Được chuyển về dạng Decimal." value="10">UV Top</option>
+						<option title="Số liệu tọa độ UV Right của ký tự.&#10;Tọa độ này được tính bằng số chấm động (Float) được chuyển từ UV Hex nhân với chiều rộng file ảnh font.&#10;Được chuyển về dạng Decimal." value="11">UV Right</option>
+						<option title="Số liệu tọa độ UV Bottom của ký tự.&#10;Tọa độ này được tính bằng số chấm động (Float) được chuyển từ UV Hex nhân với chiều cao file ảnh font.&#10;Được chuyển về dạng Decimal." value="12">UV Bottom</option>
+						<option title="Số liệu chưa xác nhận. Các bạn có thể giữ nguyên nó nếu muốn." value="13" selected>Uknown</option>
+						<option title="Số liệu vị trí bên trái của ký tự.&#10;Được chuyển về dạng Decimal." value="14">Left</option>
+						<option title="Số liệu vị trí phía trên của ký tự.&#10;Được chuyển về dạng Decimal." value="15">Top</option>
+						<option title="Số liệu vị trí bên phải của ký tự.&#10;Được chuyển về dạng Decimal." value="16">Right</option>
+						<option title="Số liệu vị trí bên dưới của ký tự.&#10;Được chuyển về dạng Decimal." value="17">Bottom</option>
+						<option title="Số liệu page font chứa character. Thường những font map sẽ có nhiều file ảnh.&#10;Và mỗi ký tự sẽ thuộc vào từng ảnh riêng của nó." value="18">Page</option>
+						<option title="Số liệu độ lệch ký tự theo trục X.&#10;Được chuyển về dạng Decimal. Thường nó được diễn giải theo kiểu số âm của Hex.&#10;VD: FFFF tương đương -1 trong số nguyên." value="19">Xoffset</option>
+						<option title="Số liệu độ lệch ký tự theo trục Y.&#10;Được chuyển về dạng Decimal. Thường nó được diễn giải theo kiểu số âm của Hex.&#10;VD: FFFE tương đương -2 trong số nguyên." value="20">Yoffset</option>
+						<option title="Độ khít của mỗi ký tự liền kề nhau.&#10;Được chuyển về dạng Decimal." value="21">Xadvance</option>
+						<option title="Lấy text một block tùy chọn." value="22">Text</option>
+						<option title="Số liệu tọa độ UV Xoffset của ký tự.&#10;Tọa độ này được tính bằng số chấm động (Float) được chuyển từ UV Hex nhân với chiều rộng file ảnh font.&#10;Được chuyển về dạng Decimal." value="23">UV Xoffset</option>
+						<option title="Số liệu tọa độ UV Yoffset của ký tự.&#10;Tọa độ này được tính bằng số chấm động (Float) được chuyển từ UV Hex nhân với chiều cao file ảnh font.&#10;Được chuyển về dạng Decimal." value="24">UV Yoffset</option>
+						<option title="Số liệu tọa độ UV Xadvance của ký tự.&#10;Tọa độ này được tính bằng số chấm động (Float) được chuyển từ UV Hex nhân với chiều rộng file ảnh font.&#10;Được chuyển về dạng Decimal." value="25">UV Advance</option>
+					</select>
+						<small class="tip-show">Tiêu đề một block, hãy đặt tiêu đề để dễ nhận biết khi phân tích font.</small>
+					</label>
+					<label class="label-block block-byte tip-hover item-mapFont">
+						<select class="select-block select-byte" onchange="selectTitleBox(this)">
+							<option value="1">1 Byte</option>
+							<option value="2" selected>2 Byte</option>
+							<option value="3">3 Byte</option>
+							<option value="4">4 Byte</option>
+							<option value="5">5 Byte</option>
+							<option value="6">6 Byte</option>
+							<option value="7">Tùy Chỉnh</option>
+						</select>
+						<small class="input-custom-byte">
+							<input type="text" placeholder="Nhập Byte" class="custom-byte" onchange="customByte(this)" />
+							<button onclick="customTitle(this)" class="custom-input-btn">Nhập</button>
+						</small>
+						<small class="tip-show">Độ dài một block, hãy chọn số byte tương ứng cho một block.</small>
+					</label>
+					<label blocktype="Decimal" class="label-block block-type tip-hover tip-left item-mapFont">
+						<select class="select-block select-type" onchange="myType(this)">
+							<option title="Dạng ký tự. Số liệu block sẽ diễn giải dưới dạng ký tự." value="0">Unicode (Ký Tự)</option>
+							<option title="Dạng số nguyên (Decimal). Số liệu block sẽ diễn giải dưới dạng số nguyên." value="1" selected>Decimal</option>
+							<option title="Dạng số thập lục phân (Hex). Số liệu block sẽ diễn giải dưới dạng số thập lục phân." value="2">Hex</option>
+							<option title="Dạng số chấm động (Float). Số liệu block sẽ diễn giải dưới dạng số chấm động." value="3">Float</option>
+							<option title="Dạng số chấm động (Float) nhưng đã được chuyển đổi về số nguyên bằng phép tính:&#10;UV Left (Float) * Chiều rộng ảnh (Decimal).&#10;Số liệu block sẽ diễn giải dưới dạng số nguyên." value="4">UV Left</option>
+							<option title="Dạng số chấm động (Float) nhưng đã được chuyển đổi về số nguyên bằng phép tính:&#10;UV Top (Float) * Chiều cao ảnh (Decimal).&#10;Số liệu block sẽ diễn giải dưới dạng số nguyên." value="5">UV Top</option>
+							<option title="Dạng số chấm động (Float) nhưng đã được chuyển đổi về số nguyên bằng phép tính:&#10;UV Right (Float) * Chiều rộng ảnh (Decimal).&#10;Số liệu block sẽ diễn giải dưới dạng số nguyên." value="6">UV Right</option>
+							<option title="Dạng số chấm động (Float) nhưng đã được chuyển đổi về số nguyên bằng phép tính:&#10;UV Bottom (Float) * Chiều cao ảnh (Decimal).&#10;Số liệu block sẽ diễn giải dưới dạng số nguyên." value="7">UV Bottom</option>
+							<option title="Dạng số nguyên có chứa số âm được chuyển đổi từ số âm trong Hex.&#10;Thông thường những số âm trong Hex được diễn giải dưới dạng đặc biệt.&#10;VD: -1 tương đương với FFFF 2 byte này trong hex. Số liệu này được dùng để phân tích các Xoffset và Yoffset" value="8">Negative Hex</option>
+							<option title="Dạng text thuần, được chuyển từ hex sang." value="9">Text</option>
+							<option title="Xoffset dạng số chấm động (Float) nhưng đã được chuyển đổi về số nguyên bằng phép tính:&#10;UV Xoffset (Float) * Chiều rộng ảnh (Decimal).&#10;Số liệu block sẽ diễn giải dưới dạng số nguyên." value="10">UV Xoffset</option>
+							<option title="Yoffset dạng số chấm động (Float) nhưng đã được chuyển đổi về số nguyên bằng phép tính:&#10;UV Yoffset (Float) * Chiều cao ảnh (Decimal).&#10;Số liệu block sẽ diễn giải dưới dạng số nguyên." value="11">UV Yoffset</option>
+							<option title="Xadvance dạng số chấm động (Float) nhưng đã được chuyển đổi về số nguyên bằng phép tính:&#10;UV Xadvance (Float) * Chiều rộng ảnh (Decimal).&#10;Số liệu block sẽ diễn giải dưới dạng số nguyên." value="12">UV Xadvance</option>
+						</select>
+						<small class="tip-show">Kiểu dữ liệu của block. Hãy chọn đúng dữ liệu để phân tích font.</small>
+					</label>
+					<label class="label-block block-regexp tip-hover tip-left item-regexp">
+						<input type="text" class="input-regexp" value="" placeholder="Nhập biểu thức" />
+						<small class="tip-show">
+							Trường này dùng để tách các dữ liệu font từ giá trị chứa fontmap dạng text. Nó thường được sử dụng ở các file FNT của BMFONT hoặc các tập tin .txt<br><br>
+							Để sử dụng các bạn có thể chọn theo các tiêu đề của block. Tool sẽ tự động thêm các thuật toán tách phù hợp theo Regular Expressions (biểu thức chính quy).<br><br>
+							Nếu các bạn hiểu rõ về Regular Expressions, các bạn có thể tùy chỉnh theo các thông số phù hợp. Tool nhận các giá trị cần lấy trong cặp dấu ().<br><br>
+							VD: Một thông số trong file FNT như sau: char id=9 x=8 y=420 width=7 height=41<br><br>
+							Nếu muốn lấy giá trị của Width. Các bạn phải viết biểu thức như sau: <b style="color:white;background:red">width\=(\S+)</b>. Tool sẽ lấy được giá trị 7 của Width. Phân tích biểu thức này như sau:<br>
+							<b style="color:white;background:red">width</b> => Kiểm tra xem dòng đó có width và lấy giá trị nằm sau nó.<br>
+							<b style="color:white;background:red">\=</b> => Những ký tự đặc biệt, các bạn cần thêm dấu <b style="color:white;background:red">\</b> để bỏ qua không tính ký tự này.<br>
+							<b style="color:white;background:red">(\S+)</b> => Lấy giá trị không phải là dấu Space.
+						</small>
+					</label>
+					<label class="label-block block-cals tip-hover tip-left">
+						<input onchange="calsinput(this)" type="text" class="input-cals" value="+0" placeholder="Phép Tính" />
+						<small class="tip-show">Tính toán bổ sung cho block này. Một số dữ liệu cần phải cộng hoặc nhân thêm một số nào đó để có thể tính ra giá trị đúng nhất của dữ liệu.<br><br>Do đó bạn cần phải nhập thêm các phép tính cần thiết cho nó.</small>
+					</label>
+					<label class="label-block block-save tip-hover tip-left">
+						<input type="checkbox" class="block-save-input" name="vehicle1" value="True">
+						<small class="tip-show">Giữ nguyên giá trị này. Tính năng này chỉ sử dụng khi tạo font bitmap bằng tool.<br><br>
+							Nó được dùng để giữ nguyên các giá trị mà bạn không muốn chuyển đổi khi tạo font.<br><br>
+							Bạn nên dùng nó đối với các giá trị mà bạn chưa xác định được kiểu dữ liệu của nó. Các giá trị này sẽ được giữ nguyên gốc sau khi tạo file map font.
+						</small>
+					</label>
+					<label class="remove-block tip-hover tip-left" onclick="RemoveBlock(this)">
+						<b><i class="fas fa-times"></i></b>
+						<small class="tip-show">Xóa bớt Block này.</small>
+					</label>
+					<label class="remove-block tip-hover tip-left" onclick="AddBlockValue(this)">
+						<b><i class="fas fa-plus"></i></b>
+						<small class="tip-show">Thêm 1 Block dữ liệu nữa.</small>
+					</label>
+				</li>						
             </ul>
           </div>
         </div> 
@@ -304,347 +301,377 @@
       </div>
 		</div>
 		<div class="block-right col-md-8">
-      <div class="page-hex-file show-page">
-         <div class="fotter-page-hex-file">
-          <ul class="list-result-file-hex">
-            <li class="item-result-file item-byte-hex tip-hover">
-              <label>Byte Row: </label><span><input class="input-byte-rows" onfocusout="byteRows(this)" onchange="byteRows(this)" value="16" type="number"/></span>
-              <small class="tip-show">Chuyển đổi số byte được hiển thị trong một hàng. Chỉ được dùng giá trị DEC ở ô này. <br><br>
-              Và giá trị tuyệt đối không thấp hơn 16 và cao hơn 32.
-              </small>
-            </li>
-            <li class="item-result-file jump-byte-hex tip-hover">
-              <label>Start Offset: </label><span><input class="jump-byte-rows" onfocusout="JumpOffset(this)" onchange="JumpOffset(this)" value="" placeholder="Start Offset" type="text"/></span>
-              <small class="tip-show">Vị trí bắt đầu khối hex mà bạn chọn. Khi nhập vào ô này, con trỏ sẽ được nhảy đến vị trí mà bạn nhập. Có thể dùng HEX và DEC đều được.<br><br>
-              Để dùng Hex cần phải thêm tiền tố <b style="color:red">0x</b> vào trước hex. VD: <b style="color:red">0x3A40</b>
-              </small>
-            </li>
-            <li class="item-result-file end-byte-hex tip-hover">
-              <label>End Offset: </label><span><input class="end-byte-rows" onfocusout="EndOffset(this)" onchange="EndOffset(this)" value="" placeholder="End Offset" type="text"/></span>
-              <small class="tip-show">Vị trí kết thúc khối hex mà bạn chọn. Khi nhập vào ô này, con trỏ sẽ chọn offset khối bắt đầu cho đến offset kết thúc mà bạn nhập.<br><br>
-              Có thể dùng HEX và DEC đều được. Để dùng Hex cần phải thêm tiền tố <b style="color:red">0x</b> vào trước hex. VD: <b style="color:red">0x3A40</b>
-              </small>
-            </li>
-            <li class="item-result-file max-byte-hex tip-hover">
-              <label>Length: </label><span><input class="max-byte-rows" onfocusout="MaxOffset(this)" onchange="MaxOffset(this)" value="" placeholder="Length" type="text"/></span>
-              <small class="tip-show">Độ dài khối hex mà bạn chọn. Khi nhập vào ô này, con trỏ sẽ chọn offset khối bắt đầu cho đến độ dài khối mà bạn nhập.<br><br>
-              Có thể dùng HEX và DEC đều được. Để dùng Hex cần phải thêm tiền tố <b style="color:red">0x</b> vào trước hex. VD: <b style="color:red">0x3A40</b>
-              </small>
-            </li>
-            <li class="item-result-file save-highlight-hex tip-hover">
-              <button class="save-highlight-button" onclick="openToolHex()"><i class="fas fa-highlighter"></i> Ghim Block</button>
-              <small class="tip-show">
-              Công cụ dùng để ghim tạm dữ liệu. Để phân tích dễ dàng hơn, cần ghim tạm các khối dữ liệu với giá trị mà bạn nghiên cứu được.<br><br>
-              Ngoài mục đích đánh dấu khối block mà bạn chọn, nó còn có tính năng đặt tên và giá trị cho khối này. Để dùng công cụ này, các bạn cần chọn khối HEX trước.<br><br>
-              Phím Tắt: <b>F1</b>
-              </small>
-            </li>
-            <li class="item-result-file remove-highlight-hex tip-hover">
-              <button class="save-highlight-button" onclick="removeToolHex()"><i class="fas fa-trash"></i> Xóa Hết Ghim</button>
-              <small class="tip-show">
-              Công cụ dùng để xóa hết các block ghim. Đôi khi ghim dữ liệu bị trùng sẽ gây lỗi. Hãy dùng công cụ này phục hồi lại mặc định.
-              </small>
-            </li>
-          </ul>
-        </div>
-        <div class="head-page-hex-file">
-          <ul class="list-head-hex">
-            <li class="item-head-hex item-title-head"><span>OFFSET</span></li>
-            <li class="item-head-hex item-count-head"><span>00 01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F</span></li>
-            <li class="item-head-hex item-text-head"><span>DECODED TEXT</span></li>
-          </ul>
-        </div>
-        <div class="body-page-hex-file">
-          <div class="offset-text-file-hex"></div>
-          <div class="left-tab-HEX">
-            <textarea readonly="" onmouseleave="focusTextarea(this,false)" onmouseenter="focusTextarea(this,true)" onkeyup="hexEdit(this)" onchange="hexEdit(this)" onmouseup="GetCusor(this)" class="textarea-file-hex"></textarea>
-            <div class="textarea-file-hex-copy"></div>
-            <div class="hight-light-hex"></div>
-            <div class="block-highlight-hex"></div>
-          </div>
-          <div class="output-text-file-hex">
-            <div class="body-output-text-file-hex"></div>
-            <textarea readonly="" onchange="textEdit(this)" onmouseup="GetCusorText(this)" class="textarea-output-text-file-hex"></textarea>
-          </div>
-        </div>
-        <div class="result-cals-file-hex">
-          <ul class="list-calc-hex">
-            <li class="item-calc-number item-hex-code tip-hover">
-              <label>HEX <b class="icont-copy-cals" onclick="copyValue(this,true)" title="Copy dòng này xuống máy tính."><i class="far fa-copy"></i></b></label>
-              <span><input class="input-hex-calc-swap" onmouseup="convertValue(this.value)" onkeyup="convertValue(this.value)" onchange="convertValue(this.value)" type="text" placeholder="Nhập Giá Trị HEX" /></span>
-              <small class="tip-show">Dữ liệu HEX mà bạn đã chọn. Có thể nhập dữ liệu HEX tùy thích để tool chuyển đổi sang các giá trị khác nhau.</small>
-            </li>
-            <li class="item-calc-number item-little-endian tip-hover">
-              <label>SWAP HEX<b class="icont-copy-cals" onclick="copyValue(this,true)" title="Copy dòng này xuống máy tính."><i class="far fa-copy"></i></b></label>
-              <span></span>
-              <small class="tip-show">Dữ liệu được chuyển đổi từ HEX gốc mà bạn đã chọn. Nó có thể là BIG ENDIAN hoặc LITTLE ENDIAN.</small>
-            </li>
-            <li class="item-calc-number item-big-endian tip-hover">
-              <label>DECIMAL<b class="icont-copy-cals" onclick="copyValue(this,false)" title="Copy dòng này xuống máy tính."><i class="far fa-copy"></i></b></label>
-              <span></span>
-              <small class="tip-show">Dữ liệu DECIMAL được chuyển đổi từ HEX gốc mà bạn đã chọn.</small>
-            </li>
-            <li class="item-calc-number item-dec-number tip-hover">
-              <label>DECIMAL SWAP<b class="icont-copy-cals" onclick="copyValue(this,false)" title="Copy dòng này xuống máy tính."><i class="far fa-copy"></i></b></label>
-              <span></span>
-              <small class="tip-show">Dữ liệu DECIMAL được chuyển đổi từ HEX được chuyển đổi SWAP mà bạn đã chọn.</small>
-            </li>
-            <li class="item-calc-number item-text-number tip-hover">
-              <label>ASNII</label>
-              <span></span>
-              <small class="tip-show">TEXT ASNII từ đoạn HEX mà bạn đã chọn.</small>
-            </li>
-            <li class="item-calc-number item-float-number tip-hover">
-              <label>FLOAT<b class="icont-copy-cals" onclick="copyValue(this,false)" title="Copy dòng này xuống máy tính."><i class="far fa-copy"></i></b></label>
-              <span></span>
-              <small class="tip-show">Dữ liệu dấu chấm động (FLOAT) được chuyển đổi từ khối HEX mà bạn đã chọn. Dữ liệu này chỉ được chuyển đổi khi bạn chọn khối HEX với 4 byte.</small>
-            </li>
-            <li class="item-calc-number item-floatSwap-number tip-hover">
-              <label>FLOAT SWAP<b class="icont-copy-cals" onclick="copyValue(this,false)" title="Copy dòng này xuống máy tính."><i class="far fa-copy"></i></b></label>
-              <span></span>
-              <small class="tip-show">Dữ liệu dấu chấm động (FLOAT) được chuyển đổi từ khối HEX được SWAP mà bạn đã chọn. Dữ liệu này chỉ được chuyển đổi khi bạn chọn khối HEX với 4 byte.</small>
-            </li>
-            <li class="item-calc-number item-Negative-number tip-hover">
-              <label>NEGATIVE HEX</label>
-              <span></span>
-              <small class="tip-show">Số âm của HEX được chuyển đổi từ khối HEX mà bạn đã chọn. Origin là HEX gốc được chuyển sang số âm. Swap là hex được đảo ngược và chuyển sang số âm.</small>
-            </li>
-            <li class="item-calc-number item-maytinh-number tip-hover" onclick="focusCals()">
-              <label>MÁY TÍNH</label>
-              <div class="body-maytinh">
-                <div class="item-body-maytinh ketqua-maytinh">
-                  <textarea title="Nhập phép tính của bạn vào đây." placeholder="Nhập phép tính của bạn." class="pheptinhmaytinh" onmouseup="ketquapheptinh()" onchange="ketquapheptinh()" onkeyup="ketquapheptinh()"></textarea>
-                  <div class="ketquatinhtoan"></div>
-                </div>
-                <div class="item-body-maytinh ketqua-maytinh">
-                  <div class="oketquadatinh" title="Kết quả phép tính của bạn."></div>
-                </div>
-                <div class="item-body-maytinh swap-maytinh">
-                  <button title="Chuyển sang phép tính bằng DEC." class="decButton btt-console active" onclick="swapMaytinh(this)">DEC</button>
-                  <button title="Chuyển sang phép tính bằng HEX" class="hexButton btt-console" onclick="swapMaytinh(this)">HEX</button>
-                </div>
-                <div class="item-body-maytinh congthuc-maytinh">
-                  <button title="Phép tính cộng." class="btt-maytinh phepcong" onclick="themPhepTinh('+')">+</button>
-                  <button title="Phép tính trừ." class="btt-maytinh pheptru" onclick="themPhepTinh('-')">-</button>
-                  <button title="Phép tính nhân." class="btt-maytinh phepnhan" onclick="themPhepTinh('*')">*</button>
-                  <button title="Phép tính chia." class="btt-maytinh phepchia" onclick="themPhepTinh('/')">/</button>
-                </div>
-                <div class="item-body-maytinh conso-maytinh">
-                  <div class="line-break-number">
-                    <button title="Xóa bớt một số trong phép tính." class="btt-maytinh clearone" onclick="clearCals(false)"><i class="fas fa-backspace"></i></button>
-                    <button title="Xóa hết tất cả phép tính." class="btt-maytinh clearAll" onclick="clearCals(true)"><i class="fas fa-eraser"></i></button>
-                  </div>
-                  <div class="line-break-number">
-                    <button class="btt-maytinh so7" onclick="themPhepTinh('7')">7</button>
-                    <button class="btt-maytinh so8" onclick="themPhepTinh('8')">8</button>
-                    <button class="btt-maytinh so9" onclick="themPhepTinh('9')">9</button>
-                  </div>
-                  <div class="line-break-number">
-                    <button class="btt-maytinh so4" onclick="themPhepTinh('4')">4</button>
-                    <button class="btt-maytinh so5" onclick="themPhepTinh('5')">5</button>
-                    <button class="btt-maytinh so6" onclick="themPhepTinh('6')">6</button>
-                  </div>
-                  <div class="line-break-number">
-                    <button class="btt-maytinh so1" onclick="themPhepTinh('1')">1</button>
-                    <button class="btt-maytinh so2" onclick="themPhepTinh('2')">2</button>
-                    <button class="btt-maytinh so3" onclick="themPhepTinh('3')">3</button>
-                  </div>
-                  <div class="line-break-number">
-                    <button class="btt-maytinh so0" onclick="themPhepTinh('0')">0</button>
-                    <button class="btt-maytinh socham" onclick="themPhepTinh('.')">.</button>
-                    <button class="btt-maytinh ketqua" onclick="themPhepTinh('%')">%</button>
-                  </div>
-                  <div class="line-break-number numberHex">
-                    <button class="btt-maytinh soA" onclick="themPhepTinh('A')">A</button>
-                    <button class="btt-maytinh soB" onclick="themPhepTinh('B')">B</button>
-                    <button class="btt-maytinh soC" onclick="themPhepTinh('C')">C</button>
-                  </div>
-                  <div class="line-break-number numberHex">
-                    <button class="btt-maytinh soD" onclick="themPhepTinh('D')">D</button>
-                    <button class="btt-maytinh soE" onclick="themPhepTinh('E')">E</button>
-                    <button class="btt-maytinh soF" onclick="themPhepTinh('F')">F</button>
-                  </div>
-                </div>
-              </div>
-              <small class="tip-show">Máy tính mini, dùng để tính toán nhanh DEC hoặc HEX.<br><br>
-              Phím Tắt: <b>F2</b></small>
-            </li>
-          </ul>
-        </div>
-      </div>
+			<div class="page-hex-file show-page">
+				<div class="fotter-page-hex-file">
+					<ul class="list-result-file-hex">
+						<li class="item-result-file item-byte-hex tip-hover">
+							<label>Byte Row: </label><span><input class="input-byte-rows" onfocusout="byteRows(this)" onchange="byteRows(this)" value="16" type="number"/></span>
+							<small class="tip-show">Chuyển đổi số byte được hiển thị trong một hàng. Chỉ được dùng giá trị DEC ở ô này. <br><br>
+								Và giá trị tuyệt đối không thấp hơn 16 và cao hơn 32.
+							</small>
+						</li>
+						<li class="item-result-file jump-byte-hex tip-hover">
+							<label>Start Offset: </label><span><input class="jump-byte-rows" onfocusout="JumpOffset(this)" onchange="JumpOffset(this)" value="" placeholder="Start Offset" type="text"/></span>
+							<small class="tip-show">Vị trí bắt đầu khối hex mà bạn chọn. Khi nhập vào ô này, con trỏ sẽ được nhảy đến vị trí mà bạn nhập. Có thể dùng HEX và DEC đều được.<br><br>
+							Để dùng Hex cần phải thêm tiền tố <b style="color:red">0x</b> vào trước hex. VD: <b style="color:red">0x3A40</b></small>
+						</li>
+						<li class="item-result-file end-byte-hex tip-hover">
+							<label>End Offset: </label><span><input class="end-byte-rows" onfocusout="EndOffset(this)" onchange="EndOffset(this)" value="" placeholder="End Offset" type="text"/></span>
+							<small class="tip-show">Vị trí kết thúc khối hex mà bạn chọn. Khi nhập vào ô này, con trỏ sẽ chọn offset khối bắt đầu cho đến offset kết thúc mà bạn nhập.<br><br>
+							Có thể dùng HEX và DEC đều được. Để dùng Hex cần phải thêm tiền tố <b style="color:red">0x</b> vào trước hex. VD: <b style="color:red">0x3A40</b></small>
+						</li>
+						<li class="item-result-file max-byte-hex tip-hover">
+							<label>Length: </label><span><input class="max-byte-rows" onfocusout="MaxOffset(this)" onchange="MaxOffset(this)" value="" placeholder="Length" type="text"/></span>
+							<small class="tip-show">Độ dài khối hex mà bạn chọn. Khi nhập vào ô này, con trỏ sẽ chọn offset khối bắt đầu cho đến độ dài khối mà bạn nhập.<br><br>
+							Có thể dùng HEX và DEC đều được. Để dùng Hex cần phải thêm tiền tố <b style="color:red">0x</b> vào trước hex. VD: <b style="color:red">0x3A40</b></small>
+						</li>
+						<li class="item-result-file save-highlight-hex tip-hover">
+							<button class="save-highlight-button" onclick="openToolHex()"><i class="fas fa-highlighter"></i> Ghim</button>
+							<small class="tip-show">
+							Công cụ dùng để ghim tạm dữ liệu. Để phân tích dễ dàng hơn, cần ghim tạm các khối dữ liệu với giá trị mà bạn nghiên cứu được.<br><br>
+							Ngoài mục đích đánh dấu khối block mà bạn chọn, nó còn có tính năng đặt tên và giá trị cho khối này. Để dùng công cụ này, các bạn cần chọn khối HEX trước.<br><br>
+							Phím Tắt: <b>F1</b></small>
+						</li>
+						<li class="item-result-file remove-highlight-hex tip-hover">
+						<button class="save-highlight-button" onclick="removeToolHex()"><i class="fas fa-trash"></i> Xóa</button>
+						<small class="tip-show">
+						Công cụ dùng để xóa hết các block ghim. Đôi khi ghim dữ liệu bị trùng sẽ gây lỗi. Hãy dùng công cụ này phục hồi lại mặc định.</small>
+					</li>
+					</ul>
+					<div class="result-cals-file-hex">
+						<ul class="list-calc-hex">
+							<li class="item-calc-number item-hex-code tip-hover">
+								<label>HEX <b class="icont-copy-cals" onclick="copyValue(this,true)" title="Copy dòng này xuống máy tính."><i class="far fa-copy"></i></b></label>
+								<span><input class="input-hex-calc-swap" onmouseup="convertValue(this.value)" onkeyup="convertValue(this.value)" onchange="convertValue(this.value)" type="text" placeholder="Nhập Giá Trị HEX" /></span>
+								<small class="tip-show">Dữ liệu HEX mà bạn đã chọn. Có thể nhập dữ liệu HEX tùy thích để tool chuyển đổi sang các giá trị khác nhau.</small>
+							</li>
+							<li class="item-calc-number item-little-endian tip-hover">
+								<label>SWAP HEX<b class="icont-copy-cals" onclick="copyValue(this,true)" title="Copy dòng này xuống máy tính."><i class="far fa-copy"></i></b></label>
+								<span></span>
+								<small class="tip-show">Dữ liệu được chuyển đổi từ HEX gốc mà bạn đã chọn. Nó có thể là BIG ENDIAN hoặc LITTLE ENDIAN.</small>
+							</li>
+							<li class="item-calc-number item-big-endian tip-hover">
+								<label>DECIMAL<b class="icont-copy-cals" onclick="copyValue(this,false)" title="Copy dòng này xuống máy tính."><i class="far fa-copy"></i></b></label>
+								<span></span>
+								<small class="tip-show">Dữ liệu DECIMAL được chuyển đổi từ HEX gốc mà bạn đã chọn.</small>
+							</li>				
+							<li class="item-calc-number item-dec-number tip-hover">
+								<label>DECIMAL SWAP<b class="icont-copy-cals" onclick="copyValue(this,false)" title="Copy dòng này xuống máy tính."><i class="far fa-copy"></i></b></label>
+								<span></span>
+								<small class="tip-show">Dữ liệu DECIMAL được chuyển đổi từ HEX được chuyển đổi SWAP mà bạn đã chọn.</small>
+							</li>				
+							<li class="item-calc-number item-float-number tip-hover">
+								<label>FLOAT<b class="icont-copy-cals" onclick="copyValue(this,false)" title="Copy dòng này xuống máy tính."><i class="far fa-copy"></i></b></label>
+								<span></span>
+								<small class="tip-show">Dữ liệu dấu chấm động (FLOAT) được chuyển đổi từ khối HEX mà bạn đã chọn. Dữ liệu này chỉ được chuyển đổi khi bạn chọn khối HEX với 4 byte.</small>
+							</li>
+							<li class="item-calc-number item-floatSwap-number tip-hover">
+								<label>FLOAT SWAP<b class="icont-copy-cals" onclick="copyValue(this,false)" title="Copy dòng này xuống máy tính."><i class="far fa-copy"></i></b></label>
+								<span></span>
+								<small class="tip-show">Dữ liệu dấu chấm động (FLOAT) được chuyển đổi từ khối HEX được SWAP mà bạn đã chọn. Dữ liệu này chỉ được chuyển đổi khi bạn chọn khối HEX với 4 byte.</small>
+							</li>
+							<li class="item-calc-number item-Negative-number tip-hover">
+								<label>NEGATIVE HEX</label>
+								<span></span>
+								<small class="tip-show">Số âm của HEX được chuyển đổi từ khối HEX mà bạn đã chọn. Origin là HEX gốc được chuyển sang số âm. Swap là hex được đảo ngược và chuyển sang số âm.</small>
+							</li>
+							<li class="item-calc-number item-text-number tip-hover asnii-li">
+								<label>ASNII</label>
+								<span></span>
+								<small class="tip-show">TEXT ASNII từ đoạn HEX mà bạn đã chọn.</small>
+							</li>
+							<li class="item-calc-number item-maytinh-number tip-hover" onclick="focusCals()">
+								<label>MÁY TÍNH</label>
+								<div class="body-maytinh">
+								<div class="item-body-maytinh ketqua-maytinh">
+								<textarea title="Nhập phép tính của bạn vào đây." placeholder="Nhập phép tính của bạn." class="pheptinhmaytinh" onmouseup="ketquapheptinh()" onchange="ketquapheptinh()" onkeyup="ketquapheptinh()"></textarea>
+								<div class="ketquatinhtoan"></div>
+								</div>
+								<div class="item-body-maytinh ketqua-maytinh">
+								<div class="oketquadatinh" title="Kết quả phép tính của bạn."></div>
+								</div>
+								<div class="item-body-maytinh swap-maytinh">
+								<button title="Chuyển sang phép tính bằng DEC." class="decButton btt-console active" onclick="swapMaytinh(this)">DEC</button>
+								<button title="Chuyển sang phép tính bằng HEX" class="hexButton btt-console" onclick="swapMaytinh(this)">HEX</button>
+								</div>
+								<div class="item-body-maytinh congthuc-maytinh">
+								<button title="Phép tính cộng." class="btt-maytinh phepcong" onclick="themPhepTinh('+')">+</button>
+								<button title="Phép tính trừ." class="btt-maytinh pheptru" onclick="themPhepTinh('-')">-</button>
+								<button title="Phép tính nhân." class="btt-maytinh phepnhan" onclick="themPhepTinh('*')">*</button>
+								<button title="Phép tính chia." class="btt-maytinh phepchia" onclick="themPhepTinh('/')">/</button>
+								</div>
+								<div class="item-body-maytinh conso-maytinh">
+								<div class="line-break-number">
+									<button title="Xóa bớt một số trong phép tính." class="btt-maytinh clearone" onclick="clearCals(false)"><i class="fas fa-backspace"></i></button>
+									<button title="Xóa hết tất cả phép tính." class="btt-maytinh clearAll" onclick="clearCals(true)"><i class="fas fa-eraser"></i></button>
+								</div>
+								<div class="line-break-number">
+									<button class="btt-maytinh so7" onclick="themPhepTinh('7')">7</button>
+									<button class="btt-maytinh so8" onclick="themPhepTinh('8')">8</button>
+									<button class="btt-maytinh so9" onclick="themPhepTinh('9')">9</button>
+								</div>
+								<div class="line-break-number">
+									<button class="btt-maytinh so4" onclick="themPhepTinh('4')">4</button>
+									<button class="btt-maytinh so5" onclick="themPhepTinh('5')">5</button>
+									<button class="btt-maytinh so6" onclick="themPhepTinh('6')">6</button>
+								</div>
+								<div class="line-break-number">
+									<button class="btt-maytinh so1" onclick="themPhepTinh('1')">1</button>
+									<button class="btt-maytinh so2" onclick="themPhepTinh('2')">2</button>
+									<button class="btt-maytinh so3" onclick="themPhepTinh('3')">3</button>
+								</div>
+								<div class="line-break-number">
+									<button class="btt-maytinh so0" onclick="themPhepTinh('0')">0</button>
+									<button class="btt-maytinh socham" onclick="themPhepTinh('.')">.</button>
+									<button class="btt-maytinh ketqua" onclick="themPhepTinh('%')">%</button>
+								</div>
+								<div class="line-break-number numberHex">
+									<button class="btt-maytinh soA" onclick="themPhepTinh('A')">A</button>
+									<button class="btt-maytinh soB" onclick="themPhepTinh('B')">B</button>
+									<button class="btt-maytinh soC" onclick="themPhepTinh('C')">C</button>
+								</div>
+								<div class="line-break-number numberHex">
+									<button class="btt-maytinh soD" onclick="themPhepTinh('D')">D</button>
+									<button class="btt-maytinh soE" onclick="themPhepTinh('E')">E</button>
+									<button class="btt-maytinh soF" onclick="themPhepTinh('F')">F</button>
+								</div>
+								</div>
+							</div>
+								<small class="tip-show">Máy tính mini, dùng để tính toán nhanh DEC hoặc HEX.<br><br>
+								Phím Tắt: <b>F2</b></small>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="wrapper1 scroll-left">
+					<div class="div1"></div>
+				</div>
+				<div class="wrap-result-hex">
+					<div class="div-page-hex-file show--hex">
+					<div class="head-page-hex-file">
+					  <ul class="list-head-hex">
+						<li class="item-head-hex item-title-head"><span>-OFFSET-</span></li>
+						<li class="item-head-hex item-count-head"><span>00 01 02 03 04 05 06 07 08 09 0A 0B 0C 0D 0E 0F</span></li>
+						<li class="item-head-hex item-text-head"><span>DECODED TEXT</span></li>
+					  </ul>
+					</div>
+					<div class="body-page-hex-file">
+						<div class="offset-text-file-hex"></div>
+						<div class="left-tab-HEX">
+							<textarea readonly="" onmouseleave="focusTextarea(this,false)" onmouseenter="focusTextarea(this,true)" onkeyup="hexEdit(this)" onchange="hexEdit(this)" onmouseup="GetCusor(this)" class="textarea-file-hex"></textarea>
+							<div class="textarea-file-hex-copy"></div>
+							<div class="hight-light-hex"></div>
+							<div class="block-highlight-hex"></div>
+						</div>
+						<div class="output-text-file-hex">
+							<div class="body-output-text-file-hex"></div>
+							<textarea readonly="" onchange="textEdit(this)" onmouseup="GetCusorText(this)" class="textarea-output-text-file-hex"></textarea>
+						</div>
+					</div>
+				</div>	
+			</div>
+			</div>
 			<div class="page-img show-page">
-        <ul class="change-page-img">
-        </ul>
-        <div class="body-page-img img-page-count-1 active">
-          <img src="empty.png" id="img-view">
-          <div id="cell-content" class="block-cell"></div>
-        </div>
+				<ul class="list-config-img">
+					<li class="item-conf-img config-zoom">
+						<ul id="zoom-img" title="Phóng to ảnh font để nhìn rõ hơn." class="title-btn tip-hover zoomImg">
+							<li class="item-zoom item-zoom-main" title="1"><b><small class="fas fa-search-plus"></small> Size Ảnh: 100%</b><i class="fas fa-caret-square-down"></i></li>
+							<li class="zoom-menu-item">
+								<ul class="main-list-zoom-show">
+									<li onclick="zoomIMG(this)" class="item-zoom" title="0.3"><b><small class="fas fa-search-plus"></small> Size Ảnh: 30%</b></li>
+									<li onclick="zoomIMG(this)" class="item-zoom" title="0.5"><b><small class="fas fa-search-plus"></small> Size Ảnh: 50%</b></li>
+									<li onclick="zoomIMG(this)" class="item-zoom" title="0.8"><b><small class="fas fa-search-plus"></small> Size Ảnh: 80%</b></li>
+									<li onclick="zoomIMG(this)" class="item-zoom active" title="1"><b><small class="fas fa-search-plus"></small> Size Ảnh: 100%</b></li>
+									<li onclick="zoomIMG(this)" class="item-zoom" title="1.5"><b><small class="fas fa-search-plus"></small> Size Ảnh: 150%</b></li>
+									<li onclick="zoomIMG(this)" class="item-zoom" title="2"><b><small class="fas fa-search-plus"></small> Size Ảnh: 200%</b></li>
+									<li onclick="zoomIMG(this)" class="item-zoom" title="3"><b><small class="fas fa-search-plus"></small> Size Ảnh: 300%</b></li>
+									<li onclick="zoomIMG(this)" class="item-zoom" title="4"><b><small class="fas fa-search-plus"></small> Size Ảnh: 400%</b></li>
+									<li onclick="zoomIMG(this)" class="item-zoom" title="5"><b><small class="fas fa-search-plus"></small> Size Ảnh: 500%</b></li>
+									<li onclick="zoomIMG(this)" class="item-zoom" title="6"><b><small class="fas fa-search-plus"></small> Size Ảnh: 600%</b></li>
+									<li onclick="zoomIMG(this)" class="item-zoom" title="7"><b><small class="fas fa-search-plus"></small> Size Ảnh: 700%</b></li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+					<li class="item-conf-img turn-grid">					
+						<b>Bật/Tắt Grid</b>
+						<label class="switch"><input onchange="showGrid(this)" type="checkbox" id="turnGrid" checked/><span class="slider"></span></label>					
+					</li>
+				</ul>
+				<ul class="change-page-img">
+				</ul>
+				<div class="overall-body-img">
+					<div nscale="1" class="body-page-img img-page-count-1 active">
+						<img src="empty.png" id="img-view">
+						<div id="cell-content" class="block-cell"></div>
+					</div>
+				</div>
 			</div>
 			<div class="page-data show-page">
 				<div id="page-result"><p class="none-data">Hiện chưa có dữ liệu để phân tích. Bạn cần chọn các dữ liệu cần thiết và nhấn vào nút Phân Tích Font để phân tích.</p></div>
 			</div>
-      <div class="page-hex show-page">
-        <div class="body-page-hex">
-          <div class="table-page-hex"></div>
-          <div class="data-hide-info"><p class="none-data">Hiện chưa có dữ liệu để phân tích chi tiết. Bạn cần bấm vào nút phân tích chi tiết ở trang cấu trúc font để tiến hành phân tích chi tiết ký tự.</p>
-          </div>
-        </div>
-      </div>
-      <div class="page-buildFont show-page">
-        <div class="body-tool-buildFont">
-          <ul class="list-tool-buildFont">
-            <li class="item-tool-buildFont fntmap-tool tip-hover">
-              <button class="wrap-tool"><i class="fas fa-file-import"></i> UPLOAD FNT FILE
-                <input type="file" accept=".fnt" id="fntFile" onclick="checkFNTFILE(this)" class="file-upload" onchange="FNTFILE(this)"/>
-              </button>
-              <small class="tip-show">Chọn File *FNT được xuất ra từ Tool BMFONT hoặc HIERO.<br><br>
-                Khi bạn tạo một font bitmap bằng 1 trong 2 tool trên, thì sẽ nhận được 2 file gồm file *FNT dữ liệu font map và một file ảnh. Các bạn cần upload file *FNT lên tool để lấy dữ liệu.
-              </small>
-            </li>
-            <li class="item-tool-buildFont fntimg-tool tip-hover">
-              <button class="wrap-tool"><i class="fas fa-image"></i> UPLOAD FONT ẢNH
-                <input type="file" accept=".jpg,.png,.bmp" id="imageFile" class="file-upload" onchange="IMGBIT(this)"/>
-              </button>
-              <small class="tip-show">Chọn File ảnh font được xuất ra từ Tool BMFONT hoặc HIERO<br><br>
-                Khi bạn tạo một font bitmap bằng 1 trong 2 tool trên, thì sẽ nhận được 2 file gồm file *FNT dữ liệu font map và một file ảnh. Các bạn cần upload file ảnh lên tool. Một vài game yêu cầu phải có font ảnh để có thể tính được giá trị của font map.</small>
-            </li>
-            <li class="item-tool-buildFont buildFNT-tool tip-hover">
-              <button class="wrap-tool"><i class="fas fa-tools"></i> TẠO FONT BITMAP</button>
-              <small class="tip-show">Tiến hành tạo lại file binary chứa font map với dữ liệu phân tích được cùng với dữ liệu font mới tạo bằng file *FNT và file ảnh font.<br><br>
-              Các bạn nên phân tích đúng font map để tool có thể hoạt động chính xác hơn.
-              </small>
-            </li>
-          </ul>
-          <div class="check-tool-fnt">
-            <div class="form-check form-switch checkCharRep tip-hover">
-              <input autocomplete="off" id="checkCharRep" type="checkbox" value="true" class="input-check-switch"  checked>
-              <label for="checkCharRep" class="form-check-label">Sử dụng Replace Ký Tự để thay Font</label>
-              <small class="tip-show">Tùy chọn này được thiết lập mặc định. Khi sử dụng tùy chọn này. Các ký tự có bên trong file FNT được tạo bằng tool sẽ được sử dụng để thay thế cho các ký tự bên trong file font map mặc định mà bạn đã phân tích. Nó chỉ lấy các tọa độ x,y chiều rộng và chiều cao của ký tự bên trong file FNT được tạo thay thế cho các tọa độ của file font map.<br><br>
-              Do đó, các ký tự trong font map sẽ có tiếng việt như file FNT được tạo nhưng vẫn giữ nguyên số ký tự nguyên gốc. Và để thể hiện các ký tự tiếng việt này khi chạy game. Bạn phải sử dụng thay thế ký tự chúng thể hiện tiếng việt.<br><br>
-              Ví dụ chữ <b>Đ</b> trong file FNT thay thế cho chữ <b>Ä</b> trong file font map gốc. Để thể hiện chữ <b>Đ</b>, các bạn cần chuyển chữ <b>Đ</b> thành chữ <b>Ä</b>.<br></br>
-              Nếu các bạn tắt tùy chọn này, tất cả ký tự trong file fnt sẽ được thay vào font map gốc. Nhưng không vượt quá số ký tự gốc của font map. Nếu vượt quá số ký tự, các bạn cần phải tắt tùy chọn <b>Giới hạn số ký tự theo Font Map Gốc</b>.<br><br>
-              Lưu ý rằng, một vài game không hỗ trợ mở rộng các ký tự tiếng việt, nó có một khối Range chứa dữ liệu Unicode riêng biệt. Các bạn cần phải tìm và sử dụng tính năng <b>Thay thế cấu trúc Range Unicode</b> để đồng bộ tất cả lại. Tuy nhiên vẫn rất dễ lỗi khi sử dụng tính năng này. Tốt nhất vẫn là sử dụng Replace ký tự để ít lỗi xảy ra hơn.
-              </small>
-            </div>
-            <div class="form-check form-switch checkMaxChar tip-hover">
-              <input autocomplete="off" id="checkMaxChar" type="checkbox" value="true" class="input-check-switch"  checked>
-              <label for="checkMaxChar" class="form-check-label">Giới hạn số ký tự theo Font Map Gốc</label>
-              <small class="tip-show">Tùy chọn giới hạn số ký tự trong file FNT được dùng để tạo font bitmap mới. Tùy chọn này được bật mặc định. Các bạn không thể sử dụng file FNT các bạn tạo có số ký tự vượt mức ký tự có trong file font map gốc.<br><br>
-              Một số game có giới hạn số ký tự bằng một thuật toán riêng biệt. Nếu các bạn xác định được vị trí để sửa cho phù hợp với file FNT các bạn tạo thì có thể sẽ chạy. Tuy nhiên để an toàn, chỉ nên giới hạn số ký tự các bạn tạo bằng với số ký tự font map gốc chứa.<br><br>
-              Nếu các bạn tắt tùy chọn này, tool sẽ tạo font map theo giới hạn số ký tự mà các bạn tạo bằng file FNT. Có lẽ một vài game có thể chạy được, tuy nhiên khả năng thành công không cao. Do đó không khuyến khích các bạn tắt tùy chọn này.
-              </small>
-            </div>
-            <div class="form-check form-switch checkXadvance tip-hover">
-              <input autocomplete="off" id="checkXadvance" type="checkbox" class="input-check-switch" disabled="disabled">
-              <label for="checkXadvance" class="form-check-label">Thay thế cấu trúc Range Xadvance</label>
-              <small class="tip-show">Tùy chọn này được vô hiệu hóa, nó chỉ được mở khi trong khối phân tích của các bạn có một cấu trúc Range Xadvance.<br><br>
-              Nếu bạn bật tùy chọn này. Dữ liệu trong khối Range Xadvance mà bạn nghiên cứu được sẽ được thay thế bằng dữ liệu Xadvance trong file FNT font mà bạn đã tạo.</small>
-            </div>
-            <div class="form-check form-switch checkWidth tip-hover">
-              <input autocomplete="off" id="checkWidth" type="checkbox" class="input-check-switch" disabled="disabled">
-              <label for="checkWidth" class="form-check-label">Thay thế cấu trúc Range Width</label>
-              <small class="tip-show">Tùy chọn này được vô hiệu hóa, nó chỉ được mở khi trong khối phân tích của các bạn có một cấu trúc Range Width.<br><br>
-              Nếu bạn bật tùy chọn này. Dữ liệu trong khối Range Width mà bạn nghiên cứu được sẽ được thay thế bằng dữ liệu Width trong file FNT font mà bạn đã tạo.</small>
-            </div>
-            <div class="form-check form-switch checkHeight tip-hover">
-              <input autocomplete="off" id="checkHeight" type="checkbox" class="input-check-switch" disabled="disabled">
-              <label for="checkHeight" class="form-check-label">Thay thế cấu trúc Range Height</label>
-              <small class="tip-show">Tùy chọn này được vô hiệu hóa, nó chỉ được mở khi trong khối phân tích của các bạn có một cấu trúc Range Height.<br><br>
-              Nếu bạn bật tùy chọn này. Dữ liệu trong khối Range Height mà bạn nghiên cứu được sẽ được thay thế bằng dữ liệu Height trong file FNT font mà bạn đã tạo.</small>
-            </div>
-            <div class="form-check form-switch checkUnicode tip-hover">
-              <input autocomplete="off" id="checkUnicode" type="checkbox" class="input-check-switch" disabled="disabled">
-              <label for="checkUnicode" class="form-check-label">Thay thế cấu trúc Range Unicode</label>
-              <small class="tip-show">Tùy chọn này được vô hiệu hóa, nó chỉ được mở khi trong khối phân tích của các bạn có một cấu trúc Range Unicode.<br><br>
-              Nếu bạn bật tùy chọn này. Dữ liệu trong khối Range Unicode mà bạn nghiên cứu được sẽ được thay thế bằng các ký tự bạn tạo trong file FNT font mà bạn đã tạo.<br><br>
-              Nó được dùng khi bạn muốn font của bạn có thể dùng bằng tiếng việt trực tiếp không thông qua quá trình Replace Ký Tự để thể hiện tiếng việt trong game.
-              </small>
-            </div>
-          </div>
-          <div class="console-tool-build">
-            <div class="panel-character-tool left-panel">
-              <div class="panel-line-tool headPanel">SỐ LIỆU FONT MAP</div>
-              <div class="panel-line-tool max-charBIT">
-                <label><i class="fas fa-th-list"></i> Tổng số ký tự File Font Map Phân Tích: </label><b></b>
-              </div>
-              <div class="panel-line-tool wIMG">
-                <label><i class="fas fa-th-list"></i> Chiều Rộng Ảnh Font Gốc: </label><b></b>
-              </div>
-              <div class="panel-line-tool hIMG">
-                <label><i class="fas fa-th-list"></i> Chiều Cao Ảnh Font Gốc: </label><b></b>
-              </div>
-            </div>
-            <div class="panel-character-tool right-panel">
-              <div class="panel-line-tool headPanel">SỐ LIỆU FONT FNT</div>
-              <div class="panel-line-tool max-charFNT">
-                <label><i class="fas fa-th-list"></i> Tổng số ký tự File FNT Font được Tạo: </label><b></b>
-              </div>
-              <div class="panel-line-tool wIMGFNT">
-                <label><i class="fas fa-th-list"></i> Chiều Rộng Ảnh Font FNT: </label><b></b>
-              </div>
-              <div class="panel-line-tool hIMGFNT">
-                <label><i class="fas fa-th-list"></i> Chiều Cao Ảnh Font FNT: </label><b></b>
-              </div>
-            </div>
-            <div class="panel-character-list-view"></div>
-            <div class="panel-consolePage"></div>
-            <div class="panel-image-tool">
-              <div class="wrap-panel-img">
-                <img src="empty.png" id="imgTool" />
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="body-faq-buildFont">
-          <div class="panel-faq">
-            <ul class="list-faq">
-              <li class="item-list-faq active" type="general">Hướng Dẫn Chung</li>
-              <li class="item-list-faq" type="bmfont">Hướng Dẫn Tạo Font Bằng BMFONT</li>
-              <li class="item-list-faq" type="hiero">Hướng Dẫn Tạo Font Bằng HIERO FONT</li>
-            </ul>
-            <div class="faq-general"></div>
-            <div class="faq-bmfont"></div>
-            <div class="faq-hiero"></div>
-          </div>
-        </div>
-        <div class="body-console-buildFont"></div>
-      </div>
+			<div class="page-hex show-page">
+				<div class="body-page-hex">
+					<div class="table-page-hex"></div>
+					<div class="data-hide-info"><p class="none-data">Hiện chưa có dữ liệu để phân tích chi tiết. Bạn cần bấm vào nút phân tích chi tiết ở trang cấu trúc font để tiến hành phân tích chi tiết ký tự.</p>
+					</div>
+				</div>
+			</div>
+			<div class="page-buildFont show-page">
+				<div class="body-tool-buildFont">
+					<ul class="list-tool-buildFont">
+						<li class="item-tool-buildFont fntmap-tool tip-hover">
+							<button class="wrap-tool"><i class="fas fa-file-import"></i> UPLOAD FNT FILE
+								<input type="file" accept=".fnt" id="fntFile" onclick="checkFNTFILE(this)" class="file-upload" onchange="FNTFILE(this)"/>
+							</button>
+							<small class="tip-show">Chọn File *FNT được xuất ra từ Tool BMFONT hoặc HIERO.<br><br>
+								Khi bạn tạo một font bitmap bằng 1 trong 2 tool trên, thì sẽ nhận được 2 file gồm file *FNT dữ liệu font map và một file ảnh. Các bạn cần upload file *FNT lên tool để lấy dữ liệu.
+							</small>
+						</li>
+						<li class="item-tool-buildFont fntimg-tool tip-hover">
+							<button class="wrap-tool"><i class="fas fa-image"></i> UPLOAD FONT ẢNH
+								<input type="file" accept=".jpg,.png,.bmp" id="imageFile" class="file-upload" onchange="IMGBIT(this)"/>
+							</button>
+							<small class="tip-show">Chọn File ảnh font được xuất ra từ Tool BMFONT hoặc HIERO<br><br>
+								Khi bạn tạo một font bitmap bằng 1 trong 2 tool trên, thì sẽ nhận được 2 file gồm file *FNT dữ liệu font map và một file ảnh. Các bạn cần upload file ảnh lên tool. Một vài game yêu cầu phải có font ảnh để có thể tính được giá trị của font map.</small>
+						</li>
+						<li class="item-tool-buildFont buildFNT-tool tip-hover">
+							<button class="wrap-tool"><i class="fas fa-tools"></i> TẠO FONT BITMAP</button>
+							<small class="tip-show">Tiến hành tạo lại file binary chứa font map với dữ liệu phân tích được cùng với dữ liệu font mới tạo bằng file *FNT và file ảnh font.<br><br>
+							Các bạn nên phân tích đúng font map để tool có thể hoạt động chính xác hơn.
+							</small>
+						</li>
+					</ul>
+				</div>				
+				<div class="check-tool-fnt">
+					<div class="form-check form-switch checkCharRep tip-hover">
+						<input autocomplete="off" id="checkCharRep" type="checkbox" value="true" class="input-check-switch"  checked>
+						<label for="checkCharRep" class="form-check-label">Sử dụng Replace Ký Tự để thay Font</label>
+						<small class="tip-show">Tùy chọn này được thiết lập mặc định. Khi sử dụng tùy chọn này. Các ký tự có bên trong file FNT được tạo bằng tool sẽ được sử dụng để thay thế cho các ký tự bên trong file font map mặc định mà bạn đã phân tích. Nó chỉ lấy các tọa độ x,y chiều rộng và chiều cao của ký tự bên trong file FNT được tạo thay thế cho các tọa độ của file font map.<br><br>
+						Do đó, các ký tự trong font map sẽ có tiếng việt như file FNT được tạo nhưng vẫn giữ nguyên số ký tự nguyên gốc. Và để thể hiện các ký tự tiếng việt này khi chạy game. Bạn phải sử dụng thay thế ký tự chúng thể hiện tiếng việt.<br><br>
+						Ví dụ chữ <b>Đ</b> trong file FNT thay thế cho chữ <b>Ä</b> trong file font map gốc. Để thể hiện chữ <b>Đ</b>, các bạn cần chuyển chữ <b>Đ</b> thành chữ <b>Ä</b>.<br></br>
+						Nếu các bạn tắt tùy chọn này, tất cả ký tự trong file fnt sẽ được thay vào font map gốc. Nhưng không vượt quá số ký tự gốc của font map. Nếu vượt quá số ký tự, các bạn cần phải tắt tùy chọn <b>Giới hạn số ký tự theo Font Map Gốc</b>.<br><br>
+						Lưu ý rằng, một vài game không hỗ trợ mở rộng các ký tự tiếng việt, nó có một khối Range chứa dữ liệu Unicode riêng biệt. Các bạn cần phải tìm và sử dụng tính năng <b>Thay thế cấu trúc Range Unicode</b> để đồng bộ tất cả lại. Tuy nhiên vẫn rất dễ lỗi khi sử dụng tính năng này. Tốt nhất vẫn là sử dụng Replace ký tự để ít lỗi xảy ra hơn.
+						</small>
+					</div>
+					<div class="form-check form-switch checkMaxChar tip-hover">
+						<input autocomplete="off" id="checkMaxChar" type="checkbox" value="true" class="input-check-switch"  checked>
+						<label for="checkMaxChar" class="form-check-label">Giới hạn số ký tự theo Font Map Gốc</label>
+						<small class="tip-show">Tùy chọn giới hạn số ký tự trong file FNT được dùng để tạo font bitmap mới. Tùy chọn này được bật mặc định. Các bạn không thể sử dụng file FNT các bạn tạo có số ký tự vượt mức ký tự có trong file font map gốc.<br><br>
+						Một số game có giới hạn số ký tự bằng một thuật toán riêng biệt. Nếu các bạn xác định được vị trí để sửa cho phù hợp với file FNT các bạn tạo thì có thể sẽ chạy. Tuy nhiên để an toàn, chỉ nên giới hạn số ký tự các bạn tạo bằng với số ký tự font map gốc chứa.<br><br>
+						Nếu các bạn tắt tùy chọn này, tool sẽ tạo font map theo giới hạn số ký tự mà các bạn tạo bằng file FNT. Có lẽ một vài game có thể chạy được, tuy nhiên khả năng thành công không cao. Do đó không khuyến khích các bạn tắt tùy chọn này.
+						</small>
+					</div>
+					<div class="form-check form-switch checkXadvance tip-hover">
+						<input autocomplete="off" id="checkXadvance" type="checkbox" class="input-check-switch" disabled="disabled">
+						<label for="checkXadvance" class="form-check-label">Thay thế cấu trúc Range Xadvance</label>
+						<small class="tip-show">Tùy chọn này được vô hiệu hóa, nó chỉ được mở khi trong khối phân tích của các bạn có một cấu trúc Range Xadvance.<br><br>
+						Nếu bạn bật tùy chọn này. Dữ liệu trong khối Range Xadvance mà bạn nghiên cứu được sẽ được thay thế bằng dữ liệu Xadvance trong file FNT font mà bạn đã tạo.</small>
+					</div>
+					<div class="form-check form-switch checkWidth tip-hover">
+						<input autocomplete="off" id="checkWidth" type="checkbox" class="input-check-switch" disabled="disabled">
+						<label for="checkWidth" class="form-check-label">Thay thế cấu trúc Range Width</label>
+						<small class="tip-show">Tùy chọn này được vô hiệu hóa, nó chỉ được mở khi trong khối phân tích của các bạn có một cấu trúc Range Width.<br><br>
+						Nếu bạn bật tùy chọn này. Dữ liệu trong khối Range Width mà bạn nghiên cứu được sẽ được thay thế bằng dữ liệu Width trong file FNT font mà bạn đã tạo.</small>
+					</div>
+					<div class="form-check form-switch checkHeight tip-hover">
+						<input autocomplete="off" id="checkHeight" type="checkbox" class="input-check-switch" disabled="disabled">
+						<label for="checkHeight" class="form-check-label">Thay thế cấu trúc Range Height</label>
+						<small class="tip-show">Tùy chọn này được vô hiệu hóa, nó chỉ được mở khi trong khối phân tích của các bạn có một cấu trúc Range Height.<br><br>
+						Nếu bạn bật tùy chọn này. Dữ liệu trong khối Range Height mà bạn nghiên cứu được sẽ được thay thế bằng dữ liệu Height trong file FNT font mà bạn đã tạo.</small>
+					</div>
+					<div class="form-check form-switch checkUnicode tip-hover">
+						<input autocomplete="off" id="checkUnicode" type="checkbox" class="input-check-switch" disabled="disabled">
+						<label for="checkUnicode" class="form-check-label">Thay thế cấu trúc Range Unicode</label>
+						<small class="tip-show">Tùy chọn này được vô hiệu hóa, nó chỉ được mở khi trong khối phân tích của các bạn có một cấu trúc Range Unicode.<br><br>
+						Nếu bạn bật tùy chọn này. Dữ liệu trong khối Range Unicode mà bạn nghiên cứu được sẽ được thay thế bằng các ký tự bạn tạo trong file FNT font mà bạn đã tạo.<br><br>
+						Nó được dùng khi bạn muốn font của bạn có thể dùng bằng tiếng việt trực tiếp không thông qua quá trình Replace Ký Tự để thể hiện tiếng việt trong game.
+						</small>
+					</div>
+				</div>
+				<div class="console-tool-build">
+					<div class="panel-character-tool left-panel">
+						<div class="panel-line-tool headPanel">SỐ LIỆU FONT MAP</div>
+						<div class="panel-line-tool max-charBIT">
+							<label><i class="fas fa-th-list"></i> Tổng số ký tự File Font Map Phân Tích: </label><b></b>
+						</div>
+						<div class="panel-line-tool wIMG">
+							<label><i class="fas fa-th-list"></i> Chiều Rộng Ảnh Font Gốc: </label><b></b>
+						</div>
+						<div class="panel-line-tool hIMG">
+							<label><i class="fas fa-th-list"></i> Chiều Cao Ảnh Font Gốc: </label><b></b>
+						</div>
+					</div>
+					<div class="panel-character-tool right-panel">
+						<div class="panel-line-tool headPanel">SỐ LIỆU FONT FNT</div>
+						<div class="panel-line-tool max-charFNT">
+							<label><i class="fas fa-th-list"></i> Tổng số ký tự File FNT Font được Tạo: </label><b></b>
+						</div>
+						<div class="panel-line-tool wIMGFNT">
+							<label><i class="fas fa-th-list"></i> Chiều Rộng Ảnh Font FNT: </label><b></b>
+						</div>
+						<div class="panel-line-tool hIMGFNT">
+							<label><i class="fas fa-th-list"></i> Chiều Cao Ảnh Font FNT: </label><b></b>
+						</div>
+					</div>
+					<div class="panel-character-list-view"></div>
+					<div class="panel-consolePage"></div>
+					<div class="panel-image-tool">
+					<div class="wrap-panel-img">
+						<img src="empty.png" id="imgTool" />
+					</div>
+				</div>
+			</div>
+				<div class="body-faq-buildFont">
+					<div class="panel-faq">
+						<ul class="list-faq">
+							<li class="item-list-faq active" type="general">Hướng Dẫn Chung</li>
+							<li class="item-list-faq" type="bmfont">Hướng Dẫn Tạo Font Bằng BMFONT</li>
+							<li class="item-list-faq" type="hiero">Hướng Dẫn Tạo Font Bằng HIERO FONT</li>
+						</ul>
+						<div class="faq-general"></div>
+						<div class="faq-bmfont"></div>
+						<div class="faq-hiero"></div>
+					</div>
+				</div>
+				<div class="body-console-buildFont"></div>
+			</div>
 			<div id="loading-run">
 				<div class="wrapbody-loading">
-					<b class="text-loading">Đang Phân Tích. Vui lòng chờ...</b>
-					<i class="fas fa-spinner fa-pulse"></i>
+				<b class="text-loading">Đang Phân Tích. Vui lòng chờ...</b>
+				<i class="fas fa-spinner fa-pulse"></i>
 				</div>
 			</div>
 			<div id="page-debug" class="show-page">
-        <div class="block-debug-item block-button-debug">
-          <div class="buttonDb" id="AllHTML" onclick="AllGetHTML(true)">GET ALL HTML</div>
-          <div class="buttonDb" id="PageHTML" onclick="AllGetHTML(false)">GET PAGE HTML</div>
-          <div class="buttonDb" id="ImportHTML1" onclick="SendHTML(true)">IMPORT ALL HTML</div>
-          <div class="buttonDb" id="ImportHTML2" onclick="SendHTML(false)">IMPORT PAGE HTML</div>
-          <div class="buttonDb" id="RunCode" onclick="CodeRun()">RUN CODE</div>
-          <div class="buttonDb" id="Hex2Text" onclick="ConvertHex()">HEX2TEXT</div>
-          <div class="buttonDb" id="SaveData" onclick="SaveData()">SAVE DATA</div>
-        </div>
-        <div class="block-debug-item block-form">
-          <label>FormData</label>
-          <textarea title="formData" id="formData"></textarea>
-        </div>
-        <div class="block-debug-item block-copy">
-        <label>Copy</label>
-          <textarea title="copy" id="copy"></textarea>
-        </div>
-        <div class="block-debug-item block-test">
-          <label>Test</label>
-          <textarea title="test" id="test"></textarea>
-        </div>
-        <div class="block-debug-item block-console">
-          <label>Console</label>
-          <textarea title="console" id="console"></textarea>
-        </div>
-        <div class="block-debug-item block-code">
-          <label>Code</label>
-          <textarea title="code" id="code"></textarea>
-        </div>
+				<div class="block-debug-item block-button-debug">
+					<div class="buttonDb" id="AllHTML" onclick="AllGetHTML(true)">GET ALL HTML</div>
+					<div class="buttonDb" id="PageHTML" onclick="AllGetHTML(false)">GET PAGE HTML</div>
+					<div class="buttonDb" id="ImportHTML1" onclick="SendHTML(true)">IMPORT ALL HTML</div>
+					<div class="buttonDb" id="ImportHTML2" onclick="SendHTML(false)">IMPORT PAGE HTML</div>
+					<div class="buttonDb" id="RunCode" onclick="CodeRun()">RUN CODE</div>
+					<div class="buttonDb" id="Hex2Text" onclick="ConvertHex()">HEX2TEXT</div>
+					<div class="buttonDb" id="SaveData" onclick="SaveData()">SAVE DATA</div>
+				</div>
+				<div class="block-debug-item block-form">
+					<label>FormData</label>
+					<textarea title="formData" id="formData"></textarea>
+				</div>
+				<div class="block-debug-item block-copy">
+					<label>Copy</label>
+					<textarea title="copy" id="copy"></textarea>
+				</div>
+				<div class="block-debug-item block-test">
+					<label>Test</label>
+					<textarea title="test" id="test"></textarea>
+				</div>
+				<div class="block-debug-item block-console">
+					<label>Console</label>
+					<textarea title="console" id="console"></textarea>
+				</div>
+				<div class="block-debug-item block-code">
+					<label>Code</label>
+					<textarea title="code" id="code"></textarea>
+				</div>
 			</div>
 		</div>
 	</div>

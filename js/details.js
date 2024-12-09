@@ -210,6 +210,7 @@ function sendTable($list){
     var $item = $list[$k];// Chọn dữ liệu
     var $titleItem = $item.title.toLowerCase().replace(/\s/g,"");
     //console.log("Title Item: " + $titleItem)
+	console.log("hex: "+$item.hex);
     $htmlData[$titleItem].Lhex = pad($item.hex);
     $htmlData[$titleItem].Bhex = SwapEndian(pad($item.hex));
     $htmlData[$titleItem].floatNumber = 0;

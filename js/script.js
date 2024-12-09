@@ -134,7 +134,7 @@ function zoomIMG(e){
 	var $text = $(e).html() + '<i class="fas fa-caret-square-down"></i>';// Lấy dữ liệu đã phóng to và thêm icont vào
 	$('.item-zoom-main').html($text);// Thêm vào danh sách
 	if($img.indexOf("empty.png") == -1){// Nếu là font ảnh
-		$('.body-page-img').css("transform","scale("+$value+")").css("-ms-transform","scale("+$value+")");// Phóng to ảnh theo kích cỡ đã chọn
+		$('.body-page-img').css("transform","scale("+$value+")").css("-ms-transform","scale("+$value+")").attr("nscale",$value);// Phóng to ảnh theo kích cỡ đã chọn 
 	}
 	else{
 		alert("Vui lòng chọn file ảnh font");// Nếu chưa có font ảnh thì báo
@@ -245,6 +245,17 @@ function AddValue($number,$box){
     $box.find('.list-block-char').append($block); // Tăng thêm block dữ liệu.
   }
   changeValue();// Chạy hàm thay đổi dữ liệu
+}
+
+// Hàm bật tắt grid
+function showGrid(e){
+    var $t = $('#turnGrid').is(":checked");
+    if($t == false){
+        $('.char-cell').addClass("hide");
+    }
+    else{
+         $('.char-cell').removeClass("hide");
+    }
 }
 
 // Hàm tách các thiết lập đã lưu
@@ -699,7 +710,10 @@ function charHover(e){// Hàm khi hover khung char của font ảnh
 }
 
 function show_tooltip(e,b){// Hàm hiện tooltip
+	$curCHAR = e;
+  var $scale = Number($('.body-page-img').attr("nscale"));
   var $widthTag = $(e)[0].offsetWidth; // Lấy width của phần tử được hover
+  var $heightTag = $(e)[0].offsetHeight; // Lấy width của phần tử được hover
   var $offset = $(e).offset();// Lấy vị trí của phần tử được hover
   var $top = $offset.top; // Lấy top
   var $left = $offset.left;// Lấy left
@@ -710,16 +724,16 @@ function show_tooltip(e,b){// Hàm hiện tooltip
   var $screenW = $("body")[0].offsetWidth;; // Lấy chiều rộng trang html
   var $screenH = $("body")[0].offsetHeight; // Lấy chiều cao trang html
   if(($right + 30) > $screenW){// Nếu gần bên lề phải trang html thì lùi tooltip lại về lề trái
-    $left = $left - $width - 30;
+    $left = ($left - $width - 30);
   }
   if(($bottom + 30) > $screenH){// Nếu gần bên lề dưới trang html thì lùi tooltip lại về lề trên
-    $top = $top - $height - 80;
+    $top = ($top - $height - 80);
   }
   if($left == 0){// Nếu đang ở lề trái thì giữ nguyên
-    $left = $widthTag
+    $left = $widthTag;
   }
   $('#tooltip').html(b);// Chèn chú thích vào tooltip
-  var $css = 'opacity: 1;left: '+($left+40)+'px ;top: '+($top+40)+'px;z-index: 1000;'; // Tạo css cho tooltio
+  var $css = 'opacity: 1;left: '+($left+$widthTag) +'px ;top: '+($top+$heightTag)+'px;z-index: 1000;'; // Tạo css cho tooltio
   $('#tooltip').attr("style",$css);// Thêm css vào tooltip
 }
 
@@ -749,8 +763,8 @@ function widthTH(){// Hàm căn chỉnh width cho thead
         var $width = $th[0].offsetWidth + 1;// Lấy chiều rộng cơ bản của td
         //console.log($width);
         if($width > 10){
-          $box2.find("th:eq("+$k+")").css("width",$width + "px");// Thêm chiều rộng cho th
-          $box1.find("th:eq("+$k+")").css("width",$width + "px");// Thêm chiều rộng cho th
+          //$box2.find("th:eq("+$k+")").css("width",$width + "px");// Thêm chiều rộng cho th
+          //$box1.find("th:eq("+$k+")").css("width",$width + "px");// Thêm chiều rộng cho th
         }
       }
     }
@@ -846,6 +860,8 @@ function changeValue(){// Hàm thay đổi dữ liệu khi thêm block hoặc
       $byte = Number($(this).val()) + $byte;// Tính tổng byte đã có
     });
     $box.find('.name-lable-byte').html('Độ Dài <b>('+$byte+' Byte)</b>');// Chèn tổng byte vào ô     
+	$box.find('.name-lable-byte').attr("title",'Độ Dài ('+$byte+' Byte)');
+	//$box.attr("title",'Độ Dài ('+$byte+' Byte)');
   }
 }
 
@@ -879,3 +895,8 @@ $(document).keydown(function(event){
 
 
 BeginRunJS();
+
+    $(".wrapper1").scroll(function(){
+        $(".wrap-result-hex")
+            .scrollLeft($(".wrapper1").scrollLeft());
+    });

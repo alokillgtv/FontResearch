@@ -224,6 +224,7 @@ function SendData($dataList,$box){
 }
 
 function ListChar($dataList){// Hàm lấy chi tiết các dữ liệu của block
+	$OBJLISTCHAR = $dataList
 	var $arrayChar = $dataList.charlist.split("||");	//Tạo một biến tách các dữ liệu file font
   //console.log($arrayChar)
 	var $itemGet = ""; //Tạo biến chứa dữ liệu font
@@ -287,21 +288,29 @@ function GetBlock($title,$byte,$type,$cals,$save,$dataList){// Hàm kiểm tra t
 			if($dataList.typeChar == 0){
 				var $hex = SwapEndian($value); //Chuyển dữ liệu sang dạng Float đã được tính thêm phép tính bổ sung nếu có và kiểu dữ liệu là Litter Endian
 				var $float = hex2float($hex); // Chuyển hex sang float
-				$result = Round(eval($float + $cals),2);
 			}else{
 				var $float = hex2float($value);
-				$result = Round(eval($float + $cals),2);
 			}
+			if($hex == "00000000" || $value == ""){
+				$float = 0;
+			}
+			$result = Round(eval($float + $cals),2);
       break;
 		case 4:	//UV Left
 			if($dataList.typeChar == 0){
 				var $hex = SwapEndian($value);
 				var $float = hex2float($hex)
 				var $left = $float * $dataList.width;
-				$result = Round(eval($left + $cals),2);
+				if($hex == "00000000"){
+					$left = 0;
+				}
+				$result = Round(eval($left + $cals),2)
 			}else{
 				var $float = hex2float($value);
 				var $left = $float * $dataList.width;
+				if($value == "00000000"){
+					$left = 0;
+				}
 				$result = Round(eval($left + $cals),2);
 			}
       break;
@@ -310,10 +319,16 @@ function GetBlock($title,$byte,$type,$cals,$save,$dataList){// Hàm kiểm tra t
 				var $hex = SwapEndian($value);
 				var $float = hex2float($hex)
 				var $top = $float * $dataList.height;
+				if($hex == "00000000"){
+					$top = 0;
+				}
 				$result = Round(eval($top + $cals),2);   
       }else{
 				var $float = hex2float($value);
 				var $top = $float * $dataList.height;
+				if($value== "00000000"){
+					$top = 0;
+				}
 				$result = Round(eval($top + $cals),2);
 			}
       break;
@@ -322,10 +337,16 @@ function GetBlock($title,$byte,$type,$cals,$save,$dataList){// Hàm kiểm tra t
 				var $hex = SwapEndian($value);
 				var $float = hex2float($hex)
 				var $right = $float * $dataList.width;
+				if($hex == "00000000"){
+					$right = 0;
+				}
 				$result = Round(eval($right + $cals),2);
       }else{
 				var $float = hex2float($value);
 				var $right = $float * $dataList.width;
+				if($value== "00000000"){
+					$right = 0;
+				}
 				$result = Round(eval($right + $cals),2);
 			}
       break;
@@ -334,10 +355,16 @@ function GetBlock($title,$byte,$type,$cals,$save,$dataList){// Hàm kiểm tra t
 				var $hex = SwapEndian($value);
 				var $float = hex2float($hex)
 				var $bottom = $float * $dataList.height;
+				if($hex == "00000000"){
+					$bottom = 0;
+				}
 				$result = Round(eval($bottom + $cals),2);
 			}else{
 				var $float = hex2float($value);
 				var $bottom = $float * $dataList.height;
+				if($value== "00000000"){
+					$bottom = 0;
+				}
 				$result = Round(eval($bottom + $cals),2);
 			}
       break;
@@ -354,10 +381,16 @@ function GetBlock($title,$byte,$type,$cals,$save,$dataList){// Hàm kiểm tra t
 				var $hex = SwapEndian($value);
 				var $float = hex2float($hex)
 				var $left = $float * $dataList.width;
+				if($hex == "00000000"){
+					$left = 0;
+				}
 				$result = Round(eval($left + $cals),2);
 			}else{
 				var $float = hex2float($value);
 				var $left = $float * $dataList.width;
+				if($value == "00000000"){
+					$left = 0;
+				}
 				$result = Round(eval($left + $cals),2);
 			}
       break;
@@ -366,10 +399,16 @@ function GetBlock($title,$byte,$type,$cals,$save,$dataList){// Hàm kiểm tra t
 				var $hex = SwapEndian($value);
 				var $float = hex2float($hex)
 				var $top = $float * $dataList.height;
-				$result = Round(eval($top + $cals),2);   
+				if($hex == "00000000"){
+					$top = 0;
+				}
+				$result = Round(eval($top + $cals),2);
       }else{
 				var $float = hex2float($value);
 				var $top = $float * $dataList.height;
+				if($value == "00000000"){
+					$top = 0;
+				}
 				$result = Round(eval($top + $cals),2);
 			}
       break;
@@ -378,10 +417,16 @@ function GetBlock($title,$byte,$type,$cals,$save,$dataList){// Hàm kiểm tra t
 				var $hex = SwapEndian($value);
 				var $float = hex2float($hex)
 				var $left = $float * $dataList.width;
+				if($hex == "00000000"){
+					$left = 0;
+				}
 				$result = Round(eval($left + $cals),2);
 			}else{
 				var $float = hex2float($value);
 				var $left = $float * $dataList.width;
+				if($value == "00000000"){
+					$left = 0;
+				}
 				$result = Round(eval($left + $cals),2);
 			}
       break;
@@ -463,6 +508,8 @@ function fontimgfile(e){// Hàm khi chọn file image font
       $item.name = $file.name;// Lấy tên file
       $item.path = $file.webkitRelativePath;// Lấy path file
       $item.imgpath = URL.createObjectURL($file);;// Tạo đường dẫn font ảnh
+	 var $wBefore = $('#img-view')[0].naturalWidth;
+      var $hBefore = $('#img-view')[0].naturalHeight;
       if($numberImage == 0){
         $('#pathImg').val($item.path);// Chèn tên file vào khung đường dẫn
         $('#img-view').attr("src",$item.imgpath);// Chèn đường dẫn vào ảnh 
@@ -471,11 +518,9 @@ function fontimgfile(e){// Hàm khi chọn file image font
       else{
         $htmlItem += '<li class="item-page-img button-page-img" imagePath="'+$item.path+'" imagePage="'+$numberImage+'" imageSrc="'+$item.imgpath+'" onclick="changeImg(this)">Ảnh '+($numberImage + 1)+'</li>';
       }
-      var $wBefore = $('#img-view')[0].naturalWidth;
-      var $hBefore = $('#img-view')[0].naturalHeight;
-      $htmlItem += '<li class="item-size-image"><div title="Chiều dài của ảnh font hiện tại."><label>Width</label><span><input class="width-input-img" type="number" placeholder="Nhập Width" value="'+$wBefore+'"></span></div><div title="Chiều cao của ảnh font hiện tại."><label>Height</label><span><input placeholder="Nhập Height" class="height-input-img" value="'+$hBefore+'" type="number"/></span></div></li>';
-    }
+    }	
   }
+	$htmlItem += '<li class="item-size-image"><div title="Chiều dài của ảnh font hiện tại."><label>Width</label><span><input class="width-input-img" type="number" placeholder="Nhập Width" value="'+$wBefore+'"></span></div><div title="Chiều cao của ảnh font hiện tại."><label>Height</label><span><input placeholder="Nhập Height" class="height-input-img" value="'+$hBefore+'" type="number"/></span></div></li>';
   $('.change-page-img').html($htmlItem);  
 }
 
@@ -486,6 +531,8 @@ function changeImg(e){
   var $box = $(e).closest(".change-page-img");
   var $wBefore = $('#img-view')[0].naturalWidth;// Lấy width ảnh gốc
   var $hBefore = $('#img-view')[0].naturalHeight;// Lấy height ảnh gốc
+  var $srcBefore = $('#img-view').attr("src");
+  var $srcAfter = $src;
   $box.find(".active").removeClass("active");
   $(e).addClass("active");
   $('#img-view').attr("src",$src);
@@ -496,6 +543,7 @@ function changeImg(e){
   setTimeout(function(){
     var $wAfter = $('#img-view')[0].naturalWidth;// Lấy width ảnh gốc
     var $hAfter = $('#img-view')[0].naturalHeight;// Lấy height ảnh gốc
+	var $srcBefore = $src;
    // console.log("$wBefore: " + $wBefore);
     //console.log("$hBefore: " + $hBefore);
    // console.log("$wAfter: " + $wAfter);
@@ -503,6 +551,11 @@ function changeImg(e){
     if($wBefore != $wAfter || $hBefore != $hAfter){
       checkFont();
     }
+	else if($srcAfter != $srcBefore){
+		checkFont();
+	}
+	$('.width-input-img').val($wAfter);
+	$('.height-input-img').val($hAfter);
   },1000);
 }
 
@@ -763,6 +816,7 @@ function dataValue($obj){
 // Hàm xuất dữ liệu bitmap font
 function dataCheck($obj,$box){
 	try{// Chạy thử
+	$OBJSUPER = $obj
     var $max = $obj.length; // Tao biến tổng số dữ liệu
     var $allHTML = ""; // Tạo biến chứa tổng dữ liệu
     var $byteMax = 0;// Số byte trong 1 block
@@ -823,11 +877,11 @@ function dataCheck($obj,$box){
           $titleTagAdd = "<b>* Chú giải:</b> " + $title + " của ký tự.";
           // Kiểm tra từng kiểu dữ liệu và thêm vào style cùng chú giải
           if($title == "Width"){
-            $objStyle.width = $block[$e].value;
+            $objStyle.width = $block[$e].value - 1;
             $titleTagAdd = "<b>* Chú giải:</b> Chiều rộng của ký tự.";
           }
           if($title == "Height"){
-            $objStyle.height = $block[$e].value;
+            $objStyle.height = $block[$e].value - 1;
             $titleTagAdd = "<b>* Chú giải:</b> Chiều cao của ký tự.";
           }
           if($title == "X" || $title == "Left" || $title == "UV Left"){
@@ -862,14 +916,14 @@ function dataCheck($obj,$box){
         $objStyle.bottom = Number($objStyle.top) + Number($objStyle.height);
       }
       if($objStyle.right != "" && $objStyle.bottom != "" && $objStyle.width == "" && $objStyle.height == ""){// Nếu có biến right và bottom nhưng không có width và height thì tính width và height
-        $objStyle.width = Number($objStyle.right) - Number($objStyle.left);
-        $objStyle.height = Number($objStyle.bottom) - Number($objStyle.top);
+        $objStyle.width = Number($objStyle.right) - Number($objStyle.left) - 1;
+        $objStyle.height = Number($objStyle.bottom) - Number($objStyle.top) - 1;
       }
       for(var $e in $objStyle){// Chạy lập theo style
         var $value = $objStyle[$e];
         if($value != ""){// Nếu có dữ liệu
           if($e == "width" || $e == "height"){
-            $value = Number($value) + 1;
+            $value = Number($value) //+ 1;
           }
           $style += $e + ": " + $value + "px;";// Chuyển các dữ liệu sang css
           $titleHTML2 += $e.toUpperCase() + ": <b>" + String($value).replace(/(\S+\.\S\S)\S+/,"$1") + "</b><br>";// Replace thông số css để lấy chú thích
@@ -877,7 +931,7 @@ function dataCheck($obj,$box){
       }
       $style = $style.replace(/Character.*?;/,"");
       $listChar += '<div pageImg="'+$page+'" class="char-cell" onclick="jumpChar(this)" onmouseover="charHover(this)" onmouseout="CharHoverHide(this)"  charnumber="'+$idCharacter+'" style="'+$style+'"><span class="hover-block-text">'+$titleHTML2+'<b>Nhấn Để Chuyển Đến<br>Khung Phân Tích</b></span></div>'; // Nối dữ liệu chứa tọa độ ký tự để tạo khung trên hình ảnh font
-      $allHTML += $item + '<td class="td-button"><button class="btn-char-des" onclick="viewChar(this)">Giải Thích</button></td></tr>';// Thêm phím phân tích dữ liệu
+      $allHTML += $item + '<td class="td-button"><button class="btn-char-des" onclick="viewChar(this)">Xem</button></td></tr>';// Thêm phím phân tích dữ liệu
     }
     $table += $header + "<th>Phân Tích</th></tr></thead><tbody>" + $header + '<th>Phân Tích</th></tr>' + $allHTML + "</tbody></table></div>";// Nối các dữ liệu vào table
     //$('#test').text($header);// Chèn dữ liệu vào form test

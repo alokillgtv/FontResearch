@@ -37,6 +37,8 @@ function setFileHex(){
   $HEXTEXTAREA = $hexFile;// Lưu dữ liệu HEXTAREA lại
   $('.textarea-file-hex').val($hexFile);// Chèn dữ liệu hex vào form
   $('.textarea-file-hex-copy').html($hexFile.replace(/\n/gi,"<br>"))
+  var $texHeight = $('.offset-text-file-hex')[0].offsetHeight;// Lấy height TEXTAREA
+  $('.textarea-file-hex').attr("style","height:" + $texHeight + "px");
   //TextareaHeight(); // Chạy hàm thiếp lập chiều cao form
 }
 
@@ -85,7 +87,7 @@ function GetCusorText(e){// Hàm chọn 1 ký tự ở khung ASNII
     }
     else{
       convertValue("")
-      $('.item-text-number span').text("Dữ liệu quá dài.")
+      $('.item-text-number span').text("Dữ liệu quá dài.");
     }
     $object.pos = pos;// Thêm object vị trí con trỏ
     $OBJECTCUSOR = $object;// Lưu dữ liệu vào biến toàn cục
@@ -169,6 +171,8 @@ function GetCusor(e){// Hàm thực thi khi chọn con trỏ ở khung HEX
     else{
       convertValue("");
       $('.item-text-number span').text("Dữ liệu quá dài.")
+	  console.log("select HEX JOBJHEX")
+	  JOBJHEX = convertValue($select);
     }
     fillHighlight(pos)// Highlight khung ASNII
     setFormOffset($start,$end,$length); // Thêm vào form offset
@@ -581,7 +585,7 @@ function convertValue($select){// Hàm chuyển đổi các dữ liệu khi ch�
       if($select.length <= 8){// Nếu khối hex nhỏ hơn 4 byte
         $object.Negative = numberNegative($object.hex);// Chuyển khối hex sang số âm
         $object.NegativeSwap = numberNegative($object.swap);// Chuyển khối hex swap sang số âm
-        var $Negative = "<b>Origin: </b><b>" + $object.Negative + "</b><br><b>SWAP: </b><b>" + $object.NegativeSwap + "</b>";
+        var $Negative = "<b>" + $object.Negative + "</b>|<b>" + $object.NegativeSwap + "</b>";
         $('.item-Negative-number span').html($Negative);// Gán các giá trị vào cột phải dữ liệu
       }
       if($select.length == 8){// Nếu khối hex bằng 4 byte
@@ -589,8 +593,8 @@ function convertValue($select){// Hàm chuyển đổi các dữ liệu khi ch�
         $object.Float = Round(hex2float($object.hex),6);// Lưu lại object Float
         $('.item-float-number span').text($object.Float);
         $('.item-floatSwap-number span').text($object.FloatSwap);
-        var $width = $('.width-input-img').val(); // Lấy width ảnh
-        var $height = $('.height-input-img').val();// Lấy height ảnh
+        var $width = $('.active .width-input-img').val(); // Lấy width ảnh
+        var $height = $('.active .height-input-img').val();// Lấy height ảnh
         if($width && $height){
           $object.uv.type = true;// Có UV
           $object.uv.width = $object.Float * $width;
@@ -753,8 +757,8 @@ function setCursorPos(input, start, end) {// Hàm đặt con trỏ vào vị tr�
 
 function byteRows(e){// Hàm kiểm tra số byte trong một hàng
   var $value = e.value;// Lấy số byte
-  if($value < 16 || $value > 32){// Nếu số byte nhỏ hơn 16 và lớn hơn 32
-    alert("Vui lòng chỉ nhập số byte từ 16 đến 32.");
+  if($value < 16 || $value > 80){// Nếu số byte nhỏ hơn 16 và lớn hơn 32
+    alert("Vui lòng chỉ nhập số byte từ 16 đến 80.");
   }
   else{
     setFileHex();// Tạo lại file hex với số byte chỉ định
