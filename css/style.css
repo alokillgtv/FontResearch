@@ -555,8 +555,8 @@ ul.list-block-char select {
   z-index: 999999;
   height: 100%;
 }
-#page-debug {
-  //display: none;
+.page-debug {
+  display: none;
 }
 #tooltip {
   background-color: #fff;
