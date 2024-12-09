@@ -556,7 +556,7 @@ ul.list-block-char select {
   height: 100%;
 }
 #page-debug {
-  display: none;
+  //display: none;
 }
 #tooltip {
   background-color: #fff;
