@@ -709,8 +709,15 @@ function charHover(e){// Hàm khi hover khung char của font ảnh
   show_tooltip(e, $(e).find("span").html());// Chèn vào tooltip và cho hiện nó
 }
 
+function tooltipX(event){
+	var $top = Number(event.clientY) + 50;
+	var $left = Number(event.clientX) + 50;
+	var $css = "top:" + $top + "px;left: " + $left +"px;z-index: 1000;opacity: 1;"; 
+	$('#tooltip').attr("style",$css)
+}
+
 function show_tooltip(e,b){// Hàm hiện tooltip
-	$curCHAR = e;
+  $curCHAR = e;
   var $scale = Number($('.body-page-img').attr("nscale"));
   var $widthTag = $(e)[0].offsetWidth; // Lấy width của phần tử được hover
   var $heightTag = $(e)[0].offsetHeight; // Lấy width của phần tử được hover
@@ -733,8 +740,8 @@ function show_tooltip(e,b){// Hàm hiện tooltip
     $left = $widthTag;
   }
   $('#tooltip').html(b);// Chèn chú thích vào tooltip
-  var $css = 'opacity: 1;left: '+($left+$widthTag) +'px ;top: '+($top+$heightTag)+'px;z-index: 1000;'; // Tạo css cho tooltio
-  $('#tooltip').attr("style",$css);// Thêm css vào tooltip
+ // var $css = 'opacity: 1;left: '+($left+$widthTag) +'px ;top: '+($top+$heightTag)+'px;z-index: 1000;'; // Tạo css cho tooltio
+ // $('#tooltip').attr("style",$css);// Thêm css vào tooltip
 }
 
 // Hàm sự kiện khi cuộn
