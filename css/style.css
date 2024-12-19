@@ -1257,6 +1257,7 @@ thead .table-header {
   margin: 0px 20px;
   position: absolute;
   z-index: 3;
+  cursor: crosshair;
 }
 .change-page-img {
   display: block;
@@ -2361,5 +2362,42 @@ input:checked + .slider:before {
     position: absolute;
     left: 0;
     right: 0;
-    top: 100px;
+    top: 190px;
+}
+ul.change-box-img li {
+    display: inline-block;
+    width: 13.2%;
+    text-align: center;
+    background: white;
+}
+
+ul.change-box-img .title-box {
+    display: block;
+    width: 100%;
+    background: cadetblue;
+    color: white;
+    font-size: 1.1em;
+    padding: 2px 0;
+}
+
+ul.change-box-img {
+    position: absolute;
+    top: 94px;
+    border: 1px solid #ccc;
+    width: 95%;
+    margin: 5px 0;
+    text-align: center;
+}
+
+ul.change-box-img input {
+    width: 70%;
+    border: 0!important;!importan;!importa;!import;!impor;!impo;!imp;!im;!i;!;
+    box-shadow: none;
+    box-sizing: content-box;
+}
+
+ul.change-box-img li b {
+    display: block;
+    color: crimson;
+    font-weight: bold;
 }

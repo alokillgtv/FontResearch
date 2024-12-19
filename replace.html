@@ -1,0 +1,317 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta content="text/html; charset=utf-8" />
+    <title>Công Cụ Nối Và Tách File TXT</title>
+    <meta http-equiv="content-script-type" content="text/javascript" />
+    <meta http-equiv="content-style-type" content="text/css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/markai30/googlesheet/d843ce56/FileSaver.js"></script>
+    <script type="text/javascript" src="https://cdn.rawgit.com/markai30/googlesheet/36e91b3e/jszip.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.0/jquery-confirm.min.js"></script>
+	<link rel="stylesheet" href="lib/codemirror.css">
+	<script src="lib/codemirror.js"></script>
+	<script src="mode/javascript/javascript.js"></script>
+	<!-- Chèn Css từ stylechat.css -->
+	<link rel="stylesheet" href="style.css">
+
+  <style>
+	<!--  
+:not(:root):-webkit-full-screen{object-fit: none!important}::-webkit-scrollbar{width: 3px}::-webkit-scrollbar-track{background: #f1f1f1}::-webkit-scrollbar-thumb{background: #888}::-webkit-scrollbar-thumb:hover{background: #555}ul::-webkit-scrollbar{width: 10px}body#body-page{max-width: 1200px;margin: 10px auto}#main-page,div#main-list-file{width: 670px;border: 2px solid #ccc;box-sizing: border-box;border-radius: 5px;display: inline-block;height: 790px;float: left;margin: 0 30px}small.copyright{display: block;float: left;text-align: center;width: 100%;margin: 20px;color: white;font-size: 18px}div#main-list-file{width: 400px;padding: 20px}div#main-body{display: block;float: left}.title-main{border-bottom: 2px solid #ccc;padding: 10px}.Tool-Join,.Tool-Split{display: inline-block;width: 332px;float: left;height: 640px;position: relative}.Tool-Button{}.Tool-Join{border-right: 2px solid #ccc}.Tool-Button h4{margin: 0;padding: 5px;text-align: center;font-size: 20px;color: white;background: brown}.main-join{padding: 5px}.Tool-Split h4{background: darkblue}label.title-info{padding: 5px;line-height: 20px}input.input-val{margin: 10px auto;padding: 5px;width: 294px;font-size: 20px;display: block}.button-join input{opacity: 0;position: absolute;top: 0;left: 0;width: 100%;height: 100%;cursor: pointer}.button-join{position: absolute;text-align: center;background: cadetblue;color: white;font-size: 22px;cursor: pointer;padding: 10px;margin-top: 50px;width: 300px;bottom: 20px}.button-join:hover{background: black}.title-main h3{font-size: 18px;margin: 0}h1{margin: 10px;color: white}html{background: black}div#main-page,#main-list-file{background: white}label.title-small{display: block;margin: 10px 0;cursor: pointer;border: 1px dashed #ccc;padding: 5px;font-weight: bold;font-size: 20px}.stastus-file{margin: 10px 0;border: 1px dashed #ccc;padding: 10px;font-size: 24px;font-weight: bold}ul.list-file{height: 630px;font-size: 18px;padding-left: 20px;overflow: auto;overflow-x: hidden;counter-reset: decimal}.title-list-file{font-size: 18px}li.item-file,.Item-child{white-space: nowrap;overflow: hidden;text-overflow: ellipsis;width: 330px;padding: 3px 0;cursor: pointer}li.item-file:before{content:"▼";font-size: 11px;vertical-align: middle}label.title-small.limit-line{display:none}.limit-line[style*="inline"]{display: block!important}ul.list-item-child{padding-left: 5px;margin-left: 10px;list-style-type: disc;border-left: 1px solid #ccc}label.file-item{vertical-align: middle}li.Item-child{padding: 1px;width: 300px}li.Item-child:before{content: "►";font-size: 11px;padding-right: 5px}.loading-run{z-index:-1;opacity:0;position:absolute;background: #0000008a;width: 100%;height: 100%;cursor: no-drop}div#main-page{position: relative}.loading-run.active{z-index: 9;opacity: 1}.text-loading{position: absolute;top: 320px;display: block;width: 100%;text-align: center;color: white;font-size: 35px;text-shadow: 1px 1px 1px black}.complete-gif{display:none}span.icont-load{zoom: 0.5;display: block}li.item-file{border-bottom: 1px dashed #ccc;cursor: pointer!important}li.item-file.split-item:before{counter-increment: decimal;content: counters(decimal, ".", decimal) ". ";font-size: 17px;font-weight: bold}li.item-file.split-item{border-bottom: 1px dashed #ccc}li.item-file{border-bottom: 1px dashed #ccc;cursor: pointer!important}li.item-file.active:before{content: "►"}small.copyright a{color: white;text-shadow: 1px 1px 1px mediumblue,1px 1px 1px mediumblue}
+-->
+</style>
+</head>
+<body id="body-page">
+<ul class="type-tool" style="text-align: center;">
+	<li class="tool-item active join-tool">Công Cụ Nối File</li>
+	<li class="tool-item pack-tool">Công Cụ Xử Lý Text</li>
+	<li class="tool-item split-tool">Công Cụ Tách Text</li>
+	<li class="tool-item js-tool">Công Cụ Thực Thi</li>
+</ul>
+<div id="main-body">
+	<div id="main-page">
+		<div class="page-content page-join active" style="display:block">
+			<div class="loading-run">
+				<div class="text-loading">
+					<span class="text-load">Đang thực thi, xin vui lòng chờ...</span>
+					<span class="icont-load">
+						<img class="loading-gif" src="https://lh6.googleusercontent.com/noNaJrjKRPcX0jaHVSowcjnV7LarET0EhgfcXIaj8RQu_CJ5QN1nyz00BfAJMhCKQZEx3IZ7y-nnc8GFV9B_5ISwyLXVApN9VXaskUXcI8Sap-6PzaCA-PSubo3VIiAMQFmfhZd7" />
+						<img class="complete-gif" src="https://lh6.googleusercontent.com/9Q3KYI6QqHUQAWbkrIEf9STY4jOICsM_a9P90GxN7qxx6ppWvbxB2pUli1_Xpe961QoHBmqh3d43mJdSv6QRpewZG48Cm9TAB0ZgbOtPi8bIvknUSBeXAznJ65a42nK0MT_bn5Pn" />
+					</span>
+				</div>
+			</div>
+			
+			<div class="title-main">
+				<h3><span style="color: #000000;">
+				Đây là công cụ để nối các file txt hoặc tách một file txt.<br>
+				Công cụ này được dùng chung với công cụ dịch nhóm do mình phát triển.<br><br>
+				Google Sheet bị giới hạn khi tạo nhiều file sheet hoặc tên sheet quá dài, đồng thời khi bạn upload quá nhiều sheet cũng sẽ tốn thời gian hơn. Khi đó việc, gộp chung nhiều file nhỏ thành một file sẽ đỡ tốn thời gian và dễ kiểm soát hơn.</span></h3>
+			</div>
+			
+			<div class="Tool-Button">
+				<div class="Tool-Join">
+					<h4>Gộp File Text</h4>
+					<div class="main-join">
+						<label class="title-info">
+							Trình gộp nhiều file lại thành một file, có thể upload nhiều file.<br><br>
+							Các bạn hãy nhập tổng số file cần gộp vào một file.<br><br>
+							Khi các bạn muốn tách file đã gộp này, hãy dùng công cụ tách file.
+							Chỉ hỗ trợ file txt, csv, srt
+						</label>
+						
+						<label class="title-small limit-file">
+							Tổng số file muốn gộp lại thành 1 file.
+							<input type="number" placeholder="Nhập số file text cần gộp vào một file." value="100" class="input-val input-join" name="number-join" />
+						</label>
+						<label class="title-small">
+							<input type="radio" name="join-type" value="join" checked> Gộp các file nhỏ lại.
+						</label>
+						<label class="title-small">
+							<input type="radio" name="join-type" value="split"> Gộp file từ công cụ tách.
+						</label>
+						<div class="button-upload-file">
+							<div>Chọn kiểu Upload File</div>
+							<label title="Upload một hoặc nhiều file. Thích hợp cho dạng text chứa chỉ trong 1 thư mục.">
+								<input type="radio" name="upload-type-file" value="file" checked> Upload File
+							</label>
+							<label title="Khi bạn chọn upload thư mục, tất cả file khi gộp sẽ có thư mục chứa.&#10;Và khi tách sẽ tự động tạo thư mục như lúc bạn gộp.">
+								<input type="radio" name="upload-type-file" value="dir"> Upload Thư Mục
+							</label>
+						</div>
+						<div class="button-join">
+							<span class="btt-join-text">Upload File Cần Gộp</span>
+							<input type="file" id="fileJoin" accept="text/plain,.csv,.srt" multiple/>
+						</div>
+					</div>
+				</div>
+				
+				<div class="Tool-Split">
+					<h4>Tách File Text</h4>
+					<div class="main-join">
+						<label class="title-info">
+							Trình tách file text thành nhiều file đã gộp trước đó.<br><br>
+							Bạn cũng có thể tách một file có dung lượng lớn thành các file khác với số dòng giới hạn bạn đề ra.<br><br>
+							Vd: Bạn có một file có hơn 20000 dòng. Nếu bạn giới hạn chúng vào khoảng 5000 dòng, thì khi đó công cụ sẽ tách dùm bạn ra 4 file text nhỏ.<br><br>
+							Bạn có thể gộp lại các file đã tách này bằng công cụ gộp.
+						</label>
+						<div class="option-split">
+							<label class="title-small">
+								<input type="radio" name="split-type" value="join" checked> Tách các file đã gộp bằng công cụ gộp file.
+							</label>
+							<label class="title-small">
+								<input type="radio" name="split-type" value="split"> Tách file có dung lượng lớn thành nhiều file nhỏ.
+							</label>
+							<label class="title-small limit-line">
+								Số dòng giới hạn trong một file
+								<input type="number" placeholder="Điền số dòng giới hạn." value="5000" class="input-val input-split" name="number-split"/>
+							</label>
+						</div>
+						<div class="button-join button-split">
+							<span class="btt-join-text btt-split-text">Upload File Cần Tách</span>
+							<input type="file" id="fileSplit" accept="text/plain,.csv,.srt" multiple/>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+		
+		<div class="page-content page-encode">
+			<div class="title-main">
+				<p>Đây là công cụ chuyển đổi ký tự theo các ký tự sẵn có, dùng để việt hóa các game không hỗ trợ font việt.<br />
+				Công cụ này sẽ chuyển đổi những từ tiếng việt thành những từ bạn soạn sẵn ở khung kế bên.<br />
+				Ngoài ra, các bạn có thể chuyển đổi ngược lại các ký tự để kiểm tra.<br />
+				Các bạn có thể tùy chọn cách replace, bằng cách chép text, hoặc upload file để replace đồng loạt.<br />
+				VD: Các bạn có một đoạn text như sau:</p>
+				<p><code>
+				~w~Bạn đã sống sót qua cuộc càn quét đầu tiên!</code></p>
+				<p><code></code></p>
+				<p>Và sau khi được replace các ký tự tiếng việt thành các ký tự phù hợp trong game:</p>
+				<p><code>~w~B¥n ³¤ sÊng sÅt qua cuÎc c¢n quµt ³®u ti¹n!</code></p>
+			</div>
+			<ul class="option-result">
+				<li class="type-option text-copy active" title="Các bạn có thể mã hóa các đoạn text&#013;bằng cách nhập text vào khung bên dưới.">Nhập Text</li>
+				<li class="type-option text-upload" title="Các bạn có thể mã hóa nhiều file liên tiếp&#013;bằng cách upload file để mã hóa.">Upload Text</li>
+			</ul>
+			<div class="input-page">
+				<textarea placeholder="Nhập đoạn text bạn cần mã hóa ký tự vào đây." class="text-result"></textarea>
+				<ul class="tool-select">
+					<li class="select-all select-item">Select All</li>
+					<li class="copy-all select-item">Copy</li>
+				</ul>
+			</div>
+			<div class="list-file-encode">
+
+				<div class="body-list-file">
+					<div class="body-file-char body-left-char">
+						<label>Danh Sách File Cần Chuyển Đổi: </label>
+						<ul class="all-file-upload">
+						</ul>
+					</div>
+					<div class="body-file-char body-right-char">
+						<label title="Chỉ hỗ trợ những file thuần text như txt, csv, srt">Upload File</label>
+						<input type="file" id="fileUploadChar" accept="text/plain,.csv,.srt" multiple/>
+					</div>
+				</div>
+			</div>
+			
+
+		</div>
+		<div class="page-content page-splitchar">
+			<div class="title-main">
+				<p>Công cụ tách các cụm từ</p>
+			</div>
+			<div class="tool-split-char">
+				<div class="wrap-btn-text-input">
+					<label>Thuật Toán Regexp</label>
+					<input type="text" class="charRegexpSplit" placeholder="Nhập các cụm từ cần tách, có thể dùng regexp" />
+				</div>
+				<div class="wrap-btn-text-input split-text-input">
+					<label>Từ Thay Thế Khi Tách Ra</label>
+					<input type="text" class="charRegexpJoin" placeholder="Nhập các ký tự tạm thay thế" />
+				</div>
+				<button class="submit-split" onclick="submitSplit()">Tách Cụm Từ</button>
+				<button class="submit-join" onclick="submitJoin()">Gộp Cụm Từ</button>
+				<button class="submit-replace" onclick="submitReplaceCheck()">Replace Cụm Từ</button>
+				<button class="submit-erase" onclick="eraseForm()">Xóa Trống</button>
+				<div class="wrap-btn-upload-char formleft">
+					<label>Upload File Nguồn</label>
+					<input title="Dùng để upload file nguồn nếu text của bạn quá nặng.&#10&#10Chỉ hỗ trợ những file thuần text như txt, csv, srt " type="file" id="fileUploadXML" onchange="formLeft(this)" accept="text/plain,.csv,.srt,.xml" multiple/>
+				</div>
+				<div class="wrap-btn-upload-char formright">
+					<label>Upload File Replace</label>
+					<input title="Dùng để upload file replace nếu text replace của bạn quá nặng.&#10&#10Chỉ hỗ trợ những file thuần text như txt, csv, srt " type="file" id="fileUploadTEXT" onchange="formRight(this)" accept="text/plain,.csv,.srt"/>
+				</div>
+				<div class="option-button-change active" title="Tùy chọn khi upload file lên, text sẽ được chuyển vào khung text.&#10;&#10;Hoặc nó sẽ được lưu vào bộ nhớ để xử lý và khi kết thúc thì được tải tập tin về.">
+					<button class="option-btn-char option-form" onclick="optionForm()">Chèn Vào Form</button><button class="option-btn-char option-download" onclick="optionDownload()">Tải File Về</button>
+				</div>
+				
+			</div>
+			<div class="input-page">
+				<div class="wrap-area-form">
+					<button class="copyform" onclick="copyAll(this)">COPY ALL</button>
+					<textarea placeholder="&#10;&#10;Nhập các đoạn text nguồn vào.&#10;&#10;Những đoạn text này sẽ được tách và thay thế bằng các ký tự tùy theo lựa chọn của bạn." class="char-result-text"></textarea>
+				</div>
+				<div class="wrap-area-form">
+					<button class="copyform daocumtu" onclick="DAOCUMTU(this)">ĐẢO CỤM TỪ</button>
+					<button class="copyform" onclick="copyAll(this)">COPY ALL</button>
+					<textarea placeholder="&#10;&#10;Khung này là nơi để tách các cụm từ bằng các thuật toán Regexp hoặc Replace các cụm từ qua lại.&#10;&#10;VD Replace: Text Nguồn	Text Replace.&#10;&#10;Mỗi cụm từ tách biệt bằng một dấu tab. Cái này các bạn copy từ 2 cột bên Excel qua là có tab liền.&#10;&#10;Các bạn nên soạn cụm từ ở file Excel sẽ dễ thực hiện hơn.&#10;Các ví dụ cụm từ như bên dưới: Yume sẽ được thay thế bằng #N2373Z#&#10;&#10;&#10;Yume	 #N2373Z# &#10;Monk	 #N2374Z# &#10;Wolf	 #N2375Z# &#10;Heal	 #N2376Z# &#10;Slow	 #N2377Z# &#10;Hook	 #N2378Z# 	" class="char-result-char"></textarea>
+				</div>
+			</div>	
+		</div>
+	
+		<div class="page-content page-js">
+			<div class="title-main">
+				<p>Công cụ thực thi</p>
+			</div>
+			<div class="ToolJSBtn">
+				<button class="submit-erase" onclick="RunJS()">Chạy Hàm</button>
+			</div>
+			<div class="input-page">
+				<div class="wrap-area-form code-wrap">
+					<button class="copyform" onclick="copyAll(this)">COPY ALL</button>
+					<textarea id="code-form" placeholder="&#10;&#10;Nhập javascript.&#10;&#10;Biến $BOX (Khung Kết Quả) và $VAL (Dữ liệu khung trả về)&#10;&#10;GETVAL(); Hàm lấy kết quả trả về" class="char-result-text text-js"></textarea>
+				</div>
+				<div class="wrap-area-form">
+					<button class="copyform" onclick="copyAll(this)">COPY ALL</button>
+					<textarea id="result-form" placeholder="Ô thực thi 1" class="char-result-char result0-js"></textarea>
+				</div>
+				<div class="wrap-area-form">
+					<button class="copyform" onclick="copyAll(this)">COPY ALL</button>
+					<textarea id="result-form2" placeholder="Ô thực thi 2" class="char-result-char result0-js"></textarea>
+				</div>
+				<div class="wrap-area-form form-bottom">
+					<button class="copyform" onclick="copyAll(this)">COPY ALL</button>
+					<textarea id="debug-form" placeholder="Khung debug tại đây" class="char-result-char debug-js"></textarea>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="main-list-file">
+		<div class="page-list page-join">
+			<div class="stastus-file">Trạng Thái:<span class="type-status"></span></div>
+			<div class="title-list-file">Danh Sách File: </div>
+			<ul class="list-file">
+			</ul>
+		</div>
+		
+		<div class="page-list page-encode">
+			<div class="btn-encode">
+				<label class="title-btn">
+					<button class="change-input btn-switch" title="Chuyển đổi cách xem các ký tự.&#013;Các bạn có thể chuyển nó về lại dạng text để dễ edit hơn.">Chuyển Đổi</button>
+				</label>
+				<label class="title-btn">				
+					<button class="change-input btn-import" title="Nhập lại các ký tự.&#013;Sử dụng file json khi lưu ký tự để dùng ký tự mới.">Nhập Ký Tự
+					<input type="file" id="jsonChar" accept="text/plain" multiple/>
+					</button>
+				</label>
+				<label class="title-btn">
+					<button class="change-input btn-save" title="Lưu lại các ký tự.&#013;Sau khi lưu, các bạn có thể dùng&#013;bảng ký tự này vào các lần chuyển đổi sau.">Lưu Ký Tự</button>
+				</label>
+			</div>
+			<div class="conter-encode">
+				<div class="encode-row encode-input" >
+					<label>Ký Tự Đầu Vào</label>
+					<textarea placeholder="Chèn các ký tự đầu vào tại đây, chúng được phân tách bằng dấu xuống hàng." title="Chèn các ký tự đầu vào tại đây, chúng được phân tách bằng dấu xuống hàng." class="character-input">Ệ&#013;Ó&#013;Ò&#013;Ỏ&#013;Õ&#013;Ọ&#013;Ô&#013;Ố&#013;Ồ&#013;Ổ&#013;Ỗ&#013;Ộ&#013;Ơ&#013;Ớ&#013;Ờ&#013;Ở&#013;Ỡ&#013;Ợ&#013;Ú&#013;Ù&#013;Ủ&#013;Ừ&#013;Ứ&#013;Ử&#013;Đ&#013;Á&#013;À&#013;Ả&#013;Ã&#013;Ạ&#013;Â&#013;Ấ&#013;Ầ&#013;Ẩ&#013;Ẫ&#013;Ậ&#013;Ă&#013;Ắ&#013;Ằ&#013;Ẳ&#013;Ẵ&#013;Ặ&#013;É&#013;È&#013;Ẻ&#013;Ẽ&#013;Ẹ&#013;Ê&#013;Ế&#013;Ề&#013;Ể&#013;Ý&#013;ấ&#013;á&#013;à&#013;ả&#013;ã&#013;ạ&#013;ă&#013;ắ&#013;ằ&#013;ẳ&#013;ẵ&#013;ặ&#013;â&#013;ầ&#013;ẩ&#013;ẫ&#013;ậ&#013;đ&#013;ẹ&#013;é&#013;è&#013;ẻ&#013;ẽ&#013;ê&#013;ế&#013;ề&#013;ể&#013;ễ&#013;ệ&#013;í&#013;ì&#013;ỉ&#013;ĩ&#013;ị&#013;ô&#013;ó&#013;ò&#013;ỏ&#013;õ&#013;ọ&#013;ố&#013;ồ&#013;ổ&#013;ỗ&#013;ộ&#013;ơ&#013;ớ&#013;ờ&#013;ở&#013;ỡ&#013;ợ&#013;ú&#013;ù&#013;ủ&#013;ũ&#013;ụ&#013;ư&#013;ứ&#013;ừ&#013;ử&#013;ữ&#013;ự&#013;ý&#013;ỳ&#013;ỷ&#013;ỹ&#013;ỵ</textarea>
+					<div class="result-character character-input-result"></div>
+				</div>
+				<div class="encode-row encode-line">
+					<span class="text-line">=></span>
+				</div>
+				<div class="encode-row encode-output">
+				<label>Ký Tự Đầu Ra</label>
+					<textarea placeholder="Chèn các ký tự đầu ra tại đây, chúng được phân tách bằng dấu xuống hàng." title="Chèn các ký tự đầu ra tại đây, chúng được phân tách bằng dấu xuống hàng."  class="character-output">€&#013;‚&#013;ƒ&#013;„&#013;…&#013;†&#013;‡&#013;ˆ&#013;‰&#013;Š&#013;‹&#013;Œ&#013;‘&#013;’&#013;“&#013;”&#013;•&#013;–&#013;—&#013;	&#013;™&#013;š&#013;›&#013;œ&#013;²&#013;å&#013;æ&#013;ç&#013;è&#013;ê&#013;ë&#013;ì&#013;í&#013;î&#013;ï&#013;ð&#013;ñ&#013;ò&#013;ó&#013;ô&#013;õ&#013;ö&#013;÷&#013;ø&#013;ù&#013;ú&#013;û&#013;ü&#013;ý&#013;þ&#013;ÿ&#013;Ÿ&#013;é&#013;¡&#013;¢&#013;£&#013;¤&#013;¥&#013;¦&#013;§&#013;¨&#013;©&#013;ª&#013;«&#013;¬&#013;®&#013;¯&#013;°&#013;±&#013;³&#013;´&#013;µ&#013;¶&#013;·&#013;¸&#013;¹&#013;º&#013;»&#013;¼&#013;½&#013;¾&#013;¿&#013;À&#013;Á&#013;Â&#013;Ã&#013;Ä&#013;Å&#013;Æ&#013;Ç&#013;È&#013;É&#013;Ê&#013;Ë&#013;Ì&#013;Í&#013;Î&#013;Ï&#013;Ð&#013;Ñ&#013;Ò&#013;Ó&#013;Ô&#013;Õ&#013;Ö&#013;×&#013;Ø&#013;Ù&#013;Ú&#013;Û&#013;Ü&#013;Ý&#013;Þ&#013;ß&#013;à&#013;á&#013;â&#013;ã&#013;ä</textarea>
+					<div class="result-character character-output-result"></div>
+				</div>
+			</div>
+			<div class="submit-button-encode">
+				<button class="btn-click btn-encode-input">Mã Hóa</button>
+				<button class="btn-click btn-encode-output">Giải Mã</button>
+			</div>	
+		</div>
+	</div>
+	<small class="copyright">Copyright © 2018 Design By <a href="mailto:matran999@gmail.com">Matran999</a></small>
+</div>
+
+<script src="script.js?tthh" type="text/javascript"></script>
+<script src="character.js" type="text/javascript"></script>
+<script type="text/javascript">
+function GETVAL(){
+$BOX = document.getElementById("result-form");
+$BOX2 = document.getElementById("result-form2");
+$VAL = $BOX.value;
+$VAL2 = $BOX2.value;
+$DEBUG = document.getElementById("debug-form");
+}
+GETVAL()
+function Log($msg){
+	var $type = typeof $msg
+	if($type == "object" || $type == "array"){
+		$msg = JSON.stringify($msg);		
+	}
+	$('.debug-js').val($type + ":\r\n" + $msg);
+}
+
+function RunJS(){
+	//var $code = $('.CodeMirror textarea').val();
+	var $code = editor.getValue("\n");
+	try {
+	  eval($code);
+	}
+	catch(err) {
+	  console.log(err);
+	  Log(err)
+	}
+	
+}
+ var editor = CodeMirror.fromTextArea($('#code-form')[0], {
+	lineNumbers: true,
+	mode : "javascript"
+  });
+</script>
+</body>
+</html>

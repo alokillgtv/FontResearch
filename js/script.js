@@ -901,6 +901,45 @@ $(document).keydown(function(event){
 });
 
 
+function  viewOffset(event){
+	if($('#turnGrid').is(":checked") == false){
+		var $h = $('.tootip-view').height();
+		var $w = $('.tootip-view').width();
+		var $top = Number(event.clientY) + $h + 10;
+		var $left = Number(event.clientX) + $w + 10;
+		var $css = "top:" + $top + "px;left: " + $left +"px;z-index: 1000;opacity: 1;"; 
+		$('#tooltip').attr("style",$css)
+		var $ox = event.offsetX;
+		var $oy = event.offsetY
+		var $html = "Tọa Độ X: <b>"+$ox+"</b><br>Tọa Độ Y: <b>"+$oy+"</b>"
+		$('#tooltip').html($html);
+	}
+}
+
+function boxView(){
+    var $x = $('.input-x input').val();
+    var $y = $('.input-y input').val();
+    var $w = $('.input-w input').val();
+    var $h = $('.input-h input').val();
+	var $css1 = "position: absolute;left: "+$x+"px;top: "+$y+"px;width: "+$w+"px;height: "+$h+"px;border: 1px solid greenyellow;"
+	console.log($x + "," + $y + "," + $w + "," + $h)
+	$('.wrap-box-custom').attr("style",$css1);
+	var $xo = $('.input-xo input').val();
+	var $yo = $('.input-yo input').val();
+	var $xa = $('.input-xa input').val();
+	$x = Number($x) - Number($xo);
+	//$h = Number($h) + Number($yo);
+	$w = $xa;
+	$y = Number($y) - Number($yo);
+	if($xo != "" && $yo != "" && $xa != ""){
+		var $css2 = "position: absolute;left: "+$x+"px;top: "+$y+"px;width: "+$w+"px;height: "+$h+"px;border: 1px solid red;"
+		$('.wrap-inside-box').attr("style",$css2);
+	}
+	else{
+		$('.wrap-inside-box').removeAttr("style");
+	}
+}
+
 BeginRunJS();
 
     $(".wrapper1").scroll(function(){
