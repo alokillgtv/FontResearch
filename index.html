@@ -28,9 +28,10 @@
 			<ul id="import-cfg" title="Mở nhanh các thiết lập để phân tích nhanh các cấu trúc mà bạn đã lưu trước đó." class="title-btn list-options tip-hover">
 				<li title="Mở nhanh các thiết lập để phân tích nhanh các cấu trúc mà bạn đã lưu trước đó." title="Chọn Thiết Lập Đã Lưu" class="item-options item-main"><b>Chọn Thiết Lập Đã Lưu</b><i class="fas fa-caret-square-down"></i></li>
 			</ul>
-			<div id="debug" title="Mở Debug" class="title-btn debug-page tip-hover" onclick="showPAGE(this,'page-debug')"><i class="fas fa-code"></i><small class="tip-show">Mở trang Develope.</small></div>
-			<div id="export-cfg" class="title-btn tip-hover save-template" onclick="exportcfg(this)"><i class="fas fa-save"></i><small class="tip-show"> Lưu các thiết lập để mở nhanh hơn khi phân tích lần sau.</small></div>
-			<div id="reload" class="title-btn tip-hover reload-template" onclick="clearData(this)"><i class="fas fa-redo-alt"></i><small class="tip-show"> Khôi phục lại các mặc định vốn có.</small></div>
+			<div title="Mở trang Develope." id="debug" title="Mở Debug" class="title-btn debug-page tip-hover" onclick="showPAGE(this,'page-debug')"><i class="fas fa-code"></i><small class="tip-show">Mở trang Develope.</small></div>
+			<div title="Lưu các thiết lập để mở nhanh hơn khi phân tích lần sau." id="export-cfg" class="title-btn tip-hover save-template" onclick="exportcfg(this)"><i class="fas fa-save"></i><small class="tip-show"> Lưu các thiết lập để mở nhanh hơn khi phân tích lần sau.</small></div>
+			<div title="Khôi phục lại các mặc định vốn có." id="reload" class="title-btn tip-hover reload-template" onclick="clearData(this)"><i class="fas fa-redo-alt"></i><small class="tip-show"> Khôi phục lại các mặc định vốn có.</small></div>
+			<div title="Ẩn hiện cột bên trái tool để dùng toàn màn hình" id="left-panel" class="title-btn tip-hover show-left-panel"><label class="switch"><input onchange="showLeft(this)" type="checkbox" id="turnLeft" checked/><span class="slider"></span></label></div>
 		</div>
 		<div class="left-combo right-cb-button">
 			<button title="Phân Tích Font&#013;Nhấn vào để tiến hành phân tích font từ những dữ liệu đã có." class="btn-button check-font title-btn tip-hover" onclick="checkFont()"><i class="fas fa-cog"></i> <b>Phân Tích Font</b><small class="tip-show">&#013;Nhấn vào để tiến hành phân tích font từ những dữ liệu đã có.</small></button>

@@ -2401,3 +2401,28 @@ ul.change-box-img li b {
     color: crimson;
     font-weight: bold;
 }
+
+div#left-panel {
+    left: 404px;
+    width: 80px;
+    background: transparent;
+}
+
+div#left-panel .switch {
+    height: 24px;
+    top: -2px;
+    width: 50px;
+}
+
+div#left-panel .slider:before {
+    height: 20px;
+    width: 20px;
+    bottom: 2px;
+}
+.block-left.active {
+    display: none;
+}
+
+.block-right.active {
+    width: 98%;
+}

@@ -695,9 +695,9 @@ function calsinput(e){// Hàm kiểm tra input tính toán
 }
 
 function CharHoverHide(){// Hàm khi không hover char
-  var $style = $('#tooltip').attr("style");// Lấy style tooltip
-  $style = $style.replace("opacity: 1","").replace("z-index: 1000","");// Xóa đi style để ẩn tooltip
-  $('#tooltip').attr("style",$style + "position:fixed;");// Chèn style vào
+  //var $style = $('#tooltip').attr("style");// Lấy style tooltip
+  //$style = $style.replace("opacity: 1","").replace("z-index: 1000","");// Xóa đi style để ẩn tooltip
+  //$('#tooltip').attr("style",$style + "position:fixed;");// Chèn style vào
 }
 
 function charTitleHover(e){// Hàm khi hover char
@@ -713,7 +713,7 @@ function tooltipX(event){
 	var $top = Number(event.clientY) + 50;
 	var $left = Number(event.clientX) + 50;
 	var $css = "top:" + $top + "px;left: " + $left +"px;z-index: 1000;opacity: 1;"; 
-	$('#tooltip').attr("style",$css)
+	$('#tooltip').attr("style",$css);
 }
 
 function show_tooltip(e,b){// Hàm hiện tooltip
@@ -908,11 +908,20 @@ function  viewOffset(event){
 		var $top = Number(event.clientY) + $h + 10;
 		var $left = Number(event.clientX) + $w + 10;
 		var $css = "top:" + $top + "px;left: " + $left +"px;z-index: 1000;opacity: 1;"; 
-		$('#tooltip').attr("style",$css)
+		$('#tooltip').attr("style",$css);
 		var $ox = event.offsetX;
 		var $oy = event.offsetY
 		var $html = "Tọa Độ X: <b>"+$ox+"</b><br>Tọa Độ Y: <b>"+$oy+"</b>"
 		$('#tooltip').html($html);
+	}
+}
+
+function showLeft(){
+	if($('#turnLeft').is(":checked") == true){
+		$('.block-left,.block-right').removeClass("active");
+	}
+	else{
+		$('.block-left,.block-right').addClass("active");
 	}
 }
 
