@@ -2377,7 +2377,11 @@ ul.change-box-img .title-box {
     background: cadetblue;
     color: white;
     font-size: 1.1em;
-    padding: 2px 0;
+    padding: 4px 0;
+    position: relative;
+    line-height: 1.1em;
+    text-align: left;
+    text-indent: 5px;
 }
 
 ul.change-box-img {
@@ -2425,4 +2429,48 @@ div#left-panel .slider:before {
 
 .block-right.active {
     width: 98%;
+}
+.btn-grid {
+    position: absolute;
+    right: 0;
+    width: 100px;
+    border: 0;
+    background: red;
+    top: 3px;
+}
+
+.btn-grid.sav-grid {
+    right: 120px;
+    background: darkblue;
+}
+
+.btn-grid:hover {
+    background: black;
+}
+
+li.title-box label {margin: 0;}
+.select-grid {
+    right: 240px;
+    background: black;
+}
+.content-cell:hover .wrap-box-custom {
+    background: #337ab74d;
+}
+
+.content-cell:before {counter-increment: my-sec-counter;/* content: "Section " counter(my-sec-counter) ". "; */}
+
+div#cell-custom {
+    counter-reset: my-sec-counter;
+}
+
+.content-cell {
+    position: relative;
+}
+
+.content-cell.active {
+    z-index: 20;
+}
+
+.content-cell.active .wrap-box-custom {
+    border-color: crimson!important;!importan;!importa;!import;!impor;!impo;!imp;!im;!i;!;!importan;!importa;!import;!impor;!impo;!imp;!im;!i;!;!Q;
 }

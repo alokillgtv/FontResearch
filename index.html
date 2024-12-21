@@ -297,7 +297,7 @@
 			</div>
       <div class="copyright">
         <b>Tool FontResearch by Alokill được viết trên nền Website, có thể sử dụng online hoặc <a target="_blank" href="https://github.com/alokillgtv/FontResearch/archive/refs/heads/main.zip">tải Source Code</a> từ <a target="_blank" href="https://github.com/alokillgtv/FontResearch">Github</a> của mình để dùng trên máy tính tiện lợi hơn.</b><br>
-        <b>Version: 1.2.1 - Update Template, Update Grid Show, Update Draw Guide and CSS</b>
+        <b>Version: 1.2.2 - Update Template, Update Grid Show, Update Draw Guide and CSS</b>
         <div id="sfc8pnlzlwk3mw6etqn6rfsn46wpb8pwpre"></div><script type="text/javascript" src="https://counter7.stat.ovh/private/counter.js?c=8pnlzlwk3mw6etqn6rfsn46wpb8pwpre&down=async" async></script><noscript><a href="https://www.freecounterstat.com" title="free counter"><img src="https://counter7.stat.ovh/private/freecounterstat.php?c=8pnlzlwk3mw6etqn6rfsn46wpb8pwpre" border="0" title="free counter" alt="free counter"></a></noscript>
       </div>
 		</div>
@@ -501,13 +501,20 @@
 					<li class="item-conf-img turn-grid">					
 						<b>Bật/Tắt Grid</b>
 						<label class="switch"><input onchange="showGrid(this)" type="checkbox" id="turnGrid" checked/><span class="slider"></span></label>		
-						<i>(Tắt Grid để hiện thông số tọa độ X/Y khi rê chuột vào ảnh)</i>
+						<i>(Tắt Grid để hiện tọa độ X/Y)</i>
 					</li>
 				</ul>
 				<ul class="change-page-img">
 				</ul>
 				<ul class="change-box-img">
-					<li class="title-box">Nhập thông số tạo box grid</li>
+					<li class="title-box">
+						<label>Nhập thông số tạo box grid</label>
+						<select onchange="selectGrid(this)" class="btn-grid select-grid">
+							<option class="selected-grid" value="1" selected>Grid 1</option>
+						</select>
+						<button onclick="saveGrid()" class="btn-grid sav-grid">Lưu Grid</button>
+						<button onclick="deleteGrid()" class="btn-grid del-grid">Xóa Grid</button>
+					</li>
 					<li class="box-item-view input-x">
 						<label><b>X</b><input type="number" onchange="boxView(this)" title="Nhập tọa độ x" placeholder="Nhập tọa độ X" value="" /></label>
 					</li>
@@ -535,8 +542,10 @@
 						<img src="empty.png" id="img-view" onmousemove="viewOffset(event)">
 						<div onmousemove="tooltipX(event)" id="cell-content" class="block-cell"></div>
 						<div id="cell-custom" class="cell-custom-block">
-							<div class="wrap-box-custom"></div>
-							<div class="wrap-inside-box"></div>
+							<div grid="1" class="content-cell active">
+								<div class="wrap-box-custom"></div>
+								<div class="wrap-inside-box"></div>
+							</div>
 						</div>
 						<div class="tootip-view"></div>
 					</div>

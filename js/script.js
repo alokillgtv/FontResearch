@@ -925,29 +925,86 @@ function showLeft(){
 	}
 }
 
+function getDataGrid(){
+	var $obj = {}
+	$obj.x = $('.input-x input').val();
+	$obj.y = $('.input-y input').val();
+	$obj.w = $('.input-w input').val();
+	$obj.h = $('.input-h input').val();
+	$obj.xo = $('.input-xo input').val();
+	$obj.yo = $('.input-yo input').val();
+	$obj.xa = $('.input-xa input').val();
+	return $obj;
+}
+
 function boxView(){
-    var $x = $('.input-x input').val();
-    var $y = $('.input-y input').val();
-    var $w = $('.input-w input').val();
-    var $h = $('.input-h input').val();
+	var $obj = getDataGrid();
+    var $x = $obj.x;
+    var $y = $obj.y;
+    var $w = $obj.w;
+    var $h = $obj.h;
 	var $css1 = "position: absolute;left: "+$x+"px;top: "+$y+"px;width: "+$w+"px;height: "+$h+"px;border: 1px solid greenyellow;"
-	console.log($x + "," + $y + "," + $w + "," + $h)
-	$('.wrap-box-custom').attr("style",$css1);
-	var $xo = $('.input-xo input').val();
-	var $yo = $('.input-yo input').val();
-	var $xa = $('.input-xa input').val();
+	var $xo = $obj.xo;
+	var $yo = $obj.yo;
+	var $xa = $obj.xa;
+	var $gridSL = $('.select-grid option:selected').val();
+	$('.content-cell[grid="'+$gridSL+'"] .wrap-box-custom').attr("style",$css1);
 	$x = Number($x) - Number($xo);
 	//$h = Number($h) + Number($yo);
 	$w = $xa;
 	$y = Number($y) - Number($yo);
 	if($xo != "" && $yo != "" && $xa != ""){
 		var $css2 = "position: absolute;left: "+$x+"px;top: "+$y+"px;width: "+$w+"px;height: "+$h+"px;border: 1px solid red;"
-		$('.wrap-inside-box').attr("style",$css2);
+		$('.content-cell[grid="'+$gridSL+'"] .wrap-inside-box').attr("style",$css2);
 	}
 	else{
-		$('.wrap-inside-box').removeAttr("style");
+		$('.content-cell[grid="'+$gridSL+'"] .wrap-inside-box').removeAttr("style");
 	}
+	
+	var $sdata = JSON.stringify($obj);
+	$('.content-cell[grid="'+$gridSL+'"]').attr("data",$sdata);
 }
+
+function saveGrid(){
+	var $number = $('.content-cell.active').attr("grid");
+	$number = Number($number) + 1;
+	var $option = '<option class="selected-grid" value="'+$number+'" selected>Grid '+$number+'</option>';
+	$('.select-grid option:selected').removeAttr("selected");
+	$('.select-grid').append($option);
+	var $data = getDataGrid();
+	var $sdata = JSON.stringify($data);
+	$('.content-cell.active').attr("data",$sdata);
+	$('.content-cell.active').removeClass("active");
+	var $html = '<div grid="'+$number+'" class="content-cell active"><div class="wrap-box-custom"></div><div class="wrap-inside-box"></div></div>';
+	$('#cell-custom').append($html);
+}
+
+
+
+function deleteGrid(){
+	var $html = '<div grid="1" class="content-cell active"><div class="wrap-box-custom"></div><div class="wrap-inside-box"></div></div>';
+	$('#cell-custom').html($html);
+	var $option = '<option class="selected-grid" value="1" selected>Grid 1</option>';
+	$('.select-grid').html($option);
+}
+
+function selectGrid(e){
+	var $value = e.value;
+	var $sdata = $('.content-cell[grid="'+$value+'"]').attr("data");
+	var $obj = JSON.parse($sdata);
+	if($obj){
+		$('.input-x input').val($obj.x);
+		$('.input-y input').val($obj.y);
+		$('.input-w input').val($obj.w);
+		$('.input-h input').val($obj.h);
+		$('.input-xo input').val($obj.xo);
+		$('.input-yo input').val($obj.yo);
+		$('.input-xa input').val($obj.xa);
+	}
+	$('.content-cell.active').removeClass("active");
+	$('.content-cell[grid="'+$value+'"]').addClass("active");
+}
+
 
 BeginRunJS();
 
