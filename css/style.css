@@ -2474,3 +2474,7 @@ div#cell-custom {
 .content-cell.active .wrap-box-custom {
     border-color: crimson!important;!importan;!importa;!import;!impor;!impo;!imp;!im;!i;!;!importan;!importa;!import;!impor;!impo;!imp;!im;!i;!;!Q;
 }
+div.eapps-widget {
+    height: 72px;
+    OVERFLOW: HIDDEN;
+}
