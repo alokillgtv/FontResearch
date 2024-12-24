@@ -151,10 +151,13 @@ ul.list-block-char {
   border: 1px solid brown;
   padding-top: 2px;
   background: white;
+  text-align: right;
+  counter-reset: section;
 }
 
 .item-char {
   padding: 5px;
+  position: relative;
 }
 
 .tip-left:hover .tip-show {
@@ -255,6 +258,8 @@ ul.list-block-char {
   padding: 5px 20px;
   color: white;
   position: relative;
+  font-size: 1.5vh;
+  text-align: left;
 }
 
 #FontChar:hover,
@@ -264,19 +269,22 @@ ul.list-block-char {
 
 #FontChar {
   background: brown;
+  width: 48%;
 }
 
 #FontImg {
   background: darkcyan;
+  width: 48%;
 }
 
 #pathFont,
 #pathImg {
   display: inline-block;
-  width: 350px;
+  width: 48%;
   border: 0;
   outline: 0;
   vertical-align: middle;
+  float: right;
 }
 
 #pathFont,
@@ -368,7 +376,7 @@ ul.list-block-char {
   text-indent: 10px;
   background: black;
   height: auto;
-  max-height: 690px;
+  max-height: 500px;
   overflow: auto;
 }
 
@@ -385,10 +393,6 @@ ul.list-block-char {
   outline: none !important;
   MIN-WIDTH: 230px;
   overflow: inherit;
-}
-select.typeChar {
-  margin-left: 20px;
-  width: 200px;
 }
 
 button#export-csv,#showTable {
@@ -445,6 +449,7 @@ button#export-csv:hover {
 ul.list-block-char select {
   font-size: 1.2vh;
   vertical-align: middle;
+  padding: 2px;
 }
 .block-save-input {
   vertical-align: top;
@@ -1047,10 +1052,12 @@ li.item-calc-number.item-maytinh-number.tip-hover {
   background: darkgoldenrod;
 }
 .btn-button.check-font {
-  background: darkcyan;
-  line-height: 20px;
-  left: 0;
-  padding: 5px!important;!importan;!importa;!import;!impor;!impo;!imp;!im;!i;!;
+	background: red;
+    line-height: 20px;
+    left: 0;
+    padding: 5px !important;
+    width: 140px;
+    font-weight: bold;
 }
 
 .input-custom-title.active {
@@ -1069,7 +1076,7 @@ li.item-calc-number.item-maytinh-number.tip-hover {
   right: 0;
   top: 0;
   margin: 0;
-  line-height: 32px;
+  line-height: 3.2vh;
 }
 .button-tool {
   margin: 0 5px;
@@ -1348,7 +1355,7 @@ thead .table-header {
   right: 0;
   bottom: 0;
   width: 100%;
-  height: 100%!important;!importan;!importa;!import;!impor;!impora;!impor;!impo;!imp;!im;!i;!;
+  height: 100%!important;
   z-index: 4;
   background: transparent;
 }
@@ -1976,9 +1983,6 @@ thead .table-header {
   /* top: 0px !important; */
   text-align: left;
 }
-.block-type .tip-show {
-  left: 0 !important;
-}
 .block-regexp .tip-show {
   left: 0 !important;
 }
@@ -2107,7 +2111,6 @@ li.item-result-file label {
 }
 
 .asnii-li {
-    width: 40%!important;
     margin: 0 auto;
 }
 
@@ -2138,7 +2141,7 @@ label.remove-block.tip-hover.tip-left {
 }
 
 label.label-block {
-    width: 13%;
+    width: 22%;
 }
 
 select.select-block.select-type {
@@ -2150,12 +2153,11 @@ li.item-menu-struct {
 }
 
 .item-calc-number span:before {
-    content: "a";
+    /* content: "a"; */
     opacity: 0;
 }
 
 li.item-calc-number.item-Negative-number span {
-    text-align: center;
 }
 
 .tip-show:hover { display: none!important}
@@ -2181,7 +2183,7 @@ li.item-calc-number.item-Negative-number span {
 		top: inherit;
 	}
 	input#fontmapfile, #pathFont, #pathImg, #type-check, .typeChar {
-    width: 35%!important;!importan;!importa;!import;!importn;!import;!impor;!impo;!imp;!im;!i;!;
+    width: 48%!important;
     min-width: inherit!important;
  }
 
@@ -2210,10 +2212,8 @@ li.item-calc-number.item-Negative-number span {
 	}
 	.item-name-list .name-label {
     font-size: 10px;
-    width: 13%;
  }
 	label.label-block {
-		width: 13%;
 		margin-right: 0.5%;
 	}
 
@@ -2395,7 +2395,7 @@ ul.change-box-img {
 
 ul.change-box-img input {
     width: 70%;
-    border: 0!important;!importan;!importa;!import;!impor;!impo;!imp;!im;!i;!;
+    border: 0!important;
     box-shadow: none;
     box-sizing: content-box;
 }
@@ -2472,9 +2472,197 @@ div#cell-custom {
 }
 
 .content-cell.active .wrap-box-custom {
-    border-color: crimson!important;!importan;!importa;!import;!impor;!impo;!imp;!im;!i;!;!importan;!importa;!import;!impor;!impo;!imp;!im;!i;!;!Q;
+    border-color: crimson!important;
 }
 div.eapps-widget {
     height: 72px;
     OVERFLOW: HIDDEN;
+}
+
+.scale-font-hex {
+    width: 20%;
+}
+
+select.scale-option-font {
+    width: 100%;
+}
+.asnii-li input {
+    height: 36px;
+    resize: none;
+}
+.list-calc-hex input,.list-calc-hex textarea {
+    width: 100%;
+    line-height: 2.3vh;
+}
+
+.swap-covs {
+    text-align: right;
+    color: red;
+    text-decoration: underline;
+}
+
+.swap-span {
+    border-top: 1px solid black;
+}
+
+.list-calc-hex input:focus, .list-calc-hex textarea:focus {
+    background: black;
+    color: white;
+}
+label.label-item.label-upload {
+    width: 100%;
+}
+
+fontimgfile {
+    width: 48%;
+}
+.label-map {
+    width: 48%!important;
+}
+.item-name-list .name-label.item-mapFont {
+    width: 50%;
+    text-align: left;
+    text-indent: 5px;
+    vertical-align: middle;
+    clear: left;
+}
+
+.name-lable-delete,.name-lable-add {
+    width: 20%;
+    text-align: center;
+    vertical-align: middle;
+    background: deepskyblue;
+}
+
+.name-lable-delete:hover, .name-lable-add:hover {
+    background: black;
+    cursor: pointer;
+}
+
+.label-block:before {
+    content: "Tiêu Đề";
+    font-size: 1.2vh;
+    background: black;
+    color: white;
+    display: block;
+    text-align: center;
+    margin-bottom: -3px;
+    font-weight: 100;
+}
+
+.label-block {
+    width: 24%;
+}
+
+.item-regexp:before {
+    content: "Regexp";
+}
+
+.block-cals:before {
+    content: "Tính Toán";
+}
+
+.block-byte:before {
+    content: "Độ Dài";
+}
+
+.block-type:before {
+    content: "Kiểu Dữ Liệu";
+}
+
+li.item-block::marker {
+    font-size: 1.1vh;
+}
+
+.item-char:before {
+    counter-increment: section;
+    content: "" counter(section) "";
+    position: absolute;
+    left: 3px;
+    font-size: 1.5vh;
+    top: 10px;
+    color: white;
+    padding: 2px 4px;
+    min-width: 18px;
+    text-align: center;
+    background: black;
+}
+.content-panel-cell {
+    border: 1px solid #ccc;
+    background: white;
+}
+
+.cals-panel {
+    font-size: 2.2vh;
+}
+
+.list-title {
+    background: cadetblue;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    font-size: 2.5vh;
+}
+
+li.list-content label,li.list-content small {
+    display: block;
+    margin-bottom: 2px;
+}
+
+li.list-content small {
+    font-size: 1.7vh;
+    font-style: italic;
+    text-align: left;
+    text-indent: 5px;
+}
+
+.list-content {
+    padding: 3px;
+    border-bottom: 2px dashed #ccc;
+    text-align: center;
+}
+
+li.list-left-panel {
+    padding: 3px;
+}
+
+.list-desc {
+    border-bottom: 2px dashed #ccc;
+}
+
+.list-content b, .list-content input {
+    display: inline-block;
+    width: 48%;
+    text-align: left;
+    text-indent: 5px;
+}
+
+.list-content b {
+    background: cadetblue;
+    color: white;
+}
+
+.list-content input {
+    border: 2px solid black;
+    margin-left: -5px;
+    font-size: 1.8vh;
+    padding-top: 2px;
+}
+.config-btn-top {
+    left: 403px;
+    background: indigo;
+}
+
+.show-left-panel {
+    min-width: 35px;
+}
+
+.cals-btn-top {
+    left: 438px;
+    background: darkmagenta;
+}
+
+.max-btn-top {
+    left: 473px;
+    background: tomato;
 }

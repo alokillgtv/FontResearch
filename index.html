@@ -31,10 +31,12 @@
 			<div title="Mở trang Develope." id="debug" title="Mở Debug" class="title-btn debug-page tip-hover" onclick="showPAGE(this,'page-debug')"><i class="fas fa-code"></i><small class="tip-show">Mở trang Develope.</small></div>
 			<div title="Lưu các thiết lập để mở nhanh hơn khi phân tích lần sau." id="export-cfg" class="title-btn tip-hover save-template" onclick="exportcfg(this)"><i class="fas fa-save"></i><small class="tip-show"> Lưu các thiết lập để mở nhanh hơn khi phân tích lần sau.</small></div>
 			<div title="Khôi phục lại các mặc định vốn có." id="reload" class="title-btn tip-hover reload-template" onclick="clearData(this)"><i class="fas fa-redo-alt"></i><small class="tip-show"> Khôi phục lại các mặc định vốn có.</small></div>
-			<div title="Ẩn hiện cột bên trái tool để dùng toàn màn hình" id="left-panel" class="title-btn tip-hover show-left-panel"><label class="switch"><input onchange="showLeft(this)" type="checkbox" id="turnLeft" checked/><span class="slider"></span></label></div>
+			<div title="Ẩn bảng tính toán để hiện bảng thiết lập font bên trái" class="title-btn tip-hover show-left-panel config-btn-top" onclick="leftPanel('config')"><i class="fas fa-cog"></i></div>
+			<div title="Ẩn bảng thiết lập bên trái để hiện bảng tính toán dữ liệu"  class="title-btn tip-hover show-left-panel cals-btn-top" onclick="leftPanel('cals')"><i class="fas fa-calculator"></i></div>
+			<div title="Ẩn hiện cột bên trái tool để dùng toàn màn hình" class="title-btn tip-hover show-left-panel max-btn-top" onclick="leftPanel('full')"><i class="fas fa-expand"></i></div>
 		</div>
 		<div class="left-combo right-cb-button">
-			<button title="Phân Tích Font&#013;Nhấn vào để tiến hành phân tích font từ những dữ liệu đã có." class="btn-button check-font title-btn tip-hover" onclick="checkFont()"><i class="fas fa-cog"></i> <b>Phân Tích Font</b><small class="tip-show">&#013;Nhấn vào để tiến hành phân tích font từ những dữ liệu đã có.</small></button>
+			<button title="Phân Tích Font&#013;Nhấn vào để tiến hành phân tích font từ những dữ liệu đã có." class="btn-button check-font title-btn tip-hover" onclick="checkFont()">PHÂN TÍCH <i class="fas fa-bolt"></i> <b>Phân Tích Font</b><small class="tip-show">&#013;Nhấn vào để tiến hành phân tích font từ những dữ liệu đã có.</small></button>
 			<div id="view-hex-file" title="Xem file map font bằng Hex Code." class="title-btn tip-hover hex-file-page" onclick="showPAGE(this,'page-hex-file')" ><i class="far fa-edit"></i> <b>Xem Hex File</b>
 				<small class="tip-show">Xem file map font bằng Hex Code.<br><br>
 				Phím Tắt: <b>F4</b></small>
@@ -56,7 +58,64 @@
 		</div>	
 	</div>
 	<div id="page-content">
-		<div class="block-left col-md-4" onclick="changeValue()">
+		<div class="block-left col-md-4 view-panel active"></div>
+		<div class="block-left col-md-4 cals-panel active">
+			<div class="content-panel-cell">
+				<div class="content-panel-left">
+					<ul class="item-left-panel item-data-conv">
+						<li class="list-left-panel list-title">Chuyển đổi dữ liệu</li>
+						<li class="list-left-panel list-desc">Bảng này dùng để chuyển đổi qua lại các dạng dữ liệu khác nhau.</li>
+						<li class="list-content char-list">
+							<label><b>Character / ASNII</b>
+								<input name="asnii-inp" class="input-hex-calc-swap" onchange="calsValue(this)" type="text" placeholder="Nhập text" />
+								<small>Dữ liệu của ký tự. Nó được hiển thị dưới dạng ASNII.</small>
+							</label>
+						</li>
+						<li class="list-content hex-list">
+							<label><b>Hex</b>
+								<input name="hex-inp" class="input-hex-calc-swap" onmouseup="convertValue(this.value)" onkeyup="convertValue(this.value)" onchange="convertValue(this.value)" type="text" placeholder="Nhập Giá Trị HEX">
+								<small>Dữ liệu dạng hex (FFDA)</small>
+							</label>
+							<label><b>Hex Swap</b>
+								<input readonly="" name="hex-swap-inp" class="input-hex-calc-swap swap-covs" onchange="calsValue(this)" type="text" placeholder="Hex Swap">
+								<small>Dữ liệu Hex được hoán đổi từ Hex gốc phía trên. VD: 0000FFD2 sẽ thành D2FF0000</small>
+							</label>
+						</li>
+						<li class="list-content dec-list">
+							<label><b>Dec</b>
+								<input name="decimal-inp" class="input-hex-calc-swap" onchange="calsValue(this)" type="text" placeholder="Nhập Giá Trị Decimal">
+								<small>Dữ liệu giá trị dạng decimal</small>
+							</label>
+							<label><b>Dec Swap</b>
+								<input readonly="" name="decimal-swap-inp" class="input-hex-calc-swap swap-covs" onchange="calsValue(this)" type="text" placeholder="Decimal của Hex Swap">
+								<small>Dữ liệu giá trị dạng decimal. Tuy nhiên giá trị của nó được hoán đổi lại từ dữ liệu gốc.</small>
+							</label>
+						</li>
+						<li class="list-content float-list">
+							<label><b>Float</b>
+								<input name="float-inp" class="input-hex-calc-swap" onchange="calsValue(this)" type="text" placeholder="Nhập số chấm động">
+								<small>Dữ liệu dưới dạng dấu chấm động (0.5)</small>
+							</label>
+							<label><b>Float Swap</b>
+								<input readonly="" name="float-swap-inp" class="input-hex-calc-swap swap-covs" onchange="calsValue(this)" type="text" placeholder="Float của Hex Swap">
+								<small>Dữ liệu dưới dạng dấu chấm động. Tuy nhiên giá trị của nó được hoán đổi lại từ dữ liệu gốc.</small>
+							</label>
+						</li>
+						<li class="list-content nagi-list">
+							<label><b>Negative</b>
+								<input name="negative-inp" class="input-hex-calc-swap" onchange="calsValue(this)" type="text" placeholder="Nhập số âm">
+								<small>Dữ liệu dưới dạng số âm (-5)</small>
+							</label>
+							<label><b>Negative Swap</b>
+								<input readonly="" name="negative-swap-inp" class="input-hex-calc-swap swap-covs" onchange="calsValue(this)" type="text" placeholder="Số Âm của Hex Swap">
+								<small>Dữ liệu dưới dạng số âm. Tuy nhiên giá trị của nó được hoán đổi lại từ dữ liệu gốc.</small>
+							</label>
+						</li>				
+					</ul>							
+				</div>
+			</div>
+		</div>
+		<div class="block-left col-md-4 setting-left" onclick="changeValue()">
 			<ul class="option-list">
 				<li class="title-option">Thiết Lập Chung</li>
 				<li class="item-option tip-hover">
@@ -79,7 +138,7 @@
           </small>
 				</li>
 				<li class="item-option tip-hover">
-					<label class="label-item label-upload">Chọn Kiểu Phân Tích: </label>
+					<label class="label-item label-upload label-map">Chọn Kiểu Phân Tích: </label>
 					<select id="type-check" onchange="FontMapChange(this)">
 						<option value="0" selected>Font Map Binary</option>
 						<option value="1">Font Map Text (*FNT,*FM,*TXT)</option>
@@ -97,7 +156,7 @@
 				</li>
         <li class="item-option tip-hover">
           <div class="item-option tip-hover item-mapFont">
-            <label>Kiểu Dữ liệu Font: </label>
+            <label class="label-item label-upload label-map">Kiểu Dữ liệu Font: </label>
             <select onchange="switchEndian(this)" class="typeChar">
                 <option value="0" selected>Little Endian</option>
                 <option value="1">Big Endian</option>
@@ -181,14 +240,14 @@
             </div>
             <div class="item-name-list">
               <!--<span class="name-label name-label-list">Block</span>-->
-              <span class="name-label name-lable-title">Tiêu Đề</span>
-              <span class="name-label name-lable-byte item-mapFont">Độ Dài</span>
-              <span class="name-label name-lable-type item-mapFont">Kiểu Dữ Liệu</span>
-              <span class="name-label name-lable-regexp item-regexp">Regular Expressions</span>
-              <span class="name-label name-lable-cals">Tính Toán</span>
-              <span class="name-label name-lable-save">Lưu</span>
-              <span class="name-label name-lable-delete">Xóa</span>
-              <span class="name-label name-lable-add">Thêm</span>
+              <span class="name-label name-lable-title hide">Tiêu Đề</span>
+              <span class="name-label name-lable-byte item-mapFont">Độ Dài Khối Block</span>
+              <span class="name-label name-lable-type item-mapFont hide">Kiểu Dữ Liệu</span>
+              <span class="name-label name-lable-regexp item-regexp hide">Regular Expressions</span>
+              <span class="name-label name-lable-cals hide">Tính Toán</span>
+              <span class="name-label name-lable-save hide hide">Lưu</span>
+              <span title="Xóa 1 hàng cuối cùng" class="name-label name-lable-delete" onclick="RemoveBlock(this)">Xóa</span>
+              <span title="Thêm một hàng dữ liệu" class="name-label name-lable-add" onclick="AddBlockValue(this)">Thêm</span>
             </div>
             <ul class="list-block-char">
 				<li class="item-block item-char">
@@ -275,18 +334,18 @@
 						<input onchange="calsinput(this)" type="text" class="input-cals" value="+0" placeholder="Phép Tính" />
 						<small class="tip-show">Tính toán bổ sung cho block này. Một số dữ liệu cần phải cộng hoặc nhân thêm một số nào đó để có thể tính ra giá trị đúng nhất của dữ liệu.<br><br>Do đó bạn cần phải nhập thêm các phép tính cần thiết cho nó.</small>
 					</label>
-					<label class="label-block block-save tip-hover tip-left">
+					<label class="label-block block-save tip-hover tip-left hide">
 						<input type="checkbox" class="block-save-input" name="vehicle1" value="True">
 						<small class="tip-show">Giữ nguyên giá trị này. Tính năng này chỉ sử dụng khi tạo font bitmap bằng tool.<br><br>
 							Nó được dùng để giữ nguyên các giá trị mà bạn không muốn chuyển đổi khi tạo font.<br><br>
 							Bạn nên dùng nó đối với các giá trị mà bạn chưa xác định được kiểu dữ liệu của nó. Các giá trị này sẽ được giữ nguyên gốc sau khi tạo file map font.
 						</small>
 					</label>
-					<label class="remove-block tip-hover tip-left" onclick="RemoveBlock(this)">
+					<label class="remove-block tip-hover tip-left hide" onclick="RemoveBlock(this)">
 						<b><i class="fas fa-times"></i></b>
 						<small class="tip-show">Xóa bớt Block này.</small>
 					</label>
-					<label class="remove-block tip-hover tip-left" onclick="AddBlockValue(this)">
+					<label class="remove-block tip-hover tip-left hide" onclick="AddBlockValue(this)">
 						<b><i class="fas fa-plus"></i></b>
 						<small class="tip-show">Thêm 1 Block dữ liệu nữa.</small>
 					</label>
@@ -327,6 +386,7 @@
 							<small class="tip-show">Độ dài khối hex mà bạn chọn. Khi nhập vào ô này, con trỏ sẽ chọn offset khối bắt đầu cho đến độ dài khối mà bạn nhập.<br><br>
 							Có thể dùng HEX và DEC đều được. Để dùng Hex cần phải thêm tiền tố <b style="color:red">0x</b> vào trước hex. VD: <b style="color:red">0x3A40</b></small>
 						</li>
+						<!--
 						<li class="item-result-file save-highlight-hex tip-hover">
 							<button class="save-highlight-button" onclick="openToolHex()"><i class="fas fa-highlighter"></i> Ghim</button>
 							<small class="tip-show">
@@ -338,109 +398,73 @@
 						<button class="save-highlight-button" onclick="removeToolHex()"><i class="fas fa-trash"></i> Xóa</button>
 						<small class="tip-show">
 						Công cụ dùng để xóa hết các block ghim. Đôi khi ghim dữ liệu bị trùng sẽ gây lỗi. Hãy dùng công cụ này phục hồi lại mặc định.</small>
-					</li>
+						</li>
+						-->
+						<li class="item-result-file scale-font-hex">
+							<label>Tăng size font Hex Viewer</label>
+							<select class="scale-option-font" onchange="changeFont(this)">
+								<option value="1.8" selected>100%</option>
+								<option value="1.9">110%</option>
+								<option value="2">120%</option>
+								<option value="2.1">130%</option>
+								<option value="2.2">140%</option>
+								<option value="2.3">150%</option>
+								<option value="2.4">160%</option>
+								<option value="2.5">170%</option>
+								<option value="2.6">180%</option>
+								<option value="2.7">190%</option>
+								<option value="2.8">200%</option>
+							</select>
+						</li>
 					</ul>
 					<div class="result-cals-file-hex">
 						<ul class="list-calc-hex">
 							<li class="item-calc-number item-hex-code tip-hover">
-								<label>HEX <b class="icont-copy-cals" onclick="copyValue(this,true)" title="Copy dòng này xuống máy tính."><i class="far fa-copy"></i></b></label>
-								<span><input class="input-hex-calc-swap" onmouseup="convertValue(this.value)" onkeyup="convertValue(this.value)" onchange="convertValue(this.value)" type="text" placeholder="Nhập Giá Trị HEX" /></span>
-								<small class="tip-show">Dữ liệu HEX mà bạn đã chọn. Có thể nhập dữ liệu HEX tùy thích để tool chuyển đổi sang các giá trị khác nhau.</small>
-							</li>
-							<li class="item-calc-number item-little-endian tip-hover">
-								<label>SWAP HEX<b class="icont-copy-cals" onclick="copyValue(this,true)" title="Copy dòng này xuống máy tính."><i class="far fa-copy"></i></b></label>
-								<span></span>
-								<small class="tip-show">Dữ liệu được chuyển đổi từ HEX gốc mà bạn đã chọn. Nó có thể là BIG ENDIAN hoặc LITTLE ENDIAN.</small>
+								<label>HEX </label>
+								<span>
+									<input name="hex-inp" class="input-hex-calc-swap" onmouseup="convertValue(this.value)" onkeyup="convertValue(this.value)" onchange="convertValue(this.value)" type="text" placeholder="Nhập Giá Trị HEX" />
+								</span>
+								<span class="span-true swap-span">
+									<input readonly name="hex-swap-inp" class="input-hex-calc-swap swap-covs"   onchange="calsValue(this)" type="text" placeholder="Hex Swap" />
+								</span>
+								<small class="tip-show">Dữ liệu HEX mà bạn đã chọn. Có thể nhập dữ liệu HEX tùy thích để tool chuyển đổi sang các giá trị khác nhau.<br>Dòng màu đỏ là dữ liệu khi swap hex gốc chuyển đổi thành.</small>
 							</li>
 							<li class="item-calc-number item-big-endian tip-hover">
-								<label>DECIMAL<b class="icont-copy-cals" onclick="copyValue(this,false)" title="Copy dòng này xuống máy tính."><i class="far fa-copy"></i></b></label>
-								<span></span>
-								<small class="tip-show">Dữ liệu DECIMAL được chuyển đổi từ HEX gốc mà bạn đã chọn.</small>
-							</li>				
-							<li class="item-calc-number item-dec-number tip-hover">
-								<label>DECIMAL SWAP<b class="icont-copy-cals" onclick="copyValue(this,false)" title="Copy dòng này xuống máy tính."><i class="far fa-copy"></i></b></label>
-								<span></span>
-								<small class="tip-show">Dữ liệu DECIMAL được chuyển đổi từ HEX được chuyển đổi SWAP mà bạn đã chọn.</small>
-							</li>				
+								<label>DECIMAL</label>
+								<span class="span-true">
+									<input name="decimal-inp" class="input-hex-calc-swap"   onchange="calsValue(this)" type="text" placeholder="Nhập Giá Trị Decimal" />
+								</span>
+								<span class="span-true swap-span">
+									<input readonly name="decimal-swap-inp" class="input-hex-calc-swap swap-covs"   onchange="calsValue(this)" type="text" placeholder="Decimal của Hex Swap" />
+								</span>
+								<small class="tip-show">Dữ liệu DECIMAL được chuyển đổi từ HEX gốc mà bạn đã chọn.<br>Dòng màu đỏ là dữ liệu khi swap hex gốc chuyển đổi thành.</small>
+							</li>								
 							<li class="item-calc-number item-float-number tip-hover">
-								<label>FLOAT<b class="icont-copy-cals" onclick="copyValue(this,false)" title="Copy dòng này xuống máy tính."><i class="far fa-copy"></i></b></label>
-								<span></span>
-								<small class="tip-show">Dữ liệu dấu chấm động (FLOAT) được chuyển đổi từ khối HEX mà bạn đã chọn. Dữ liệu này chỉ được chuyển đổi khi bạn chọn khối HEX với 4 byte.</small>
-							</li>
-							<li class="item-calc-number item-floatSwap-number tip-hover">
-								<label>FLOAT SWAP<b class="icont-copy-cals" onclick="copyValue(this,false)" title="Copy dòng này xuống máy tính."><i class="far fa-copy"></i></b></label>
-								<span></span>
-								<small class="tip-show">Dữ liệu dấu chấm động (FLOAT) được chuyển đổi từ khối HEX được SWAP mà bạn đã chọn. Dữ liệu này chỉ được chuyển đổi khi bạn chọn khối HEX với 4 byte.</small>
+								<label>FLOAT</label>
+								<span class="span-true">
+									<input name="float-inp" class="input-hex-calc-swap"   onchange="calsValue(this)" type="text" placeholder="Nhập số chấm động" />
+								</span>
+								<span class="span-true swap-span">
+									<input readonly name="float-swap-inp" class="input-hex-calc-swap swap-covs"   onchange="calsValue(this)" type="text" placeholder="Float của Hex Swap" />
+								</span>
+								<small class="tip-show">Dữ liệu dấu chấm động (FLOAT) được chuyển đổi từ khối HEX mà bạn đã chọn. Dữ liệu này chỉ được chuyển đổi khi bạn chọn khối HEX với 4 byte.<br>Dòng màu đỏ là dữ liệu khi swap hex gốc chuyển đổi thành.</small>
 							</li>
 							<li class="item-calc-number item-Negative-number tip-hover">
 								<label>NEGATIVE HEX</label>
-								<span></span>
-								<small class="tip-show">Số âm của HEX được chuyển đổi từ khối HEX mà bạn đã chọn. Origin là HEX gốc được chuyển sang số âm. Swap là hex được đảo ngược và chuyển sang số âm.</small>
+								<span class="span-true">
+									<input name="negative-inp" class="input-hex-calc-swap"    onchange="calsValue(this)" type="text" placeholder="Nhập số âm" />
+								</span>
+								<span class="span-true swap-span">
+									<input readonly name="negative-swap-inp" class="input-hex-calc-swap swap-covs"   onchange="calsValue(this)" type="text" placeholder="Số Âm của Hex Swap" />
+								</span>
+								<small class="tip-show">Số âm của HEX được chuyển đổi từ khối HEX mà bạn đã chọn. Origin là HEX gốc được chuyển sang số âm. Swap là hex được đảo ngược và chuyển sang số âm.<br>Dòng màu đỏ là dữ liệu khi swap hex gốc chuyển đổi thành.</small>
 							</li>
 							<li class="item-calc-number item-text-number tip-hover asnii-li">
 								<label>ASNII</label>
-								<span></span>
+								<span class="span-true">
+									<input name="asnii-inp" class="input-hex-calc-swap"   onchange="calsValue(this)" type="text" placeholder="Nhập text" />
+								</span>
 								<small class="tip-show">TEXT ASNII từ đoạn HEX mà bạn đã chọn.</small>
-							</li>
-							<li class="item-calc-number item-maytinh-number tip-hover" onclick="focusCals()">
-								<label>MÁY TÍNH</label>
-								<div class="body-maytinh">
-								<div class="item-body-maytinh ketqua-maytinh">
-								<textarea title="Nhập phép tính của bạn vào đây." placeholder="Nhập phép tính của bạn." class="pheptinhmaytinh" onmouseup="ketquapheptinh()" onchange="ketquapheptinh()" onkeyup="ketquapheptinh()"></textarea>
-								<div class="ketquatinhtoan"></div>
-								</div>
-								<div class="item-body-maytinh ketqua-maytinh">
-								<div class="oketquadatinh" title="Kết quả phép tính của bạn."></div>
-								</div>
-								<div class="item-body-maytinh swap-maytinh">
-								<button title="Chuyển sang phép tính bằng DEC." class="decButton btt-console active" onclick="swapMaytinh(this)">DEC</button>
-								<button title="Chuyển sang phép tính bằng HEX" class="hexButton btt-console" onclick="swapMaytinh(this)">HEX</button>
-								</div>
-								<div class="item-body-maytinh congthuc-maytinh">
-								<button title="Phép tính cộng." class="btt-maytinh phepcong" onclick="themPhepTinh('+')">+</button>
-								<button title="Phép tính trừ." class="btt-maytinh pheptru" onclick="themPhepTinh('-')">-</button>
-								<button title="Phép tính nhân." class="btt-maytinh phepnhan" onclick="themPhepTinh('*')">*</button>
-								<button title="Phép tính chia." class="btt-maytinh phepchia" onclick="themPhepTinh('/')">/</button>
-								</div>
-								<div class="item-body-maytinh conso-maytinh">
-								<div class="line-break-number">
-									<button title="Xóa bớt một số trong phép tính." class="btt-maytinh clearone" onclick="clearCals(false)"><i class="fas fa-backspace"></i></button>
-									<button title="Xóa hết tất cả phép tính." class="btt-maytinh clearAll" onclick="clearCals(true)"><i class="fas fa-eraser"></i></button>
-								</div>
-								<div class="line-break-number">
-									<button class="btt-maytinh so7" onclick="themPhepTinh('7')">7</button>
-									<button class="btt-maytinh so8" onclick="themPhepTinh('8')">8</button>
-									<button class="btt-maytinh so9" onclick="themPhepTinh('9')">9</button>
-								</div>
-								<div class="line-break-number">
-									<button class="btt-maytinh so4" onclick="themPhepTinh('4')">4</button>
-									<button class="btt-maytinh so5" onclick="themPhepTinh('5')">5</button>
-									<button class="btt-maytinh so6" onclick="themPhepTinh('6')">6</button>
-								</div>
-								<div class="line-break-number">
-									<button class="btt-maytinh so1" onclick="themPhepTinh('1')">1</button>
-									<button class="btt-maytinh so2" onclick="themPhepTinh('2')">2</button>
-									<button class="btt-maytinh so3" onclick="themPhepTinh('3')">3</button>
-								</div>
-								<div class="line-break-number">
-									<button class="btt-maytinh so0" onclick="themPhepTinh('0')">0</button>
-									<button class="btt-maytinh socham" onclick="themPhepTinh('.')">.</button>
-									<button class="btt-maytinh ketqua" onclick="themPhepTinh('%')">%</button>
-								</div>
-								<div class="line-break-number numberHex">
-									<button class="btt-maytinh soA" onclick="themPhepTinh('A')">A</button>
-									<button class="btt-maytinh soB" onclick="themPhepTinh('B')">B</button>
-									<button class="btt-maytinh soC" onclick="themPhepTinh('C')">C</button>
-								</div>
-								<div class="line-break-number numberHex">
-									<button class="btt-maytinh soD" onclick="themPhepTinh('D')">D</button>
-									<button class="btt-maytinh soE" onclick="themPhepTinh('E')">E</button>
-									<button class="btt-maytinh soF" onclick="themPhepTinh('F')">F</button>
-								</div>
-								</div>
-							</div>
-								<small class="tip-show">Máy tính mini, dùng để tính toán nhanh DEC hoặc HEX.<br><br>
-								Phím Tắt: <b>F2</b></small>
 							</li>
 						</ul>
 					</div>

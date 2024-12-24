@@ -522,6 +522,18 @@ function fontimgfile(e){// Hàm khi chọn file image font
   }
 	$htmlItem += '<li class="item-size-image"><div title="Chiều dài của ảnh font hiện tại."><label>Width</label><span><input class="width-input-img" type="number" placeholder="Nhập Width" value="'+$wBefore+'"></span></div><div title="Chiều cao của ảnh font hiện tại."><label>Height</label><span><input placeholder="Nhập Height" class="height-input-img" value="'+$hBefore+'" type="number"/></span></div></li>';
   $('.change-page-img').html($htmlItem);  
+	getSizeFImg(1000);
+	getSizeFImg(5000);
+}
+
+function getSizeFImg($time){
+  setTimeout(function(){
+	  var $wBefore = $('#img-view')[0].naturalWidth;
+      var $hBefore = $('#img-view')[0].naturalHeight;
+	  $('.width-input-img').val($wBefore)
+	  $('.height-input-img').val($hBefore)
+	  
+  },$time);
 }
 
 function changeImg(e){

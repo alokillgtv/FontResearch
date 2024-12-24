@@ -87,7 +87,7 @@ function GetCusorText(e){// Hàm chọn 1 ký tự ở khung ASNII
     }
     else{
       convertValue("")
-      $('.item-text-number span').text("Dữ liệu quá dài.");
+      $('input[name="asnii-inp"]').val("Dữ liệu quá dài.");
     }
     $object.pos = pos;// Thêm object vị trí con trỏ
     $OBJECTCUSOR = $object;// Lưu dữ liệu vào biến toàn cục
@@ -578,21 +578,26 @@ function convertValue($select){// Hàm chuyển đổi các dữ liệu khi ch�
       $object.uv.type = false;// Kiểm tra xem uv có tính được không
       $object.uv.value = "Dữ liệu UV không thể tính được.\nDo không có kích thước font ảnh.\nVui lòng chọn font ảnh để tính giá trị này."     
       $object.asnii = hex2ascii($object.hex).replace(/[^\u20-\u1f\u80-\ua1]|\</gi,".");// Lưu giá trị text của khối hex
-      $('.item-little-endian span').text($object.swap);// Gán các giá trị vào cột phải dữ liệu
-      $('.item-big-endian span').text($object.dec);// Gán các giá trị vào cột phải dữ liệu
-      $('.item-dec-number span').text($object.decSwap);// Gán các giá trị vào cột phải dữ liệu
-      $('.item-text-number span').text($object.asnii);// Gán các giá trị vào cột phải dữ liệu
+	  $('input[name="hex-inp"]').val($object.hex);
+      $('input[name="hex-swap-inp"]').val($object.swap);// Gán các giá trị vào cột phải dữ liệu
+      $('input[name="decimal-inp"]').val($object.dec);// Gán các giá trị vào cột phải dữ liệu
+      $('input[name="decimal-swap-inp"]').val($object.decSwap);// Gán các giá trị vào cột phải dữ liệu
+      $('input[name="asnii-inp"]').val($object.asnii);// Gán các giá trị vào cột phải dữ liệu
       if($select.length <= 8){// Nếu khối hex nhỏ hơn 4 byte
         $object.Negative = numberNegative($object.hex);// Chuyển khối hex sang số âm
         $object.NegativeSwap = numberNegative($object.swap);// Chuyển khối hex swap sang số âm
-        var $Negative = "<b>" + $object.Negative + "</b>|<b>" + $object.NegativeSwap + "</b>";
-        $('.item-Negative-number span').html($Negative);// Gán các giá trị vào cột phải dữ liệu
+        //var $Negative = "<b>" + $object.Negative + "</b>|<b>" + $object.NegativeSwap + "</b>";
+        //$('.item-Negative-number span').html($Negative);// Gán các giá trị vào cột phải dữ liệu
+		$('input[name="negative-swap-inp"]').val(numberNegative($object.swap))
+		$('input[name="negative-inp"]').val(numberNegative($object.hex))
       }
       if($select.length == 8){// Nếu khối hex bằng 4 byte
         $object.FloatSwap = Round(hex2float($object.swap),6);// Lưu lại object Float
         $object.Float = Round(hex2float($object.hex),6);// Lưu lại object Float
-        $('.item-float-number span').text($object.Float);
-        $('.item-floatSwap-number span').text($object.FloatSwap);
+		$('input[name="float-inp"]').val($object.Float);
+		$('input[name="float-swap-inp"]').val($object.FloatSwap);
+       // $('.item-float-number span').text($object.Float);
+       // $('.item-floatSwap-number span').text($object.FloatSwap);
         var $width = $('.active .width-input-img').val(); // Lấy width ảnh
         var $height = $('.active .height-input-img').val();// Lấy height ảnh
         if($width && $height){
@@ -610,14 +615,14 @@ function convertValue($select){// Hàm chuyển đổi các dữ liệu khi ch�
         }
       }
       else{// Nếu số liệu lớn hoặc nhỏ hơn 4 byte thì xóa float
-        $('.item-float-number span').text("");
+        $('input[name="float-inp"],input[name="float-swap-inp"]').val("");
       }
     }
   }
   else{
     // Dữ liệu không phải hex hoặc quá dài, xóa các dữ liệu cột phải
-    $('.item-little-endian span,.item-big-endian span,.item-dec-number span,.item-text-number span,.item-Negative-number span,.item-float-number span').text("");
-    $('.input-hex-calc-swap').val("");
+    $('.list-calc-hex input').val("");
+    //$('.input-hex-calc-swap').val("");
   }
   return $object;// Trả về các giá trị đã chuyển đổi
 }

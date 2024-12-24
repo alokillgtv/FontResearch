@@ -353,18 +353,17 @@ function importConfigJS($name){
 
 // Hàm xóa bớt các block 
 function RemoveBlock(e){
-  var $li = $(e).closest("li");
-  var $box = $(e).closest("ul");
-  if($box.find("li").length > 1){
-    $li.remove();
+  var $box = $(e).closest(".item-struct");
+  var $li = $box.find(".item-block.item-char").length;
+  if($li > 1){
+    $box.find(".item-block.item-char:last").remove();
   };
-  changeValue();// Chạy hàm thay đổi dữ liệu
 }
 // Hàm tạo thêm block dữ liệu
 function AddBlockValue(e){
   var $box = $(e).closest(".item-struct");
   var $block = $box.find('.item-block:last')[0].outerHTML; 
-  $(e).closest('li').after($block);
+  $box.find('.list-block-char').append($block);
   changeValue();// Chạy hàm thay đổi dữ liệu
 }
 
@@ -866,8 +865,8 @@ function changeValue(){// Hàm thay đổi dữ liệu khi thêm block hoặc
     $box.find('.select-byte option:selected').each(function(){// Thực thi từng trường byte
       $byte = Number($(this).val()) + $byte;// Tính tổng byte đã có
     });
-    $box.find('.name-lable-byte').html('Độ Dài <b>('+$byte+' Byte)</b>');// Chèn tổng byte vào ô     
-	$box.find('.name-lable-byte').attr("title",'Độ Dài ('+$byte+' Byte)');
+    $box.find('.name-lable-byte').html('Độ Dài Khối Block<b>('+$byte+' Byte)</b>');// Chèn tổng byte vào ô     
+	$box.find('.name-lable-byte').attr("title",'Độ Dài Khối Block ('+$byte+' Byte)');
 	//$box.attr("title",'Độ Dài ('+$byte+' Byte)');
   }
 }
@@ -916,12 +915,27 @@ function  viewOffset(event){
 	}
 }
 
-function showLeft(){
-	if($('#turnLeft').is(":checked") == true){
-		$('.block-left,.block-right').removeClass("active");
+function leftPanel($a){
+	
+	if($a == "full"){
+		var $check = $('.block-right.active').length;
+		if($check > 0){
+			$('.block-left').addClass("active");
+			$('.setting-left,.block-right').removeClass("active");
+		}
+		else{
+			$('.block-left,.block-right').addClass("active");
+		}
 	}
-	else{
-		$('.block-left,.block-right').addClass("active");
+	else if($a == "config"){
+		$('.block-left,.block-right').removeClass("active");
+		$('.block-left').addClass("active");
+		$('.setting-left').removeClass("active");
+	}
+	else if($a == "cals"){
+		$('.block-left,.block-right').removeClass("active");
+		$('.block-left').addClass("active");
+		$('.cals-panel').removeClass("active");
 	}
 }
 
@@ -1003,6 +1017,44 @@ function selectGrid(e){
 	}
 	$('.content-cell.active').removeClass("active");
 	$('.content-cell[grid="'+$value+'"]').addClass("active");
+}
+
+function changeFont(e){
+	var $value = e.value;
+	$('.wrap-result-hex').attr("style","font-size: "+$value+"vh;")
+}
+
+function calsValue(e){
+	var $value = e.value;
+	var $name = e.name;
+	if($value.match(/^[a-fA-F0-9]+$/) || $value.match(/^[0-9]+$/) || $value.match(/^-?\d*(\.\d+)?$/)){
+		if($name == "hex-swap-inp"){
+			//var $hex = SwapEndian($value)
+			convertValue($value);
+		}
+		else if($name == "decimal-inp" || $name == "decimal-swap-inp"){
+			var $hex = dec2hex($value, 32,8);
+			//$hex = SwapEndian($hex);
+			convertValue($hex);
+		}
+		else if($name == "float-inp" || $name == "float-swap-inp"){
+			var $hex = float2hex($value);
+			//$hex = SwapEndian($hex);
+			convertValue($hex);
+		}
+		else if($name = "negative-inp" || $name == "negative-swap-inp"){
+			var $hex  = NegativeHex($value,8);
+			//$hex = SwapEndian($hex);
+			convertValue($hex);
+		}
+	}
+	else{
+		if($name == "asnii-inp"){
+			var $hex = ascii2hex($value)
+			convertValue($hex);
+		}
+	}
+	//console.log($name + "|" + $value);
 }
 
 
