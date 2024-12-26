@@ -694,9 +694,9 @@ function calsinput(e){// Hàm kiểm tra input tính toán
 }
 
 function CharHoverHide(){// Hàm khi không hover char
-  //var $style = $('#tooltip').attr("style");// Lấy style tooltip
-  //$style = $style.replace("opacity: 1","").replace("z-index: 1000","");// Xóa đi style để ẩn tooltip
-  //$('#tooltip').attr("style",$style + "position:fixed;");// Chèn style vào
+  var $style = $('#tooltip').attr("style");// Lấy style tooltip
+  $style = $style.replace("opacity: 1","").replace("z-index: 1000","");// Xóa đi style để ẩn tooltip
+  $('#tooltip').attr("style",$style + "position:fixed;");// Chèn style vào
 }
 
 function charTitleHover(e){// Hàm khi hover char
@@ -739,8 +739,8 @@ function show_tooltip(e,b){// Hàm hiện tooltip
     $left = $widthTag;
   }
   $('#tooltip').html(b);// Chèn chú thích vào tooltip
- // var $css = 'opacity: 1;left: '+($left+$widthTag) +'px ;top: '+($top+$heightTag)+'px;z-index: 1000;'; // Tạo css cho tooltio
- // $('#tooltip').attr("style",$css);// Thêm css vào tooltip
+ var $css = 'opacity: 1;left: '+($left+$widthTag) +'px ;top: '+($top+$heightTag)+'px;z-index: 1000;'; // Tạo css cho tooltio
+ $('#tooltip').attr("style",$css);// Thêm css vào tooltip
 }
 
 // Hàm sự kiện khi cuộn
@@ -1026,6 +1026,7 @@ function changeFont(e){
 
 function calsValue(e){
 	var $value = e.value;
+	$value = $value.replace(/\s/gi,"");
 	var $name = e.name;
 	if($value.match(/^[a-fA-F0-9]+$/) || $value.match(/^[0-9]+$/) || $value.match(/^-?\d*(\.\d+)?$/)){
 		if($name == "hex-swap-inp"){

@@ -561,8 +561,10 @@ function selectTitleHL(e){// Hàm chọn kiểu dữ liệu dựa trên tiêu đ
 }
 
 function convertValue($select){// Hàm chuyển đổi các dữ liệu khi chọn khối hex
+	console.log($select);
   var $object = {};// Tạo một biến object chữa dữ liệu
   $object.type = false;// Tạo biến kiểm tra kiểu dữ liệu
+  $select = $select.replace(/\s/gi,"");
   if($select.length > 0){// Nếu khối chọn có dữ liệu
     if($select.match(/^[a-fA-F0-9]+$/) || $select.match(/^[0-9]+$/)){// Kiểm tra xem dữ liệu là hex hoặc dec
       $object.type = true;// Dữ liệu có tồn tại
